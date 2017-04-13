@@ -15,6 +15,16 @@
 		A74DE88A1E8DD4EB006B2AF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */; };
 		A74DE8951E8DD4EB006B2AF5 /* tntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8941E8DD4EB006B2AF5 /* tntTests.swift */; };
 		A74DE8A01E8DD4EB006B2AF5 /* tntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */; };
+		A74DE8B01E96C699006B2AF5 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */; };
+		A74DE8B11E96C699006B2AF5 /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A74DE8B21E96C699006B2AF5 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */; };
+		A74DE8B31E96C699006B2AF5 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A74DE8B41E96C699006B2AF5 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */; };
+		A74DE8B51E96C699006B2AF5 /* AWSCognito.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */; };
+		A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */; };
+		A74DE8BF1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */; };
+		A74DE8C01E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +44,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A74DE8B61E96C699006B2AF5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A74DE8B51E96C699006B2AF5 /* AWSCognito.framework in Embed Frameworks */,
+				A74DE8B11E96C699006B2AF5 /* AWSDynamoDB.framework in Embed Frameworks */,
+				A74DE8B31E96C699006B2AF5 /* AWSCore.framework in Embed Frameworks */,
+				A74DE8C01E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A74DE8791E8DD4EB006B2AF5 /* tnt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tnt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +76,12 @@
 		A74DE89B1E8DD4EB006B2AF5 /* tntUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tntUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntUITests.swift; sourceTree = "<group>"; };
 		A74DE8A11E8DD4EB006B2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
+		A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
+		A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
+		A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntAthlete.swift; sourceTree = "<group>"; };
+		A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntHomeViewController.swift; sourceTree = "<group>"; };
+		A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +89,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A74DE8B41E96C699006B2AF5 /* AWSCognito.framework in Frameworks */,
+				A74DE8B01E96C699006B2AF5 /* AWSDynamoDB.framework in Frameworks */,
+				A74DE8B21E96C699006B2AF5 /* AWSCore.framework in Frameworks */,
+				A74DE8BF1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +116,10 @@
 		A74DE8701E8DD4EB006B2AF5 = {
 			isa = PBXGroup;
 			children = (
+				A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */,
+				A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */,
+				A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */,
+				A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */,
 				A74DE87B1E8DD4EB006B2AF5 /* tnt */,
 				A74DE8931E8DD4EB006B2AF5 /* tntTests */,
 				A74DE89E1E8DD4EB006B2AF5 /* tntUITests */,
@@ -101,7 +142,9 @@
 			children = (
 				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
+				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
 				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
+				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
 				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
 				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
 				A74DE88B1E8DD4EB006B2AF5 /* Info.plist */,
@@ -138,6 +181,8 @@
 				A74DE8751E8DD4EB006B2AF5 /* Sources */,
 				A74DE8761E8DD4EB006B2AF5 /* Frameworks */,
 				A74DE8771E8DD4EB006B2AF5 /* Resources */,
+				A74DE8B61E96C699006B2AF5 /* Embed Frameworks */,
+				A74DE8B71E96C6E6006B2AF5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -257,6 +302,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A74DE8B71E96C6E6006B2AF5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A74DE8751E8DD4EB006B2AF5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -265,6 +326,8 @@
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
+				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
+				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +479,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ozzieozumo.tnt;
@@ -428,6 +495,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ozzieozumo.tnt;
