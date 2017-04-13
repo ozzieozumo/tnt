@@ -15,16 +15,22 @@
 		A74DE88A1E8DD4EB006B2AF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */; };
 		A74DE8951E8DD4EB006B2AF5 /* tntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8941E8DD4EB006B2AF5 /* tntTests.swift */; };
 		A74DE8A01E8DD4EB006B2AF5 /* tntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */; };
-		A74DE8B01E96C699006B2AF5 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */; };
-		A74DE8B11E96C699006B2AF5 /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A74DE8B21E96C699006B2AF5 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */; };
-		A74DE8B31E96C699006B2AF5 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A74DE8B41E96C699006B2AF5 /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */; };
-		A74DE8B51E96C699006B2AF5 /* AWSCognito.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */; };
 		A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */; };
-		A74DE8BF1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */; };
-		A74DE8C01E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; };
+		A76E9CD41E9FDCF400FC14FC /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */; };
+		A76E9CD81E9FDD1900FC14FC /* AWSCognito.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A76E9CDA1E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */; };
+		A76E9CDB1E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A76E9CDD1E9FDD5700FC14FC /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */; };
+		A76E9CDE1E9FDD5700FC14FC /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; };
+		A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A79FAF7A1E9FF596005C66E2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */; };
+		A79FAF7C1E9FF5B7005C66E2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */; };
+		A79FAF7E1E9FF5C1005C66E2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */; };
+		A79FAF801E9FF5CE005C66E2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,16 +51,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A74DE8B61E96C699006B2AF5 /* Embed Frameworks */ = {
+		A76E9CD51E9FDCF400FC14FC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A74DE8B51E96C699006B2AF5 /* AWSCognito.framework in Embed Frameworks */,
-				A74DE8B11E96C699006B2AF5 /* AWSDynamoDB.framework in Embed Frameworks */,
-				A74DE8B31E96C699006B2AF5 /* AWSCore.framework in Embed Frameworks */,
-				A74DE8C01E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */,
+				A76E9CD81E9FDD1900FC14FC /* AWSCognito.framework in Embed Frameworks */,
+				A76E9CDB1E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework in Embed Frameworks */,
+				A76E9CDE1E9FDD5700FC14FC /* AWSDynamoDB.framework in Embed Frameworks */,
+				A76E9CD41E9FDCF400FC14FC /* AWSCore.framework in Embed Frameworks */,
+				A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,12 +83,17 @@
 		A74DE89B1E8DD4EB006B2AF5 /* tntUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tntUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntUITests.swift; sourceTree = "<group>"; };
 		A74DE8A11E8DD4EB006B2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
-		A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
-		A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
 		A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntAthlete.swift; sourceTree = "<group>"; };
 		A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntHomeViewController.swift; sourceTree = "<group>"; };
-		A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
+		A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
+		A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
+		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
+		A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
+		A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
+		A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +101,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A74DE8B41E96C699006B2AF5 /* AWSCognito.framework in Frameworks */,
-				A74DE8B01E96C699006B2AF5 /* AWSDynamoDB.framework in Frameworks */,
-				A74DE8B21E96C699006B2AF5 /* AWSCore.framework in Frameworks */,
-				A74DE8BF1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework in Frameworks */,
+				A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */,
+				A79FAF7A1E9FF596005C66E2 /* FBSDKCoreKit.framework in Frameworks */,
+				A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */,
+				A76E9CDD1E9FDD5700FC14FC /* AWSDynamoDB.framework in Frameworks */,
+				A79FAF7C1E9FF5B7005C66E2 /* FBSDKLoginKit.framework in Frameworks */,
+				A79FAF801E9FF5CE005C66E2 /* FBSDKShareKit.framework in Frameworks */,
+				A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */,
+				A76E9CDA1E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework in Frameworks */,
+				A79FAF7E1E9FF5C1005C66E2 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,10 +133,6 @@
 		A74DE8701E8DD4EB006B2AF5 = {
 			isa = PBXGroup;
 			children = (
-				A74DE8BE1E96F118006B2AF5 /* AWSCognitoIdentityProvider.framework */,
-				A74DE8AD1E96C699006B2AF5 /* AWSDynamoDB.framework */,
-				A74DE8AE1E96C699006B2AF5 /* AWSCore.framework */,
-				A74DE8AF1E96C699006B2AF5 /* AWSCognito.framework */,
 				A74DE87B1E8DD4EB006B2AF5 /* tnt */,
 				A74DE8931E8DD4EB006B2AF5 /* tntTests */,
 				A74DE89E1E8DD4EB006B2AF5 /* tntUITests */,
@@ -149,6 +162,7 @@
 				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
 				A74DE88B1E8DD4EB006B2AF5 /* Info.plist */,
 				A74DE8831E8DD4EB006B2AF5 /* tnt.xcdatamodeld */,
+				A7579B351E9FD6C800143A85 /* Frameworks */,
 			);
 			path = tnt;
 			sourceTree = "<group>";
@@ -171,6 +185,23 @@
 			path = tntUITests;
 			sourceTree = "<group>";
 		};
+		A7579B351E9FD6C800143A85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */,
+				A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */,
+				A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */,
+				A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */,
+				A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */,
+				A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */,
+				A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */,
+				A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */,
+				A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -181,8 +212,8 @@
 				A74DE8751E8DD4EB006B2AF5 /* Sources */,
 				A74DE8761E8DD4EB006B2AF5 /* Frameworks */,
 				A74DE8771E8DD4EB006B2AF5 /* Resources */,
-				A74DE8B61E96C699006B2AF5 /* Embed Frameworks */,
-				A74DE8B71E96C6E6006B2AF5 /* ShellScript */,
+				A76E9CD51E9FDCF400FC14FC /* Embed Frameworks */,
+				A76E9CE21E9FDE2F00FC14FC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -303,7 +334,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A74DE8B71E96C6E6006B2AF5 /* ShellScript */ = {
+		A76E9CE21E9FDE2F00FC14FC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -314,7 +345,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"\n";
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -482,6 +513,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/sumo/bloc/FacebookSDK,
 				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -498,6 +530,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/sumo.bloc/FacebookSDK,
 				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -580,6 +613,7 @@
 				A74DE8A61E8DD4EB006B2AF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A74DE8A71E8DD4EB006B2AF5 /* Build configuration list for PBXNativeTarget "tntTests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +622,7 @@
 				A74DE8A91E8DD4EB006B2AF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A74DE8AA1E8DD4EB006B2AF5 /* Build configuration list for PBXNativeTarget "tntUITests" */ = {
 			isa = XCConfigurationList;
@@ -596,6 +631,7 @@
 				A74DE8AC1E8DD4EB006B2AF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

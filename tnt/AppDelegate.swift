@@ -8,7 +8,11 @@
 
 import UIKit
 import CoreData
+
 import AWSCore
+import FBSDKCoreKit
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
