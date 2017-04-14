@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 import AWSCore
+import AWSCognito
 import FBSDKCoreKit
 
 
@@ -24,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         print("TNT Team Tracker")
+        
+      //  if AWSCognito.cognitoDeviceId() != nil {
+        //    let canRegisterApp : UIApplication? = application
+            // registering for user notifications different in iOS10.x look at User Notifications framework 
+            /*canRegisterApp?.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
+            */
+       // }
+        
         return true
     }
 
