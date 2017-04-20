@@ -12,6 +12,7 @@ import CoreData
 import AWSCore
 import AWSCognito
 import FBSDKCoreKit
+import FBSDKLoginKit
 
 
 
@@ -26,15 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("TNT Team Tracker")
         
-      //  if AWSCognito.cognitoDeviceId() != nil {
-        //    let canRegisterApp : UIApplication? = application
-            // registering for user notifications different in iOS10.x look at User Notifications framework 
-            /*canRegisterApp?.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
-            */
-       // }
-        
-        return true
+        // Connect the FaceBook app delegate to this application delegate
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        // Allow Facebook login to return to this app
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+   
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

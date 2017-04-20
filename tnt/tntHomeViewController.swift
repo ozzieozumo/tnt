@@ -22,13 +22,14 @@ class tntHomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        /*
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
                                                                 identityPoolId:"us-east-1:f35978b2-4b85-4c22-97aa-f09c3551d25e")
         
         let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
         
         AWSServiceManager.default().defaultServiceConfiguration = configuration
+ 
         
         print("AWS SDK Agent String %@", configuration?.userAgent)
         
@@ -44,6 +45,7 @@ class tntHomeViewController: UIViewController {
             }
             return task;
         })
+ */
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
@@ -53,10 +55,6 @@ class tntHomeViewController: UIViewController {
             } else if let athlete = task.result as? tntAthlete {
                 
                 print("TNT: retrieved name" + athlete.firstName! + athlete.lastName!)
-                
-                
-                //self.view.setNeedsLayout()
-                //self.view.layoutIfNeeded()
                 
                 DispatchQueue.main.async { self.tntName.text = athlete.firstName! + athlete.lastName! }
             }

@@ -7,15 +7,89 @@
 //
 
 import UIKit
+import UICKeyChainStore
+import FBSDKLoginKit
+import AWSCognito
 
 class tntLoginViewController: UIViewController {
-
+    
+    var fbToken: FBSDKAccessToken?
+    var credentialsProvider: AWSCredentialsProvider?
+    var fbLoginManager: FBSDKLoginManager?
+    
+    
     override func viewDidLoad() {
+        
+        // Try to automatically login using FaceBook and AWS Cognito
+        
+        // 1. Check for the global FB Access Token
+        
+        self.fbToken = FBSDKAccessToken.current()
+        if self.fbToken != nil {
+            
+            print("LoginView - found existing FB token")
+            self.CognitoLogin()
+            
+        } else {
+            // 2. No access token, so do a FB login
+            
+            if self.fbLoginManager == nil {
+                self.fbLoginManager = FBSDKLoginManager()
+                
+                self.fbLoginManager?.logIn(withReadPermissions: nil, from: self) {
+                    (result, error) -> Void in
+                    
+                    if (error != nil) {
+                        DispatchQueue.main.async {
+                            
+                            let alert = UIAlertController(title: "Error logging in with FB", message: error!.localizedDescription, preferredStyle: .alert)
+                            self.presentingViewController?.present(alert, animated: true, completion: nil)
+                        }
+                    } else if result!.isCancelled {
+                        //Do nothing
+                    } else {
+                        // Now the current access token should be set on Facebook
+                        self.fbToken = FBSDKAccessToken.current()
+                        
+                        // Now that we have the FBToken (in this thread), proceed to setup the Cognito Service
+                        self.CognitoLogin()
+                    }
+                }
+            }
+        }
+        
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
+    
+    func CognitoLogin() {
+     
+        
+        // assert(self.fbToken != nil)
+        
+        let fblogin = [Constants.FACEBOOK_PROVIDER : fbToken!.tokenString!]
+        
+        if self.credentialsProvider == nil {
+            
+            // Create an IdentityProviderManager to return the FB login info when requested
+            
+            let idpm = tntIdentityProvider(logins: fblogin)
+            
+            // Instantiate the Cognito credentials provider using region, pool and the logins
+            
+            self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: idpm)
+            let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
+            
+            AWSServiceManager.default().defaultServiceConfiguration = configuration
+            
+            print("Logged in to AWS Cognito using FB login")
+        } else {
+            // should probably call getIdentityId or something here
+        }
+
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

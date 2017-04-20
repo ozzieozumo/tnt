@@ -17,11 +17,8 @@ struct Constants {
     static let COGNITO_REGIONTYPE = AWSRegionType.USEast1
     static let COGNITO_IDENTITY_POOL_ID = "us-east-1:f35978b2-4b85-4c22-97aa-f09c3551d25e"
     
-    static let DEVICE_TOKEN_KEY = "DeviceToken"
-    static let COGNITO_DEVICE_TOKEN_KEY = "CognitoDeviceToken"
-    static let COGNITO_PUSH_NOTIF = "CognitoPushNotification"
     
     //KeyChain Constants
-    static let BYOI_PROVIDER = "BYOI"
+    static let FACEBOOK_PROVIDER = "graph.facebook.com"
     
 }
