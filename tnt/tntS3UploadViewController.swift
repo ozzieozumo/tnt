@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 import AWSS3
 
 class tntS3UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -21,6 +22,7 @@ class tntS3UploadViewController: UIViewController, UIImagePickerControllerDelega
         
         uipc.delegate = self
         uipc.sourceType = .photoLibrary
+        uipc.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         uipc.modalPresentationStyle = .overCurrentContext
         
         self.present(uipc, animated: true, completion: nil)
@@ -55,9 +57,22 @@ class tntS3UploadViewController: UIViewController, UIImagePickerControllerDelega
             print("Creating 'upload' directory failed. Error: \(error)")
         }
         
+        
+        var filename = ""
+        
+        switch (info[UIImagePickerControllerMediaType] as! String){
+        case kUTTypeImage as NSString as String:
+            filename = "image.png";
+            break;
+            
+        case kUTTypeMovie as NSString as String:
+            filename = "movie.mp4"
+            break;
+            
+        default: break
+        }
         let uploadFileURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload")?.appendingPathComponent("testimage.png")
         
-        let filePath = uploadFileURL?.path
         let imageData = UIImagePNGRepresentation(self.selectedImage!)
         
         do {
@@ -70,7 +85,7 @@ class tntS3UploadViewController: UIViewController, UIImagePickerControllerDelega
         let uploadRequest = AWSS3TransferManagerUploadRequest()
         
         uploadRequest!.bucket = "ozzieozumo.tnt"
-        uploadRequest!.key = "myTestFile.png"
+        uploadRequest!.key = filename
         uploadRequest!.body = uploadFileURL!
         
         transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject! in
@@ -98,6 +113,7 @@ class tntS3UploadViewController: UIViewController, UIImagePickerControllerDelega
         
         
     }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)

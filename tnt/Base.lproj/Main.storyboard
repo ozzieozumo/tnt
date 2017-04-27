@@ -46,9 +46,25 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-Cw-Pp4">
                                 <frame key="frameInset" minX="110" minY="259" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload to S3"/>
+                                <state key="normal" title="Upload Image to S3"/>
                                 <connections>
                                     <segue destination="EVD-fr-yxD" kind="show" id="Iwx-BW-HaV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESl-QF-I5q">
+                                <frame key="frameInset" minX="100" minY="327" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Upload Video to S3"/>
+                                <connections>
+                                    <action selector="uploadVideo:" destination="bCL-Sf-QFQ" eventType="touchUpInside" id="kmd-UU-v87"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTs-LY-taL">
+                                <frame key="frameInset" minX="88" minY="399" width="148" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play Video From S3"/>
+                                <connections>
+                                    <action selector="playVideoClicked:" destination="bCL-Sf-QFQ" eventType="touchUpInside" id="p1u-3u-eB0"/>
                                 </connections>
                             </button>
                         </subviews>
