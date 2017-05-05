@@ -16,6 +16,8 @@ class tntAthlete : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var firstName:  String?
     var lastName: String?
     var eventLevels: [String: Int]?
+    var cognitoId: String?
+    var profileImageURL: String?
     
     class func dynamoDBTableName() -> String {
         return "tntAthlete"
