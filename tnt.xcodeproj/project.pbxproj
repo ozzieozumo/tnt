@@ -30,6 +30,9 @@
 		A76E9CDE1E9FDD5700FC14FC /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; };
 		A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */; };
+		A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3511EC4C5430007A543 /* tntSynchManager.swift */; };
+		A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3531EC537470007A543 /* tntLoginManager.swift */; };
 		A79FAF7A1E9FF596005C66E2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */; };
 		A79FAF7C1E9FF5B7005C66E2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */; };
 		A79FAF7E1E9FF5C1005C66E2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */; };
@@ -98,6 +101,9 @@
 		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 		A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
 		A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
+		A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLocalDataManager.swift; sourceTree = "<group>"; };
+		A79DB3511EC4C5430007A543 /* tntSynchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntSynchManager.swift; sourceTree = "<group>"; };
+		A79DB3531EC537470007A543 /* tntLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginManager.swift; sourceTree = "<group>"; };
 		A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
@@ -188,6 +194,9 @@
 				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
 				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
 				A74DE88B1E8DD4EB006B2AF5 /* Info.plist */,
+				A79DB3531EC537470007A543 /* tntLoginManager.swift */,
+				A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */,
+				A79DB3511EC4C5430007A543 /* tntSynchManager.swift */,
 				A74DE8831E8DD4EB006B2AF5 /* tnt.xcdatamodeld */,
 				A7579B351E9FD6C800143A85 /* Frameworks */,
 			);
@@ -438,6 +447,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */,
+				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
@@ -446,6 +457,7 @@
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
+				A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */,
 				A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

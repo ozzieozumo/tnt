@@ -27,8 +27,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("TNT Team Tracker")
         
-        // Connect the FaceBook app delegate to this application delegate
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        // Connect the FaceBook app delegate to this application
+        _ = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // Init the local data manager 
+        
+        tntLocalDataManager.shared.loadLocalData()
+        
+        // If no local data, try to load from the cloud DB  (must be logged in and on wifi) 
+        
+        if tntLocalDataManager.shared.athletes.count == 0 {
+            tntLoginManager.shared.loginWithSavedCredentials()
+            
+            if tntLoginManager.shared.credentialsProvider != nil {
+                
+                // Only try to load from the cloud DB if the background login was successful
+                
+                tntSynchManager.shared.loadCache()
+            }
+        }
+        
+        // If testing, load test data programmatically
+        
+        // Init the synch manager to look for updated data and changed access etc
+        
+        return true
+        
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
