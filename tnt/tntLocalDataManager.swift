@@ -49,6 +49,35 @@ class tntLocalDataManager {
         }
     }
     
+    func clearTNTObjects () {
+        
+        batchDeleteEntity(name: "Athlete"); athletes = []
+        batchDeleteEntity(name: "Meet"); meets = []
+        //batchDeleteEntity(name: "Video"); videos = []
+        
+    }
+    
+    func batchDeleteEntity(name: String) {
+    
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: name)
+        let batchDelete = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try managedContext.execute(batchDelete)
+            try managedContext.save()
+            print("tntLocalDataManager: deleted all managed \(name) objects")
+        } catch let error as NSError {
+            print("Could not delete \(name) objects \(error), \(error.userInfo)")
+        }
+    }
+    
 }
 
 

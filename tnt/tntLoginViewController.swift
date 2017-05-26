@@ -26,47 +26,13 @@ class tntLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        // Try to automatically login using FaceBook and AWS Cognito
-        
-        // 1. Check for the global FB Access Token
-        
-        self.fbToken = FBSDKAccessToken.current()
-        if self.fbToken != nil {
-            
-            print("LoginView - found existing FB token")
-            self.CognitoLogin()
-            
-        } else {
-            // 2. No access token, so do a FB login
-            
-            if self.fbLoginManager == nil {
-                self.fbLoginManager = FBSDKLoginManager()
-                
-                self.fbLoginManager?.logIn(withReadPermissions: ["public_profile"], from: self) {
-                    (result, error) -> Void in
-                    
-                    if (error != nil) {
-                        DispatchQueue.main.async {
-                            
-                            let alert = UIAlertController(title: "Error logging in with FB", message: error!.localizedDescription, preferredStyle: .alert)
-                            self.presentingViewController?.present(alert, animated: true, completion: nil)
-                        }
-                    } else if result!.isCancelled {
-                        //Do nothing
-                        print("FB Login result was cancelled")
-                    
-                    } else {
-                        // Now the current access token should be set on Facebook
-                        self.fbToken = FBSDKAccessToken.current()
-                        
-                        // Now that we have the FBToken (in this thread), proceed to setup the Cognito Service
-                        self.CognitoLogin()
-                    }
-                }
-            }
-        }
-        
         super.viewDidLoad()
+        
+        // for now, just segue to the athlete view
+        
+        // performSegue(withIdentifier: "showAthlete", sender: nil)
+        
+
 
     }
 
@@ -286,4 +252,13 @@ class tntLoginViewController: UIViewController {
         
         
     }
+    
+    @IBAction func clearCoreDataClicked(_ sender: AnyObject) {
+        
+        // clear all managed objects from CoreData
+        
+        tntLocalDataManager.shared.clearTNTObjects()
+        
+    }
+    
 }
