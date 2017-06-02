@@ -51,6 +51,15 @@ class tntLoginManager {
     
     func CognitoLogin() {
         
+        // Make sure the FB token is set before proceeding
+        
+        self.fbToken = FBSDKAccessToken.current()
+        
+        if self.fbToken == nil {
+            print("tntLogin Manager - attempted Cognito Login with no FB token set")
+            return
+        }
+        
         // print out some information about the Facebook Token and User Profile
         
         print("tnt: FBSDK Version \(FBSDKSettings.sdkVersion())")
@@ -82,7 +91,7 @@ class tntLoginManager {
             AWSServiceManager.default().defaultServiceConfiguration = configuration
             
             print("tntLoginManager:  service manager initialized")
-            print("tntLoginManager (AWS user agent info): \(configuration?.userAgent)")
+            print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
             
             // call getIdentityId here and print out in continuation block
             
@@ -91,7 +100,7 @@ class tntLoginManager {
                 // TODO: check for errors here
                 
                 self.cognitoId  = self.credentialsProvider?.identityId
-                print("tntLoginManager: Cognito Identity ID set \(self.cognitoId)")
+                print("tntLoginManager: Cognito Identity ID set \(self.cognitoId ?? "Default")")
                 
                 return nil
                 }

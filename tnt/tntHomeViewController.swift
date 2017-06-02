@@ -40,6 +40,7 @@ class tntHomeViewController: UIViewController {
         if tntLocalDataManager.shared.athletes.count > 0 {
             
             displayAthleteData()
+            displayProfileImage()
             
         } else {
             
@@ -126,6 +127,19 @@ class tntHomeViewController: UIViewController {
         tntName.text = firstName + " " + lastName
         
         
+        
+    }
+    
+    func displayProfileImage() {
+        // display an updated profile image
+        
+        let athlete = tntLocalDataManager.shared.athletes[self.athleteIndex]
+        
+        let img = UIImage(data: athlete.value(forKey: "profileImage") as! Data)
+        
+        self.profileImage.image = img
+        
+        
     }
     
     func observerMoreAthletes(notification: Notification) {
@@ -133,19 +147,15 @@ class tntHomeViewController: UIViewController {
         // Switch back to the main thread to update the UI
         
         DispatchQueue.main.async{
-                self.displayAthleteData()
+            self.displayAthleteData()
         }
     
     }
     
     func observerProfileImageLoaded(notification: Notification) {
         DispatchQueue.main.async{
-        
-            let athlete = tntLocalDataManager.shared.athletes[self.athleteIndex]
+            self.displayProfileImage()
             
-            let img = UIImage(data: athlete.value(forKey: "profileImage") as! Data)
-            
-            self.profileImage.image = img
         }
         
     }
