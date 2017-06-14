@@ -30,6 +30,8 @@
 		A76E9CDE1E9FDD5700FC14FC /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; };
 		A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */; };
+		A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F21EE9C66700E05757 /* tntVideo.swift */; };
 		A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */; };
 		A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3511EC4C5430007A543 /* tntSynchManager.swift */; };
 		A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3531EC537470007A543 /* tntLoginManager.swift */; };
@@ -101,6 +103,8 @@
 		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 		A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
 		A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
+		A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideosTableViewController.swift; sourceTree = "<group>"; };
+		A77E58F21EE9C66700E05757 /* tntVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideo.swift; sourceTree = "<group>"; };
 		A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLocalDataManager.swift; sourceTree = "<group>"; };
 		A79DB3511EC4C5430007A543 /* tntSynchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntSynchManager.swift; sourceTree = "<group>"; };
 		A79DB3531EC537470007A543 /* tntLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginManager.swift; sourceTree = "<group>"; };
@@ -186,10 +190,12 @@
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
 				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
 				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
+				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
 				A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */,
 				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
 				A7BCE18D1EA0175C0053B550 /* Constants.swift */,
 				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
+				A77E58F21EE9C66700E05757 /* tntVideo.swift */,
 				A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */,
 				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
 				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
@@ -454,8 +460,10 @@
 				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
+				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
+				A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */,
 				A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */,
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,

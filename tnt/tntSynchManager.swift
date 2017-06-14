@@ -121,7 +121,49 @@ class tntSynchManager {
         })
     }
 
+    func loadVideos() {
+    
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
+        dynamoDBObjectMapper.load(tntVideo.self, hashKey: "1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+            } else if let video = task.result as? tntVideo {
+                
+                
+                print("TNT: retrieved video \(video.cloudURL ?? "no URL")")
+                
+                guard let context = tntLocalDataManager.shared.moc else {
+                    return nil
+                }
+                let entity = NSEntityDescription.entity(forEntityName: "Video", in: context)!
+                
+                let managedObject = NSManagedObject(entity: entity, insertInto: context)
+                
+                managedObject.setValue(video.cloudURL, forKeyPath: "cloudURL")
+                managedObject.setValue(video.localIdentifier, forKeyPath: "localIdentifier")
+                
+                do {
+                    try context.save()
+                    
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+                
+                
+                // send a notification indicating new athlete data
+                
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: ["videoId":video.videoId])
+                
+            }
+            return nil
+        })
+
+        
+    }
+    
+    
     func tntPreSignedURL(unsignedURL: String) -> String {
                 
                 var preSignedURL : String? = nil

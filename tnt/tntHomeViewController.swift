@@ -142,6 +142,8 @@ class tntHomeViewController: UIViewController {
         
     }
     
+    // MARK: Notification Observers
+    
     func observerMoreAthletes(notification: Notification) {
         // This notification received when athlete is loaded into local cache from cloud DB
         // Switch back to the main thread to update the UI
