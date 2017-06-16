@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
+import AWSS3
 
 class tntVideosTableViewController: UITableViewController {
 
@@ -24,7 +27,9 @@ class tntVideosTableViewController: UITableViewController {
         
         // if there are no videos in coredata, try to load from the cloud database
         
-        if tntLocalDataManager.shared.videos?.fetchedObjects?.count == 0 {
+        let videoCount = tntLocalDataManager.shared.videos?.fetchedObjects?.count ?? 0
+        
+        if videoCount == 0 {
             
             tntSynchManager.shared.loadVideos() // asynch
             
@@ -46,7 +51,7 @@ class tntVideosTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (tntLocalDataManager.shared.videos?.fetchedObjects?.count)!
+        return (tntLocalDataManager.shared.videos?.fetchedObjects?.count) ?? 0
     }
 
  
@@ -70,6 +75,17 @@ class tntVideosTableViewController: UITableViewController {
         
         return cell
 
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // show a video player for the selected cell
+        
+        let videoMO = tntLocalDataManager.shared.videos?.object(at: indexPath)
+        
+        let movieKey = videoMO?.value(forKey: "cloudURL") as! String
+        
+        showPlayer(partialURL: movieKey)
+        
     }
   
 
@@ -130,6 +146,56 @@ class tntVideosTableViewController: UITableViewController {
         }
         
     }
+    
+    func showPlayer(partialURL: String) {
+        
+        // once the video has been uploaded, create and present a player
+        
+        // We cannot simply request the S3 video by URL since this would not pass any token and access would be denied
+        
+        // Instead we use the PreSigned URL builder
+        
+        let preSignedRequest = AWSS3GetPreSignedURLRequest()
+        preSignedRequest.bucket = "ozzieozumo.tnt"
+        preSignedRequest.key = partialURL
+        preSignedRequest.httpMethod = .GET
+        preSignedRequest.expires = Date().addingTimeInterval(48*60*60)
+        
+        let preSigner = AWSS3PreSignedURLBuilder.default()
+        
+        preSigner.getPreSignedURL(preSignedRequest).continueWith {
+            (task) in
+            
+            if let error = task.error as? NSError {
+                print("Error: \(error)")
+                return nil
+            }
+            
+            let presignedURL = task.result! as NSURL
+            print("Download presignedURL is: \(presignedURL)")
+            
+            
+            // switch to main queue for the UI actions
+            
+            DispatchQueue.main.async {
+                let s3videoURL = presignedURL as URL
+                let player = AVPlayer(url: s3videoURL)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                self.present(playerViewController, animated: true) {
+                    playerViewController.player!.play()
+                }
+                
+            }
+            
+            
+            return nil
+            
+        }
+        
+        
+    }
+
 
 
 }

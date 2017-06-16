@@ -93,6 +93,8 @@ class tntLocalDataManager {
         
         do {
             try videos?.performFetch()
+            let videoCount = videos?.fetchedObjects?.count ?? 0
+            print("TNT Local Data Manager:  fetched \(videoCount) videos")
         } catch {
             fatalError("Failed to initialize videos FetchedResultsController: \(error)")
         }
