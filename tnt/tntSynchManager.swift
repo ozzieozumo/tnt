@@ -170,6 +170,29 @@ class tntSynchManager {
         
     }
     
+    func createVideo(s3VideoKey: String) {
+    
+        guard let newVideo = tntVideo() else {
+            print("Could not create TNT video")
+            return
+        }
+        newVideo.cloudURL = s3VideoKey
+        newVideo.localIdentifier  = "NIL"
+        newVideo.videoId = s3VideoKey
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+
+        dynamoDBObjectMapper.save(newVideo).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+            } else {
+                print("TNT synch manager created video item")
+            }
+            return nil
+        })
+        
+    }
+    
     
     func tntPreSignedURL(unsignedURL: String) -> String {
                 

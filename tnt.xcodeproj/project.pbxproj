@@ -10,6 +10,7 @@
 		1ED4563BC5C90E6380225BDF /* Pods_tnt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4D76D9CE2B78856F25CFBF /* Pods_tnt.framework */; };
 		A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */; };
 		A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */; };
+		A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */; };
 		A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */; };
 		A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */; };
 		A74DE8821E8DD4EB006B2AF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */; };
@@ -82,6 +83,7 @@
 		9F4D76D9CE2B78856F25CFBF /* Pods_tnt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tnt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntIdentityProvider.swift; sourceTree = "<group>"; };
 		A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntS3UploadViewController.swift; sourceTree = "<group>"; };
+		A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideoUploadViewController.swift; sourceTree = "<group>"; };
 		A74DE8791E8DD4EB006B2AF5 /* tnt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tnt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
 				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
 				A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */,
+				A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */,
 				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
 				A7BCE18D1EA0175C0053B550 /* Constants.swift */,
 				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
@@ -465,6 +468,7 @@
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
 				A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */,
 				A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */,
+				A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */,
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
