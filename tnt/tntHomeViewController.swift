@@ -19,6 +19,13 @@ class tntHomeViewController: UIViewController {
     @IBOutlet weak var tntName: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     
+    // current level displays
+    
+    @IBOutlet weak var currentLevelTR: UITextField!
+    @IBOutlet weak var currentLevelDMT: UITextField!
+    @IBOutlet weak var currentLevelTU: UITextField!
+    @IBOutlet weak var nextMeetInfo: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +39,8 @@ class tntHomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMoreAthletes(notification:)), name: Notification.Name("tntMoreAthletes"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerProfileImageLoaded(notification:)), name: Notification.Name("tntProfileImageLoaded"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMeetLoaded(notification:)), name: Notification.Name("tntMeetLoaded"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +50,7 @@ class tntHomeViewController: UIViewController {
             
             displayAthleteData()
             displayProfileImage()
+            displayMeetInfo(meetIndex: 0)
             
         } else {
             
@@ -126,6 +136,18 @@ class tntHomeViewController: UIViewController {
         let lastName =  athlete.value(forKey: "lastName") as? String ?? ""
         tntName.text = firstName + " " + lastName
         
+        // current level display
+        
+        //let eventLevels = athlete.value(forKey: "eventLevels") as! [String: Int]
+        
+        let levelTRint = 6 // eventLevels["TR"]
+        let levelTUint = 7 // eventLevels["TU"]
+        let levelDMTint = 7 // eventLevels["DMT"]
+        
+        currentLevelTR.text =  levelTRint != nil ? "\(levelTRint)" : ""
+        currentLevelTU.text = levelTUint != nil ? "\(levelTUint)" : ""
+        currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint)" : ""
+        
         
         
     }
@@ -141,6 +163,45 @@ class tntHomeViewController: UIViewController {
         
         
     }
+    
+    func displayMeetInfo(meetIndex: Int) {
+        // format and display info about the next meet   
+        guard let meets = tntLocalDataManager.shared.meets?.fetchedObjects else {
+            return
+            // TODO:  display message indicating no meet data loaded
+        }
+        if meetIndex >= meets.count {
+            return
+            // TODO: display alternate message about no meets available
+        }
+        let meetMO = meets[meetIndex]
+        let meetTitle = meetMO.value(forKey: "Title") as! String
+        let meetSubtitle = meetMO.value(forKey: "SubTitle") as! String
+        
+        nextMeetInfo.text = "\(meetTitle) \n \(meetSubtitle)"
+        
+        
+    }
+    
+    // Mark : Segue processing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destvc = segue.destination as? tntScoringViewController {
+            
+            // Set the meet and athlete on the scoring view controller
+            let athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
+            let athleteId = athleteMO.value(forKey: "id") as! String
+            destvc.athleteId = athleteId
+            
+            let meetMO = tntLocalDataManager.shared.meets?.object(at: IndexPath(item: 0, section: 0))
+            let meetId = meetMO?.value(forKey: "id") as! String
+            destvc.meetId = meetId
+            
+            
+        }
+    }
+
     
     // MARK: Notification Observers
     
@@ -161,7 +222,15 @@ class tntHomeViewController: UIViewController {
         }
         
     }
-
     
+    func observerMeetLoaded(notification: Notification) {
+        DispatchQueue.main.async{
+            self.displayMeetInfo(meetIndex: 0)
+            
+        }
+        
+    }
+
+
     
 }

@@ -27,9 +27,9 @@ class tntSynchManager {
         // TODO:  probably should set some sort of context object on the singleton
         
         self.loadAthletes()
+        self.loadMeets()
         
-        // load the other stuff too .. 
-        
+                
     }
 
     func loadAthletes() {
@@ -37,20 +37,12 @@ class tntSynchManager {
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
-        let startDDB = DispatchTime.now()
-        
         dynamoDBObjectMapper.load(tntAthlete.self, hashKey: "1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
             if let error = task.error as? NSError {
                 print("The request failed. Error: \(error)")
             } else if let athlete = task.result as? tntAthlete {
                 
-                let endDDB = DispatchTime.now()
-                
-                let execSecs = Double(endDDB.uptimeNanoseconds - startDDB.uptimeNanoseconds) / 1000000000
-                print("extime DDB get \(execSecs) seconds")
-                
                 print("TNT: retrieved name" + athlete.firstName! + athlete.lastName!)
-                
                 
                 // create a managed object and store it
                 
@@ -63,9 +55,10 @@ class tntSynchManager {
                 let entity = NSEntityDescription.entity(forEntityName: "Athlete", in: managedContext)!
                 
                 let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
-                
+                managedObject.setValue(athlete.athleteId, forKeyPath: "id")
                 managedObject.setValue(athlete.firstName, forKeyPath: "firstName")
                 managedObject.setValue(athlete.lastName, forKeyPath: "lastName")
+                managedObject.setValue(athlete.eventLevels, forKeyPath: "eventLevels")
                 
                 do {
                     try managedContext.save()
@@ -131,8 +124,7 @@ class tntSynchManager {
         dynamoDBObjectMapper.scan(tntVideo.self, expression: scanExpression).continueWith(block: { (task) -> Void in
             if let error = task.error as NSError? {
                 print("The request failed. Error: \(error)")
-            } else if let paginatedOutput = task.result as? AWSDynamoDBPaginatedOutput {
-                
+            } else if let paginatedOutput:AWSDynamoDBPaginatedOutput = task.result {
                 
                 for video in paginatedOutput.items as! [tntVideo] {
                     
@@ -169,6 +161,110 @@ class tntSynchManager {
 
         
     }
+    
+    func loadMeets() {
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.limit = 100
+        
+        dynamoDBObjectMapper.scan(tntMeet.self, expression: scanExpression).continueWith(block: { (task) -> Void in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+            } else if let paginatedOutput = task.result as? AWSDynamoDBPaginatedOutput {
+                
+                
+                for meet in paginatedOutput.items as! [tntMeet] {
+                    
+                    print("TNT: retrieved meet \(meet.meetTitle ?? "no URL")")
+                    
+                    let context = tntLocalDataManager.shared.moc
+                    let entity = NSEntityDescription.entity(forEntityName: "Meet", in: context!)!
+                    let managedObject = NSManagedObject(entity: entity, insertInto: context)
+                    
+                    managedObject.setValue(meet.meetId, forKeyPath: "id")
+                    managedObject.setValue(meet.meetTitle, forKeyPath: "Title")
+                    managedObject.setValue(meet.meetSubTitle, forKeyPath: "SubTitle")
+                    
+                    do {
+                        try context?.save()
+                        
+                    } catch let error as NSError {
+                        print("TNT: Could not save meet to CoreData. \(error), \(error.userInfo)")
+                    }
+                    
+                }
+                
+                // fetch the results in coredata
+                
+                tntLocalDataManager.shared.fetchMeets()
+                
+                // send a notification indicating new meet data
+                
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name("tntMeetLoaded"), object: nil, userInfo: nil)
+                
+            }
+            
+        })
+        
+        
+    }
+    
+    func loadScores(athleteId: String, meetId: String) {
+        
+        // load score data from cloud DB to core data
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.load(tntScores.self, hashKey: "1:1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+            } else if let scores = task.result as? tntScores {
+                
+                print("TNT: retrieved scores for" + scores.scoreId!)
+                
+                // create a managed object and store it
+                
+                guard let appDelegate =
+                    UIApplication.shared.delegate as? AppDelegate else {
+                        return nil
+                }
+                
+                let managedContext = appDelegate.persistentContainer.viewContext
+                let entity = NSEntityDescription.entity(forEntityName: "Scores", in: managedContext)!
+                
+                let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
+                managedObject.setValue(scores.athleteId, forKeyPath: "athleteId")
+                managedObject.setValue(scores.meetId, forKeyPath: "meetId")
+                managedObject.setValue(scores.scoreId, forKeyPath: "scoreId")
+                managedObject.setValue(scores.events, forKeyPath: "events")
+                managedObject.setValue(scores.scores, forKeyPath: "scores")
+                
+                do {
+                    try managedContext.save()
+                    tntLocalDataManager.shared.scores[scores.scoreId!] = managedObject
+                } catch let error as NSError {
+                    print("Could not save scores to CoreData. \(error), \(error.userInfo)")
+                }
+                
+                
+                // send a notification indicating new scores data
+                
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name("tntScoresLoaded"), object: nil, userInfo: ["ahtleteId":scores.athleteId!,
+                                                                                            "meetId": scores.meetId!])
+                
+            }
+            return nil
+        })
+
+        
+        
+    }
+    
+
     
     func createVideo(s3VideoKey: String) {
     

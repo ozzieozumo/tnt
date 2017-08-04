@@ -18,7 +18,8 @@ class tntLocalDataManager {
     
     var moc: NSManagedObjectContext?
     var athletes : [NSManagedObject]
-    var meets : [NSManagedObject]
+    var scores : [String: NSManagedObject]
+    var meets : NSFetchedResultsController<NSManagedObject>?
     
     var videos: NSFetchedResultsController<NSManagedObject>?
     
@@ -29,7 +30,8 @@ class tntLocalDataManager {
     */
     
     athletes = []
-    meets = []
+    scores = [:]
+    meets = NSFetchedResultsController()
     videos = NSFetchedResultsController()
     moc = nil
         
@@ -57,13 +59,15 @@ class tntLocalDataManager {
         }
         
         fetchRelatedVideos()
+        fetchMeets()
     }
     
     func clearTNTObjects () {
         
         batchDeleteEntity(name: "Athlete"); athletes = []
-        batchDeleteEntity(name: "Meet"); meets = []
-        batchDeleteEntity(name: "Video"); videos = nil;
+        batchDeleteEntity(name: "Meet"); meets = nil
+        batchDeleteEntity(name: "Video"); videos = nil
+        batchDeleteEntity(name: "Scores"); scores = [:]
         
     }
     
@@ -100,6 +104,44 @@ class tntLocalDataManager {
         }
         
     }
+    
+    func fetchMeets() {
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: "Meet")
+        let dateSort = NSSortDescriptor(key: "startDate", ascending: true)
+        request.sortDescriptors = [dateSort]
+        
+        self.meets = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc!, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try meets?.performFetch()
+            let meetCount = meets?.fetchedObjects?.count ?? 0
+            print("TNT Local Data Manager:  fetched \(meetCount) meets")
+        } catch {
+            fatalError("Failed to initialize meets FetchedResultsController: \(error)")
+        }
+        
+    }
+    
+    func fetchScores(_ scoreId: String) {
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Scores")
+        fetchRequest.predicate = NSPredicate(format: "scoreId == %@", scoreId)
+        
+        do {
+            let scoresArray = try moc!.fetch(fetchRequest)
+            if scoresArray.count > 0 {
+                
+                self.scores[scoreId] = scoresArray[0]
+            }
+            print("tntLocalDataManager: retrieve \(scoreId) score data")
+            
+        } catch let error as NSError {
+            print("Could not fetch scores from core data. \(error), \(error.userInfo)")
+        }
+    }
+
+
     
 }
 
