@@ -382,11 +382,24 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Scores" id="TX0-14-AGt">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="suT-ax-x8a"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Mvh-7S-kvq"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Mvh-7S-kvq">
+                                            <connections>
+                                                <action selector="cancelVC:" destination="ZM8-h5-qnw" id="rTx-GU-CC8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="suT-ax-x8a">
+                                            <connections>
+                                                <action selector="saveScores:" destination="ZM8-h5-qnw" id="HI6-F2-aWj"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Wg-Q76">
+                                <rect key="frame" x="290" y="461" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refresh"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

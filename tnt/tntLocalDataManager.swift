@@ -133,6 +133,11 @@ class tntLocalDataManager {
             if scoresArray.count > 0 {
                 
                 self.scores[scoreId] = scoresArray[0]
+                
+                // TODO: check the timestamp of the item retrieved from core data
+                //       if the age exceeds the cahe expiration limit then initiate a 
+                //       a synchmanager task to check for a newer item
+                
             }
             print("tntLocalDataManager: retrieve \(scoreId) score data")
             

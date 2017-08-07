@@ -264,6 +264,35 @@ class tntSynchManager {
         
     }
     
+    func saveScores(_ scoreId: String) {
+        
+        let scoresMO = tntLocalDataManager.shared.scores[scoreId]
+        
+        
+        if let scoresDB = tntScores() {
+        
+            scoresDB.scoreId = scoresMO?.value(forKey: "scoreId") as! String
+            scoresDB.athleteId = scoresMO?.value(forKey: "athleteId") as! String
+            scoresDB.meetId = scoresMO?.value(forKey: "meetId") as! String
+            
+            scoresDB.events = scoresMO?.value(forKey: "events") as! Set<String>
+            
+            scoresDB.scores = scoresMO?.value(forKey: "scores") as! [NSDictionary]
+            
+            let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+            
+            dynamoDBObjectMapper.save(scoresDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+                if let error = task.error as NSError? {
+                    print("TNT synch manager, failed saving scores object. Error: \(error)")
+                } else {
+                    print("TNT synch manager saved scores item")
+                }
+                return nil
+            })
+        }
+
+    }
+    
 
     
     func createVideo(s3VideoKey: String) {

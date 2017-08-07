@@ -64,6 +64,8 @@ class tntScoringViewController: UIViewController {
     
         let events = meetScores.value(forKey: "events") as! Set<String>
         
+        // TODO:  hide/deactivate any sections not in the event list for this athlete & meet combo
+        
         let scores = meetScores.value(forKey: "scores") as! [Dictionary<String, Any>]
         
         for passDict in scores {
@@ -92,7 +94,68 @@ class tntScoringViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func saveScores(_ sender: Any) {
+        
+        // 1: Save to Core Data (pending = true)
+        
+        let scoresMO = tntLocalDataManager.shared.scores[scoreId]
+        var scoresArray: [Dictionary<String, Any>] = []
+        
+        
+        if let doubleTR1 = Double(scoreTR1.text ?? "") {
+            scoresArray.append(["event": "TR", "pass": 1, "score": doubleTR1])
+        }
+        if let doubleTU1 = Double(scoreTU1.text ?? "") {
+            scoresArray.append(["event": "TU", "pass": 1, "score": doubleTU1])
+        }
+        if let doubleTU2 = Double(scoreTU2.text ?? "") {
+            scoresArray.append(["event": "TU", "pass": 2, "score": doubleTU2])
+        }
+        if let doubleDMT1 = Double(scoreDMT1.text ?? "") {
+            scoresArray.append(["event": "DMT", "pass": 1, "score": doubleDMT1])
+        }
+        if let doubleDMT2 = Double(scoreDMT2.text ?? "") {
+            scoresArray.append(["event": "DMT", "pass": 2, "score": doubleDMT2])
+        }
+        
+        scoresMO?.setValue(scoresArray, forKey: "scores")
+        scoresMO?.setValue(true, forKey: "cloudSavePending")
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        
+        do {
+            try managedContext.save()
+            tntLocalDataManager.shared.scores[scoreId] = scoresMO
+        } catch let error as NSError {
+            print("Could not save scores to CoreData. \(error), \(error.userInfo)")
+        }
+        
+        // 2. If WiFi available, save to CloudDB
+        
+        // omit check for network connection while testing Dynamao
+        
+        tntSynchManager.shared.saveScores(scoreId)
+        
+        // 2a in success handler, set pending = false 
+        
+        // 2b in failure / error handler leave pending = true and continue
+        
+        // 3. If WiFi unavailable just leave pending = true and continueSa
+        
+        
+    }
     
+    @IBAction func cancelVC(_ sender: Any) {
+        
+        navigationController?.popViewController(animated: true)
+        
+    }
     // MARK: Notification Observers
     
     func observerScoresLoaded(notification: Notification) {
