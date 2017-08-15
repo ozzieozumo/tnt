@@ -145,7 +145,29 @@ class tntLocalDataManager {
             print("Could not fetch scores from core data. \(error), \(error.userInfo)")
         }
     }
-
+    
+    func getPendingScoreUpdates() -> [NSManagedObject] {
+        
+        // return an array of MOs for each Score in a pending upload state
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Scores")
+        fetchRequest.predicate = NSPredicate(format: "cloudSavePending == true")
+        
+        do {
+            let scoresArray = try moc!.fetch(fetchRequest)
+            if scoresArray.count > 0 {
+                
+                return scoresArray
+                
+            } else {
+                return []
+            }
+            
+        } catch let error as NSError {
+            print("TNT: getPendingScoreUpdates. \(error), \(error.userInfo)")
+        }
+        return []
+    }
 
     
 }

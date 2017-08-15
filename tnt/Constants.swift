@@ -21,5 +21,10 @@ struct Constants {
     //KeyChain Constants
     static let FACEBOOK_PROVIDER = "graph.facebook.com"
     
+    
+    // Synch Manager Constants 
+    
+    static let cloudDBRetryInterval = 20  // seconds to wait before retry
+    
        
 }

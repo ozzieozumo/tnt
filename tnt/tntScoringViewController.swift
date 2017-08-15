@@ -66,7 +66,7 @@ class tntScoringViewController: UIViewController {
         
         // TODO:  hide/deactivate any sections not in the event list for this athlete & meet combo
         
-        let scores = meetScores.value(forKey: "scores") as! [Dictionary<String, Any>]
+        let scores = meetScores.value(forKey: "scores") as! [[String:Any]]
         
         for passDict in scores {
             
@@ -140,7 +140,7 @@ class tntScoringViewController: UIViewController {
         
         // omit check for network connection while testing Dynamao
         
-        tntSynchManager.shared.saveScores(scoreId)
+        // tntSynchManager.shared.saveScores(scoreId)
         
         // 2a in success handler, set pending = false 
         

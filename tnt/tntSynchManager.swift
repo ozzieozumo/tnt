@@ -366,5 +366,98 @@ class tntSynchManager {
                 return preSignedURL!
             }
 
+    
+    // Synchronization background task:  check for pending updates and retry
+    
+    func startRetryTask() {
+    
+        // should be called in background, not on main thread
+        precondition(!Thread.isMainThread, "tntSynchManager : retryTask must not run on main thread")
+        
+        // check to see if task already started
+        
+        let queue = DispatchQueue(label: "cloudRetryQueue")
+        let group = DispatchGroup()
+        
 
+        // start a polling loop looking for pending updates
+        
+        
+        while true {
+                // setup a group with a timer and the polling task
+                // when both have finished, start again 
+                
+                group.enter()
+                queue.async {
+                    
+                    print("TNT Synch Manager : Polling")
+                    
+                    // Execute code to look for pending items and initiate background updates
+                    // (this code should be guaranteed to finish after a certain timeout)
+                    
+                    for pendingScore in tntLocalDataManager.shared.getPendingScoreUpdates() {
+                        
+                        // make a tntScores mapping object
+                        
+                        let scoresDB = tntScores(scoresMO: pendingScore)
+                        
+                        // use object mapper to attempt an update
+                        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+                        
+                        dynamoDBObjectMapper.save(scoresDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+                            if let error = task.error as NSError? {
+                                print("TNT synch manager, failed saving scores object. Error: \(error)")
+                                
+                                // TODO:  analysis of error codes
+                                
+                            } else {
+                                print("TNT synch manager saved scores item to cloud DB")
+                                
+                                pendingScore.setValue(false, forKey: "cloudSavePending")
+                                pendingScore.setValue(Date(), forKey: "cloudSaveDate")
+                                
+                                // need to call save on the context
+                                
+                                guard let appDelegate =
+                                    UIApplication.shared.delegate as? AppDelegate else {
+                                        return nil
+                                }
+                                
+                                let managedContext = appDelegate.persistentContainer.viewContext
+                                
+                                
+                                do {
+                                    try managedContext.save()
+                                } catch let error as NSError {
+                                    print("Could not save scores to CoreData. \(error), \(error.userInfo)")
+                                }
+
+                                
+                            }
+                            group.leave()
+                            return nil
+                        })
+
+                    }
+                    
+                    
+                }
+                
+                
+                group.enter()
+                queue.asyncAfter(deadline: .now() + .seconds(Constants.cloudDBRetryInterval)) {
+                    
+                    
+                    print("TNT Synch Manager : Timer Done")
+                    group.leave()
+                }
+                
+                group.wait()
+                print("TNT Synch Manager : Polling and Timer Done, Looping")
+                
+            }
+        
+    }
+    
+    
 }
