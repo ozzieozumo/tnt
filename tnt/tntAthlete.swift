@@ -26,4 +26,18 @@ class tntAthlete : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     class func hashKeyAttribute() -> String {
         return "athleteId"
     }
+    
+    convenience init(athleteMO : NSManagedObject) {
+        
+        self.init()
+        
+        athleteId = athleteMO.value(forKey: "id") as! String?
+        firstName = athleteMO.value(forKey: "firstName") as! String?
+        lastName = athleteMO.value(forKey: "lastName") as! String?
+        eventLevels = athleteMO.value(forKey: "eventLevels") as! [String: Int]?
+        cognitoId = athleteMO.value(forKey: "cognitoId") as! String?
+        profileImageURL = athleteMO.value(forKey: "profileImageURL") as! String?
+        
+    }
+
 }

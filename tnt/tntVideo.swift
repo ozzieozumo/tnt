@@ -24,4 +24,17 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     class func hashKeyAttribute() -> String {
         return "videoId"
     }
+    
+    convenience init(videoMO : NSManagedObject) {
+        
+        self.init()
+        
+        // Assumes that a valid scores MO has been received
+        
+        videoId = videoMO.value(forKey: "videoId") as! String?
+        cloudURL = videoMO.value(forKey: "cloudURL") as! String?
+        localIdentifier = videoMO.value(forKey: "localIdentifier") as! String?
+        
+    }
+
 }

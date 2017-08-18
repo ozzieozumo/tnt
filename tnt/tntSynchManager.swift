@@ -46,69 +46,15 @@ class tntSynchManager {
                 
                 // create a managed object and store it
                 
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return nil
-                }
-                
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let entity = NSEntityDescription.entity(forEntityName: "Athlete", in: managedContext)!
-                
-                let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
-                managedObject.setValue(athlete.athleteId, forKeyPath: "id")
-                managedObject.setValue(athlete.firstName, forKeyPath: "firstName")
-                managedObject.setValue(athlete.lastName, forKeyPath: "lastName")
-                managedObject.setValue(athlete.eventLevels, forKeyPath: "eventLevels")
+                let moAthlete = Athlete(dbAthlete: athlete)  // sends notifications on completion
                 
                 do {
-                    try managedContext.save()
-                    tntLocalDataManager.shared.athletes.append(managedObject)
+                    try tntLocalDataManager.shared.moc!.save()
+                    tntLocalDataManager.shared.athletes.append(moAthlete)
                 } catch let error as NSError {
                     print("Could not save. \(error), \(error.userInfo)")
                 }
 
-                
-                // send a notification indicating new athlete data
-                
-                let nc = NotificationCenter.default
-                nc.post(name: Notification.Name("tntMoreAthletes"), object: nil, userInfo: ["ahtleteId":athlete.athleteId])
-                
-                
-                // load the profile image from the URL
-                
-                let startSign = DispatchTime.now()
-                let s3imgURL = URL(string: self.tntPreSignedURL(unsignedURL: athlete.profileImageURL!))
-                let endSign = DispatchTime.now()
-                
-                let signSecs = Double(endSign.uptimeNanoseconds - startSign.uptimeNanoseconds) / 1000000000
-                print("extime URL Signing\(signSecs) seconds")
-
-                
-                let startImgGet = DispatchTime.now()
-                let imgData = try? Data(contentsOf: s3imgURL!, options: [])
-                
-                managedObject.setValue(imgData, forKeyPath: "profileImage")
-                
-                do {
-                    try managedContext.save()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-
-                
-                let endImgGet = DispatchTime.now()
-                
-                let imgSecs = Double(endImgGet.uptimeNanoseconds - startImgGet.uptimeNanoseconds) / 1000000000
-                print("extime Img Get  \(imgSecs) seconds")
-
-                // send a separate message for the image load, which can take longer
-                
-                nc.post(name: Notification.Name("tntProfileImageLoaded"), object: nil, userInfo: ["ahtleteId":athlete.athleteId])
-
-                
-                
-                // receiver will need to switch to main thread for UI updates
-        
             }
             return nil
         })

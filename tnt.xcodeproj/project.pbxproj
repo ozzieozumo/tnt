@@ -35,6 +35,14 @@
 		A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; };
 		A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEB1F335AD5004D7215 /* tntScores.swift */; };
+		A77D4CF51F44DC79004D7215 /* Scores+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */; };
+		A77D4CF61F44DC79004D7215 /* Scores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */; };
+		A77D4CF71F44DC79004D7215 /* Meet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */; };
+		A77D4CF81F44DC7A004D7215 /* Meet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */; };
+		A77D4CF91F44DC7A004D7215 /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */; };
+		A77D4CFA1F44DC7A004D7215 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */; };
+		A77D4CFB1F44DC7A004D7215 /* Athlete+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */; };
+		A77D4CFC1F44DC7A004D7215 /* Athlete+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */; };
 		A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */; };
 		A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F21EE9C66700E05757 /* tntVideo.swift */; };
 		A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */; };
@@ -113,6 +121,14 @@
 		A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
 		A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
 		A77D4CEB1F335AD5004D7215 /* tntScores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntScores.swift; sourceTree = "<group>"; };
+		A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scores+CoreDataClass.swift"; path = "CoreData/Scores+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scores+CoreDataProperties.swift"; path = "CoreData/Scores+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Meet+CoreDataClass.swift"; path = "CoreData/Meet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Meet+CoreDataProperties.swift"; path = "CoreData/Meet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "CoreData/Video+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataProperties.swift"; path = "CoreData/Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Athlete+CoreDataClass.swift"; path = "CoreData/Athlete+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Athlete+CoreDataProperties.swift"; path = "CoreData/Athlete+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideosTableViewController.swift; sourceTree = "<group>"; };
 		A77E58F21EE9C66700E05757 /* tntVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideo.swift; sourceTree = "<group>"; };
 		A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLocalDataManager.swift; sourceTree = "<group>"; };
@@ -196,6 +212,14 @@
 		A74DE87B1E8DD4EB006B2AF5 /* tnt */ = {
 			isa = PBXGroup;
 			children = (
+				A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */,
+				A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */,
+				A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */,
+				A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */,
+				A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */,
+				A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */,
+				A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */,
+				A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */,
 				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
 				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
@@ -474,17 +498,25 @@
 				A734D4DD1F216E1F006F89D3 /* tntScoringViewController.swift in Sources */,
 				A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */,
 				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
+				A77D4CFB1F44DC7A004D7215 /* Athlete+CoreDataClass.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
+				A77D4CF81F44DC7A004D7215 /* Meet+CoreDataProperties.swift in Sources */,
+				A77D4CF61F44DC79004D7215 /* Scores+CoreDataProperties.swift in Sources */,
+				A77D4CFA1F44DC7A004D7215 /* Video+CoreDataProperties.swift in Sources */,
+				A77D4CF91F44DC7A004D7215 /* Video+CoreDataClass.swift in Sources */,
 				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
+				A77D4CF71F44DC79004D7215 /* Meet+CoreDataClass.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
 				A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */,
 				A734D4DF1F216E8A006F89D3 /* tntMeetsTableViewController.swift in Sources */,
 				A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */,
 				A734D4DB1F17E30D006F89D3 /* tntMeet.swift in Sources */,
+				A77D4CF51F44DC79004D7215 /* Scores+CoreDataClass.swift in Sources */,
 				A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */,
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
+				A77D4CFC1F44DC7A004D7215 /* Athlete+CoreDataProperties.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 				A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,

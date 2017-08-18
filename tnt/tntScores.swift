@@ -22,8 +22,6 @@ class tntScores : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
         self.init()
         
-        // Assumes that a valid scores MO has been received
-        
         scoreId = scoresMO.value(forKey: "scoreId") as! String?
         athleteId = scoresMO.value(forKey: "athleteId") as! String?
         meetId = scoresMO.value(forKey: "meetId") as! String?
