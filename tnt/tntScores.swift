@@ -18,15 +18,15 @@ class tntScores : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var events:  Set<String>?
     var scores: [NSDictionary]?
     
-    convenience init(scoresMO : NSManagedObject) {
+    convenience init(scoresMO : Scores) {
     
         self.init()
         
-        scoreId = scoresMO.value(forKey: "scoreId") as! String?
-        athleteId = scoresMO.value(forKey: "athleteId") as! String?
-        meetId = scoresMO.value(forKey: "meetId") as! String?
-        events = scoresMO.value(forKey: "events") as! Set<String>?
-        scores = scoresMO.value(forKey: "scores") as! [NSDictionary]?
+        scoreId = scoresMO.scoreId
+        athleteId = scoresMO.athleteId
+        meetId = scoresMO.meetId
+        events = scoresMO.events as! Set<String>?
+        scores = scoresMO.scores as! [NSDictionary]?
 
     }
     

@@ -18,7 +18,7 @@ class tntLocalDataManager {
     
     var moc: NSManagedObjectContext?
     var athletes : [NSManagedObject]
-    var scores : [String: NSManagedObject]
+    var scores : [String: Scores]
     var meets : NSFetchedResultsController<NSManagedObject>?
     
     var videos: NSFetchedResultsController<NSManagedObject>?
@@ -125,7 +125,7 @@ class tntLocalDataManager {
     
     func fetchScores(_ scoreId: String) {
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Scores")
+        let fetchRequest: NSFetchRequest<Scores> = Scores.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "scoreId == %@", scoreId)
         
         do {
@@ -146,11 +146,11 @@ class tntLocalDataManager {
         }
     }
     
-    func getPendingScoreUpdates() -> [NSManagedObject] {
+    func getPendingScoreUpdates() -> [Scores] {
         
         // return an array of MOs for each Score in a pending upload state
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Scores")
+        let fetchRequest: NSFetchRequest<Scores> = Scores.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "cloudSavePending == true")
         
         do {

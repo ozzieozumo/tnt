@@ -12,7 +12,7 @@ import CoreData
 
 public class Athlete: NSManagedObject {
     
-    convenience init(dbAthlete: tntAthlete, loadImage: Bool = true) {
+    convenience init(dbAthlete: tntAthlete) {
         
         self.init(context: tntLocalDataManager.shared.moc!)
         
@@ -20,6 +20,11 @@ public class Athlete: NSManagedObject {
         self.firstName = dbAthlete.firstName
         self.lastName = dbAthlete.lastName
         self.eventLevels = dbAthlete.eventLevels as NSObject?
+        
+                
+    }
+    
+    func saveLocal() {
         
         do {
             try tntLocalDataManager.shared.moc!.save()
@@ -33,12 +38,6 @@ public class Athlete: NSManagedObject {
         let nc = NotificationCenter.default
         nc.post(name: Notification.Name("tntAthleteDataLoaded"), object: nil, userInfo: ["ahtleteId":self.id!])
         
-        
-        // background request to fill in the image data
-        
-        if loadImage {
-            self.backgroundLoadImage(imageURL: dbAthlete.profileImageURL)
-        }
         
     }
     

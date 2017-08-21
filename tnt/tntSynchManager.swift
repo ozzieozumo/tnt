@@ -42,7 +42,9 @@ class tntSynchManager {
                 print("The request failed. Error: \(error)")
             } else if let athlete = task.result as? tntAthlete {
                 
-                let moAthlete = Athlete(dbAthlete: athlete)  // sends notifications on completion of data and image loading
+                let moAthlete = Athlete(dbAthlete: athlete)
+                moAthlete.saveLocal()
+                moAthlete.backgroundLoadImage(imageURL: athlete.profileImageURL)
                 
             }
             return nil
@@ -162,58 +164,21 @@ class tntSynchManager {
                 
                 // create a managed object and store it
                 
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return nil
-                }
-                
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let entity = NSEntityDescription.entity(forEntityName: "Scores", in: managedContext)!
-                
-                let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
-                managedObject.setValue(scores.athleteId, forKeyPath: "athleteId")
-                managedObject.setValue(scores.meetId, forKeyPath: "meetId")
-                managedObject.setValue(scores.scoreId, forKeyPath: "scoreId")
-                managedObject.setValue(scores.events, forKeyPath: "events")
-                managedObject.setValue(scores.scores, forKeyPath: "scores")
-                
-                do {
-                    try managedContext.save()
-                    tntLocalDataManager.shared.scores[scores.scoreId!] = managedObject
-                } catch let error as NSError {
-                    print("Could not save scores to CoreData. \(error), \(error.userInfo)")
-                }
-                
-                
-                // send a notification indicating new scores data
-                
-                let nc = NotificationCenter.default
-                nc.post(name: Notification.Name("tntScoresLoaded"), object: nil, userInfo: ["ahtleteId":scores.athleteId!,
-                                                                                            "meetId": scores.meetId!])
+                let moScores = Scores(dbScores: scores)
+                moScores.saveLocal()
                 
             }
             return nil
         })
 
-        
-        
     }
     
     func saveScores(_ scoreId: String) {
         
-        let scoresMO = tntLocalDataManager.shared.scores[scoreId]
+        if let scoresMO = tntLocalDataManager.shared.scores[scoreId] {
         
+            let scoresDB = tntScores(scoresMO: scoresMO)
         
-        if let scoresDB = tntScores() {
-        
-            scoresDB.scoreId = scoresMO?.value(forKey: "scoreId") as! String
-            scoresDB.athleteId = scoresMO?.value(forKey: "athleteId") as! String
-            scoresDB.meetId = scoresMO?.value(forKey: "meetId") as! String
-            
-            scoresDB.events = scoresMO?.value(forKey: "events") as! Set<String>
-            
-            scoresDB.scores = scoresMO?.value(forKey: "scores") as! [NSDictionary]
-            
             let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
             
             dynamoDBObjectMapper.save(scoresDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
@@ -348,25 +313,9 @@ class tntSynchManager {
                             } else {
                                 print("TNT synch manager saved scores item to cloud DB")
                                 
-                                pendingScore.setValue(false, forKey: "cloudSavePending")
-                                pendingScore.setValue(Date(), forKey: "cloudSaveDate")
-                                
-                                // need to call save on the context
-                                
-                                guard let appDelegate =
-                                    UIApplication.shared.delegate as? AppDelegate else {
-                                        return nil
-                                }
-                                
-                                let managedContext = appDelegate.persistentContainer.viewContext
-                                
-                                
-                                do {
-                                    try managedContext.save()
-                                } catch let error as NSError {
-                                    print("Could not save scores to CoreData. \(error), \(error.userInfo)")
-                                }
-
+                                pendingScore.cloudSavePending = false
+                                pendingScore.cloudSaveDate = Date() as NSDate
+                                pendingScore.saveLocal()
                                 
                             }
                             group.leave()
