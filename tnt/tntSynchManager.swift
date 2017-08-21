@@ -42,19 +42,8 @@ class tntSynchManager {
                 print("The request failed. Error: \(error)")
             } else if let athlete = task.result as? tntAthlete {
                 
-                print("TNT: retrieved name" + athlete.firstName! + athlete.lastName!)
+                let moAthlete = Athlete(dbAthlete: athlete)  // sends notifications on completion of data and image loading
                 
-                // create a managed object and store it
-                
-                let moAthlete = Athlete(dbAthlete: athlete)  // sends notifications on completion
-                
-                do {
-                    try tntLocalDataManager.shared.moc!.save()
-                    tntLocalDataManager.shared.athletes.append(moAthlete)
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-
             }
             return nil
         })

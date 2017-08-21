@@ -36,7 +36,7 @@ class tntHomeViewController: UIViewController {
         //  
     
         
-        NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMoreAthletes(notification:)), name: Notification.Name("tntMoreAthletes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMoreAthletes(notification:)), name: Notification.Name("tntAthleteDataLoaded"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerProfileImageLoaded(notification:)), name: Notification.Name("tntProfileImageLoaded"), object: nil)
         
