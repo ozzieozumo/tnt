@@ -25,15 +25,14 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "videoId"
     }
     
-    convenience init(videoMO : NSManagedObject) {
+    convenience init(videoMO : Video) {
         
         self.init()
         
-        // Assumes that a valid scores MO has been received
-        
-        videoId = videoMO.value(forKey: "videoId") as! String?
-        cloudURL = videoMO.value(forKey: "cloudURL") as! String?
-        localIdentifier = videoMO.value(forKey: "localIdentifier") as! String?
+                
+        videoId = videoMO.videoId
+        cloudURL = videoMO.cloudURL
+        localIdentifier = videoMO.localIdentifier
         
     }
 

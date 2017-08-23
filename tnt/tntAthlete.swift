@@ -27,16 +27,16 @@ class tntAthlete : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "athleteId"
     }
     
-    convenience init(athleteMO : NSManagedObject) {
+    convenience init(athleteMO : Athlete) {
         
         self.init()
         
-        athleteId = athleteMO.value(forKey: "id") as! String?
-        firstName = athleteMO.value(forKey: "firstName") as! String?
-        lastName = athleteMO.value(forKey: "lastName") as! String?
-        eventLevels = athleteMO.value(forKey: "eventLevels") as! [String: Int]?
-        cognitoId = athleteMO.value(forKey: "cognitoId") as! String?
-        profileImageURL = athleteMO.value(forKey: "profileImageURL") as! String?
+        athleteId = athleteMO.id
+        firstName = athleteMO.firstName
+        lastName = athleteMO.lastName
+        eventLevels = athleteMO.eventLevels as! [String : Int]?
+        //cognitoId = athleteMO.cognitoId
+        //profileImageURL = athleteMO.profileImageURL
         
     }
 

@@ -32,21 +32,31 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "meetId"
     }
     
-    convenience init(meetMO : NSManagedObject) {
+    convenience init(meetMO : Meet) {
         
         self.init()
         
-        // Assumes that a valid scores MO has been received
+        meetId = meetMO.id
+        meetCity = meetMO.city
         
-        meetId = meetMO.value(forKey: "meetId") as! String?
-        meetCity = meetMO.value(forKey: "meetStartDate") as! String?
-        meetStartDate = meetMO.value(forKey: "meetStartDate") as! String?    // need date conversion?
-        meetEndDate = meetMO.value(forKey: "meetEndDate") as! String?
-        meetVenue = meetMO.value(forKey: "meetVenue") as! String?
-        meetLevels = meetMO.value(forKey: "meetLevels") as! [Int]?
-        meetEvents = meetMO.value(forKey: "meetEvents") as! [String]?
-        meetTitle = meetMO.value(forKey: "meetTitle") as! String?
-        meetSubTitle = meetMO.value(forKey: "meetSubTitle") as! String?
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        meetStartDate = dateFormatter.string(from: meetMO.startDate! as Date)
+        meetEndDate = dateFormatter.string(from: meetMO.endDate! as Date)
+        meetVenue = meetMO.venue
+        
+        //convert min/max levels to array of levels
+        
+        var levels: [Int] = []
+        for level in meetMO.minLevel ... meetMO.maxLevel {
+                levels.append(Int(level))
+        }
+            
+        meetLevels = levels
+        meetEvents = meetMO.events as! [String]?
+        meetTitle = meetMO.title
+        meetSubTitle = meetMO.subTitle
     
     }
 

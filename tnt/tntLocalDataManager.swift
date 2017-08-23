@@ -19,9 +19,8 @@ class tntLocalDataManager {
     var moc: NSManagedObjectContext?
     var athletes : [NSManagedObject]
     var scores : [String: Scores]
-    var meets : NSFetchedResultsController<NSManagedObject>?
-    
-    var videos: NSFetchedResultsController<NSManagedObject>?
+    var meets : NSFetchedResultsController<Meet>?
+    var videos: NSFetchedResultsController<Video>?
     
     private init() {
     
@@ -88,12 +87,11 @@ class tntLocalDataManager {
     
     func fetchRelatedVideos() {
     
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Video")
+        let request: NSFetchRequest<Video> = Video.fetchRequest()
         let dateSort = NSSortDescriptor(key: "publishDate", ascending: true)
         request.sortDescriptors = [dateSort]
         
         self.videos = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc!, sectionNameKeyPath: nil, cacheName: nil)
-        // videos.delegate = self
         
         do {
             try videos?.performFetch()
@@ -107,7 +105,7 @@ class tntLocalDataManager {
     
     func fetchMeets() {
         
-        let request = NSFetchRequest<NSManagedObject>(entityName: "Meet")
+        let request: NSFetchRequest<Meet> = Meet.fetchRequest()
         let dateSort = NSSortDescriptor(key: "startDate", ascending: true)
         request.sortDescriptors = [dateSort]
         
