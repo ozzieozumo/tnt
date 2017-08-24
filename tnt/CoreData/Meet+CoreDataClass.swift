@@ -51,6 +51,56 @@ public class Meet: NSManagedObject {
         
     }
     
+    
+    // MARK - Class Functions
+    
+    class func lastSelected() -> Meet? {
+    
+    // return the last selected meet or nil
+        
+        let defaults = UserDefaults.standard
+        if let lastSelectedMeetId = defaults.string(forKey: "tntLastSelectedMeetId") {
+            for meet in tntLocalDataManager.shared.meets?.fetchedObjects ?? [] {
+                if meet.id == lastSelectedMeetId {
+                    return meet
+                }
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    class func setLastSelected(meetId: String?) {
+        
+        // set the last selected meetId
+        
+        let defaults = UserDefaults.standard
+        
+        if meetId != nil {
+            defaults.set(meetId, forKey: "tntLastSelectedMeetId")
+            defaults.synchronize()
+        } else {
+            defaults.removeObject(forKey: "tntLastSelectedMeetId")
+        }
+    }
+    
+    class func nextMeet(startDate: Date) -> Meet? {
+    
+    // return the next meet, starting on or after the given start date (or nil)
+    
+        for meet in tntLocalDataManager.shared.meets?.fetchedObjects ?? [] {
+            
+            if let meetStart = meet.startDate as Date? {
+                if meetStart >= startDate {
+                    return meet
+                }
+            }
+
+        }
+        return nil
+    }
 
 
 }

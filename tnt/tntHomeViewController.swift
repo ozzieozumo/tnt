@@ -15,6 +15,7 @@ import AWSS3
 class tntHomeViewController: UIViewController {
     
     var athleteIndex: Int = 0
+    var selectedMeet: Meet? = nil
     
     @IBOutlet weak var tntName: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
@@ -50,7 +51,7 @@ class tntHomeViewController: UIViewController {
             
             displayAthleteData()
             displayProfileImage()
-            displayMeetInfo(meetIndex: 0)
+            displayMeetInfo()
             
         } else {
             
@@ -164,22 +165,30 @@ class tntHomeViewController: UIViewController {
         
     }
     
-    func displayMeetInfo(meetIndex: Int) {
-        // format and display info about the next meet   
-        guard let meets = tntLocalDataManager.shared.meets?.fetchedObjects else {
-            return
-            // TODO:  display message indicating no meet data loaded
-        }
-        if meetIndex >= meets.count {
-            return
-            // TODO: display alternate message about no meets available
-        }
-        let meetMO = meets[meetIndex]
-        let meetTitle = meetMO.value(forKey: "Title") as! String
-        let meetSubtitle = meetMO.value(forKey: "SubTitle") as! String
+    func displayMeetInfo() {
         
-        nextMeetInfo.text = "\(meetTitle) \n \(meetSubtitle)"
+        // set the current meet if it is not set already 
         
+        
+        self.selectedMeet = Meet.lastSelected()
+            
+        if self.selectedMeet == nil {
+                self.selectedMeet = Meet.nextMeet(startDate: Date())
+                
+        }
+        
+        if let meet = self.selectedMeet {
+            // format and display info about the next meet
+            
+            let meetTitle = meet.title ?? ""
+            let meetSubtitle = meet.subTitle ?? ""
+            
+            nextMeetInfo.text = "\(meetTitle) \n \(meetSubtitle)"
+            
+        } else {
+            // no saved meet and no next meet
+            nextMeetInfo.text = "No Meets Available"
+        }
         
     }
     
@@ -228,7 +237,7 @@ class tntHomeViewController: UIViewController {
     
     func observerMeetLoaded(notification: Notification) {
         DispatchQueue.main.async{
-            self.displayMeetInfo(meetIndex: 0)
+            self.displayMeetInfo()
             
         }
         

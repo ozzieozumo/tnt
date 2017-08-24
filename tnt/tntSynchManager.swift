@@ -67,20 +67,8 @@ class tntSynchManager {
                     
                     print("TNT: retrieved video \(video.cloudURL ?? "no URL")")
                     
-                    let context = tntLocalDataManager.shared.moc
-                    let entity = NSEntityDescription.entity(forEntityName: "Video", in: context!)!
-                    let managedObject = NSManagedObject(entity: entity, insertInto: context)
-                    
-                    managedObject.setValue(video.cloudURL, forKeyPath: "cloudURL")
-                    managedObject.setValue(video.localIdentifier, forKeyPath: "localIdentifier")
-                    
-                    do {
-                        try context?.save()
-                        
-                    } catch let error as NSError {
-                        print("Could not save. \(error), \(error.userInfo)")
-                    }
-                    
+                    let videoMO = Video(dbVideo: video)
+                    videoMO.saveLocal()
                 }
                 
                 // fetch the results in coredata
@@ -116,21 +104,8 @@ class tntSynchManager {
                     
                     print("TNT: retrieved meet \(meet.meetTitle ?? "no URL")")
                     
-                    let context = tntLocalDataManager.shared.moc
-                    let entity = NSEntityDescription.entity(forEntityName: "Meet", in: context!)!
-                    let managedObject = NSManagedObject(entity: entity, insertInto: context)
-                    
-                    managedObject.setValue(meet.meetId, forKeyPath: "id")
-                    managedObject.setValue(meet.meetTitle, forKeyPath: "Title")
-                    managedObject.setValue(meet.meetSubTitle, forKeyPath: "SubTitle")
-                    
-                    do {
-                        try context?.save()
-                        
-                    } catch let error as NSError {
-                        print("TNT: Could not save meet to CoreData. \(error), \(error.userInfo)")
-                    }
-                    
+                    let meetMO = Meet(dbMeet: meet)
+                    meetMO.saveLocal()  // needs exception handling?
                 }
                 
                 // fetch the results in coredata

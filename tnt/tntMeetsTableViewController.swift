@@ -28,24 +28,50 @@ class tntMeetsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        return (tntLocalDataManager.shared.meets!.sections?.count)!
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let sections = tntLocalDataManager.shared.meets?.sections else {
+            fatalError("No sections in fetchedResultsController")
+        }
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
 
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tntmeet", for: indexPath)
+        // Set up the cell
+        guard let meet = tntLocalDataManager.shared.meets?.object(at: indexPath) else {
+            fatalError("Attempt to configure cell without a managed object")
+        }
+        //Populate the cell from the object
+        
+        cell.textLabel?.text = meet.title
+        cell.contentView.backgroundColor = UIColor.cyan
+        
         return cell
+
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // show a video player for the selected cell
+        
+        
+        if let meet = tntLocalDataManager.shared.meets?.fetchedObjects?[indexPath.row] {
+            
+            Meet.setLastSelected(meetId: meet.id)
+            navigationController?.popViewController(animated: true)
+            
+        }
+        
+    }
+
+    
 
     /*
     // Override to support conditional editing of the table view.

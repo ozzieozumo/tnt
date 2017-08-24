@@ -21,6 +21,7 @@ public class Athlete: NSManagedObject {
         self.lastName = dbAthlete.lastName
         self.eventLevels = dbAthlete.eventLevels as NSObject?
         
+  
                 
     }
     
