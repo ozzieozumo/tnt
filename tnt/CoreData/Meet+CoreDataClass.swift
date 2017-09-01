@@ -101,6 +101,21 @@ public class Meet: NSManagedObject {
         }
         return nil
     }
+    
+    class func indexOfId(_ id: String?) -> IndexPath? {
+        
+        guard id != nil else { return nil }
+        
+        for (row, meet) in (tntLocalDataManager.shared.meets?.fetchedObjects ?? []).enumerated() {
+            
+            if meet.id == id {
+                return IndexPath(row: row, section: 0)
+            }
+            
+        }
+        return nil
+        
+    }
 
 
 }

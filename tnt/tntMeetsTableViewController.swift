@@ -10,6 +10,11 @@ import UIKit
 
 class tntMeetsTableViewController: UITableViewController {
 
+   
+    var selectedMeetId : String? = nil
+    
+    @IBOutlet weak var nextMeetSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +23,21 @@ class tntMeetsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let defaults = UserDefaults.standard
+        
+        let dateSelect = defaults.bool(forKey: "nextMeetSelectByDate")
+        
+        if dateSelect {
+            nextMeetSwitch.setOn(true, animated: false)
+            self.selectedMeetId = Meet.nextMeet(startDate: Date())?.id
+            
+        } else {
+            nextMeetSwitch.setOn(false, animated: false)
+            self.selectedMeetId = Meet.lastSelected()?.id
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,9 +78,20 @@ class tntMeetsTableViewController: UITableViewController {
 
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // show a video player for the selected cell
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // show selected row as selected
         
+        if let meet  = tntLocalDataManager.shared.meets?.object(at: indexPath) {
+            if meet.id == self.selectedMeetId {
+                cell.setSelected(true, animated: true)
+            } else {
+                cell.setSelected(false, animated: true)
+            }
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let meet = tntLocalDataManager.shared.meets?.fetchedObjects?[indexPath.row] {
             
@@ -69,6 +100,15 @@ class tntMeetsTableViewController: UITableViewController {
             
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        if nextMeetSwitch.isOn {
+            return nil
+        } else {
+            return indexPath
+        }
     }
 
     
@@ -117,5 +157,24 @@ class tntMeetsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    @IBAction func nextMeetSwitchChanged(_ sender: Any) {
+        
+        // save the selection to user defaults
+        
+        let defaults = UserDefaults.standard
+        defaults.set(nextMeetSwitch.isOn, forKey: "nextMeetSelectByDate")
+        defaults.synchronize()
+        
+        if nextMeetSwitch.isOn {
+            
+            self.selectedMeetId = Meet.nextMeet(startDate: Date())?.id
+            
+            tableView.reloadData()
+        }
+        
+        
+    }
 
 }

@@ -169,14 +169,18 @@ class tntHomeViewController: UIViewController {
         
         // set the current meet if it is not set already 
         
+        let defaults = UserDefaults.standard
+        let dateSelect = defaults.bool(forKey: "nextMeetSelectByDate")
         
-        self.selectedMeet = Meet.lastSelected()
+        if dateSelect {
+            self.selectedMeet = Meet.nextMeet(startDate: Date())
+             
+        } else {
+            self.selectedMeet = Meet.lastSelected()
             
-        if self.selectedMeet == nil {
-                self.selectedMeet = Meet.nextMeet(startDate: Date())
-                
         }
         
+               
         if let meet = self.selectedMeet {
             // format and display info about the next meet
             
