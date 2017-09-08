@@ -23,6 +23,7 @@ extension Scores {
     @NSManaged public var meetId: String?
     @NSManaged public var scoreId: String?
     @NSManaged public var scores: NSObject?
+    @NSManaged public var videos: NSObject?
     @NSManaged public var timeStamp: NSDate?
 
 }

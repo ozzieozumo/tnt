@@ -17,6 +17,7 @@ class tntScores : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var meetId: String?
     var events:  Set<String>?
     var scores: [NSDictionary]?
+    var videos: [NSDictionary]?
     
     convenience init(scoresMO : Scores) {
     
@@ -27,6 +28,8 @@ class tntScores : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         meetId = scoresMO.meetId
         events = scoresMO.events as! Set<String>?
         scores = scoresMO.scores as! [NSDictionary]?
+        videos = scoresMO.videos as! [NSDictionary]?
+        
 
     }
     

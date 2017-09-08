@@ -75,7 +75,7 @@ class tntSynchManager {
                 
                 tntLocalDataManager.shared.fetchRelatedVideos()
                 
-                // send a notification indicating new athlete data
+                // send a notification indicating new video data
                 
                 let nc = NotificationCenter.default
                 nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: nil)

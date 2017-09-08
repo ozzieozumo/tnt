@@ -17,7 +17,7 @@ class tntLocalDataManager {
     static let shared = tntLocalDataManager()
     
     var moc: NSManagedObjectContext?
-    var athletes : [NSManagedObject]
+    var athletes : [Athlete]
     var scores : [String: Scores]
     var meets : NSFetchedResultsController<Meet>?
     var videos: NSFetchedResultsController<Video>?
@@ -48,7 +48,7 @@ class tntLocalDataManager {
         // do nothing for now
         
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Athlete")
+        let fetchRequest: NSFetchRequest<Athlete> = Athlete.fetchRequest()
         
         do {
             athletes = try moc!.fetch(fetchRequest)

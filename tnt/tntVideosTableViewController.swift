@@ -12,7 +12,17 @@ import AVKit
 import AWSS3
 
 class tntVideosTableViewController: UITableViewController {
+    
+    // This view displays videos, and allows upload of new videos, related to a particular athlete & meet 
+    
+    var athleteMO : Athlete?
+    var meetMO : Meet?
+    var scoresMO : Scores?
+    var videos : [[String:Any]]?
 
+    @IBOutlet weak var athleteName: UILabel!
+    @IBOutlet weak var meetInfo: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,13 +37,17 @@ class tntVideosTableViewController: UITableViewController {
         
         // if there are no videos in coredata, try to load from the cloud database
         
-        let videoCount = tntLocalDataManager.shared.videos?.fetchedObjects?.count ?? 0
+        getScores()
+    
         
-        if videoCount == 0 {
-            
-            tntSynchManager.shared.loadVideos() // asynch
-            
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        showContextInfo()
+        
         
     }
 
@@ -51,7 +65,7 @@ class tntVideosTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (tntLocalDataManager.shared.videos?.fetchedObjects?.count) ?? 0
+        return (self.videos?.count) ?? 0
     }
 
  
@@ -59,13 +73,13 @@ class tntVideosTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tntvideo", for: indexPath)
         // Set up the cell
-        guard let object = tntLocalDataManager.shared.videos?.object(at: indexPath) else {
+        guard let object = self.videos?[indexPath.row] else {
             fatalError("Attempt to configure cell without a managed object")
         }
         //Populate the cell from the object
         
         //let urlLabel = UILabel()
-        let cloudURL = object.value(forKey: "cloudURL") as? String
+        let cloudURL = object["videoId"] as? String
         //urlLabel.text =  cloudURL ?? ""
         cell.textLabel?.text = cloudURL ?? ""
         //urlLabel.backgroundColor = UIColor.orange
@@ -193,9 +207,40 @@ class tntVideosTableViewController: UITableViewController {
             
         }
         
+    }
+    
+    func showContextInfo() {
+        
+        self.athleteName.text = (self.athleteMO?.lastName ?? "") + "," + (self.athleteMO?.firstName ?? "")
+        
+        self.meetInfo.text = self.meetMO?.title ?? ""
+        
         
     }
+    
+    func getScores() {
+        
+        guard let athleteId = athleteMO?.id, let meetId = meetMO?.id else {
+            return
+        }
+        
+        let scoreId = athleteId + ":" + meetId
+        
+        if let scores = tntLocalDataManager.shared.scores[scoreId] {
+            
+            self.scoresMO = scores
+            self.videos = scores.videos as! [[String:Any]]?
+            return
+            
+        } else {
+            
+            // request loading from cloud DB (and await notification)
+            
+            tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
 
-
+            return
+            
+        }
+    }
 
 }

@@ -21,6 +21,7 @@ public class Scores: NSManagedObject {
         self.meetId = dbScores.meetId
         self.events = dbScores.events as NSObject?
         self.scores = dbScores.scores as NSObject?
+        self.videos = dbScores.videos as NSObject?
         
         
         

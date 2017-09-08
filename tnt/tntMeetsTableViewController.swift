@@ -91,6 +91,7 @@ class tntMeetsTableViewController: UITableViewController {
         
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let meet = tntLocalDataManager.shared.meets?.fetchedObjects?[indexPath.row] {

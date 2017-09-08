@@ -211,7 +211,16 @@ class tntHomeViewController: UIViewController {
             let meetId = meetMO?.value(forKey: "id") as! String
             destvc.meetId = meetId
             
+            return
             
+        }
+        
+        if let destvc = segue.destination as? tntVideosTableViewController {
+            
+            destvc.athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
+            destvc.meetMO = self.selectedMeet
+            
+            return
         }
     }
     
