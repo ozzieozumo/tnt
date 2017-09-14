@@ -52,6 +52,9 @@ class tntSynchManager {
     }
 
     func loadVideos() {
+        
+        // TODO : this function currently is scanning all videos and loading them all at once
+        // should convert the localcache to an array (instead of fetchedresultscontroller) and provide a method for loading one at a time
     
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
@@ -69,16 +72,18 @@ class tntSynchManager {
                     
                     let videoMO = Video(dbVideo: video)
                     videoMO.saveLocal()
+                    
+                    // send a notification indicating new video data
+                    
+                    let nc = NotificationCenter.default
+                    nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: ["videoId" : videoMO.videoId!])
                 }
                 
                 // fetch the results in coredata
                 
                 tntLocalDataManager.shared.fetchRelatedVideos()
                 
-                // send a notification indicating new video data
                 
-                let nc = NotificationCenter.default
-                nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: nil)
                 
             }
     
@@ -126,6 +131,7 @@ class tntSynchManager {
     
     func loadScores(athleteId: String, meetId: String) {
         
+        
         // load score data from cloud DB to core data
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
@@ -171,6 +177,9 @@ class tntSynchManager {
 
     
     func createVideo(s3VideoKey: String) {
+        
+        // TODO : maybe this should have a completion handler, so that after creating the item in Dynamo
+        //        we could automatically pull it into CoreData
     
         guard let newVideo = tntVideo() else {
             print("Could not create TNT video")
@@ -187,6 +196,7 @@ class tntSynchManager {
                 print("The request failed. Error: \(error)")
             } else {
                 print("TNT synch manager created video item")
+                tntSynchManager.shared.loadVideos()
             }
             return nil
         })
@@ -317,6 +327,46 @@ class tntSynchManager {
             }
         
     }
+    
+    func s3VideoUpload(url: URL) {
+        let transferManager = AWSS3TransferManager.default()
+        
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        
+        uploadRequest!.bucket = "ozzieozumo.tnt"
+        let videoKey = "videos/" + UUID().uuidString.lowercased() + ".mov"
+        uploadRequest!.key = videoKey
+        uploadRequest!.body = url
+        
+        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject! in
+            if let error: NSError = task.error as NSError? {
+                if error.domain == AWSS3TransferManagerErrorDomain as String {
+                    if let errorCode = AWSS3TransferManagerErrorType(rawValue: error.code) {
+                        switch (errorCode) {
+                        case .cancelled, .paused:
+                            // update UI on main queue
+                            break;
+                            
+                        default:
+                            print("upload() failed: [\(error)]")
+                            break;
+                        }
+                    } else {
+                        print("upload() failed: [\(error)]")
+                    }
+                } else {
+                    print("upload() failed: [\(error)]")
+                }
+            }
+            print("video upload success")
+            
+            tntSynchManager.shared.createVideo(s3VideoKey: videoKey)
+            
+            return task
+        }
+        
+    }
+
     
     
 }

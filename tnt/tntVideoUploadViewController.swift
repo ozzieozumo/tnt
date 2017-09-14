@@ -11,6 +11,12 @@ import MobileCoreServices
 import AWSS3
 
 class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // The picker delegate will either set a URL to upload or leave it as nil
+    // The calling view controller is responsible for doing the upload, displaying spinners etc
+    
+    var uploadURL: URL? = nil
+    weak var uploadDelegate : tntVideoUploadPickerDelegate?
 
     override func viewDidLoad() {
         
@@ -93,12 +99,16 @@ class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDel
             print("TNT video upload : local file URL not available, cannot upload")
             return
         }
-        s3VideoUpload(url: uploadFileURL as URL)
+        
+        
+        uploadDelegate?.didChooseUploadURL(sender: self, uploadURL: uploadFileURL as URL)
+        
     }
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func s3VideoUpload(url: URL) {
@@ -139,9 +149,6 @@ class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
     }
-    
-
-    
     
 
 }

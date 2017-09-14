@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 import AWSS3
 
-class tntVideosTableViewController: UITableViewController {
+class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerDelegate {
     
     // This view displays videos, and allows upload of new videos, related to a particular athlete & meet 
     
@@ -32,6 +32,7 @@ class tntVideosTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerScoresLoaded(notification:)), name: Notification.Name("tntScoresLoaded"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerVideoLoaded(notification:)), name: Notification.Name("tntVideoLoaded"), object: nil)
         
@@ -155,11 +156,53 @@ class tntVideosTableViewController: UITableViewController {
     func observerVideoLoaded(notification: Notification) {
         // This notification received when videos have been loaded from the cloud DB to core data
         
+        // reload the video into coredata
+        
+        guard let scores = self.scoresMO else {
+            print("TNT : video loaded but scoresMO not set")
+            return
+        }
+        
+        if let videoId = notification.userInfo?["videoId"] as? String {
+            
+            if !scores.containsVideo(id: videoId) {
+                
+                // Add the new video object as a related video to the current scores object
+                
+                if var videos = scores.videos as? [[String:Any]] {
+                
+                    videos.append(["videoId" : videoId])
+                    
+                    // do I need to copy back to the scoresMO?  confusing pass by reference etc
+                    
+                    self.scoresMO?.videos = videos as NSObject
+                    scoresMO?.saveLocal()
+                    tntSynchManager.shared.saveScores(scores.scoreId!)
+                    
+                }
+                
+            }
+            
+        }
+        
         DispatchQueue.main.async{
             self.tableView.reloadData()
         }
         
     }
+    
+    func observerScoresLoaded(notification: Notification) {
+        // This notification received when a new or updated scores object has been loaded to core data
+        // This includes updated related video information
+        
+        getScores()
+        
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+        
+    }
+
     
     func showPlayer(partialURL: String) {
         
@@ -221,6 +264,7 @@ class tntVideosTableViewController: UITableViewController {
     func getScores() {
         
         guard let athleteId = athleteMO?.id, let meetId = meetMO?.id else {
+            print("TNT : athlete and meet must be set for videos view controller")
             return
         }
         
@@ -242,5 +286,41 @@ class tntVideosTableViewController: UITableViewController {
             
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destVC = segue.destination as? tntVideoUploadViewController {
+            
+            destVC.uploadDelegate = self
+        }
+        
+    }
+    
+    func didChooseUploadURL(sender: UIViewController, uploadURL: URL?) {
+        
+        guard let url = uploadURL else {
+            return
+        }
+        
+        // pop the VC of the video picker
+        
+        self.navigationController?.popViewController(animated: true)
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        // TODO (fancy) : show a progress indicator in a new table row or in the header
+        
+        // upload the file to S3 and create the video object
+        
+        tntSynchManager.shared.s3VideoUpload(url: url)
 
+    
+    }
+
+}
+
+protocol tntVideoUploadPickerDelegate : class {
+    
+    func didChooseUploadURL(sender: UIViewController, uploadURL: URL?)
+    
 }

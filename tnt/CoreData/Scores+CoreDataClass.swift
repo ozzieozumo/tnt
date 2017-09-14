@@ -40,9 +40,22 @@ public class Scores: NSManagedObject {
         // send a notification indicating that scores data was loaded
         
         let nc = NotificationCenter.default
-        nc.post(name: Notification.Name("tntScoresDataLoaded"), object: nil, userInfo: ["scoreId":self.scoreId!])
+        nc.post(name: Notification.Name("tntScoresLoaded"), object: nil, userInfo: ["scoreId":self.scoreId!])
 
         
+    }
+    
+    func containsVideo(id: String) -> Bool {
+        
+        if let vDicts = videos as? [[String:Any]] {
+        
+            for v in vDicts {
+                if v["videoId"] as? String == id {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 }
