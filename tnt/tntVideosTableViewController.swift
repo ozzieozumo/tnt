@@ -34,7 +34,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerScoresLoaded(notification:)), name: Notification.Name("tntScoresLoaded"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerVideoLoaded(notification:)), name: Notification.Name("tntVideoLoaded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerScoresNotFound(notification:)), name: Notification.Name("tntScoresNotFound"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerRelatedVideoLoaded(notification:)), name: Notification.Name("tntScoresNewVideo"), object: nil)
         
         // if there are no videos in coredata, try to load from the cloud database
         
@@ -153,8 +155,8 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
     
     // MARK: Notification Observers
     
-    func observerVideoLoaded(notification: Notification) {
-        // This notification received when videos have been loaded from the cloud DB to core data
+    func observerRelatedVideoLoaded(notification: Notification) {
+        // This notification received when a new video has been added as a related video of a scores object
         
         // reload the video into coredata
         
@@ -163,27 +165,18 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             return
         }
         
-        if let videoId = notification.userInfo?["videoId"] as? String {
+        if let notifiedScoreId = notification.userInfo?["scoreId"] as? String {
             
-            if !scores.containsVideo(id: videoId) {
-                
-                // Add the new video object as a related video to the current scores object
-                
-                if var videos = scores.videos as? [[String:Any]] {
-                
-                    videos.append(["videoId" : videoId])
-                    
-                    // do I need to copy back to the scoresMO?  confusing pass by reference etc
-                    
-                    self.scoresMO?.videos = videos as NSObject
-                    scoresMO?.saveLocal()
-                    tntSynchManager.shared.saveScores(scores.scoreId!)
-                    
-                }
-                
+            if notifiedScoreId != scores.scoreId {
+                return   // ignore any random notifications that arrive with the wrong scoreId
             }
             
+        } else {
+            print("TNT: scoreID expected but not received on notification for new related video")
+            return
         }
+        
+        getScores()
         
         DispatchQueue.main.async{
             self.tableView.reloadData()
@@ -195,13 +188,41 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         // This notification received when a new or updated scores object has been loaded to core data
         // This includes updated related video information
         
-        getScores()
-        
         DispatchQueue.main.async{
             self.tableView.reloadData()
         }
         
     }
+    
+    func observerScoresNotFound(notification: Notification) {
+        // This notification received when a request to load scores from Dynamo finds no score entity for the given id
+        
+        // Create a scores entity for this Id.  Save it to coredata and cloud. 
+        
+        guard let athleteId = athleteMO?.id, let meetId = meetMO?.id else {
+            return
+        }
+        
+        if let scoreId = notification.userInfo?["scoreId"] as? String {
+            
+            if scoreId == athleteId + ":" + meetId {
+                let scoresMO = Scores(context: tntLocalDataManager.shared.moc!)
+                scoresMO.athleteId = athleteId
+                scoresMO.meetId = meetId
+                scoresMO.scoreId = scoreId
+                
+                scoresMO.saveLocal()
+                self.scoresMO = scoresMO
+                tntSynchManager.shared.saveScores(scoreId)
+                
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+    }
+
 
     
     func showPlayer(partialURL: String) {
@@ -270,6 +291,10 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         let scoreId = athleteId + ":" + meetId
         
+        // first try to fetch from coredata to populate the cache, since scores are not loaded until needed
+        
+        tntLocalDataManager.shared.fetchScores(scoreId)
+        
         if let scores = tntLocalDataManager.shared.scores[scoreId] {
             
             self.scoresMO = scores
@@ -312,7 +337,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         // upload the file to S3 and create the video object
         
-        tntSynchManager.shared.s3VideoUpload(url: url)
+        tntSynchManager.shared.s3VideoUpload(url: url, scores: scoresMO!)
 
     
     }

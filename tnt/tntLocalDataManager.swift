@@ -103,6 +103,20 @@ class tntLocalDataManager {
         
     }
     
+    func loadNewVideo(video: tntVideo) {
+        
+        // create a videoMO and cache entry for a newly created Dynamo video entry
+        
+        let videoMO = Video(dbVideo: video)
+        videoMO.saveLocal()
+        
+        // send a notification indicating new video data
+        
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: ["videoId" : videoMO.videoId!])
+
+    }
+    
     func fetchMeets() {
         
         let request: NSFetchRequest<Meet> = Meet.fetchRequest()

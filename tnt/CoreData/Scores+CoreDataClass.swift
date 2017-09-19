@@ -45,6 +45,40 @@ public class Scores: NSManagedObject {
         
     }
     
+    func addVideo(relatedVideoId: String) {
+        
+        if !containsVideo(id: relatedVideoId) {
+            
+            var newVideoDicts: [[String:Any]]
+            
+            if let oldVideoDicts = videos as? [[String:Any]] {
+                
+                newVideoDicts = oldVideoDicts
+            } else {
+                
+                newVideoDicts =  []
+            }
+            
+            newVideoDicts.append(["videoId" : relatedVideoId])
+            
+            videos = newVideoDicts as NSObject
+            saveLocal()
+            
+            // send a notification including the videoId AND the scoreId
+            
+            let nc = NotificationCenter.default
+            nc.post(name: Notification.Name("tntScoresNewVideo"), object: nil, userInfo: ["scoreId":self.scoreId!,
+                                                                                          "videoId":relatedVideoId])
+            
+            // background:  write the updates scores object back to Dynamo
+            
+            tntSynchManager.shared.saveScores(scoreId!)
+        }
+
+        
+        
+    }
+    
     func containsVideo(id: String) -> Bool {
         
         if let vDicts = videos as? [[String:Any]] {

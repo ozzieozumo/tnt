@@ -51,7 +51,7 @@ class tntSynchManager {
         })
     }
 
-    func loadVideos() {
+    func loadAllVideos() {
         
         // TODO : this function currently is scanning all videos and loading them all at once
         // should convert the localcache to an array (instead of fetchedresultscontroller) and provide a method for loading one at a time
@@ -136,9 +136,13 @@ class tntSynchManager {
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
-        dynamoDBObjectMapper.load(tntScores.self, hashKey: "1:1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+        let scoreId = athleteId + ":" + meetId
+        
+        dynamoDBObjectMapper.load(tntScores.self, hashKey: scoreId, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
             if let error = task.error as NSError? {
                 print("The request failed. Error: \(error)")
+                return nil
+                
             } else if let scores = task.result as? tntScores {
                 
                 print("TNT: retrieved scores for" + scores.scoreId!)
@@ -147,8 +151,14 @@ class tntSynchManager {
                 
                 let moScores = Scores(dbScores: scores)
                 moScores.saveLocal()
+                return nil
                 
             }
+            // send a notification indicating that a scores object was not found (a normal situation - the VC will create one in response)
+            
+            let nc = NotificationCenter.default
+            nc.post(name: Notification.Name("tntScoresNotFound"), object: nil, userInfo: ["scoreId":scoreId])
+            
             return nil
         })
 
@@ -185,6 +195,7 @@ class tntSynchManager {
             print("Could not create TNT video")
             return
         }
+        
         newVideo.cloudURL = s3VideoKey
         newVideo.localIdentifier  = "NIL"
         newVideo.videoId = s3VideoKey
@@ -194,9 +205,11 @@ class tntSynchManager {
         dynamoDBObjectMapper.save(newVideo).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
             if let error = task.error as NSError? {
                 print("The request failed. Error: \(error)")
+                return nil
             } else {
                 print("TNT synch manager created video item")
-                tntSynchManager.shared.loadVideos()
+                tntLocalDataManager.shared.loadNewVideo(video: newVideo)
+                return nil
             }
             return nil
         })
@@ -328,7 +341,7 @@ class tntSynchManager {
         
     }
     
-    func s3VideoUpload(url: URL) {
+    func s3VideoUpload(url: URL, scores: Scores? = nil) {
         let transferManager = AWSS3TransferManager.default()
         
         let uploadRequest = AWSS3TransferManagerUploadRequest()
@@ -361,6 +374,14 @@ class tntSynchManager {
             print("video upload success")
             
             tntSynchManager.shared.createVideo(s3VideoKey: videoKey)
+            
+            // a scores object is provided when this is a new file upload and the new video
+            // should be added as a related video of athlete/meet
+            
+            if let scoresMO = scores {
+                
+                scoresMO.addVideo(relatedVideoId: videoKey)
+            }
             
             return task
         }
