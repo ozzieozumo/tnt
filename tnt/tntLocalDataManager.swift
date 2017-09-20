@@ -20,7 +20,7 @@ class tntLocalDataManager {
     var athletes : [Athlete]
     var scores : [String: Scores]
     var meets : NSFetchedResultsController<Meet>?
-    var videos: NSFetchedResultsController<Video>?
+    var videos: [String: Video]
     
     private init() {
     
@@ -31,7 +31,7 @@ class tntLocalDataManager {
     athletes = []
     scores = [:]
     meets = NSFetchedResultsController()
-    videos = NSFetchedResultsController()
+    videos = [:]
     moc = nil
         
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -57,7 +57,6 @@ class tntLocalDataManager {
             print("Could not fetch athletes from core data. \(error), \(error.userInfo)")
         }
         
-        fetchRelatedVideos()
         fetchMeets()
     }
     
@@ -65,7 +64,7 @@ class tntLocalDataManager {
         
         batchDeleteEntity(name: "Athlete"); athletes = []
         batchDeleteEntity(name: "Meet"); meets = nil
-        batchDeleteEntity(name: "Video"); videos = nil
+        batchDeleteEntity(name: "Video"); videos = [:]
         batchDeleteEntity(name: "Scores"); scores = [:]
         
     }
@@ -85,18 +84,19 @@ class tntLocalDataManager {
         }
     }
     
-    func fetchRelatedVideos() {
+    func fetchVideo(videoId: String) {
     
         let request: NSFetchRequest<Video> = Video.fetchRequest()
-        let dateSort = NSSortDescriptor(key: "publishDate", ascending: true)
-        request.sortDescriptors = [dateSort]
-        
-        self.videos = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc!, sectionNameKeyPath: nil, cacheName: nil)
+        request.predicate = NSPredicate(format: "videoId == %@", videoId)
         
         do {
-            try videos?.performFetch()
-            let videoCount = videos?.fetchedObjects?.count ?? 0
-            print("TNT Local Data Manager:  fetched \(videoCount) videos")
+            let videoArray = try moc!.fetch(request)
+            if videoArray.count > 0 {
+                
+                videos[videoId] = videoArray[0]
+                print("TNT fetched video with id : \(videoId)")
+                
+            }
         } catch {
             fatalError("Failed to initialize videos FetchedResultsController: \(error)")
         }
@@ -180,7 +180,29 @@ class tntLocalDataManager {
         }
         return []
     }
-
+    
+    func getVideoById(videoId: String) -> Video? {
+        
+        // look in the cache dictionary
+        
+        if let video = videos[videoId] {
+            return video
+        } else {
+            // try to fetch from coredata 
+            fetchVideo(videoId: videoId)
+            
+            if let video = videos[videoId] {
+                return video
+            } else {
+                
+                // background request to get from Dyanmo
+                tntSynchManager.shared.loadVideo(videoId: videoId)
+                return nil
+                
+            }
+        }
+    }
+    
     
 }
 

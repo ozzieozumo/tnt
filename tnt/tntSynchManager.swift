@@ -79,17 +79,35 @@ class tntSynchManager {
                     nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: ["videoId" : videoMO.videoId!])
                 }
                 
-                // fetch the results in coredata
-                
-                tntLocalDataManager.shared.fetchRelatedVideos()
-                
-                
-                
             }
     
         })
 
         
+    }
+    
+    func loadVideo(videoId: String) {
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.load(tntVideo.self, hashKey: videoId, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+                return nil
+                
+            } else if let videoDB = task.result as? tntVideo {
+                
+                print("TNT: synch manager retrieved video for \(videoId)")
+                
+                // create a managed object and store it
+                
+                let videoMO = Video(dbVideo: videoDB)
+                videoMO.saveLocal()
+                return nil
+                
+            }
+            return nil
+        })
     }
     
     func loadMeets() {
@@ -213,7 +231,6 @@ class tntSynchManager {
                 tntLocalDataManager.shared.loadNewVideo(video: newVideo)
                 return nil
             }
-            return nil
         })
         
     }

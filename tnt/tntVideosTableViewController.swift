@@ -95,13 +95,18 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         // show a video player for the selected cell
         
-        let videoMO = tntLocalDataManager.shared.videos?.object(at: indexPath)
+        guard let videoId = self.videos?[indexPath.row]["videoId"] as? String else {
+            print("TNT videos VC : videoId is nil for selected row")
+            return
+        }
         
-        let movieKey = videoMO?.value(forKey: "cloudURL") as! String
-        
-        showPlayer(partialURL: movieKey)
+        if let video = tntLocalDataManager.shared.getVideoById(videoId: videoId) {
+            
+            showPlayer(partialURL: video.cloudURL!)
+        }
         
     }
   

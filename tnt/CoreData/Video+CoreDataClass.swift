@@ -26,7 +26,7 @@ public class Video: NSManagedObject {
         
         do {
             try tntLocalDataManager.shared.moc!.save()
-            tntLocalDataManager.shared.fetchRelatedVideos()
+            tntLocalDataManager.shared.videos[videoId!] = self
             
         } catch let error as NSError {
             print("TNT: could not save video to core data. \(error), \(error.userInfo)")
