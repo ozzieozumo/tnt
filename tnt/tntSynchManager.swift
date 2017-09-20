@@ -175,10 +175,12 @@ class tntSynchManager {
             dynamoDBObjectMapper.save(scoresDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
                 if let error = task.error as NSError? {
                     print("TNT synch manager, failed saving scores object. Error: \(error)")
+                    return nil
                 } else {
                     print("TNT synch manager saved scores item")
+                    scoresMO.clearCloudSavePending()
+                    return nil
                 }
-                return nil
             })
         }
 
@@ -307,14 +309,12 @@ class tntSynchManager {
                                 print("TNT synch manager, failed saving scores object. Error: \(error)")
                                 
                                 // TODO:  analysis of error codes
+                        
                                 
                             } else {
                                 print("TNT synch manager saved scores item to cloud DB")
                                 
-                                pendingScore.cloudSavePending = false
-                                pendingScore.cloudSaveDate = Date() as NSDate
-                                pendingScore.saveLocal()
-                                
+                                pendingScore.clearCloudSavePending()
                             }
                             group.leave()
                             return nil

@@ -30,6 +30,7 @@ public class Scores: NSManagedObject {
     func saveLocal() {
         
         cloudSavePending = true
+        
         do {
             try tntLocalDataManager.shared.moc!.save()
             tntLocalDataManager.shared.scores[scoreId!] = self
@@ -42,8 +43,21 @@ public class Scores: NSManagedObject {
         
         let nc = NotificationCenter.default
         nc.post(name: Notification.Name("tntScoresLoaded"), object: nil, userInfo: ["scoreId":self.scoreId!])
-
         
+    }
+    
+    func clearCloudSavePending() {
+        
+        cloudSavePending = false
+        cloudSaveDate = Date() as NSDate
+        
+        do {
+            try tntLocalDataManager.shared.moc!.save()
+            
+        } catch let error as NSError {
+            print("TNT: could not save scores to core data. \(error), \(error.userInfo)")
+        }
+
     }
     
     func addVideo(relatedVideoId: String) {

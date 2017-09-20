@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DispatchQueue.global().async {
             
-            // tntSynchManager.shared.startRetryTask()
+            tntSynchManager.shared.startRetryTask()
             
         }
         
