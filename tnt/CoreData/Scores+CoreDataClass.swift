@@ -29,6 +29,7 @@ public class Scores: NSManagedObject {
     
     func saveLocal() {
         
+        cloudSavePending = true
         do {
             try tntLocalDataManager.shared.moc!.save()
             tntLocalDataManager.shared.scores[scoreId!] = self

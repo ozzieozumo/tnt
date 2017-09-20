@@ -16,6 +16,7 @@ class tntScoringViewController: UIViewController {
     var meetId : String = ""
     var athleteId : String = ""
     var scoreId : String = ""
+    var meetScores: Scores? = nil
     
     
     @IBOutlet weak var scoreTR1: UITextField!
@@ -32,26 +33,7 @@ class tntScoringViewController: UIViewController {
         
         scoreId = "\(athleteId):\(meetId)"
         
-        // if scores are available in local store, display them
-        
-        tntLocalDataManager.shared.fetchScores(scoreId)
-        
-        if let meetScores = tntLocalDataManager.shared.scores[scoreId] {
-            
-            
-            self.displayScores(meetScores: meetScores)
-            
-            // TODO - display the score data and allow editing
-            
-        } else {
-            
-            
-            // Ask the synch manager to load the scores for this athlete & meet
-            // then wait for a notification
-            
-            tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
-        }
-        
+        getScores()
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,15 +42,38 @@ class tntScoringViewController: UIViewController {
     }
     
     
-    func displayScores(meetScores: NSManagedObject) {
-    
-        let events = meetScores.value(forKey: "events") as! Set<String>
+    func getScores() {
         
+        // if scores are available in coredata display them
+        
+        tntLocalDataManager.shared.fetchScores(scoreId)
+        
+        if let scores = tntLocalDataManager.shared.scores[scoreId] {
+            
+            meetScores = scores
+            displayScores()
+            
+        } else {
+            
+            // Ask the synch manager to load the scores for this athlete & meet
+            
+            tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
+        }
+
+    }
+    
+    func displayScores() {
+        
+        guard let scores = meetScores else {
+            print("TNT scores VC cannot display a nil scores object")
+            return
+        }
+    
         // TODO:  hide/deactivate any sections not in the event list for this athlete & meet combo
         
-        let scores = meetScores.value(forKey: "scores") as! [[String:Any]]
+        let scoresDictArray = scores.scores as? [[String:Any]] ?? []
         
-        for passDict in scores {
+        for passDict in scoresDictArray {
             
             let event = passDict["event"] as! String
             let pass  = passDict["pass"] as! Int
@@ -96,9 +101,13 @@ class tntScoringViewController: UIViewController {
     */
     @IBAction func saveScores(_ sender: Any) {
         
-        // 1: Save to Core Data (pending = true)
+        guard let scores = meetScores else {
+            print("TNT scores VC - cannot save when score object is nil")
+            return
+        }
         
-        let scoresMO = tntLocalDataManager.shared.scores[scoreId]
+        // 1: save new scores array to core data
+        
         var scoresArray: [Dictionary<String, Any>] = []
         
         
@@ -118,36 +127,9 @@ class tntScoringViewController: UIViewController {
             scoresArray.append(["event": "DMT", "pass": 2, "score": doubleDMT2])
         }
         
-        scoresMO?.setValue(scoresArray, forKey: "scores")
-        scoresMO?.setValue(true, forKey: "cloudSavePending")
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-
-        
-        do {
-            try managedContext.save()
-            tntLocalDataManager.shared.scores[scoreId] = scoresMO
-        } catch let error as NSError {
-            print("Could not save scores to CoreData. \(error), \(error.userInfo)")
-        }
-        
-        // 2. If WiFi available, save to CloudDB
-        
-        // omit check for network connection while testing Dynamao
-        
-        // tntSynchManager.shared.saveScores(scoreId)
-        
-        // 2a in success handler, set pending = false 
-        
-        // 2b in failure / error handler leave pending = true and continue
-        
-        // 3. If WiFi unavailable just leave pending = true and continueSa
-        
+        scores.scores = scoresArray as NSObject
+        scores.saveLocal()
+        tntSynchManager.shared.saveScores(scores.scoreId!)
         
     }
     
@@ -160,10 +142,11 @@ class tntScoringViewController: UIViewController {
     
     func observerScoresLoaded(notification: Notification) {
         // This notification received when score data is fetched from the cloud DB into Core Data
-        // Switch back to the main thread to update the UI
         
         DispatchQueue.main.async{
-            self.displayScores(meetScores: tntLocalDataManager.shared.scores[self.scoreId]!)
+            
+            self.getScores()
+            
         }
         
     }

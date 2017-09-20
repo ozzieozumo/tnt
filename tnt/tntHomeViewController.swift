@@ -30,13 +30,6 @@ class tntHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
-        // Observe these events: 
-        //    1.  tntMoreAthletes
-        //  
-    
-        
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMoreAthletes(notification:)), name: Notification.Name("tntAthleteDataLoaded"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerProfileImageLoaded(notification:)), name: Notification.Name("tntProfileImageLoaded"), object: nil)
@@ -173,15 +166,15 @@ class tntHomeViewController: UIViewController {
         let dateSelect = defaults.bool(forKey: "nextMeetSelectByDate")
         
         if dateSelect {
-            self.selectedMeet = Meet.nextMeet(startDate: Date())
+            selectedMeet = Meet.nextMeet(startDate: Date())
              
         } else {
-            self.selectedMeet = Meet.lastSelected()
+            selectedMeet = Meet.lastSelected()
             
         }
         
                
-        if let meet = self.selectedMeet {
+        if let meet = selectedMeet {
             // format and display info about the next meet
             
             let meetTitle = meet.title ?? ""
@@ -203,13 +196,15 @@ class tntHomeViewController: UIViewController {
         if let destvc = segue.destination as? tntScoringViewController {
             
             // Set the meet and athlete on the scoring view controller
-            let athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
-            let athleteId = athleteMO.value(forKey: "id") as! String
-            destvc.athleteId = athleteId
             
-            let meetMO = tntLocalDataManager.shared.meets?.object(at: IndexPath(item: 0, section: 0))
-            let meetId = meetMO?.value(forKey: "id") as! String
-            destvc.meetId = meetId
+            let athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
+            if let athleteId = athleteMO.id {
+                destvc.athleteId = athleteId
+            }
+            
+            if let meetId = selectedMeet?.id {
+                destvc.meetId = meetId
+            }
             
             return
             
