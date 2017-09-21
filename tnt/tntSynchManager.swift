@@ -34,11 +34,12 @@ class tntSynchManager {
 
     func loadAthletes() {
         
+        // TODO - this should be converted to a func that takes an athleteId and loads from Dynamo one at a time
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
         dynamoDBObjectMapper.load(tntAthlete.self, hashKey: "1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
-            if let error = task.error as? NSError {
+            if let error = task.error as NSError? {
                 print("The request failed. Error: \(error)")
             } else if let athlete = task.result as? tntAthlete {
                 
@@ -120,8 +121,7 @@ class tntSynchManager {
         dynamoDBObjectMapper.scan(tntMeet.self, expression: scanExpression).continueWith(block: { (task) -> Void in
             if let error = task.error as NSError? {
                 print("The request failed. Error: \(error)")
-            } else if let paginatedOutput = task.result as? AWSDynamoDBPaginatedOutput {
-                
+            } else if let paginatedOutput = task.result as AWSDynamoDBPaginatedOutput? {
                 
                 for meet in paginatedOutput.items as! [tntMeet] {
                     
@@ -266,14 +266,14 @@ class tntSynchManager {
                 preSigner.getPreSignedURL(preSignedRequest).continueWith {
                     (task) in
                     
-                    if let error = task.error as? NSError {
+                    if let error = task.error as NSError? {
                         print("Error: \(error)")
                         signingGroup.leave()
                         return nil
                     }
                     
                     preSignedURL = task.result!.absoluteString
-                    print("Download presignedURL is: \(preSignedURL)")
+                    print("Download presignedURL is: \(String(describing: preSignedURL))")
                     signingGroup.leave()
                     return nil
                     

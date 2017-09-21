@@ -15,9 +15,14 @@ class tntScoringViewController: UIViewController {
     // The meet and athlete should be set via prepareforsegue
     var meetId : String = ""
     var athleteId : String = ""
+    var athleteMO: Athlete? = nil
+    var meetMO: Meet? = nil
+    
     var scoreId : String = ""
     var meetScores: Scores? = nil
     
+    @IBOutlet weak var athleteName: UILabel!
+    @IBOutlet weak var meetName: UILabel!
     
     @IBOutlet weak var scoreTR1: UITextField!
     @IBOutlet weak var scoreTU1: UITextField!
@@ -33,6 +38,8 @@ class tntScoringViewController: UIViewController {
         
         scoreId = "\(athleteId):\(meetId)"
         
+        getScoresContext()
+        
         getScores()
     }
     
@@ -40,6 +47,28 @@ class tntScoringViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func getScoresContext() {
+    
+        athleteMO = tntLocalDataManager.shared.athletes[athleteId]
+        meetMO = tntLocalDataManager.shared.meets[meetId]
+        
+        if athleteMO == nil || meetMO == nil {
+            print("TNT Scores VC could not get athlete and meet objects for context")
+        }
+    }
+    
+    
+    
+    func displayScoresContext() {
+        
+        self.athleteName.text = (self.athleteMO?.lastName ?? "") + "," + (self.athleteMO?.firstName ?? "")
+        
+        self.meetName.text = self.meetMO?.title ?? ""
+        
+        
+    }
+
     
     
     func getScores() {

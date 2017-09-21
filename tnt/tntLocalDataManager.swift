@@ -17,53 +17,38 @@ class tntLocalDataManager {
     static let shared = tntLocalDataManager()
     
     var moc: NSManagedObjectContext?
-    var athletes : [Athlete]
+    var athletes : [String: Athlete]
     var scores : [String: Scores]
-    var meets : NSFetchedResultsController<Meet>?
+    var meets : [String: Meet]
     var videos: [String: Video]
     
     private init() {
-    
-    /* Try to load cached data from Core Data.  
-       Failing that, setup an empty set of data. 
-    */
-    
-    athletes = []
-    scores = [:]
-    meets = NSFetchedResultsController()
-    videos = [:]
-    moc = nil
+        athletes = [:]
+        scores = [:]
+        meets = [:]
+        videos = [:]
+        moc = nil
+            
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("tntLocalDataManager: could not get application delegate")
+            return
+        }
         
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        print("tntLocalDataManager: could not get application delegate")
+        moc = appDelegate.persistentContainer.viewContext
         return
-    }
-    
-    moc = appDelegate.persistentContainer.viewContext
-    return
  
     }
     
     func loadLocalData() {
-        // do nothing for now
         
-        
-        let fetchRequest: NSFetchRequest<Athlete> = Athlete.fetchRequest()
-        
-        do {
-            athletes = try moc!.fetch(fetchRequest)
-            print("tntLocalDataManager: retrieve \(athletes.count) athletes")
-        } catch let error as NSError {
-            print("Could not fetch athletes from core data. \(error), \(error.userInfo)")
-        }
-        
+        fetchAthlete(athleteId: "1")
         fetchMeets()
     }
     
     func clearTNTObjects () {
         
-        batchDeleteEntity(name: "Athlete"); athletes = []
-        batchDeleteEntity(name: "Meet"); meets = nil
+        batchDeleteEntity(name: "Athlete"); athletes = [:]
+        batchDeleteEntity(name: "Meet"); meets = [:]
         batchDeleteEntity(name: "Video"); videos = [:]
         batchDeleteEntity(name: "Scores"); scores = [:]
         
@@ -103,6 +88,23 @@ class tntLocalDataManager {
         
     }
     
+    func fetchAthlete(athleteId: String) {
+    
+        let request: NSFetchRequest<Athlete> = Athlete.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", athleteId)
+        
+        do {
+            let athleteArray = try moc!.fetch(request)
+            if athleteArray.count > 0 {
+                
+                athletes[athleteId] = athleteArray[0]
+                print("TNT Local Data Manager fetched athlete with id : \(athleteId)")
+            }
+        } catch {
+            print("TNT Local Data Manager failed fetching athlete with id : \(athleteId)")
+        }
+    }
+    
     func loadNewVideo(video: tntVideo) {
         
         // create a videoMO and cache entry for a newly created Dynamo video entry
@@ -120,19 +122,32 @@ class tntLocalDataManager {
     func fetchMeets() {
         
         let request: NSFetchRequest<Meet> = Meet.fetchRequest()
+        
+        do {
+            let fetchedMeetsArray = try moc!.fetch(request)
+            for meet in fetchedMeetsArray {
+                meets[meet.id!] = meet
+                print("TNT Local Data Manager fetched meet with id : \(meet.id!)")
+            }
+        } catch {
+            fatalError("TNT Local Data Manager exception retrieving meets: \(error)")
+        }
+        
+    }
+    
+    func availableMeets() -> [Meet] {
+        // returns an array of meets available to this athlete; meets are in start date order
+        
+        let request: NSFetchRequest<Meet> = Meet.fetchRequest()
         let dateSort = NSSortDescriptor(key: "startDate", ascending: true)
         request.sortDescriptors = [dateSort]
         
-        self.meets = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc!, sectionNameKeyPath: nil, cacheName: nil)
-        
         do {
-            try meets?.performFetch()
-            let meetCount = meets?.fetchedObjects?.count ?? 0
-            print("TNT Local Data Manager:  fetched \(meetCount) meets")
+            let fetchedMeetsArray = try moc!.fetch(request)
+            return fetchedMeetsArray
         } catch {
-            fatalError("Failed to initialize meets FetchedResultsController: \(error)")
+            fatalError("TNT Local Data Manager exception retrieving meets: \(error)")
         }
-        
     }
     
     func fetchScores(_ scoreId: String) {
@@ -179,6 +194,28 @@ class tntLocalDataManager {
             print("TNT: getPendingScoreUpdates. \(error), \(error.userInfo)")
         }
         return []
+    }
+    
+    func getAthleteById(athleteId: String) -> Athlete? {
+        
+        // look in the cache dictionary
+        
+        if let athlete = athletes[athleteId] {
+            return athlete
+        } else {
+            // try to fetch from coredata
+            fetchAthlete(athleteId: athleteId)
+            
+            if let athlete = athletes[athleteId] {
+                return athlete
+            } else {
+                
+                // background request to get from Dyanmo
+                tntSynchManager.shared.loadAthletes()
+                return nil
+                
+            }
+        }
     }
     
     func getVideoById(videoId: String) -> Video? {

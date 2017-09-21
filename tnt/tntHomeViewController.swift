@@ -14,7 +14,7 @@ import AWSS3
 
 class tntHomeViewController: UIViewController {
     
-    var athleteIndex: Int = 0
+    var athleteId: String = "1"
     var selectedMeet: Meet? = nil
     
     @IBOutlet weak var tntName: UITextField!
@@ -125,11 +125,12 @@ class tntHomeViewController: UIViewController {
     func displayAthleteData() {
         // Display the data for the current athlete 
         
-        let athlete = tntLocalDataManager.shared.athletes[0]
-        let firstName = athlete.value(forKey: "firstName") as? String ?? ""
-        let lastName =  athlete.value(forKey: "lastName") as? String ?? ""
-        tntName.text = firstName + " " + lastName
-        
+        if let athlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId) {
+            let firstName = athlete.firstName ?? ""
+            let lastName =  athlete.lastName ?? ""
+            tntName.text = firstName + " " + lastName
+        }
+    
         // current level display
         
         //let eventLevels = athlete.value(forKey: "eventLevels") as! [String: Int]
@@ -142,18 +143,16 @@ class tntHomeViewController: UIViewController {
         currentLevelTU.text = levelTUint != nil ? "\(levelTUint)" : ""
         currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint)" : ""
         
-        
-        
     }
     
     func displayProfileImage() {
         // display an updated profile image
         
-        let athlete = tntLocalDataManager.shared.athletes[self.athleteIndex]
+        if let athlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId) {
         
-        let img = UIImage(data: athlete.value(forKey: "profileImage") as! Data)
-        
-        self.profileImage.image = img
+            let img = UIImage(data: athlete.profileImage! as Data)
+            self.profileImage.image = img
+        }
         
         
     }
@@ -196,23 +195,16 @@ class tntHomeViewController: UIViewController {
         if let destvc = segue.destination as? tntScoringViewController {
             
             // Set the meet and athlete on the scoring view controller
-            
-            let athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
-            if let athleteId = athleteMO.id {
-                destvc.athleteId = athleteId
-            }
-            
-            if let meetId = selectedMeet?.id {
-                destvc.meetId = meetId
-            }
-            
+        
+            destvc.athleteId = athleteId
+            destvc.meetId = selectedMeet?.id ?? ""
             return
             
         }
         
         if let destvc = segue.destination as? tntVideosTableViewController {
             
-            destvc.athleteMO = tntLocalDataManager.shared.athletes[self.athleteIndex]
+            destvc.athleteMO = tntLocalDataManager.shared.athletes[athleteId]
             destvc.meetMO = self.selectedMeet
             
             return

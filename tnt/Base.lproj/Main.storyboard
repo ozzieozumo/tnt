@@ -452,6 +452,8 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="athleteName" destination="r5o-Cp-n8j" id="7MC-u5-UNf"/>
+                        <outlet property="meetName" destination="3h1-w0-oXn" id="VPS-fw-TuU"/>
                         <outlet property="scoreDMT1" destination="6Mz-6S-Zkq" id="OKD-pq-9zt"/>
                         <outlet property="scoreDMT2" destination="wqv-sP-yqB" id="4lf-UF-rce"/>
                         <outlet property="scoreTR1" destination="3mK-AC-CIC" id="8ql-6Z-B3H"/>
@@ -504,7 +506,7 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="42"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9k-8I-KAI" id="hkd-7I-cSh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

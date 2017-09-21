@@ -12,6 +12,7 @@ class tntMeetsTableViewController: UITableViewController {
 
    
     var selectedMeetId : String? = nil
+    var meets: [Meet] = []
     
     @IBOutlet weak var nextMeetSwitch: UISwitch!
     
@@ -23,6 +24,8 @@ class tntMeetsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        meets = tntLocalDataManager.shared.availableMeets()
         
         let defaults = UserDefaults.standard
         
@@ -49,57 +52,52 @@ class tntMeetsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return (tntLocalDataManager.shared.meets!.sections?.count)!
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = tntLocalDataManager.shared.meets?.sections else {
-            fatalError("No sections in fetchedResultsController")
-        }
-        let sectionInfo = sections[section]
-        return sectionInfo.numberOfObjects
+        return meets.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "tntmeet", for: indexPath)
-        // Set up the cell
-        guard let meet = tntLocalDataManager.shared.meets?.object(at: indexPath) else {
+   
+        if indexPath.row <= meets.count {
+            let meet = meets[indexPath.row]
+            //Populate the cell from the object
+            
+            cell.textLabel?.text = meet.title
+            cell.contentView.backgroundColor = UIColor.cyan
+            
+            return cell
+
+        } else {
             fatalError("Attempt to configure cell without a managed object")
         }
-        //Populate the cell from the object
         
-        cell.textLabel?.text = meet.title
-        cell.contentView.backgroundColor = UIColor.cyan
-        
-        return cell
-
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // show selected row as selected
         
-        if let meet  = tntLocalDataManager.shared.meets?.object(at: indexPath) {
-            if meet.id == self.selectedMeetId {
+        let meet = meets[indexPath.row]
+        
+        if meet.id == self.selectedMeetId {
                 cell.setSelected(true, animated: true)
             } else {
                 cell.setSelected(false, animated: true)
             }
-        }
-        
     }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let meet = tntLocalDataManager.shared.meets?.fetchedObjects?[indexPath.row] {
+        let meet = meets[indexPath.row]
             
-            Meet.setLastSelected(meetId: meet.id)
-            navigationController?.popViewController(animated: true)
-            
-        }
+        Meet.setLastSelected(meetId: meet.id)
+        navigationController?.popViewController(animated: true)
         
     }
     

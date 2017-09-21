@@ -29,7 +29,7 @@ public class Athlete: NSManagedObject {
         
         do {
             try tntLocalDataManager.shared.moc!.save()
-            tntLocalDataManager.shared.athletes.append(self)
+            tntLocalDataManager.shared.athletes[id!] = self
         } catch let error as NSError {
             print("TNT: could not save athlete to core data. \(error), \(error.userInfo)")
         }

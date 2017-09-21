@@ -60,12 +60,7 @@ public class Meet: NSManagedObject {
         
         let defaults = UserDefaults.standard
         if let lastSelectedMeetId = defaults.string(forKey: "tntLastSelectedMeetId") {
-            for meet in tntLocalDataManager.shared.meets?.fetchedObjects ?? [] {
-                if meet.id == lastSelectedMeetId {
-                    return meet
-                }
-            }
-            
+            return tntLocalDataManager.shared.meets[lastSelectedMeetId]
         }
         
         return nil
@@ -90,7 +85,7 @@ public class Meet: NSManagedObject {
     
     // return the next meet, starting on or after the given start date (or nil)
     
-        for meet in tntLocalDataManager.shared.meets?.fetchedObjects ?? [] {
+        for meet in tntLocalDataManager.shared.availableMeets() {
             
             if let meetStart = meet.startDate as Date? {
                 if meetStart >= startDate {
@@ -102,20 +97,5 @@ public class Meet: NSManagedObject {
         return nil
     }
     
-    class func indexOfId(_ id: String?) -> IndexPath? {
-        
-        guard id != nil else { return nil }
-        
-        for (row, meet) in (tntLocalDataManager.shared.meets?.fetchedObjects ?? []).enumerated() {
-            
-            if meet.id == id {
-                return IndexPath(row: row, section: 0)
-            }
-            
-        }
-        return nil
-        
-    }
-
 
 }
