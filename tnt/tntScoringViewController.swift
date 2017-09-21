@@ -39,7 +39,7 @@ class tntScoringViewController: UIViewController {
         scoreId = "\(athleteId):\(meetId)"
         
         getScoresContext()
-        
+        displayScoresContext()
         getScores()
     }
     
