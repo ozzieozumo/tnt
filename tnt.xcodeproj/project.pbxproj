@@ -29,6 +29,10 @@
 		A74DE8A01E8DD4EB006B2AF5 /* tntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */; };
 		A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */; };
 		A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */; };
+		A7504E4E1F7ABE7B00928A79 /* Scores+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */; };
+		A7504E501F7ABEDD00928A79 /* Meet+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */; };
+		A7504E521F7ABF5800928A79 /* Video+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E511F7ABF5800928A79 /* Video+TNT.swift */; };
+		A7504E541F7ABFC000928A79 /* Athlete+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */; };
 		A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; };
 		A76E9CD41E9FDCF400FC14FC /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */; };
@@ -125,6 +129,10 @@
 		A74DE8A11E8DD4EB006B2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntAthlete.swift; sourceTree = "<group>"; };
 		A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntHomeViewController.swift; sourceTree = "<group>"; };
+		A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scores+TNT.swift"; sourceTree = "<group>"; };
+		A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Meet+TNT.swift"; sourceTree = "<group>"; };
+		A7504E511F7ABF5800928A79 /* Video+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+TNT.swift"; sourceTree = "<group>"; };
+		A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+TNT.swift"; sourceTree = "<group>"; };
 		A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
 		A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
 		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
@@ -224,12 +232,16 @@
 			children = (
 				A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */,
 				A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */,
+				A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */,
 				A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */,
 				A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */,
+				A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */,
 				A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */,
 				A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */,
+				A7504E511F7ABF5800928A79 /* Video+TNT.swift */,
 				A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */,
 				A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */,
+				A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */,
 				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
 				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
@@ -520,6 +532,7 @@
 				A77D4CF81F44DC7A004D7215 /* Meet+CoreDataProperties.swift in Sources */,
 				A77D4CF61F44DC79004D7215 /* Scores+CoreDataProperties.swift in Sources */,
 				A77D4CFA1F44DC7A004D7215 /* Video+CoreDataProperties.swift in Sources */,
+				A7504E501F7ABEDD00928A79 /* Meet+TNT.swift in Sources */,
 				A7349A1F1F78959D00E5EFEA /* tntAthleteSelectViewController.swift in Sources */,
 				A77D4CF91F44DC7A004D7215 /* Video+CoreDataClass.swift in Sources */,
 				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
@@ -538,10 +551,13 @@
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 				A7349A1B1F78054100E5EFEA /* tntAthleteSetupChoices.swift in Sources */,
 				A7349A1D1F781F0200E5EFEA /* tntEditAthleteViewController.swift in Sources */,
+				A7504E4E1F7ABE7B00928A79 /* Scores+TNT.swift in Sources */,
 				A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */,
+				A7504E521F7ABF5800928A79 /* Video+TNT.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
 				A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */,
 				A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */,
+				A7504E541F7ABFC000928A79 /* Athlete+TNT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
