@@ -2,8 +2,8 @@
 //  Meet+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 8/16/17.
-//  Copyright © 2017 ozziozumo. All rights reserved.
+//  Created by Luke Everett on 9/26/17.
+//  Copyright © 2017 ozzieozumo. All rights reserved.
 //
 
 import Foundation

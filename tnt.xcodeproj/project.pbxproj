@@ -29,10 +29,18 @@
 		A74DE8A01E8DD4EB006B2AF5 /* tntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE89F1E8DD4EB006B2AF5 /* tntUITests.swift */; };
 		A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */; };
 		A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */; };
-		A7504E4E1F7ABE7B00928A79 /* Scores+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */; };
-		A7504E501F7ABEDD00928A79 /* Meet+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */; };
-		A7504E521F7ABF5800928A79 /* Video+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E511F7ABF5800928A79 /* Video+TNT.swift */; };
-		A7504E541F7ABFC000928A79 /* Athlete+TNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */; };
+		A7504E4E1F7ABE7B00928A79 /* ScoresMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */; };
+		A7504E501F7ABEDD00928A79 /* MeetMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */; };
+		A7504E521F7ABF5800928A79 /* VideoMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E511F7ABF5800928A79 /* VideoMO.swift */; };
+		A7504E541F7ABFC000928A79 /* AthleteMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E531F7ABFC000928A79 /* AthleteMO.swift */; };
+		A7504E5D1F7AC41B00928A79 /* Meet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E551F7AC41B00928A79 /* Meet+CoreDataClass.swift */; };
+		A7504E5E1F7AC41B00928A79 /* Meet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E561F7AC41B00928A79 /* Meet+CoreDataProperties.swift */; };
+		A7504E5F1F7AC41B00928A79 /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E571F7AC41B00928A79 /* Video+CoreDataClass.swift */; };
+		A7504E601F7AC41B00928A79 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E581F7AC41B00928A79 /* Video+CoreDataProperties.swift */; };
+		A7504E611F7AC41B00928A79 /* Scores+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E591F7AC41B00928A79 /* Scores+CoreDataClass.swift */; };
+		A7504E621F7AC41B00928A79 /* Scores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5A1F7AC41B00928A79 /* Scores+CoreDataProperties.swift */; };
+		A7504E631F7AC41B00928A79 /* Athlete+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */; };
+		A7504E641F7AC41B00928A79 /* Athlete+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */; };
 		A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; };
 		A76E9CD41E9FDCF400FC14FC /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */; };
@@ -44,14 +52,6 @@
 		A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; };
 		A76E9CE11E9FDD7C00FC14FC /* AWSS3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEB1F335AD5004D7215 /* tntScores.swift */; };
-		A77D4CF51F44DC79004D7215 /* Scores+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */; };
-		A77D4CF61F44DC79004D7215 /* Scores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */; };
-		A77D4CF71F44DC79004D7215 /* Meet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */; };
-		A77D4CF81F44DC7A004D7215 /* Meet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */; };
-		A77D4CF91F44DC7A004D7215 /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */; };
-		A77D4CFA1F44DC7A004D7215 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */; };
-		A77D4CFB1F44DC7A004D7215 /* Athlete+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */; };
-		A77D4CFC1F44DC7A004D7215 /* Athlete+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */; };
 		A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */; };
 		A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E58F21EE9C66700E05757 /* tntVideo.swift */; };
 		A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */; };
@@ -129,24 +129,24 @@
 		A74DE8A11E8DD4EB006B2AF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntAthlete.swift; sourceTree = "<group>"; };
 		A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntHomeViewController.swift; sourceTree = "<group>"; };
-		A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scores+TNT.swift"; sourceTree = "<group>"; };
-		A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Meet+TNT.swift"; sourceTree = "<group>"; };
-		A7504E511F7ABF5800928A79 /* Video+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+TNT.swift"; sourceTree = "<group>"; };
-		A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+TNT.swift"; sourceTree = "<group>"; };
+		A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresMO.swift; sourceTree = "<group>"; };
+		A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetMO.swift; sourceTree = "<group>"; };
+		A7504E511F7ABF5800928A79 /* VideoMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoMO.swift; sourceTree = "<group>"; };
+		A7504E531F7ABFC000928A79 /* AthleteMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AthleteMO.swift; sourceTree = "<group>"; };
+		A7504E551F7AC41B00928A79 /* Meet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Meet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A7504E561F7AC41B00928A79 /* Meet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Meet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A7504E571F7AC41B00928A79 /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A7504E581F7AC41B00928A79 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A7504E591F7AC41B00928A79 /* Scores+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scores+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A7504E5A1F7AC41B00928A79 /* Scores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scores+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
 		A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
 		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 		A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
 		A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
 		A77D4CEB1F335AD5004D7215 /* tntScores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntScores.swift; sourceTree = "<group>"; };
-		A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scores+CoreDataClass.swift"; path = "CoreData/Scores+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Scores+CoreDataProperties.swift"; path = "CoreData/Scores+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Meet+CoreDataClass.swift"; path = "CoreData/Meet+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Meet+CoreDataProperties.swift"; path = "CoreData/Meet+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "CoreData/Video+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataProperties.swift"; path = "CoreData/Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Athlete+CoreDataClass.swift"; path = "CoreData/Athlete+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Athlete+CoreDataProperties.swift"; path = "CoreData/Athlete+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideosTableViewController.swift; sourceTree = "<group>"; };
 		A77E58F21EE9C66700E05757 /* tntVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideo.swift; sourceTree = "<group>"; };
 		A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLocalDataManager.swift; sourceTree = "<group>"; };
@@ -230,18 +230,11 @@
 		A74DE87B1E8DD4EB006B2AF5 /* tnt */ = {
 			isa = PBXGroup;
 			children = (
-				A77D4CED1F44DC79004D7215 /* Scores+CoreDataClass.swift */,
-				A77D4CEE1F44DC79004D7215 /* Scores+CoreDataProperties.swift */,
-				A7504E4D1F7ABE7B00928A79 /* Scores+TNT.swift */,
-				A77D4CEF1F44DC79004D7215 /* Meet+CoreDataClass.swift */,
-				A77D4CF01F44DC79004D7215 /* Meet+CoreDataProperties.swift */,
-				A7504E4F1F7ABEDD00928A79 /* Meet+TNT.swift */,
-				A77D4CF11F44DC79004D7215 /* Video+CoreDataClass.swift */,
-				A77D4CF21F44DC79004D7215 /* Video+CoreDataProperties.swift */,
-				A7504E511F7ABF5800928A79 /* Video+TNT.swift */,
-				A77D4CF31F44DC79004D7215 /* Athlete+CoreDataClass.swift */,
-				A77D4CF41F44DC79004D7215 /* Athlete+CoreDataProperties.swift */,
-				A7504E531F7ABFC000928A79 /* Athlete+TNT.swift */,
+				A7643F1D1F7AC979008C9579 /* CoreData */,
+				A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */,
+				A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */,
+				A7504E511F7ABF5800928A79 /* VideoMO.swift */,
+				A7504E531F7ABFC000928A79 /* AthleteMO.swift */,
 				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
 				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
@@ -308,6 +301,21 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		A7643F1D1F7AC979008C9579 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A7504E551F7AC41B00928A79 /* Meet+CoreDataClass.swift */,
+				A7504E561F7AC41B00928A79 /* Meet+CoreDataProperties.swift */,
+				A7504E571F7AC41B00928A79 /* Video+CoreDataClass.swift */,
+				A7504E581F7AC41B00928A79 /* Video+CoreDataProperties.swift */,
+				A7504E591F7AC41B00928A79 /* Scores+CoreDataClass.swift */,
+				A7504E5A1F7AC41B00928A79 /* Scores+CoreDataProperties.swift */,
+				A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */,
+				A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		B8E1DD02351D613F0FFDFB99 /* Pods */ = {
@@ -525,39 +533,39 @@
 			files = (
 				A734D4DD1F216E1F006F89D3 /* tntScoringViewController.swift in Sources */,
 				A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */,
+				A7504E5E1F7AC41B00928A79 /* Meet+CoreDataProperties.swift in Sources */,
 				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
-				A77D4CFB1F44DC7A004D7215 /* Athlete+CoreDataClass.swift in Sources */,
+				A7504E5F1F7AC41B00928A79 /* Video+CoreDataClass.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
-				A77D4CF81F44DC7A004D7215 /* Meet+CoreDataProperties.swift in Sources */,
-				A77D4CF61F44DC79004D7215 /* Scores+CoreDataProperties.swift in Sources */,
-				A77D4CFA1F44DC7A004D7215 /* Video+CoreDataProperties.swift in Sources */,
-				A7504E501F7ABEDD00928A79 /* Meet+TNT.swift in Sources */,
+				A7504E601F7AC41B00928A79 /* Video+CoreDataProperties.swift in Sources */,
+				A7504E501F7ABEDD00928A79 /* MeetMO.swift in Sources */,
 				A7349A1F1F78959D00E5EFEA /* tntAthleteSelectViewController.swift in Sources */,
-				A77D4CF91F44DC7A004D7215 /* Video+CoreDataClass.swift in Sources */,
 				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
-				A77D4CF71F44DC79004D7215 /* Meet+CoreDataClass.swift in Sources */,
+				A7504E621F7AC41B00928A79 /* Scores+CoreDataProperties.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
 				A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */,
 				A734D4DF1F216E8A006F89D3 /* tntMeetsTableViewController.swift in Sources */,
 				A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */,
 				A734D4DB1F17E30D006F89D3 /* tntMeet.swift in Sources */,
-				A77D4CF51F44DC79004D7215 /* Scores+CoreDataClass.swift in Sources */,
 				A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */,
 				A7349A211F7895C200E5EFEA /* tntAthleteSearchViewController.swift in Sources */,
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
-				A77D4CFC1F44DC7A004D7215 /* Athlete+CoreDataProperties.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
+				A7504E5D1F7AC41B00928A79 /* Meet+CoreDataClass.swift in Sources */,
+				A7504E631F7AC41B00928A79 /* Athlete+CoreDataClass.swift in Sources */,
 				A7349A1B1F78054100E5EFEA /* tntAthleteSetupChoices.swift in Sources */,
 				A7349A1D1F781F0200E5EFEA /* tntEditAthleteViewController.swift in Sources */,
-				A7504E4E1F7ABE7B00928A79 /* Scores+TNT.swift in Sources */,
+				A7504E611F7AC41B00928A79 /* Scores+CoreDataClass.swift in Sources */,
+				A7504E641F7AC41B00928A79 /* Athlete+CoreDataProperties.swift in Sources */,
+				A7504E4E1F7ABE7B00928A79 /* ScoresMO.swift in Sources */,
 				A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */,
-				A7504E521F7ABF5800928A79 /* Video+TNT.swift in Sources */,
+				A7504E521F7ABF5800928A79 /* VideoMO.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
 				A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */,
 				A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */,
-				A7504E541F7ABFC000928A79 /* Athlete+TNT.swift in Sources */,
+				A7504E541F7ABFC000928A79 /* AthleteMO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

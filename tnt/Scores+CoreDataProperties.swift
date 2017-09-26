@@ -2,8 +2,8 @@
 //  Scores+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 8/16/17.
-//  Copyright © 2017 ozziozumo. All rights reserved.
+//  Created by Luke Everett on 9/26/17.
+//  Copyright © 2017 ozzieozumo. All rights reserved.
 //
 
 import Foundation
@@ -23,7 +23,7 @@ extension Scores {
     @NSManaged public var meetId: String?
     @NSManaged public var scoreId: String?
     @NSManaged public var scores: NSObject?
-    @NSManaged public var videos: NSObject?
     @NSManaged public var timeStamp: NSDate?
+    @NSManaged public var videos: NSObject?
 
 }
