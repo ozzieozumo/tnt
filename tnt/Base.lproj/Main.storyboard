@@ -71,9 +71,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-gl-4Az">
-                                <rect key="frame" x="120" y="201" width="86" height="30"/>
+                                <rect key="frame" x="113" y="159" width="86" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Athlete View"/>
+                                <state key="normal" title="Home View"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="showAthlete" id="C6Q-eX-F0C"/>
                                 </connections>
@@ -86,6 +86,14 @@
                                     <segue destination="wR7-Nb-Ce5" kind="show" id="tQo-9X-QtI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCa-cU-p0D">
+                                <rect key="frame" x="104" y="203" width="104" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Athlete Setup"/>
+                                <connections>
+                                    <segue destination="MyI-1X-r6f" kind="show" id="gSg-Fb-2IK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -94,6 +102,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXi-VU-jgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-207.19999999999999" y="138.98050974512745"/>
+        </scene>
+        <!--AthleteSetup-->
+        <scene sceneID="Fj0-6Q-cVx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AthleteSetup" id="MyI-1X-r6f" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="llC-Nx-F4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="492" y="-461"/>
         </scene>
         <!--Tnt Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -605,6 +621,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3VO-jR-EeR"/>
-        <segue reference="DbF-hn-L9T"/>
+        <segue reference="tQo-9X-QtI"/>
     </inferredMetricsTieBreakers>
 </document>

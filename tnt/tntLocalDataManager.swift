@@ -41,7 +41,7 @@ class tntLocalDataManager {
     
     func loadLocalData() {
         
-        fetchAthlete(athleteId: "1")
+        fetchAllAthletes()  
         fetchMeets()
     }
     
@@ -104,6 +104,24 @@ class tntLocalDataManager {
             print("TNT Local Data Manager failed fetching athlete with id : \(athleteId)")
         }
     }
+    
+    func fetchAllAthletes() {
+        
+        let request: NSFetchRequest<Athlete> = Athlete.fetchRequest()
+        
+        do {
+            let athleteArray = try moc!.fetch(request)
+            
+            for athlete in athleteArray {
+                athletes[athlete.id!] = athlete
+                print("TNT Local Data Manager fetched athlete \(athlete.id!) in fetch ALL")
+            }
+            
+        } catch {
+            print("TNT Local Data Manager failed fetching ALL athletes in init")
+        }
+    }
+
     
     func loadNewVideo(video: tntVideo) {
         

@@ -27,6 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("TNT Team Tracker")
         
+        if let rootVC = window?.rootViewController as! UINavigationController? {
+            
+            print("Root View Controller is a  UINavigationController")
+            print("RVC has \(rootVC.viewControllers.count) controllers on in stack")
+            print("Is the window the key window yet? : \(String(describing: window?.isKeyWindow))")
+            
+        }
+        
         // Connect the FaceBook app delegate to this application
         _ = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
