@@ -185,7 +185,7 @@
         <!--Edit Athlete-->
         <scene sceneID="loP-hi-efR">
             <objects>
-                <viewController id="HYE-de-JUC" customClass="tntEditAthleteViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tntEditAthleteVC" id="HYE-de-JUC" customClass="tntEditAthleteViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hqM-Et-bHD"/>
                         <viewControllerLayoutGuide type="bottom" id="xG7-gi-O7m"/>

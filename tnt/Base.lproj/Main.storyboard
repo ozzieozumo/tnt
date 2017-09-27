@@ -205,13 +205,13 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZS-Mx-ldV">
                                 <rect key="frame" x="57.5" y="281" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
-                                <connections>
-                                    <segue destination="rpJ-sG-GNH" kind="show" id="MQZ-Q7-Xdl"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pM5-tm-A59">
                                 <rect key="frame" x="80.5" y="70" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editAthlete:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gWb-qs-ODb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-Vd-n1f">
                                 <rect key="frame" x="83" y="471" width="48" height="30"/>
@@ -620,7 +620,7 @@
         <image name="StarsNStripes2017" width="500" height="442"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="DbF-hn-L9T"/>
         <segue reference="3VO-jR-EeR"/>
-        <segue reference="tQo-9X-QtI"/>
     </inferredMetricsTieBreakers>
 </document>

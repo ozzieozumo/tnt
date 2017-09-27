@@ -212,6 +212,13 @@ class tntHomeViewController: UIViewController {
     }
     
     
+    @IBAction func editAthlete(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "AthleteSetup", bundle: nil)
+        let editAthleteVC = storyboard.instantiateViewController(withIdentifier: "tntEditAthleteVC") as! tntEditAthleteViewController
+        editAthleteVC.athlete = tntLocalDataManager.shared.athletes[athleteId]
+        self.navigationController?.pushViewController(editAthleteVC, animated: true)
+    }
     
 
     
