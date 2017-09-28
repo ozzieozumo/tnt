@@ -121,6 +121,40 @@ class tntLocalDataManager {
             print("TNT Local Data Manager failed fetching ALL athletes in init")
         }
     }
+    
+    func getAthleteById(athleteId: String) -> Athlete? {
+        
+        // look in the cache dictionary
+        
+        if let athlete = athletes[athleteId] {
+            return athlete
+        } else {
+            // try to fetch from coredata
+            fetchAthlete(athleteId: athleteId)
+            
+            if let athlete = athletes[athleteId] {
+                return athlete
+            } else {
+                
+                // background request to get from Dyanmo
+                tntSynchManager.shared.loadAthletes()
+                return nil
+                
+            }
+        }
+    }
+    
+    func deleteAthlete(athlete: Athlete) {
+        
+        athletes[athlete.id!] = nil
+        moc!.delete(athlete)
+        do {
+            try moc!.save()
+        } catch {
+            fatalError("TNT Local Data Manager error saving context after athlete delete")
+        }
+    }
+
 
     
     func loadNewVideo(video: tntVideo) {
@@ -214,27 +248,6 @@ class tntLocalDataManager {
         return []
     }
     
-    func getAthleteById(athleteId: String) -> Athlete? {
-        
-        // look in the cache dictionary
-        
-        if let athlete = athletes[athleteId] {
-            return athlete
-        } else {
-            // try to fetch from coredata
-            fetchAthlete(athleteId: athleteId)
-            
-            if let athlete = athletes[athleteId] {
-                return athlete
-            } else {
-                
-                // background request to get from Dyanmo
-                tntSynchManager.shared.loadAthletes()
-                return nil
-                
-            }
-        }
-    }
     
     func getVideoById(videoId: String) -> Video? {
         

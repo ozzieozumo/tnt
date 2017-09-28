@@ -51,12 +51,35 @@ class tntSynchManager {
             return nil
         })
     }
+    
+    func saveAthlete(athleteId: String) {
+        
+        if let athleteMO = tntLocalDataManager.shared.athletes[athleteId] {
+            
+            let athleteDB = tntAthlete(athleteMO: athleteMO)
+            
+            let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+            
+            dynamoDBObjectMapper.save(athleteDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+                if let error = task.error as NSError? {
+                    print("TNT synch manager, failed saving athlete object. Error: \(error)")
+                    return nil
+                } else {
+                    print("TNT synch manager saved athlete item")
+                    
+                    // clear cloudSavePending flag
+                    
+                    return nil
+                }
+            })
+        }
+        
+    }
+    
+
 
     func loadAllVideos() {
-        
-        // TODO : this function currently is scanning all videos and loading them all at once
-        // should convert the localcache to an array (instead of fetchedresultscontroller) and provide a method for loading one at a time
-    
+            
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
         let scanExpression = AWSDynamoDBScanExpression()

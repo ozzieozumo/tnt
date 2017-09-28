@@ -20,13 +20,21 @@ class tntAthleteSelectViewController: UITableViewController {
 
         // convert the dictionary of athletes into an array sorted by last name for display in the table
         
+        for k in tntLocalDataManager.shared.athletes.keys {
+            print("TNT athlete select found athlete with key \(k as String)")
+        }
+        
         athletes = tntLocalDataManager.shared.athletes.sorted{
                 (first: (key: String, value: Athlete), second: (key: String, value: Athlete)) -> Bool in
-                return first.value.lastName! < second.value.lastName!
+                return (first.value.lastName ?? "") < (second.value.lastName ?? "")
         }
         
         displayHeader()
         displayFooter()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,25 +65,30 @@ class tntAthleteSelectViewController: UITableViewController {
     }
 
 
-    /*
+   
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+            return true
     }
-    */
 
-    /*
+   
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            
+            let athleteToDelete = athletes[indexPath.row].value
+            
+            athletes.remove(at: indexPath.row)
+            tntLocalDataManager.shared.deleteAthlete(athlete: athleteToDelete)
+            
+            // note that the athlete is NOT deleted from the cloud DB
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
