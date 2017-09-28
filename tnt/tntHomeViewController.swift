@@ -14,7 +14,7 @@ import AWSS3
 
 class tntHomeViewController: UIViewController {
     
-    var athleteId: String = "1"
+    var selectedAthlete: Athlete? = nil
     var selectedMeet: Meet? = nil
     
     @IBOutlet weak var tntName: UITextField!
@@ -39,8 +39,12 @@ class tntHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        
+        setAthleteFromUserDefaults()
+
+        
         // Display athlete data if available, otherwise request it (and wait to be notified)
-        if tntLocalDataManager.shared.athletes.count > 0 {
+        if selectedAthlete != nil {
             
             displayAthleteData()
             displayProfileImage()
@@ -48,8 +52,7 @@ class tntHomeViewController: UIViewController {
             
         } else {
             
-            requestAthleteData()
-            
+             // disable some buttons, allowing Edit/Select only
         }
     }
     override func didReceiveMemoryWarning() {
@@ -115,17 +118,24 @@ class tntHomeViewController: UIViewController {
         return preSignedURL!
     }
     
-    func requestAthleteData() {
-    
-        tntLocalDataManager.shared.clearTNTObjects()
-        tntSynchManager.shared.loadCache()
-    
+    func setAthleteFromUserDefaults() {
+        
+        let defaults = UserDefaults.standard
+        if let athleteId = defaults.string(forKey: "tntSelectedAthleteId") {
+            
+            selectedAthlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId)
+            
+        } else {
+            // selected Athlete is not set in User Defaults, do nothing and wait
+            return
+        }
     }
+    
     
     func displayAthleteData() {
         // Display the data for the current athlete 
         
-        if let athlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId) {
+        if let athlete = selectedAthlete {
             let firstName = athlete.firstName ?? ""
             let lastName =  athlete.lastName ?? ""
             tntName.text = firstName + " " + lastName
@@ -148,10 +158,12 @@ class tntHomeViewController: UIViewController {
     func displayProfileImage() {
         // display an updated profile image
         
-        if let athlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId) {
+        if let imgData = selectedAthlete?.profileImage as Data? {
         
-            let img = UIImage(data: athlete.profileImage! as Data)
+            let img = UIImage(data: imgData)
             self.profileImage.image = img
+        } else {
+            // display placeholder image
         }
         
         
@@ -196,7 +208,7 @@ class tntHomeViewController: UIViewController {
             
             // Set the meet and athlete on the scoring view controller
         
-            destvc.athleteId = athleteId
+            destvc.athleteId = selectedAthlete?.id ?? ""
             destvc.meetId = selectedMeet?.id ?? ""
             return
             
@@ -204,7 +216,7 @@ class tntHomeViewController: UIViewController {
         
         if let destvc = segue.destination as? tntVideosTableViewController {
             
-            destvc.athleteMO = tntLocalDataManager.shared.athletes[athleteId]
+            destvc.athleteMO = selectedAthlete
             destvc.meetMO = self.selectedMeet
             
             return
@@ -216,7 +228,7 @@ class tntHomeViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "AthleteSetup", bundle: nil)
         let editAthleteVC = storyboard.instantiateViewController(withIdentifier: "tntEditAthleteVC") as! tntEditAthleteViewController
-        editAthleteVC.athlete = tntLocalDataManager.shared.athletes[athleteId]
+        editAthleteVC.athlete = selectedAthlete
         self.navigationController?.pushViewController(editAthleteVC, animated: true)
     }
     

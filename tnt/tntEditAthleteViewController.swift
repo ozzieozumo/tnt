@@ -50,7 +50,9 @@ class tntEditAthleteViewController: UIViewController {
             
             let defaultDate = Date()
             
-            if let img = UIImage(data: existingAthlete.profileImage! as Data) {
+            if let imgData = existingAthlete.profileImage as Data? {
+                
+                let img = UIImage(data: imgData)
                 profileImage.image = img
             }
             firstName.text = existingAthlete.firstName ?? ""
@@ -129,5 +131,7 @@ class tntEditAthleteViewController: UIViewController {
         }
         
     }
+    
+    
 
 }

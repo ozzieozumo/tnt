@@ -64,7 +64,15 @@ class tntAthleteSelectViewController: UITableViewController {
         return cell
     }
 
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let defaults = UserDefaults.standard
+        let athlete = athletes[indexPath.row].value
+        defaults.set(athlete.id, forKey: "tntSelectedAthleteId")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
+        self.navigationController?.setViewControllers([homeVC], animated: true)
+    }
    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -152,7 +152,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oby-TH-82T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1373.5999999999999" y="158.77061469265368"/>
+            <point key="canvasLocation" x="1503" y="239"/>
         </scene>
         <!--Search Athlete-->
         <scene sceneID="wIY-OO-Iaf">
@@ -274,16 +274,26 @@
                                                     <!--2017-09-26 15:25:46 +0000-->
                                                 </date>
                                             </datePicker>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NeZ-Qb-nMz">
+                                                <rect key="frame" x="150.5" y="8.5" width="47" height="30"/>
+                                                <state key="normal" title="Switch"/>
+                                                <connections>
+                                                    <action selector="saveAthlete:" destination="HYE-de-JUC" eventType="touchUpInside" id="g2i-wo-28S"/>
+                                                    <segue destination="3VL-vP-wew" kind="show" id="Vpi-DZ-Pvu"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Ekg-na-dXy" firstAttribute="leading" secondItem="dQc-dB-nr4" secondAttribute="leading" constant="20" id="6X1-8V-BGU"/>
+                                            <constraint firstItem="NeZ-Qb-nMz" firstAttribute="leading" secondItem="W8h-t1-Dc6" secondAttribute="trailing" constant="25" id="6oB-gh-UrH"/>
                                             <constraint firstItem="AQb-Zr-eHl" firstAttribute="top" secondItem="FaC-CI-aif" secondAttribute="bottom" constant="15" id="AmM-mS-mG4"/>
                                             <constraint firstItem="AQb-Zr-eHl" firstAttribute="leading" secondItem="FaC-CI-aif" secondAttribute="leading" id="EZd-aK-4wf"/>
                                             <constraint firstItem="FaC-CI-aif" firstAttribute="top" secondItem="FIg-Tr-Tn8" secondAttribute="bottom" constant="15" id="O5Y-BY-0zJ"/>
                                             <constraint firstItem="FIg-Tr-Tn8" firstAttribute="top" secondItem="W8h-t1-Dc6" secondAttribute="bottom" constant="20" id="WBV-Rf-5hh"/>
                                             <constraint firstItem="FaC-CI-aif" firstAttribute="leading" secondItem="dQc-dB-nr4" secondAttribute="leading" constant="25" id="ZRj-Tz-oH6"/>
                                             <constraint firstItem="W8h-t1-Dc6" firstAttribute="top" secondItem="dQc-dB-nr4" secondAttribute="topMargin" constant="5" id="aCx-5i-cPo"/>
+                                            <constraint firstItem="NeZ-Qb-nMz" firstAttribute="baseline" secondItem="W8h-t1-Dc6" secondAttribute="baseline" id="dHn-fj-oyY"/>
                                             <constraint firstItem="mZa-tg-2Wx" firstAttribute="width" secondItem="s92-0U-Eib" secondAttribute="width" id="drL-aN-Cxe"/>
                                             <constraint firstItem="GJb-Ws-JId" firstAttribute="top" secondItem="AQb-Zr-eHl" secondAttribute="bottom" constant="25" id="eNY-xF-cqz"/>
                                             <constraint firstItem="W8h-t1-Dc6" firstAttribute="leading" secondItem="dQc-dB-nr4" secondAttribute="leadingMargin" constant="10" id="j2A-au-zxp"/>
@@ -345,4 +355,7 @@
             <point key="canvasLocation" x="-646" y="148"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vpi-DZ-Pvu"/>
+    </inferredMetricsTieBreakers>
 </document>
