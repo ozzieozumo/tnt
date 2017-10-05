@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Photos
 import MobileCoreServices
 import AWSS3
+import AVKit
+import AVFoundation
 
 class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -100,8 +103,22 @@ class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDel
             return
         }
         
+        // let asset = AVURLAsset(url: uploadFileURL as URL)
         
-        uploadDelegate?.didChooseUploadURL(sender: self, uploadURL: uploadFileURL as URL)
+        var phasset : PHAsset? = nil
+        
+        if let referenceURL = info[UIImagePickerControllerReferenceURL] {
+            
+            if let phasset = PHAsset.fetchAssets(withALAssetURLs: [referenceURL as! URL], options: nil).firstObject {
+                
+                uploadDelegate?.didChooseUploadVideo(sender: self, localMediaURL: uploadFileURL as URL, photosAsset: phasset)
+            } else {
+                print("TNT video upload: failure - could not retrieve Photos Asset for chosen video")
+                return
+            }
+        }
+        
+        
         
     }
     
@@ -111,45 +128,7 @@ class tntVideoUploadViewController: UIViewController, UIImagePickerControllerDel
         self.navigationController?.popViewController(animated: true)
     }
     
-    func s3VideoUpload(url: URL) {
-        let transferManager = AWSS3TransferManager.default()
         
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        
-        uploadRequest!.bucket = "ozzieozumo.tnt"
-        let videoKey = "videos/" + UUID().uuidString.lowercased() + ".mov"
-        uploadRequest!.key = videoKey
-        uploadRequest!.body = url
-        
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject! in
-            if let error: NSError = task.error as NSError? {
-                if error.domain == AWSS3TransferManagerErrorDomain as String {
-                    if let errorCode = AWSS3TransferManagerErrorType(rawValue: error.code) {
-                        switch (errorCode) {
-                        case .cancelled, .paused:
-                            // update UI on main queue
-                            break;
-                            
-                        default:
-                            print("upload() failed: [\(error)]")
-                            break;
-                        }
-                    } else {
-                        print("upload() failed: [\(error)]")
-                    }
-                } else {
-                    print("upload() failed: [\(error)]")
-                }
-            }
-            print("video upload success")
-            
-            tntSynchManager.shared.createVideo(s3VideoKey: videoKey)
-            
-            return task
-        }
-        
-    }
-    
 
 }
 

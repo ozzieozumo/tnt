@@ -164,6 +164,8 @@ class tntLocalDataManager {
         let videoMO = Video(dbVideo: video)
         videoMO.saveLocal()
         
+        videoMO.loadThumbImage(imageURL: videoMO.thumbKey)
+        
         // send a notification indicating new video data
         
         let nc = NotificationCenter.default

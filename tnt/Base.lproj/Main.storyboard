@@ -205,6 +205,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZS-Mx-ldV">
                                 <rect key="frame" x="57.5" y="281" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <segue destination="rpJ-sG-GNH" kind="show" id="2Dj-RP-gLV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pM5-tm-A59">
                                 <rect key="frame" x="80.5" y="70" width="30" height="30"/>
@@ -301,7 +304,7 @@
         <scene sceneID="si5-Zn-npn">
             <objects>
                 <tableViewController id="wR7-Nb-Ce5" customClass="tntVideosTableViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zgv-uv-WxZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="134" sectionHeaderHeight="28" sectionFooterHeight="28" id="zgv-uv-WxZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -335,13 +338,62 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntvideo" id="G3e-V2-6vz">
-                                <rect key="frame" x="0.0" y="87" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntvideo" rowHeight="134" id="G3e-V2-6vz" customClass="tntRelatedVideosTableCell" customModule="tnt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="87" width="375" height="134"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G3e-V2-6vz" id="mNV-LX-klv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Optional description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kD8-Yw-211">
+                                            <rect key="frame" x="13" y="80.5" width="266.5" height="40"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="6Ss-2j-OcB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNU-md-dpo">
+                                            <rect key="frame" x="284.5" y="83" width="72.5" height="32.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title and Date/Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZc-pb-1ZM">
+                                            <rect key="frame" x="13" y="13" width="150.5" height="57.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-emoticon" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-Ld-Ary">
+                                            <rect key="frame" x="302" y="13" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="SGG-Ib-UU1"/>
+                                                <constraint firstAttribute="width" constant="60" id="cbq-oT-qGI"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="HNU-md-dpo" firstAttribute="top" secondItem="rbw-Ld-Ary" secondAttribute="bottom" constant="10" id="1F3-pg-lK3"/>
+                                        <constraint firstItem="kD8-Yw-211" firstAttribute="top" secondItem="JZc-pb-1ZM" secondAttribute="bottom" constant="10" id="IBy-JM-NfS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rbw-Ld-Ary" secondAttribute="trailing" constant="5" id="IOA-hU-thW"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="kD8-Yw-211" secondAttribute="bottom" constant="5" id="Me6-gK-rbF"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="HNU-md-dpo" secondAttribute="bottom" constant="10" id="SKP-mo-FsY"/>
+                                        <constraint firstItem="rbw-Ld-Ary" firstAttribute="top" secondItem="mNV-LX-klv" secondAttribute="topMargin" constant="5" id="TcA-zM-rSn"/>
+                                        <constraint firstItem="JZc-pb-1ZM" firstAttribute="leading" secondItem="mNV-LX-klv" secondAttribute="leadingMargin" constant="5" id="ewR-tC-cMK"/>
+                                        <constraint firstItem="JZc-pb-1ZM" firstAttribute="top" secondItem="mNV-LX-klv" secondAttribute="topMargin" constant="5" id="fXW-0w-uPQ"/>
+                                        <constraint firstItem="HNU-md-dpo" firstAttribute="leading" secondItem="kD8-Yw-211" secondAttribute="trailing" constant="5" id="gP3-Qi-kSR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="HNU-md-dpo" secondAttribute="trailing" constant="10" id="nXE-tZ-zjn"/>
+                                        <constraint firstItem="kD8-Yw-211" firstAttribute="leading" secondItem="mNV-LX-klv" secondAttribute="leadingMargin" constant="5" id="tua-mg-7jO"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="videoDescription" destination="kD8-Yw-211" id="DAJ-FW-ZpN"/>
+                                    <outlet property="videoRunTime" destination="HNU-md-dpo" id="Vi1-GO-Ppx"/>
+                                    <outlet property="videoThumb" destination="rbw-Ld-Ary" id="7eB-Vy-m9M"/>
+                                    <outlet property="videoTitle" destination="JZc-pb-1ZM" id="A4r-IM-0Ao"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -356,7 +408,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1tl-Oo-j5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47.200000000000003" y="931.48425787106453"/>
+            <point key="canvasLocation" x="-47.5" y="930.5"/>
         </scene>
         <!--Tnt Video Upload View Controller-->
         <scene sceneID="hfx-UB-SE0">
@@ -618,9 +670,10 @@
     </scenes>
     <resources>
         <image name="StarsNStripes2017" width="500" height="442"/>
+        <image name="smile-emoticon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DbF-hn-L9T"/>
-        <segue reference="3VO-jR-EeR"/>
+        <segue reference="UYT-Om-cUA"/>
     </inferredMetricsTieBreakers>
 </document>

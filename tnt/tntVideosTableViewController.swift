@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Photos
 import AWSS3
 
 class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerDelegate {
@@ -41,6 +42,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         // if there are no videos in coredata, try to load from the cloud database
         
         getScores()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
     
         
     }
@@ -74,21 +78,13 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tntvideo", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tntvideo", for: indexPath) as! tntRelatedVideosTableCell
         // Set up the cell
         guard let object = self.videos?[indexPath.row] else {
             fatalError("Attempt to configure cell without a managed object")
         }
-        //Populate the cell from the object
-        
-        //let urlLabel = UILabel()
-        let cloudURL = object["videoId"] as? String
-        //urlLabel.text =  cloudURL ?? ""
-        cell.textLabel?.text = cloudURL ?? ""
-        //urlLabel.backgroundColor = UIColor.orange
-        
-        //cell.addSubview(urlLabel)
-        cell.contentView.backgroundColor = UIColor.cyan
+        cell.setVideo(videoId: object["videoId"] as! String)
+        cell.showVideoDetails(relatedVideoDict: object)
         
         return cell
 
@@ -326,9 +322,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
     }
     
-    func didChooseUploadURL(sender: UIViewController, uploadURL: URL?) {
+    func didChooseUploadVideo(sender: UIViewController, localMediaURL: URL?, photosAsset: PHAsset) {
         
-        guard let url = uploadURL else {
+        guard let url = localMediaURL else {
             return
         }
         
@@ -342,8 +338,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         // upload the file to S3 and create the video object
         
-        tntSynchManager.shared.s3VideoUpload(url: url, scores: scoresMO!)
-
+        tntSynchManager.shared.s3VideoUpload(url: url, asset: photosAsset, scores: scoresMO!)
     
     }
 
@@ -351,6 +346,6 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
 
 protocol tntVideoUploadPickerDelegate : class {
     
-    func didChooseUploadURL(sender: UIViewController, uploadURL: URL?)
+    func didChooseUploadVideo(sender: UIViewController, localMediaURL: URL?, photosAsset: PHAsset)
     
 }

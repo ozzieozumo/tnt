@@ -15,6 +15,7 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var videoId: String?
     var cloudURL:  String?              // AWS S3 path
+    var thumbKey: String?               // AWS S3 key for thumbnail image
     var localIdentifier: String?        // PH Asset/Object identitifier
     
     class func dynamoDBTableName() -> String {
@@ -33,6 +34,7 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         videoId = videoMO.videoId
         cloudURL = videoMO.cloudURL
         localIdentifier = videoMO.localIdentifier
+        thumbKey = videoMO.thumbKey
         
     }
 

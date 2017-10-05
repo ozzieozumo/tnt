@@ -2,7 +2,7 @@
 //  Video+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 9/26/17.
+//  Created by Luke Everett on 10/4/17.
 //  Copyright © 2017 ozzieozumo. All rights reserved.
 //
 
@@ -20,5 +20,7 @@ extension Video {
     @NSManaged public var localIdentifier: String?
     @NSManaged public var publishDate: NSDate?
     @NSManaged public var videoId: String?
+    @NSManaged public var thumbKey: String?
+    @NSManaged public var thumbImage: NSData?
 
 }

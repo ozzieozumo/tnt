@@ -63,6 +63,7 @@
 		A79FAF801E9FF5CE005C66E2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */; };
 		A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */; };
 		A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18D1EA0175C0053B550 /* Constants.swift */; };
+		A7E22CAA1F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginViewController.swift; sourceTree = "<group>"; };
 		A7BCE18D1EA0175C0053B550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntRelatedVideosTableCell.swift; sourceTree = "<group>"; };
 		CCADD3B3E4116C46273994CD /* Pods-tnt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tnt.release.xcconfig"; path = "Pods/Target Support Files/Pods-tnt/Pods-tnt.release.xcconfig"; sourceTree = "<group>"; };
 		E8CA800DC1F082033AA5E8FF /* Pods-tnt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tnt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tnt/Pods-tnt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,6 +244,7 @@
 				A734D4DC1F216E1F006F89D3 /* tntScoringViewController.swift */,
 				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
 				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
+				A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */,
 				A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */,
 				A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */,
 				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
@@ -542,6 +545,7 @@
 				A7504E501F7ABEDD00928A79 /* MeetMO.swift in Sources */,
 				A7349A1F1F78959D00E5EFEA /* tntAthleteSelectViewController.swift in Sources */,
 				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
+				A7E22CAA1F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift in Sources */,
 				A74DE87F1E8DD4EB006B2AF5 /* ViewController.swift in Sources */,
 				A7504E621F7AC41B00928A79 /* Scores+CoreDataProperties.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,

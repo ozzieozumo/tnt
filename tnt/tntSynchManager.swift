@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import Photos
 import AWSCore
 import AWSDynamoDB
 import AWSS3
@@ -229,11 +230,9 @@ class tntSynchManager {
     
 
     
-    func createVideo(s3VideoKey: String) {
+    func createVideo(s3VideoKey: String, thumbKey: String) {
         
-        // TODO : maybe this should have a completion handler, so that after creating the item in Dynamo
-        //        we could automatically pull it into CoreData
-    
+        
         guard let newVideo = tntVideo() else {
             print("Could not create TNT video")
             return
@@ -242,6 +241,7 @@ class tntSynchManager {
         newVideo.cloudURL = s3VideoKey
         newVideo.localIdentifier  = "NIL"
         newVideo.videoId = s3VideoKey
+        newVideo.thumbKey = thumbKey
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
 
@@ -269,10 +269,15 @@ class tntSynchManager {
                 let preSignedRequest = AWSS3GetPreSignedURLRequest()
                 preSignedRequest.bucket = "ozzieozumo.tnt"
                 
-                // find the key (filename) starting after ozzieozumo.tnt/
-                
-                let keyStart = unsignedURL.index(unsignedURL.range(of: preSignedRequest.bucket)!.upperBound, offsetBy: 1)
-                
+                // find the key (filename) starting after ozzieozumo.tnt/ if it is present otherwise start at beginning
+        
+                var keyStart: String.Index
+                if let bucketRange = unsignedURL.range(of: preSignedRequest.bucket) {
+                    keyStart = unsignedURL.index(bucketRange.upperBound, offsetBy: 1)
+                } else {
+                    keyStart = unsignedURL.startIndex
+                }
+        
                 preSignedRequest.key = unsignedURL.substring(from: keyStart)
                 preSignedRequest.httpMethod = .GET
                 preSignedRequest.expires = Date().addingTimeInterval(48*60*60)
@@ -381,13 +386,14 @@ class tntSynchManager {
         
     }
     
-    func s3VideoUpload(url: URL, scores: Scores? = nil) {
-        let transferManager = AWSS3TransferManager.default()
+    func s3VideoUpload(url: URL, asset: PHAsset, scores: Scores? = nil) {
         
+        let transferManager = AWSS3TransferManager.default()
         let uploadRequest = AWSS3TransferManagerUploadRequest()
         
         uploadRequest!.bucket = "ozzieozumo.tnt"
-        let videoKey = "videos/" + UUID().uuidString.lowercased() + ".mov"
+        let videoUUID = UUID().uuidString.lowercased()
+        let videoKey = "videos/" + videoUUID + ".mov"
         uploadRequest!.key = videoKey
         uploadRequest!.body = url
         
@@ -413,21 +419,95 @@ class tntSynchManager {
             }
             print("video upload success")
             
-            tntSynchManager.shared.createVideo(s3VideoKey: videoKey)
+            // video and thumb upload can occur in parallel, but updating coredata and dynamo db should happen after both uploads
             
-            // a scores object is provided when this is a new file upload and the new video
-            // should be added as a related video of athlete/meet
-            
-            if let scoresMO = scores {
-                
-                scoresMO.addVideo(relatedVideoId: videoKey)
+            self.uploadVideoThumbnail(forAsset: asset, partialKey: videoUUID) { (error, result) in
+                if let thumbError = error {
+                    return
+                } else {
+                    tntSynchManager.shared.createVideo(s3VideoKey: videoKey, thumbKey: result)
+                    
+                    // a scores object is provided when this is a new file upload and the new video
+                    // should be added as a related video of athlete/meet
+                    
+                    if let scoresMO = scores {
+                        
+                        scoresMO.addVideo(relatedVideoId: videoKey)
+                    }
+                }
             }
             
-            return task
+            return nil
+            
         }
         
     }
-
     
+    func uploadVideoThumbnail(forAsset: PHAsset, partialKey: String, completion: @escaping (NSError?, String)->()) {
+    
+    // obtains a thumbnail sized image from PHImageManager, writes it to disk as a JPEG, uploads to S3
+    // TODO: cconvert this to work like AWS functions, i.e. returning AWS task
+    
+        var thumbSize = CGSize()
+        thumbSize.height = 60
+        thumbSize.width = 60
+        
+        var imageRequestOptions = PHImageRequestOptions()
+        imageRequestOptions.isSynchronous = true
+        var thumbImage: UIImage? = nil
+        
+        PHImageManager.default().requestImage(for: forAsset, targetSize: thumbSize, contentMode: .aspectFill, options: imageRequestOptions) { (result: UIImage?, info: [AnyHashable : Any]?) in
+            if let img = result {
+                print("TNT Synch Manager: retrieved non nil image via PHImageManager")
+                thumbImage = img
+            } else {
+                // return an error
+                let error = NSError(domain: "TNT", code: 0, userInfo: ["reason": "failed to retrieve thumbnail image from PHImageManager"])
+                completion(error, "")
+            }
+        }
+        
+        // write the image to disk locally
+        
+        let fileName = partialKey + ".png"
+        var fileURL: URL
+        if let img = thumbImage {
+            
+            do {
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                fileURL = documentsURL.appendingPathComponent("\(fileName)")
+                if let pngImageData = UIImagePNGRepresentation(img) {
+                    try pngImageData.write(to: fileURL, options: .atomic)
+                }
+            } catch {
+                // return an error
+                let error = NSError(domain: "TNT", code: 0, userInfo: ["reason": "failed writing thumbnail image to local storage"])
+                completion(error, "")            }
+            
+            // make an S3 request to upload the thumbnail image file
+            
+            let transferManager = AWSS3TransferManager.default()
+            let uploadRequest = AWSS3TransferManagerUploadRequest()
+            
+            uploadRequest!.bucket = "ozzieozumo.tnt"
+            let imageKey = "thumbs/" + fileName
+            uploadRequest!.key = imageKey
+            uploadRequest!.body = fileURL
+            
+            transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject! in
+                if let error = task.error as NSError? {
+                    print("TNT Synch Manager : failed uploading video thumbnail image \(imageKey)")
+                    // return an error
+                    let error = NSError(domain: "TNT", code: 0, userInfo: ["reason": "failed to upload thumb image to S3 via transfer manager"])
+                    completion(error, "")
+                } else {
+                    print("TNT Synch Manager : uploaded video thumbnail image \(imageKey)")
+                    completion(nil, imageKey)
+                }
+                return nil
+            }
+            
+        }
+    }
     
 }
