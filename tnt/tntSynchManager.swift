@@ -256,7 +256,7 @@ class tntSynchManager {
             }
         })
         
-    }
+            }
     
     
     func tntPreSignedURL(unsignedURL: String) -> String {

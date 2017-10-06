@@ -17,6 +17,9 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var cloudURL:  String?              // AWS S3 path
     var thumbKey: String?               // AWS S3 key for thumbnail image
     var localIdentifier: String?        // PH Asset/Object identitifier
+    var publishDate: String?            // yyyy-MM-dd
+    var captureDate: String?            // yyyy-MM-dd
+    var duration: Double?               // duration in seconds
     
     class func dynamoDBTableName() -> String {
         return "tntVideo"
@@ -36,6 +39,18 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         localIdentifier = videoMO.localIdentifier
         thumbKey = videoMO.thumbKey
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let captureDate = videoMO.captureDate {
+            self.captureDate = dateFormatter.string(from: captureDate as Date)
+        }
+        
+        if let publishDate = videoMO.publishDate {
+            self.publishDate = dateFormatter.string(from: publishDate as Date)
+        }
+        
+        duration = videoMO.duration
     }
 
 }

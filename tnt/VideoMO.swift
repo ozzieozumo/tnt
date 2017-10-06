@@ -20,6 +20,19 @@ extension Video {
         self.videoId = dbVideo.videoId
         self.thumbKey = dbVideo.thumbKey
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let publishDate = dbVideo.publishDate {
+            self.publishDate = dateFormatter.date(from: publishDate) as NSDate?
+        }
+        
+        if let captureDate = dbVideo.captureDate {
+            self.captureDate = dateFormatter.date(from: captureDate) as NSDate?
+        }
+        
+        self.duration = dbVideo.duration ?? 0.0
+
     }
     
     func saveLocal() {

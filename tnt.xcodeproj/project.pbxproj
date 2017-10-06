@@ -232,11 +232,9 @@
 		A74DE87B1E8DD4EB006B2AF5 /* tnt */ = {
 			isa = PBXGroup;
 			children = (
-				A7643F1D1F7AC979008C9579 /* CoreData */,
-				A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */,
-				A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */,
-				A7504E511F7ABF5800928A79 /* VideoMO.swift */,
-				A7504E531F7ABFC000928A79 /* AthleteMO.swift */,
+				A7643F1D1F7AC979008C9579 /* CoreData Generated */,
+				A7E20B871F86EAEB009A0506 /* CoreData Custom */,
+				A7E20B881F86EB28009A0506 /* DynamoDB Mapping */,
 				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
 				A74DE87E1E8DD4EB006B2AF5 /* ViewController.swift */,
 				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
@@ -254,10 +252,6 @@
 				A7349A1E1F78959D00E5EFEA /* tntAthleteSelectViewController.swift */,
 				A7349A201F7895C200E5EFEA /* tntAthleteSearchViewController.swift */,
 				A7BCE18D1EA0175C0053B550 /* Constants.swift */,
-				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
-				A77D4CEB1F335AD5004D7215 /* tntScores.swift */,
-				A734D4DA1F17E30D006F89D3 /* tntMeet.swift */,
-				A77E58F21EE9C66700E05757 /* tntVideo.swift */,
 				A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */,
 				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
 				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
@@ -306,7 +300,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		A7643F1D1F7AC979008C9579 /* CoreData */ = {
+		A7643F1D1F7AC979008C9579 /* CoreData Generated */ = {
 			isa = PBXGroup;
 			children = (
 				A7504E551F7AC41B00928A79 /* Meet+CoreDataClass.swift */,
@@ -318,7 +312,29 @@
 				A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */,
 				A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */,
 			);
-			name = CoreData;
+			name = "CoreData Generated";
+			sourceTree = "<group>";
+		};
+		A7E20B871F86EAEB009A0506 /* CoreData Custom */ = {
+			isa = PBXGroup;
+			children = (
+				A7504E531F7ABFC000928A79 /* AthleteMO.swift */,
+				A7504E511F7ABF5800928A79 /* VideoMO.swift */,
+				A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */,
+				A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */,
+			);
+			name = "CoreData Custom";
+			sourceTree = "<group>";
+		};
+		A7E20B881F86EB28009A0506 /* DynamoDB Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
+				A77D4CEB1F335AD5004D7215 /* tntScores.swift */,
+				A734D4DA1F17E30D006F89D3 /* tntMeet.swift */,
+				A77E58F21EE9C66700E05757 /* tntVideo.swift */,
+			);
+			name = "DynamoDB Mapping";
 			sourceTree = "<group>";
 		};
 		B8E1DD02351D613F0FFDFB99 /* Pods */ = {

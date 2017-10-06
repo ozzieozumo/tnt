@@ -95,6 +95,33 @@ extension Scores {
         
     }
     
+    func deleteVideo(relatedVideoId: String) {
+        
+        var vDicts = videos as? [[String: Any]] ?? []
+        
+        
+        for (i, dict) in vDicts.enumerated() {
+                
+                if dict["videoId"] as? String == relatedVideoId {
+                        vDicts.remove(at: i)
+                }
+        }
+        
+        self.videos = vDicts as NSObject
+        saveLocal()
+       
+        // send a notification including the videoId AND the scoreId
+        
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name("tntScoresDeletedVideo"), object: nil, userInfo: ["scoreId":self.scoreId!,
+                                                                                      "videoId":relatedVideoId])
+        
+        // background:  write the updates scores object back to Dynamo
+        
+        tntSynchManager.shared.saveScores(scoreId!)
+        
+    }
+    
     func containsVideo(id: String) -> Bool {
         
         if let vDicts = videos as? [[String:Any]] {

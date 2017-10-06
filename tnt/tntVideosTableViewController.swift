@@ -115,17 +115,28 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
     }
     */
 
-    /*
     // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let videoIdToDelete = videos?[indexPath.row]["videoId"] as! String?
+            
+            
+            // delete related video for this scores obect .. using LocalDataManager or Scores
+            // note that the actual video and thumb files will not be removed from S3 
+            
+            if let video = tntLocalDataManager.shared.getVideoById(videoId: videoIdToDelete!), let scores = scoresMO {
+                scores.deleteVideo(relatedVideoId: video.videoId!)
+                videos?.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
