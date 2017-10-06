@@ -82,7 +82,13 @@ extension Video {
                     self.thumbImage = imgData as NSData?
                     
                     do {
-                        try tntLocalDataManager.shared.moc!.save()
+                        self.saveLocal()
+                        print("TNT: thumbnail image for video downloaded and set in coredata")
+                        
+                        let nc = NotificationCenter.default
+                        nc.post(name: Notification.Name("tntVideoThumbnailLoaded"), object: nil, userInfo: ["videoId":self.videoId!])
+                        
+                        
                     } catch let error as NSError {
                         print("TNT: could not save video thumb image. \(error), \(error.userInfo)")
                     }

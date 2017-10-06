@@ -39,6 +39,8 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerRelatedVideoLoaded(notification:)), name: Notification.Name("tntScoresNewVideo"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerThumbnailLoaded(notification:)), name: Notification.Name("tntVideoThumbnailLoaded"), object: nil)
+        
         // if there are no videos in coredata, try to load from the cloud database
         
         getScores()
@@ -129,9 +131,11 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             
             if let video = tntLocalDataManager.shared.getVideoById(videoId: videoIdToDelete!), let scores = scoresMO {
                 scores.deleteVideo(relatedVideoId: video.videoId!)
-                videos?.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
             }
+            
+            videos?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+          
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -205,6 +209,17 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         }
         
     }
+    
+    func observerThumbnailLoaded(notification: Notification) {
+        // This notification received when a new or updated scores object has been loaded to core data
+        // This includes updated related video information
+        
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+        
+    }
+
     
     func observerScoresNotFound(notification: Notification) {
         // This notification received when a request to load scores from Dynamo finds no score entity for the given id

@@ -164,12 +164,15 @@ class tntLocalDataManager {
         let videoMO = Video(dbVideo: video)
         videoMO.saveLocal()
         
-        videoMO.loadThumbImage(imageURL: videoMO.thumbKey)
-        
         // send a notification indicating new video data
         
         let nc = NotificationCenter.default
         nc.post(name: Notification.Name("tntVideoLoaded"), object: nil, userInfo: ["videoId" : videoMO.videoId!])
+        
+        // background request to load the thumbnail image, will post separate notification
+        
+        videoMO.loadThumbImage(imageURL: videoMO.thumbKey)
+
 
     }
     
