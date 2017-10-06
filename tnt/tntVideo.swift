@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Photos
 
 
 import AWSDynamoDB
@@ -51,6 +52,33 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         }
         
         duration = videoMO.duration
+    }
+    
+    
+    public func setAssetMetadata(from: PHAsset) {
+        
+        // set the capture date and duration from the PHAsset metadata
+        
+        duration = from.duration as Double
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let captureDate = from.creationDate {
+            self.captureDate = dateFormatter.string(from: captureDate as Date)
+        }
+        
+    }
+    
+    public func setPublishDate() {
+        
+        // sets the publish date to today in yyyy-MM-dd format
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        publishDate = dateFormatter.string(from: Date())
+        
     }
 
 }

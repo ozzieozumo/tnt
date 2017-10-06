@@ -230,7 +230,7 @@ class tntSynchManager {
     
 
     
-    func createVideo(s3VideoKey: String, thumbKey: String) {
+    func createVideo(s3VideoKey: String, thumbKey: String, pha: PHAsset) {
         
         
         guard let newVideo = tntVideo() else {
@@ -242,6 +242,10 @@ class tntSynchManager {
         newVideo.localIdentifier  = "NIL"
         newVideo.videoId = s3VideoKey
         newVideo.thumbKey = thumbKey
+        
+        newVideo.setAssetMetadata(from: pha)
+        newVideo.setPublishDate()
+        
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
 
@@ -425,7 +429,7 @@ class tntSynchManager {
                 if let thumbError = error {
                     return
                 } else {
-                    tntSynchManager.shared.createVideo(s3VideoKey: videoKey, thumbKey: result)
+                    tntSynchManager.shared.createVideo(s3VideoKey: videoKey, thumbKey: result, pha: asset)
                     
                     // a scores object is provided when this is a new file upload and the new video
                     // should be added as a related video of athlete/meet

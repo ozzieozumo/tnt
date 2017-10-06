@@ -129,8 +129,8 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             // delete related video for this scores obect .. using LocalDataManager or Scores
             // note that the actual video and thumb files will not be removed from S3 
             
-            if let video = tntLocalDataManager.shared.getVideoById(videoId: videoIdToDelete!), let scores = scoresMO {
-                scores.deleteVideo(relatedVideoId: video.videoId!)
+            if let videoId = videoIdToDelete, let scores = scoresMO {
+                scores.deleteVideo(relatedVideoId: videoId)
             }
             
             videos?.remove(at: indexPath.row)

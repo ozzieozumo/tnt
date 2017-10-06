@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Photos
 
 extension Video {
     
@@ -102,7 +103,6 @@ extension Video {
         
         downloadTask.resume()
     }
-
         
 }
 

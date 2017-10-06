@@ -37,7 +37,19 @@ class tntRelatedVideosTableCell: UITableViewCell {
     
     func showVideoDetails(relatedVideoDict: [String: Any]) {
     
-        videoTitle.text = "Untitled (date unknown)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        var dateText: String
+        
+        if let captureDate = video?.captureDate as Date? {
+            
+            dateText = dateFormatter.string(from: captureDate)
+            
+        } else {
+            dateText = "(date unknown)"
+        }
+        videoTitle.text = "Untitled \(dateText)"
         videoDescription.text = "meet specific video description from the scores table"
         if let imgData = video?.thumbImage as Data? {
             
@@ -47,7 +59,7 @@ class tntRelatedVideosTableCell: UITableViewCell {
             self.videoThumb.image = UIImage(imageLiteralResourceName: "smile-emoticon")
         }
 
-        videoRunTime.text = "10.0 s"
+        videoRunTime.text = String(format: "%.2f", video?.duration ?? 0.0)
     }
 
 }
