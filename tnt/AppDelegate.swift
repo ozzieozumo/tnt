@@ -50,9 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // If testing, load test data programmatically
-        
-        // Init the synch manager to look for updated data and changed access etc
+        setInitialVC()
         
         return true
         
@@ -141,6 +139,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    func setInitialVC() {
+        
+        var startingVCs : [UIViewController] = []
+        
+        // if running in debug mode, add the utilities page to the VCs
+        
+        #if DEBUG
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntDebugUtilities")
+            startingVCs.append(debugUtilVC)
+        
+        #endif
+        
+        
+        
+        let defaults = UserDefaults.standard
+        if let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") {
+            
+            // athlete saved in user defaults -> display home VC
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
+            startingVCs.append(homeVC)
+            
+        } else {
+            
+            // otherwise, display athlete setup VC
+            let storyboard = UIStoryboard(name: "AthleteSetup", bundle: nil)
+            let setupVC = storyboard.instantiateViewController(withIdentifier: "tntAthleteSetup")
+            startingVCs.append(setupVC)
+            
+        }
+
+        if let navController = self.window?.rootViewController as! UINavigationController? {
+            navController.setViewControllers(startingVCs, animated: false)
         }
     }
 

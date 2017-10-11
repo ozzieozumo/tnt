@@ -69,9 +69,9 @@ class tntAthleteSelectViewController: UITableViewController {
         let athlete = athletes[indexPath.row].value
         defaults.set(athlete.id, forKey: "tntSelectedAthleteId")
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
-        self.navigationController?.setViewControllers([homeVC], animated: true)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setInitialVC()
     }
    
     // Override to support conditional editing of the table view.

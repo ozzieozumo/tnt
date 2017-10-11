@@ -29,7 +29,7 @@
         <!--Tnt Login View Controller-->
         <scene sceneID="iZI-Lx-gzd">
             <objects>
-                <viewController id="bCL-Sf-QFQ" customClass="tntLoginViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tntDebugUtilities" id="bCL-Sf-QFQ" customClass="tntLoginViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lIq-X6-Mdn"/>
                         <viewControllerLayoutGuide type="bottom" id="O9h-kK-hiw"/>
@@ -673,7 +673,7 @@
         <image name="smile-emoticon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="3VO-jR-EeR"/>
         <segue reference="DbF-hn-L9T"/>
-        <segue reference="UYT-Om-cUA"/>
     </inferredMetricsTieBreakers>
 </document>
