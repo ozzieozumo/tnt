@@ -11,12 +11,18 @@ import UIKit
 class tntRelatedVideosTableCell: UITableViewCell {
 
     var video : Video? = nil
+    weak var tableUpdatesDelegate: tntRelatedCellDelegate?
     
+ 
+    @IBOutlet var videoCaptureDate: UILabel!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoDescription: UITextView!
     @IBOutlet weak var videoThumb: UIImageView!
     @IBOutlet weak var videoRunTime: UILabel!
     
+    @IBOutlet var compactView: UIView!
+    
+    @IBOutlet var expandedView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -49,8 +55,9 @@ class tntRelatedVideosTableCell: UITableViewCell {
         } else {
             dateText = "(date unknown)"
         }
-        videoTitle.text = "Untitled \(dateText)"
-        videoDescription.text = "meet specific video description from the scores table"
+        videoCaptureDate.text = dateText
+        videoTitle.text = "(Untitled)"
+        
         if let imgData = video?.thumbImage as Data? {
             
             let img = UIImage(data: imgData)
@@ -62,4 +69,9 @@ class tntRelatedVideosTableCell: UITableViewCell {
         videoRunTime.text = String(format: "%.2f", video?.duration ?? 0.0)
     }
 
+    @IBAction func tapToggleExpand(_ sender: Any) {
+        
+        expandedView.isHidden = !expandedView.isHidden
+        tableUpdatesDelegate?.didToggleExpansion(for: self)
+    }
 }

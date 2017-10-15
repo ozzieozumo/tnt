@@ -12,14 +12,15 @@ import AVKit
 import Photos
 import AWSS3
 
-class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerDelegate {
+class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerDelegate, tntRelatedCellDelegate {
     
     // This view displays videos, and allows upload of new videos, related to a particular athlete & meet 
     
     var athleteMO : Athlete?
     var meetMO : Meet?
     var scoresMO : Scores?
-    var videos : [[String:Any]]?
+    var videos : [(expanded: Bool, info: [String:Any])] = []
+    
 
     @IBOutlet weak var athleteName: UILabel!
     @IBOutlet weak var meetInfo: UILabel!
@@ -74,7 +75,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.videos?.count) ?? 0
+        return self.videos.count
     }
 
  
@@ -82,12 +83,14 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tntvideo", for: indexPath) as! tntRelatedVideosTableCell
         // Set up the cell
-        guard let object = self.videos?[indexPath.row] else {
-            fatalError("Attempt to configure cell without a managed object")
-        }
-        cell.setVideo(videoId: object["videoId"] as! String)
-        cell.showVideoDetails(relatedVideoDict: object)
+        let info = self.videos[indexPath.row].info
+            
+        cell.tableUpdatesDelegate = self
         
+        cell.setVideo(videoId: info["videoId"] as! String)
+        cell.showVideoDetails(relatedVideoDict: info)
+        cell.expandedView.isHidden = !(self.videos[indexPath.row].expanded)
+
         return cell
 
     }
@@ -96,7 +99,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         // show a video player for the selected cell
         
-        guard let videoId = self.videos?[indexPath.row]["videoId"] as? String else {
+        guard let videoId = self.videos[indexPath.row].info["videoId"] as? String else {
             print("TNT videos VC : videoId is nil for selected row")
             return
         }
@@ -123,7 +126,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         if editingStyle == .delete {
             // Delete the row from the data source
             
-            let videoIdToDelete = videos?[indexPath.row]["videoId"] as! String?
+            let videoIdToDelete = videos[indexPath.row].info["videoId"] as! String?
             
             
             // delete related video for this scores obect .. using LocalDataManager or Scores
@@ -133,7 +136,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
                 scores.deleteVideo(relatedVideoId: videoId)
             }
             
-            videos?.remove(at: indexPath.row)
+            videos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
           
             
@@ -325,7 +328,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         if let scores = tntLocalDataManager.shared.scores[scoreId] {
             
             self.scoresMO = scores
-            self.videos = scores.videos as! [[String:Any]]?
+            let videoInfo = scores.videos! as! [[String:Any]]
+            
+            self.videos = videoInfo.flatMap { return (expanded: false, info: $0)}
             return
             
         } else {
@@ -348,6 +353,11 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
     }
     
+    
+    @IBAction func didToggleExpand(_ sender: Any) {
+        
+    }
+    
     func didChooseUploadVideo(sender: UIViewController, localMediaURL: URL?, photosAsset: PHAsset) {
         
         guard let url = localMediaURL else {
@@ -367,6 +377,16 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         tntSynchManager.shared.s3VideoUpload(url: url, asset: photosAsset, scores: scoresMO!)
     
     }
+    
+    func didToggleExpansion(for cell: tntRelatedVideosTableCell) {
+        
+        if let indexPath = tableView.indexPath(for: cell) {
+            
+            videos[indexPath.row].expanded = !videos[indexPath.row].expanded
+            tableView.reloadRows(at: [indexPath], with: .fade)
+            
+        }
+    }
 
 }
 
@@ -375,3 +395,10 @@ protocol tntVideoUploadPickerDelegate : class {
     func didChooseUploadVideo(sender: UIViewController, localMediaURL: URL?, photosAsset: PHAsset)
     
 }
+
+protocol tntRelatedCellDelegate : class {
+    func didToggleExpansion(for: tntRelatedVideosTableCell)
+}
+
+
+
