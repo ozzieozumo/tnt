@@ -56,10 +56,10 @@
 		A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */; };
 		A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3511EC4C5430007A543 /* tntSynchManager.swift */; };
 		A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79DB3531EC537470007A543 /* tntLoginManager.swift */; };
-		A79FAF7A1E9FF596005C66E2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */; };
-		A79FAF7C1E9FF5B7005C66E2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */; };
-		A79FAF7E1E9FF5C1005C66E2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */; };
-		A79FAF801E9FF5CE005C66E2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */; };
+		A7BAA68F1F91AD9800B33CBC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BAA68C1F91A9A500B33CBC /* FBSDKCoreKit.framework */; };
+		A7BAA6901F91AD9F00B33CBC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BAA68D1F91A9A500B33CBC /* FBSDKLoginKit.framework */; };
+		A7BAA6911F91ADA400B33CBC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BAA68B1F91A96F00B33CBC /* Bolts.framework */; };
+		A7BAA6921F91ADAA00B33CBC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BAA68E1F91A9A500B33CBC /* FBSDKShareKit.framework */; };
 		A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */; };
 		A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18D1EA0175C0053B550 /* Constants.swift */; };
 		A7E22CAA1F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */; };
@@ -151,10 +151,10 @@
 		A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLocalDataManager.swift; sourceTree = "<group>"; };
 		A79DB3511EC4C5430007A543 /* tntSynchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntSynchManager.swift; sourceTree = "<group>"; };
 		A79DB3531EC537470007A543 /* tntLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginManager.swift; sourceTree = "<group>"; };
-		A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
-		A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A7BAA68B1F91A96F00B33CBC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		A7BAA68C1F91A9A500B33CBC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A7BAA68D1F91A9A500B33CBC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A7BAA68E1F91A9A500B33CBC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginViewController.swift; sourceTree = "<group>"; };
 		A7BCE18D1EA0175C0053B550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntRelatedVideosTableCell.swift; sourceTree = "<group>"; };
@@ -167,15 +167,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7BAA68F1F91AD9800B33CBC /* FBSDKCoreKit.framework in Frameworks */,
+				A7BAA6901F91AD9F00B33CBC /* FBSDKLoginKit.framework in Frameworks */,
+				A7BAA6911F91ADA400B33CBC /* Bolts.framework in Frameworks */,
+				A7BAA6921F91ADAA00B33CBC /* FBSDKShareKit.framework in Frameworks */,
 				A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */,
-				A79FAF7A1E9FF596005C66E2 /* FBSDKCoreKit.framework in Frameworks */,
 				A76E9CE01E9FDD7C00FC14FC /* AWSS3.framework in Frameworks */,
 				A76E9CDD1E9FDD5700FC14FC /* AWSDynamoDB.framework in Frameworks */,
-				A79FAF7C1E9FF5B7005C66E2 /* FBSDKLoginKit.framework in Frameworks */,
-				A79FAF801E9FF5CE005C66E2 /* FBSDKShareKit.framework in Frameworks */,
 				A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */,
 				A76E9CDA1E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework in Frameworks */,
-				A79FAF7E1E9FF5C1005C66E2 /* Bolts.framework in Frameworks */,
 				1ED4563BC5C90E6380225BDF /* Pods_tnt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,10 +283,10 @@
 		A7579B351E9FD6C800143A85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A79FAF7F1E9FF5CE005C66E2 /* FBSDKShareKit.framework */,
-				A79FAF7D1E9FF5C1005C66E2 /* Bolts.framework */,
-				A79FAF7B1E9FF5B7005C66E2 /* FBSDKLoginKit.framework */,
-				A79FAF791E9FF596005C66E2 /* FBSDKCoreKit.framework */,
+				A7BAA68C1F91A9A500B33CBC /* FBSDKCoreKit.framework */,
+				A7BAA68D1F91A9A500B33CBC /* FBSDKLoginKit.framework */,
+				A7BAA68E1F91A9A500B33CBC /* FBSDKShareKit.framework */,
+				A7BAA68B1F91A96F00B33CBC /* Bolts.framework */,
 				A76E9CDF1E9FDD7C00FC14FC /* AWSS3.framework */,
 				A76E9CDC1E9FDD5700FC14FC /* AWSDynamoDB.framework */,
 				A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */,
@@ -741,7 +741,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/sumo/bloc/FacebookSDK,
+					/Users/sumo/iosdev/FacebookSDK,
 				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -759,7 +759,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/sumo.bloc/FacebookSDK,
+					/Users/sumo/iosdev/FacebookSDK,
 				);
 				INFOPLIST_FILE = tnt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

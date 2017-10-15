@@ -26,7 +26,7 @@ class tntLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         
-         super.viewDidLoad()
+        super.viewDidLoad()
         
         if tntLoginManager.shared.fbToken == nil {
             self.fbLoginManager = FBSDKLoginManager()
