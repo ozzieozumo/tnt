@@ -86,10 +86,10 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         let info = self.videos[indexPath.row].info
             
         cell.tableUpdatesDelegate = self
-        
+        cell.expandedView.isHidden = !(self.videos[indexPath.row].expanded)
         cell.setVideo(videoId: info["videoId"] as! String)
         cell.showVideoDetails(relatedVideoDict: info)
-        cell.expandedView.isHidden = !(self.videos[indexPath.row].expanded)
+        
 
         return cell
 

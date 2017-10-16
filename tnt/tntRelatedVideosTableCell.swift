@@ -20,6 +20,7 @@ class tntRelatedVideosTableCell: UITableViewCell {
     @IBOutlet weak var videoThumb: UIImageView!
     @IBOutlet weak var videoRunTime: UILabel!
     
+    @IBOutlet var viewToggleButton: UIButton!
     @IBOutlet var compactView: UIView!
     
     @IBOutlet var expandedView: UIView!
@@ -67,11 +68,19 @@ class tntRelatedVideosTableCell: UITableViewCell {
         }
 
         videoRunTime.text = String(format: "%.2f", video?.duration ?? 0.0)
+        
+        if expandedView.isHidden {
+            let expandImage = UIImage(imageLiteralResourceName: "down-arrow")
+            viewToggleButton.setImage(expandImage, for: .normal)
+        } else {
+            let contractImage = UIImage(imageLiteralResourceName: "up-arrow")
+            viewToggleButton.setImage(contractImage, for: .normal)
+        }
     }
 
     @IBAction func tapToggleExpand(_ sender: Any) {
-        
-        expandedView.isHidden = !expandedView.isHidden
+        // don't hide the view here .. call the delegate to update expanded in table data source
+        // then rebuild the cell in cellFor
         tableUpdatesDelegate?.didToggleExpansion(for: self)
     }
 }

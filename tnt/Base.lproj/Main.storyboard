@@ -449,6 +449,7 @@
                                     <outlet property="videoRunTime" destination="HNU-md-dpo" id="Vi1-GO-Ppx"/>
                                     <outlet property="videoThumb" destination="rbw-Ld-Ary" id="7eB-Vy-m9M"/>
                                     <outlet property="videoTitle" destination="JZc-pb-1ZM" id="A4r-IM-0Ao"/>
+                                    <outlet property="viewToggleButton" destination="ivA-tT-GAW" id="wiU-po-yam"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
