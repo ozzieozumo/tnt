@@ -30,25 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Connect the FaceBook app delegate to this application
         _ = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        // Try to login using saved Facebook token and Cognito.  This will also init the AWS configuration
+        // Try to login using saved Facebook token and Cognito.  This will also init the AWS Cognito configuration
         
         tntLoginManager.shared.loginWithSavedCredentials()
         
-        // Init the local data manager 
+        // Init the local data manager, loading available athletes from core data
         
         tntLocalDataManager.shared.loadLocalData()
         
-        // If no local data, try to load from the cloud DB  (must be logged in and on wifi) 
-        
-        if tntLocalDataManager.shared.athletes.count == 0 {
-            
-            if tntLoginManager.shared.credentialsProvider != nil {
-                
-                // Only try to load from the cloud DB if the background login was successful
-                
-                // tntSynchManager.shared.loadCache()
-            }
-        }
+        // Choose the starting VC based on login status, saved athletes etc
         
         setInitialVC()
         
@@ -142,9 +132,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: Initial VC selection
+    
     func setInitialVC() {
         
         var startingVCs : [UIViewController] = []
+        var debugVCs:  [UIViewController] = []
+        
+        guard let navController = self.window?.rootViewController as! UINavigationController? else {
+            print("TNT setInitialVC: no navigation controller defined")
+            return
+        }
+        
+        if !tntLoginManager.shared.loggedIn {
+            
+            // not logged in, so open the login page
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "tntLoginMethods")
+            startingVCs.append(loginVC)
+            
+            navController.setViewControllers(startingVCs, animated: false)
+            return
+        }
         
         // if running in debug mode, add the utilities page to the VCs
         
@@ -152,16 +161,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntDebugUtilities")
-            startingVCs.append(debugUtilVC)
+            debugVCs.append(debugUtilVC)
         
         #endif
         
-        
-        
         let defaults = UserDefaults.standard
-        if let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") {
+        let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") ?? ""
+        
+        if tntLocalDataManager.shared.athletes[savedAthleteId] != nil {
             
-            // athlete saved in user defaults -> display home VC
+            // athlete saved in user defaults and exists in core data -> display home VC
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
@@ -176,9 +185,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
 
-        if let navController = self.window?.rootViewController as! UINavigationController? {
-            navController.setViewControllers(startingVCs, animated: false)
-        }
+        
+        navController.setViewControllers(debugVCs + startingVCs, animated: false)
     }
 
 }

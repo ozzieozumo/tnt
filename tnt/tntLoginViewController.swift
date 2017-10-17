@@ -58,62 +58,6 @@ class tntLoginViewController: UIViewController {
     }
 
     
-    func CognitoLogin() {
-     
-        
-        // assert(self.fbToken != nil)  also, this won't be on the main thread
-        
-        // print out some information about the Facebook Token and User Profile
-        
-        print("tnt: FBSDK Version \(FBSDKSettings.sdkVersion())")
-        
-        FBSDKProfile.loadCurrentProfile  { (profile, error) -> Void in
-            // Completion handler for loadCurrentProfile
-            if (error != nil) {
-                    print("tnt:error in loadCurrentProfile")
-                }
-            else {
-                let fbProfile = FBSDKProfile.current()
-                print("tnt: FBSDK User Profile \(fbProfile!.name)")
-            }
-        }
-    
-        let fblogin = [Constants.FACEBOOK_PROVIDER : fbToken!.tokenString!]
-        
-        if self.credentialsProvider == nil {
-            
-            // Create an IdentityProviderManager to return the FB login info when requested
-            
-            let idpm = tntIdentityProvider(logins: fblogin)
-            
-            // Instantiate the Cognito credentials provider using region, pool and the logins
-            
-            self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: idpm)
-            let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
-            
-            AWSServiceManager.default().defaultServiceConfiguration = configuration
-            
-            print("tnt: Logged in to AWS Cognito")
-            print("tnt: \(configuration?.userAgent)")
-            
-            // could call getIdentityId here and print out in continuation block
-            
-            self.credentialsProvider?.getIdentityId().continueWith { task in
-                
-                print("tnt: Cognito Identity ID \(self.credentialsProvider?.identityId)")
-                
-            }
-            
-        } else {
-            // we already have a credentials provider 
-            // should probably call getIdentityId or something here
-        }
-        
-        DispatchQueue.main.async {
-            
-            self.btnDynamo.isUserInteractionEnabled = true
-        }
-    }
     
     
     override func didReceiveMemoryWarning() {

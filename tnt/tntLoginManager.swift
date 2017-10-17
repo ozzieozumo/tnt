@@ -17,6 +17,9 @@ class tntLoginManager {
     
     static let shared = tntLoginManager()
     
+    var loggedIn: Bool {
+        return (fbToken != nil) && (cognitoId != nil)
+    }
     var fbToken: FBSDKAccessToken?
     var cognitoId: String?
     var credentialsProvider: AWSCognitoCredentialsProvider?
