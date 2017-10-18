@@ -383,7 +383,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         if let indexPath = tableView.indexPath(for: cell) {
             
             videos[indexPath.row].expanded = !videos[indexPath.row].expanded
-            tableView.reloadRows(at: [indexPath], with: .fade)
+            tableView.beginUpdates()
+            cell.toggleExpansion()
+            tableView.endUpdates()
             
         }
     }
