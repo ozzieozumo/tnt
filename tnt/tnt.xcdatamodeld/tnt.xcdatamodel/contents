@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Athlete" representedClassName=".Athlete" syncable="YES">
+        <attribute name="cognitoId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dob" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="eventLevels" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,7 +46,7 @@
         <attribute name="videoId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Athlete" positionX="-126" positionY="-189" width="128" height="165"/>
+        <element name="Athlete" positionX="-126" positionY="-189" width="128" height="180"/>
         <element name="Meet" positionX="133" positionY="-36" width="128" height="208"/>
         <element name="Scores" positionX="-110" positionY="17" width="128" height="178"/>
         <element name="Video" positionX="367" positionY="45" width="128" height="165"/>

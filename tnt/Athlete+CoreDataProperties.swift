@@ -2,8 +2,9 @@
 //  Athlete+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 9/26/17.
+//  Created by Luke Everett on 10/19/17.
 //  Copyright © 2017 ozzieozumo. All rights reserved.
+//
 //
 
 import Foundation
@@ -23,6 +24,7 @@ extension Athlete {
     @NSManaged public var lastName: String?
     @NSManaged public var profileImage: NSData?
     @NSManaged public var recoveryKey: String?
+    @NSManaged public var cognitoId: String?
     @NSManaged public var registered: Meet?
 
 }

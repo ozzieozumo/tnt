@@ -334,7 +334,6 @@
                                                 <rect key="frame" x="150.5" y="8.5" width="47" height="30"/>
                                                 <state key="normal" title="Switch"/>
                                                 <connections>
-                                                    <action selector="saveAthlete:" destination="HYE-de-JUC" eventType="touchUpInside" id="g2i-wo-28S"/>
                                                     <segue destination="3VL-vP-wew" kind="show" id="Vpi-DZ-Pvu"/>
                                                 </connections>
                                             </button>
@@ -396,6 +395,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="y8E-uC-nsp"/>
+        <segue reference="Vpi-DZ-Pvu"/>
     </inferredMetricsTieBreakers>
 </document>

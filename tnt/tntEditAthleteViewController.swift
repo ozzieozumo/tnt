@@ -90,12 +90,29 @@ class tntEditAthleteViewController: UIViewController {
             
             athleteToSave = Athlete(context: localMOC)
             athleteToSave.id = UUID().uuidString
+            if let cognitoId = tntLoginManager.shared.cognitoId {
+                athleteToSave.cognitoId = cognitoId
+            } else {
+                // Log an error and return; something pretty weird must have happened
+                print("TNT Save Athlete: no CognitoId available when trying to save athlete. Save canceled")
+                return
+            }
         
         }
         
         athleteToSave.firstName = firstName.text
         athleteToSave.lastName = lastName.text
         athleteToSave.dob = dobPicker.date as NSDate
+        
+        if isNameLocalDuplicate(athlete: athleteToSave) {
+            
+            // show alert and return
+            let alertC = UIAlertController(title: "Duplicate Name", message: "Name is already taken.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertC.addAction(defaultAction)
+            self.present(alertC, animated: true, completion: nil)
+            return
+        }
         
         do {
             
@@ -141,6 +158,19 @@ class tntEditAthleteViewController: UIViewController {
         
     }
     
+    func isNameLocalDuplicate(athlete: Athlete) -> Bool {
+        
+        // Check whether an athlete with the same first and last name is already saved locally in Core Data
+        
+        let athleteName = (athlete.lastName ?? "") + (athlete.firstName ?? "")
+        
+        let existingNames = tntLocalDataManager.shared.athletes.map { (key:String, value: Athlete) -> String in
+            return (value.lastName ?? "") + (value.firstName ?? "")
+        }
+        
+        return existingNames.contains(athleteName)
+        
+    }
     
 
 }

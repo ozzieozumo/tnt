@@ -16,6 +16,7 @@ extension Athlete {
         self.init(context: tntLocalDataManager.shared.moc!)
         
         self.id = dbAthlete.athleteId
+        self.cognitoId = dbAthlete.cognitoId
         self.firstName = dbAthlete.firstName
         self.lastName = dbAthlete.lastName
         self.eventLevels = dbAthlete.eventLevels as NSObject?

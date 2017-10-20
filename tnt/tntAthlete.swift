@@ -54,7 +54,7 @@ class tntAthlete : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         
         recoveryKey = athleteMO.recoveryKey ?? " "
         
-        //cognitoId = athleteMO.cognitoId
+        cognitoId = athleteMO.cognitoId
         //profileImageURL = athleteMO.profileImageURL
         
     }
