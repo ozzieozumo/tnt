@@ -29,7 +29,7 @@ class tntAthleteSetupChoices: UITableViewController {
                 ),
             AthleteSetupChoice(
                 title: "Reconnect",
-                description: "Reconnect to an athlete on this device or recover an athlete from the database",
+                description: "Reconnect this device to other athletes",
                 icon: nil,
                 segueId: "tntAthleteSelectSegue"
             )]

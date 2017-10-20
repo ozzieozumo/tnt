@@ -69,6 +69,10 @@ class tntEditAthleteViewController: UIViewController {
     
     
     @IBAction func saveAthlete(_ sender: Any) {
+        
+        /* TODO:  the save action on an existing athlete should pop the view controller (probably returing to the home view
+            on a new athlete, the save action should open the home view for the new athlete
+         */
     
         var athleteToSave: Athlete
         
@@ -128,6 +132,11 @@ class tntEditAthleteViewController: UIViewController {
             tntLocalDataManager.shared.athletes[newAthlete.id!] = newAthlete
             tntSynchManager.shared.saveAthlete(athleteId: newAthlete.id!)
             
+            let defaults = UserDefaults.standard
+            defaults.setValue(newAthlete.id!, forKey: "tntSelectedAthleteId")
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.setInitialVC()
         }
         
     }

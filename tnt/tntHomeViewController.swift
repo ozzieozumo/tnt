@@ -20,6 +20,9 @@ class tntHomeViewController: UIViewController {
     @IBOutlet weak var tntName: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet var editAthleteButton: UIButton!
+    @IBOutlet var selectAthleteButton: UIButton!
+    
     // current level displays
     
     @IBOutlet weak var currentLevelTR: UITextField!
