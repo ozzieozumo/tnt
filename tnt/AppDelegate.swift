@@ -38,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tntLocalDataManager.shared.loadLocalData()
         
+        // Background load from DynamoDB to core data
+        
+        tntSynchManager.shared.loadCache()  
+        
         // Choose the starting VC based on login status, saved athletes etc
         
         setInitialVC()
@@ -144,6 +148,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
+        #if DEBUG
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntDebugUtilities")
+            debugVCs.append(debugUtilVC)
+            
+        #endif
+        
+        
         if !tntLoginManager.shared.loggedIn {
             
             // not logged in, so open the login page
@@ -151,20 +164,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let loginVC = storyboard.instantiateViewController(withIdentifier: "tntLoginMethods")
             startingVCs.append(loginVC)
             
-            navController.setViewControllers(startingVCs, animated: false)
+            navController.setViewControllers(debugVCs + startingVCs, animated: false)
             return
         }
         
         // if running in debug mode, add the utilities page to the VCs
         
-        #if DEBUG
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntDebugUtilities")
-            debugVCs.append(debugUtilVC)
-        
-        #endif
-        
+       
         let defaults = UserDefaults.standard
         let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") ?? ""
         

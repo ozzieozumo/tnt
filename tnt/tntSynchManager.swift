@@ -27,7 +27,7 @@ class tntSynchManager {
         
         // TODO:  probably should set some sort of context object on the singleton
         
-        self.loadAthletes()
+        // self.loadAthletes()
         self.loadMeets()
         
                 
@@ -48,6 +48,45 @@ class tntSynchManager {
                 moAthlete.saveLocal()
                 moAthlete.backgroundLoadImage(imageURL: athlete.profileImageURL)
                 
+            }
+            return nil
+        })
+    }
+    
+    func loadAthleteById(athleteId: String, success: @escaping (Athlete) -> Void ) {
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.load(tntAthlete.self, hashKey: athleteId, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+            } else if let athlete = task.result as? tntAthlete {
+                
+                // what happens if coredata already has an athlete with this ID?  should overwrite
+                
+                let moAthlete = Athlete(dbAthlete: athlete)
+                moAthlete.saveLocal()
+                moAthlete.backgroundLoadImage(imageURL: athlete.profileImageURL)
+                success(moAthlete)
+            }
+            return nil
+        })
+    }
+    
+    func athletesSavedByUser(cognitoId: String, handler: @escaping (_ result: [tntAthlete], _ error: NSError?) -> Void) {
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.filterExpression = "cognitoId = :userid"
+        scanExpression.expressionAttributeValues = [":userid": cognitoId]
+        
+        dynamoDBObjectMapper.scan(tntAthlete.self, expression: scanExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("TNT SynchManager: athletesSavedByUser failed to scan athletes \(error)")
+                handler([],error)
+            } else if let paginatedOutput = task.result {
+                handler(paginatedOutput.items as! [tntAthlete], nil)
             }
             return nil
         })

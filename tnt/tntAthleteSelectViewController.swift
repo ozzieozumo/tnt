@@ -56,7 +56,7 @@ class tntAthleteSelectViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "athlete", for: indexPath)
-
+        
         let athlete = athletes[indexPath.row].value
         
         cell.textLabel?.text = (athlete.lastName ?? "") + ", " + (athlete.firstName ?? "")

@@ -23,8 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Facebook Login"/>
                                 <connections>
-                                    <action selector="facebookLogin:" destination="44M-Y9-2IL" eventType="touchUpInside" id="4wF-sn-oNm"/>
-                                    <action selector="fbLoginTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="lCs-AY-2RU"/>
+                                    <action selector="fbLoginTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="LYv-7h-w78"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login using one of these methods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-C1-Mid">
