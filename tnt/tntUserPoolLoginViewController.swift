@@ -74,6 +74,11 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
                 
                 self.present(alertController, animated: true, completion:  nil)
             } else { // Authentication successful
+                
+                // obtain an AWS credential and reset AWS ready to use Dynamo and other services
+                
+                tntLoginManager.shared.completeLoginWithUserPool()
+                
                 self.loginEmail.text = nil
                 self.navigationController?.popViewController(animated: true)
             }

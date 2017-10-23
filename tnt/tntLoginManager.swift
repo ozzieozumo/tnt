@@ -103,7 +103,7 @@ class tntLoginManager {
                 // TODO: check for errors here
                 
                 self.cognitoId  = self.credentialsProvider?.identityId
-                print("tntLoginManager: Cognito Identity ID set \(self.cognitoId ?? "Default")")
+                print("tntLoginManager: setting Cognito ID via FBlogin \(self.cognitoId ?? "Default")")
                 
                 return nil
                 }
@@ -111,4 +111,54 @@ class tntLoginManager {
         }
 
     }
+    
+    func completeLoginWithUserPool() {
+    // convert a logged in user pool into a credential for use with AWS services
+        
+        // get the Cognito user pool
+        
+        let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        
+        let getLoginsTask = pool.logins()
+        
+        getLoginsTask.continueWith { task in
+            
+            if let error = task.error as NSError? {
+                print("TNT Login Manager, failed getting logins for pool. Error: \(error)")
+            } else {
+                if let poolLogins = task.result as! [String: String]? {
+                    print("tntLoginManager: retrieved user pool logins\(poolLogins.count)")
+                    
+                    let idpm = tntIdentityProvider(logins: poolLogins)
+                    self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: idpm)
+                    
+                    let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
+                    
+                    // re-create pool configuration so that it can be registered with new service configuration
+                    let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
+                                                                                    clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
+                                                                                    poolId: Constants.CognitoIdentityUserPoolId)
+                    AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+                    
+                    AWSServiceManager.default().defaultServiceConfiguration = configuration
+                    
+                    print("tntLoginManager:  service manager initialized")
+                    print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
+                    
+                    self.credentialsProvider?.getIdentityId().continueWith { task in
+                     
+                         if let error = task.error as NSError? {
+                             print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
+                         } else {
+                             self.cognitoId  = self.credentialsProvider?.identityId
+                             print("tntLoginManager: settting Cognito ID via user pool \(self.cognitoId ?? "Default")")
+                         }
+                         return nil
+                     }
+                }
+            }
+            return nil
+        }
+    }
+   
 }

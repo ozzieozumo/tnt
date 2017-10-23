@@ -213,10 +213,9 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         signInViewController = (storyboard.instantiateViewController(withIdentifier: "tntUserPoolLogin") as! tntUserPoolLoginViewController)
         
         DispatchQueue.main.async {
-            
             navController.pushViewController(self.signInViewController!, animated: true)
-            
         }
+        
         return self.signInViewController!
     }
     
