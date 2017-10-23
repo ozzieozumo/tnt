@@ -194,19 +194,13 @@ class tntSynchManager {
                     meetMO.saveLocal()  // needs exception handling?
                 }
                 
-                // fetch the results in coredata
-                
-                tntLocalDataManager.shared.fetchMeets()
-                
                 // send a notification indicating new meet data
                 
                 let nc = NotificationCenter.default
                 nc.post(name: Notification.Name("tntMeetLoaded"), object: nil, userInfo: nil)
                 
             }
-            
         })
-        
         
     }
     

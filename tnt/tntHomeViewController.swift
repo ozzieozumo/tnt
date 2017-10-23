@@ -54,7 +54,7 @@ class tntHomeViewController: UIViewController {
             displayMeetInfo()
             
         } else {
-            
+            print("TNT Home View Controller :  selected athelete is nil")
              // disable some buttons, allowing Edit/Select only
         }
     }

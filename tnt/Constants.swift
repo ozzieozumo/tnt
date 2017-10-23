@@ -26,5 +26,15 @@ struct Constants {
     
     static let cloudDBRetryInterval = 20  // seconds to wait before retry
     
+    
+    // Cognito User Pool (email signin) Constantts
+    
+    static let CognitoIdentityUserPoolRegion: AWSRegionType = AWSRegionType.USEast1
+    static let CognitoIdentityUserPoolId = "us-east-1_Ocj65mPqG"
+    static let CognitoIdentityUserPoolAppClientId = "1dkv5qgiapgpt8rbtcmh3ql9cg"
+    static let CognitoIdentityUserPoolAppClientSecret = "krdejfkk8cbn5ig83n7tb42iav1n2v6qc6b9flr7qj5e1n93pq9"
+    
+    static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
+    
        
 }

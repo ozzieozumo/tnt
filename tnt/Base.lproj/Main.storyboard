@@ -40,7 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESl-QF-I5q">
-                                <rect key="frame" x="100" y="327" width="133" height="24"/>
+                                <rect key="frame" x="98" y="353" width="133" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upload Video to S3"/>
                                 <connections>
@@ -53,14 +53,6 @@
                                 <state key="normal" title="Play Video From S3"/>
                                 <connections>
                                     <action selector="playVideoClicked:" destination="bCL-Sf-QFQ" eventType="touchUpInside" id="p1u-3u-eB0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-Cw-Pp4">
-                                <rect key="frame" x="76" y="259" width="170" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Image to S3"/>
-                                <connections>
-                                    <segue destination="EVD-fr-yxD" kind="show" identifier="showUploadImage" id="Iwx-BW-HaV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDQ-nj-N9v">
@@ -95,6 +87,22 @@
                                     <segue destination="MyI-1X-r6f" kind="show" id="gSg-Fb-2IK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6K2-Aa-3br">
+                                <rect key="frame" x="105" y="241" width="102" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login Methods"/>
+                                <connections>
+                                    <segue destination="NP0-w5-HtP" kind="show" id="Pk5-yx-4qH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-Cw-Pp4">
+                                <rect key="frame" x="79" y="305" width="170" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Upload Image to S3"/>
+                                <connections>
+                                    <segue destination="EVD-fr-yxD" kind="show" identifier="showUploadImage" id="Iwx-BW-HaV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -103,6 +111,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXi-VU-jgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-207.19999999999999" y="138.98050974512745"/>
+        </scene>
+        <!--tntLoginMethods-->
+        <scene sceneID="Kdh-UM-PpJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="tntLoginMethods" id="NP0-w5-HtP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rZy-9B-Zhj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="390" y="-553"/>
         </scene>
         <!--AthleteSetup-->
         <scene sceneID="Fj0-6Q-cVx">

@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import AWSCognitoIdentityProvider
 
 class tntLoginMethodsViewController: UIViewController {
     
@@ -61,7 +62,31 @@ class tntLoginMethodsViewController: UIViewController {
         
     }
     
-    
+    func userPoolLogin() {
+        
+        /* From this function we just call getDetails.
+        If there is no user logged in, the pool will contact its UI delegate to show a login screen
+         On success we should set the logged in information in the login singleton
+         Any failures should be caught on the signIn screen and handled via alerts
+         If the user cancels, we should return to the login methods screen.
+ 
+         */
+        
+        let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        let user = pool.currentUser()
+        var response: AWSCognitoIdentityUserGetDetailsResponse?
+        
+        user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async(execute: {
+                response = task.result  // this is kind of pointless
+                self.title = user?.username  // this is not realistic 
+                
+            })
+            return nil
+        }
+        
+        
+    }
     // MARK: - Button Actions
     
     @IBAction func fbLoginTapped(_ sender: Any) {
@@ -69,6 +94,12 @@ class tntLoginMethodsViewController: UIViewController {
         
         FBLogin()
         
+    }
+    
+    
+    @IBAction func userPoolLoginTapped(_ sender: Any) {
+        
+        userPoolLogin()
     }
     
     /*
