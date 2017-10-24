@@ -78,8 +78,8 @@ class tntLoginMethodsViewController: UIViewController {
         
         user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
             DispatchQueue.main.async(execute: {
-                response = task.result  // this is kind of pointless
-                self.title = user?.username  // this is not realistic 
+                response = task.result
+                self.title = user?.username  // realistically would segue to home view controller
                 
             })
             return nil

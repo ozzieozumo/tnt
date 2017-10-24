@@ -119,46 +119,34 @@ class tntLoginManager {
         
         let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         
-        let getLoginsTask = pool.logins()
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: pool)
         
-        getLoginsTask.continueWith { task in
-            
-            if let error = task.error as NSError? {
-                print("TNT Login Manager, failed getting logins for pool. Error: \(error)")
-            } else {
-                if let poolLogins = task.result as! [String: String]? {
-                    print("tntLoginManager: retrieved user pool logins\(poolLogins.count)")
+        let cognitoIdBeforegetId = self.credentialsProvider?.identityId
                     
-                    let idpm = tntIdentityProvider(logins: poolLogins)
-                    self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: idpm)
+        let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
                     
-                    let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        // is it necessary to re-register the pool with the default service config?
+        
+        // AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: pool.userPoolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
                     
-                    // re-create pool configuration so that it can be registered with new service configuration
-                    let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
-                                                                                    clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
-                                                                                    poolId: Constants.CognitoIdentityUserPoolId)
-                    AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        print("tntLoginManager:  service manager initialized")
+        print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
+        
+        // if everything is honky dory, we should be able to access Dynamo DB.  If not, this will crash pretty fast. 
+        
+        tntSynchManager.shared.loadAthletes()
                     
-                    AWSServiceManager.default().defaultServiceConfiguration = configuration
-                    
-                    print("tntLoginManager:  service manager initialized")
-                    print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
-                    
-                    self.credentialsProvider?.getIdentityId().continueWith { task in
+        self.credentialsProvider?.getIdentityId().continueWith { task in
                      
-                         if let error = task.error as NSError? {
-                             print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
-                         } else {
-                             self.cognitoId  = self.credentialsProvider?.identityId
-                             print("tntLoginManager: settting Cognito ID via user pool \(self.cognitoId ?? "Default")")
-                         }
-                         return nil
-                     }
-                }
-            }
-            return nil
-        }
+                 if let error = task.error as NSError? {
+                     print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
+                 } else {
+                     self.cognitoId  = self.credentialsProvider?.identityId
+                     print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
+                 }
+                 return nil
+         }
     }
-   
 }

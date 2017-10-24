@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Try to login using saved Facebook token and Cognito.  This will also init the AWS Cognito configuration
         
-        tntLoginManager.shared.loginWithSavedCredentials()
+        // tntLoginManager.shared.loginWithSavedCredentials()
         
         // Init the local data manager, loading available athletes from core data
         
@@ -234,8 +234,8 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         // setup logging
         AWSLogger.default().logLevel = .verbose
         
-        // setup service configuration
-        let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+        
+        let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: nil)
         
         // create pool configuration
         let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
@@ -243,10 +243,14 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
                                                                         poolId: Constants.CognitoIdentityUserPoolId)
         
         // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         
         // fetch the user pool client we initialized in above step
         let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        
+        let poolServiceConfig = pool.configuration
+        let poolPoolConfig = pool.userPoolConfiguration
+        
         pool.clearAll()  // just while testing; need to save last authentication method in UserDefaults and retry silent login with valid token
         pool.delegate = self
         
