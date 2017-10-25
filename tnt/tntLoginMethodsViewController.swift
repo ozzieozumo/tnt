@@ -48,14 +48,15 @@ class tntLoginMethodsViewController: UIViewController {
                 } else {
                     
                     // Now that we have the FBToken (in this thread), proceed to setup the Cognito Service
-                    tntLoginManager.shared.CognitoLogin()
+                    tntLoginManager.shared.completeLoginWithFB {
                     
-                    // TODO: since we are logged in now, we should re-run anything that was skipped/failed in startup, e.g. loadCache
-                    
-                    DispatchQueue.main.async {
+                        // TODO: since we are logged in now, we should re-run anything that was skipped/failed in startup, e.g. loadCache
                         
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.setInitialVC()
+                        DispatchQueue.main.async {
+                            
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.setInitialVC()
+                        }
                     }
                 }
             }
@@ -74,14 +75,17 @@ class tntLoginMethodsViewController: UIViewController {
         
         let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         let user = pool.currentUser()
-        var response: AWSCognitoIdentityUserGetDetailsResponse?
         
         user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
-            DispatchQueue.main.async(execute: {
-                response = task.result
-                self.title = user?.username  // realistically would segue to home view controller
-                
-            })
+            if let error = task.error as NSError? {
+                print("TNT Login Methods VC, failed user.getDetails. Error: \(error)")
+            } else {
+                // theoretically, we should should be logged in with a Cognito ID now
+                DispatchQueue.main.async {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.setInitialVC()
+                }
+            }
             return nil
         }
         

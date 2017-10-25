@@ -35,15 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Try to login using saved Facebook token and Cognito.  This will also init the AWS Cognito configuration
         
-        // tntLoginManager.shared.loginWithSavedCredentials()
+        tntLoginManager.shared.attemptSilentLogin()
         
         // Init the local data manager, loading available athletes from core data
         
         tntLocalDataManager.shared.loadLocalData()
         
         // Choose the starting VC based on login status, saved athletes etc
-        
-        setupUserPool()  // move this to tntLoginManager
         
         setInitialVC()
         
@@ -199,16 +197,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // MARK:- AWSCognitoIdentityInteractiveAuthenticationDelegate protocol delegate
-// TODO: It woud seem better to put this in the LoginManager singleton, rather than AppDelegate
+
 extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
         
         guard let navController = self.window?.rootViewController as! UINavigationController? else {
             print("TNT startPasswordAuthentication: no navigation controller, returning unloaded controller")
-            return tntUserPoolLoginViewController()
+            return tntUserPoolLoginViewController() // forced to return something
         }
-
+        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         signInViewController = (storyboard.instantiateViewController(withIdentifier: "tntUserPoolLogin") as! tntUserPoolLoginViewController)
         
@@ -218,41 +216,6 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         
         return self.signInViewController!
     }
-    
-    func setupUserPool() {
-        // Warn user if configuration not updated
-        if (Constants.CognitoIdentityUserPoolId == "YOUR_USER_POOL_ID") {
-            let alertController = UIAlertController(title: "Invalid Configuration",
-                                                    message: "Please configure user pool constants in Constants.swift file.",
-                                                    preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            
-            self.window?.rootViewController!.present(alertController, animated: true, completion:  nil)
-        }
-        
-        // setup logging
-        AWSLogger.default().logLevel = .verbose
-        
-        
-        let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: nil)
-        
-        // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: Constants.CognitoIdentityUserPoolId)
-        
-        // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-        
-        // fetch the user pool client we initialized in above step
-        let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-        
-        let poolServiceConfig = pool.configuration
-        let poolPoolConfig = pool.userPoolConfiguration
-        
-        pool.clearAll()  // just while testing; need to save last authentication method in UserDefaults and retry silent login with valid token
-        pool.delegate = self
-        
-    }
 }
+
+
