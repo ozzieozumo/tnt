@@ -266,12 +266,15 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ekg-na-dXy">
                                                 <rect key="frame" x="20" y="53.5" width="120" height="120"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FIg-Tr-Tn8">
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile" translatesAutoresizingMaskIntoConstraints="NO" id="FIg-Tr-Tn8">
                                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="120" id="9kb-HH-Ehj"/>
                                                             <constraint firstAttribute="width" constant="120" id="g6Q-ch-Mkm"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="sUi-vv-Aeu" appends="YES" id="VtA-z3-4uK"/>
+                                                        </connections>
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
@@ -390,10 +393,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0A-IS-mnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="sUi-vv-Aeu">
+                    <connections>
+                        <action selector="profileImageTapped:" destination="HYE-de-JUC" id="6Fu-W7-ktX"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1388" y="-500.59970014992507"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default_profile" width="300" height="300"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vpi-DZ-Pvu"/>
     </inferredMetricsTieBreakers>

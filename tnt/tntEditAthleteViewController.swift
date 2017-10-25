@@ -8,6 +8,11 @@
 
 import UIKit
 import CoreData
+import Photos
+import MobileCoreServices
+import AWSS3
+import AVKit
+import AVFoundation
 
 class tntEditAthleteViewController: UIViewController {
     
@@ -54,6 +59,9 @@ class tntEditAthleteViewController: UIViewController {
                 
                 let img = UIImage(data: imgData)
                 profileImage.image = img
+            } else {
+                // image data not in core data, try to get it from URL
+                
             }
             firstName.text = existingAthlete.firstName ?? ""
             lastName.text = existingAthlete.lastName   ?? ""
@@ -64,6 +72,10 @@ class tntEditAthleteViewController: UIViewController {
     }
     
     func displayDefaultData() {
+        
+        // show the placeholder for the user profile image
+        
+        profileImage.image = #imageLiteral(resourceName: "default_profile")
         
     }
     
@@ -172,5 +184,71 @@ class tntEditAthleteViewController: UIViewController {
         
     }
     
+    func showProfilePicker()  {
+        
+        let uipc = UIImagePickerController()
+        uipc.delegate = self
+        
+        if !UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alertMessageOk(title: "Error", message: "The Photo Library is not available")
+        }
+        
+        uipc.sourceType = .photoLibrary
+        
+        let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)
+        
+        if !(mediaTypes?.contains(kUTTypeMovie as String))! {
+            alertMessageOk(title: "Error", message: "Movie media type is not supported")
+        }
+        uipc.mediaTypes = [kUTTypeImage as String]
+        uipc.modalPresentationStyle = .overCurrentContext
+        
+        self.present(uipc, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func profileImageTapped(_ sender: Any) {
+        
+        print("Profile Image was tapped")
+        
+        //immediately turn of user interaction so that we don't get multiple taps
+        
+        profileImage.isUserInteractionEnabled = false
+        
+        showProfilePicker()
+        
+    }
+    
 
+}
+
+extension tntEditAthleteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        var preferredImage: UIImage?
+        
+        let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage
+        let originalImage  = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        preferredImage = (editedImage != nil) ? editedImage : originalImage
+        
+        if preferredImage != nil {
+            profileImage.image = preferredImage
+            profileImage.isUserInteractionEnabled = true
+            
+        } else {
+            print("TNT: profile image picker coujld not determine chosen image")
+        }
+        
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        // don't change the displayed profile image, just dismiss the picker
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
