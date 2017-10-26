@@ -114,25 +114,103 @@ class tntSynchManager {
         
         if let athleteMO = tntLocalDataManager.shared.athletes[athleteId] {
             
-            let athleteDB = tntAthlete(athleteMO: athleteMO)
+            saveAthleteImage(athleteMO: athleteMO) { (result: URL?) in
             
-            let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+                let athleteDB = tntAthlete(athleteMO: athleteMO)
+                athleteDB.profileImageURL = result?.absoluteString
+                
+                let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+                
+                dynamoDBObjectMapper.save(athleteDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+                    if let error = task.error as NSError? {
+                        print("TNT synch manager, failed saving athlete object. Error: \(error)")
+                        return nil
+                    } else {
+                        print("TNT synch manager saved athlete item")
+                        
+                        // clear cloudSavePending flag
+                        
+                        return nil
+                    }
+                })
+            }
             
-            dynamoDBObjectMapper.save(athleteDB).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
-                if let error = task.error as NSError? {
-                    print("TNT synch manager, failed saving athlete object. Error: \(error)")
-                    return nil
-                } else {
-                    print("TNT synch manager saved athlete item")
-                    
-                    // clear cloudSavePending flag
-                    
-                    return nil
-                }
-            })
         }
         
     }
+    
+    
+    func saveAthleteImage(athleteMO: Athlete, success: @escaping (_ result: URL?) -> Void) {
+        
+        // saves the current profile image from Coredata to S3
+        // returns via completion handler either the URL of the saved image or an error code on failure
+        
+        guard let imgData = athleteMO.profileImage else {
+            print("TNT Athlete: save image called but profile image data is nil")
+            success(nil)
+            return
+        }
+        
+        do {
+            try FileManager.default.createDirectory(
+                at: NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload")!,
+                withIntermediateDirectories: true,
+                attributes: nil)
+        } catch {
+            print("Creating 'upload' directory failed. Error: \(error)")
+        }
+        
+        let filename = athleteMO.id! + ".png"
+        
+        let localFileURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload")?.appendingPathComponent(filename)
+        
+        do {
+            try imgData.write(to: localFileURL!, options: [.atomic])
+        } catch {
+            print("TNT error creating local file for profile image upload \(error)")
+            return
+        }
+        
+        // local file is ready, now upload to S3
+        
+        let transferManager = AWSS3TransferManager.default()
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        
+        uploadRequest!.bucket = "ozzieozumo.tnt"
+        uploadRequest!.key = "profiles/" + filename
+        uploadRequest!.body = localFileURL!
+        
+        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject! in
+            if let error: NSError = task.error as NSError? {
+                if error.domain == AWSS3TransferManagerErrorDomain as String {
+                    if let errorCode = AWSS3TransferManagerErrorType(rawValue: error.code) {
+                        switch (errorCode) {
+                        case .cancelled, .paused:
+                            // update UI on main queue
+                            break;
+                            
+                        default:
+                            print("upload() failed: [\(error)]")
+                            break;
+                        }
+                    } else {
+                        print("upload() failed: [\(error)]")
+                    }
+                } else {
+                    print("upload() failed: [\(error)]")
+                }
+            } else {
+                
+                // Succesful Upload
+                
+                let remoteURL = URL(string: "https://s3.amazonaws.com/" + uploadRequest!.bucket! + "/profiles/" + filename)
+                success(remoteURL)
+            }
+            return task
+        }
+        
+    }
+    
     
 
 

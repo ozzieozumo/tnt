@@ -21,18 +21,15 @@ class tntEditAthleteViewController: UIViewController {
     
     var athlete: Athlete?
     
-    var profileImgDataAtLoad : NSData?
-    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var dobPicker: UIDatePicker!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        
-        saveInitialData()
         displayAthleteData()
         
     }
@@ -52,11 +49,6 @@ class tntEditAthleteViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    func saveInitialData () {
-        
-        profileImgDataAtLoad = athlete?.profileImage
-    }
     
     func displayAthleteData() {
         
@@ -122,24 +114,23 @@ class tntEditAthleteViewController: UIViewController {
         }
         if let pimg = self.profileImage?.image {
             athleteToSave.profileImage = UIImagePNGRepresentation(pimg) as NSData?
-            
-            // TODO: check to see if the image data has actually changed, and only save to to S3 if it has changed
-            
-            athleteToSave.backgroundSaveImage { (url) in print("TNT background image save success \(url)")}
         }
         
         athleteToSave.firstName = firstName.text
         athleteToSave.lastName = lastName.text
         athleteToSave.dob = dobPicker.date as NSDate
         
-        if isNameLocalDuplicate(athlete: athleteToSave) {
-            
-            // show alert and return
-            let alertC = UIAlertController(title: "Duplicate Name", message: "Name is already taken.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertC.addAction(defaultAction)
-            self.present(alertC, animated: true, completion: nil)
-            return
+        // check for duplicate names
+        if athlete == nil {
+            if isNameLocalDuplicate(athlete: athleteToSave) {
+                
+                // show alert and return
+                let alertC = UIAlertController(title: "Duplicate Name", message: "Name is already taken.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertC.addAction(defaultAction)
+                self.present(alertC, animated: true, completion: nil)
+                return
+            }
         }
         
         do {
@@ -175,14 +166,17 @@ class tntEditAthleteViewController: UIViewController {
             // This object, associated with the parent context, can be inserted into the LocalDataManager
             
             tntLocalDataManager.shared.athletes[newAthlete.id!] = newAthlete
-            tntSynchManager.shared.saveAthlete(athleteId: newAthlete.id!)
             
             let defaults = UserDefaults.standard
             defaults.setValue(newAthlete.id!, forKey: "tntSelectedAthleteId")
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.setInitialVC()
         }
+        // Whether new or existing ahtlete, start background cloud save and show home screen
+        
+        tntSynchManager.shared.saveAthlete(athleteId: athleteToSave.id!)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setInitialVC()
         
     }
     
