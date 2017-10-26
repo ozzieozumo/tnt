@@ -21,6 +21,8 @@ class tntEditAthleteViewController: UIViewController {
     
     var athlete: Athlete?
     
+    var profileImgDataAtLoad : NSData?
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
@@ -29,6 +31,8 @@ class tntEditAthleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        saveInitialData()
         displayAthleteData()
         
     }
@@ -48,6 +52,11 @@ class tntEditAthleteViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func saveInitialData () {
+        
+        profileImgDataAtLoad = athlete?.profileImage
+    }
     
     func displayAthleteData() {
         
@@ -110,6 +119,13 @@ class tntEditAthleteViewController: UIViewController {
                 return
             }
         
+        }
+        if let pimg = self.profileImage?.image {
+            athleteToSave.profileImage = UIImagePNGRepresentation(pimg) as NSData?
+            
+            // TODO: check to see if the image data has actually changed, and only save to to S3 if it has changed
+            
+            athleteToSave.backgroundSaveImage { (url) in print("TNT background image save success \(url)")}
         }
         
         athleteToSave.firstName = firstName.text
