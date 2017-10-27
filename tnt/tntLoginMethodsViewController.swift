@@ -14,14 +14,17 @@ class tntLoginMethodsViewController: UIViewController {
     
     var fbLoginManager = FBSDKLoginManager()
 
+    @IBOutlet var loginFacebook: UIButton!
+    @IBOutlet var loginUserPool: UIButton!
     @IBOutlet var logoutFacebook: UIButton!
     @IBOutlet var logoutUserPool: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        setButtons()    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setButtons()
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,10 +89,7 @@ class tntLoginMethodsViewController: UIViewController {
             if let error = task.error as NSError? {
                 print("TNT Login Methods VC, failed user.getDetails. Error: \(error)")
             } else {
-                // At this point, the Cognito User Pools login is complete
-                // We should have a current user on the pool and a valid token in pool.logins
-                
-                // Now setup the credential provider and get a federated ID.
+                // User Pool Login is complete, setup credential provider and get federated ID
                 
                 tntLoginManager.shared.completeLoginWithUserPool {
                     print("Login Methods VC: user pool login complete")
@@ -108,7 +108,8 @@ class tntLoginMethodsViewController: UIViewController {
     // MARK: - Button Actions
     
     func setButtons() {
-        
+        loginFacebook.isEnabled = !tntLoginManager.shared.loggedIn
+        loginUserPool.isEnabled = !tntLoginManager.shared.loggedIn
         logoutFacebook.isEnabled = tntLoginManager.shared.isLoggedInFB()
         logoutUserPool.isEnabled = tntLoginManager.shared.isLoggedInUserPool()
     }
@@ -124,6 +125,7 @@ class tntLoginMethodsViewController: UIViewController {
         if tntLoginManager.shared.isLoggedInFB() {
             tntLoginManager.shared.fbLogout()
             tntLocalDataManager.shared.clearTNTObjects()
+            setButtons()
         }
     }
     
@@ -139,6 +141,7 @@ class tntLoginMethodsViewController: UIViewController {
         if tntLoginManager.shared.isLoggedInUserPool() {
             tntLoginManager.shared.userPoolLogout()
             tntLocalDataManager.shared.clearTNTObjects()
+            setButtons()
         }
         
     }

@@ -77,6 +77,8 @@
                         <viewLayoutGuide key="safeArea" id="LEp-C9-HjU"/>
                     </view>
                     <connections>
+                        <outlet property="loginFacebook" destination="qKq-BD-XRz" id="M6h-9K-uTi"/>
+                        <outlet property="loginUserPool" destination="IkH-Fy-xQy" id="duu-45-er0"/>
                         <outlet property="logoutFacebook" destination="uww-GW-YT0" id="Jrg-K8-J7g"/>
                         <outlet property="logoutUserPool" destination="O8e-w1-wQZ" id="n8Y-bs-aXr"/>
                     </connections>

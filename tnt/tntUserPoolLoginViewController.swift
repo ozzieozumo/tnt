@@ -68,8 +68,9 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
             }
         } else { // Authentication successful
             print("TNT User Pool Login VC: successful login")
-            tntLoginManager.shared.printPoolInfo()
-            // IMPORTANT: don't try to call completeLogin() here, because currentUser etc is not set yet on the pool
+            // IMPORTANT: at this point, the user pool login is not complete
+            //    e.g. the current user is not set and the logins are not set
+            // The pool is not setup completely until the success handler for getDetails
         }
     }
 }

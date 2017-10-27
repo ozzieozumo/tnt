@@ -33,25 +33,6 @@ class tntSynchManager {
                 
     }
 
-    func anyDynamoCall(success: @escaping () -> Void) {
-        
-        // make some random call to Dynamo DB
-        // for use during User Pool token exchange for Cognito
-        // otherwise getIdentityId never returns
-        
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
-        
-        dynamoDBObjectMapper.load(tntAthlete.self, hashKey: "1", rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
-            if let error = task.error as NSError? {
-                print("The request failed. Error: \(error)")
-            } else {
-                print("The request succeeded")
-                success()
-            }
-            return nil
-        })
-    }
-
     func loadAthletes() {
         
         // TODO - this should be converted to a func that takes an athleteId and loads from Dynamo one at a time

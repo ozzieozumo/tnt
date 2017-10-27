@@ -186,7 +186,7 @@ class tntLoginManager {
         }
         
         // setup logging
-        AWSLogger.default().logLevel = .verbose
+        // AWSLogger.default().logLevel = .verbose
         
         let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: nil)
         
@@ -270,12 +270,8 @@ class tntLoginManager {
     }
     
     func completeLoginWithUserPool(success: @escaping ()->Void) {
-        
-    // TODO: add completion handler to this function, chain tasks together
     // convert a logged in user pool into a credential for use with AWS services
-        
-        // get the Cognito user pool
-        // let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+    // this should be called on successful completion of getDetails()
         
         let pool = self.userPool
         
@@ -286,37 +282,26 @@ class tntLoginManager {
         let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
                     
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // is it necessary to re-register the pool with the default service config?
-        
-        // AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: pool.userPoolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
                     
         print("tntLoginManager:  service manager initialized")
         print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
         
-        // if everything is honky dory, we should be able to access Dynamo DB.  If not, this will crash pretty fast.
-        // This seems to make all the difference -- i.e. calling this before getIdentityId.  Don't know why
-        
-        // do something with Dynamo to force token exchange for credential (and id)
-        
-        tntSynchManager.shared.anyDynamoCall() {
-        
-            self.credentialsProvider?.getIdentityId().continueWith { task in
-                
-                     if let error = task.error as NSError? {
-                         print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
-                     } else {
-                         self.cognitoId  = self.credentialsProvider?.identityId
-                         print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
-                        
-                         //let defaults = UserDefaults.standard
-                         //defaults.set(self.LOGIN_EMAIL, forKey: self.LASTLOGIN_KEY )
-                         success()
-                     }
-                     return nil
-             }
-        }
+        self.credentialsProvider?.getIdentityId().continueWith { task in
+            
+                 if let error = task.error as NSError? {
+                     print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
+                 } else {
+                     self.cognitoId  = self.credentialsProvider?.identityId
+                     print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
+                    
+                     let defaults = UserDefaults.standard
+                     defaults.set(self.LOGIN_EMAIL, forKey: self.LASTLOGIN_KEY )
+                     success()
+                 }
+                 return nil
+         }
     }
+    
 }
 
 
