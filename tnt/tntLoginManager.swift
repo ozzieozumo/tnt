@@ -219,7 +219,9 @@ class tntLoginManager {
         if let user = userPool?.currentUser() {
         
             if user.isSignedIn {
-                completeLoginWithUserPool()
+                completeLoginWithUserPool() {
+                    // should do something here .. more chaining
+                }
             } else {
                 print("tntLogin Manager - cannot resume user pool session. (probably expired token)")
                 return
@@ -245,12 +247,39 @@ class tntLoginManager {
         }
     }
     
-    func completeLoginWithUserPool() {
+    func printPoolInfo() {
+        if let pool = self.userPool {
+            print("TNT Login Manager: pool is not nil")
+            
+            if let user = pool.currentUser() {
+                print("pool has a current user \(user.username ?? "name is nil")")
+            } else {
+                print("pool had a nil current user")
+            }
+            pool.logins().continueOnSuccessWith {
+                (task) in
+                
+                if let loginsDict = task.result {
+                    print("TNT Login Manager: user pool has \(loginsDict.count) logins")
+                }
+                return nil
+            }
+        } else {
+            print("Pool was nil on Login Manager")
+        }
+    }
+    
+    func completeLoginWithUserPool(success: @escaping ()->Void) {
+        
+    // TODO: add completion handler to this function, chain tasks together
     // convert a logged in user pool into a credential for use with AWS services
         
         // get the Cognito user pool
+        // let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         
-        let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        let pool = self.userPool
+        
+        printPoolInfo()
         
         self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: pool)
                     
@@ -268,21 +297,25 @@ class tntLoginManager {
         // if everything is honky dory, we should be able to access Dynamo DB.  If not, this will crash pretty fast.
         // This seems to make all the difference -- i.e. calling this before getIdentityId.  Don't know why
         
-        tntSynchManager.shared.anyDynamoCall()  // do something with Dynamo to force token exchange for credential (and id)
-                    
-        self.credentialsProvider?.getIdentityId().continueWith { task in
-                     
-                 if let error = task.error as NSError? {
-                     print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
-                 } else {
-                     self.cognitoId  = self.credentialsProvider?.identityId
-                     print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
-                    
-                     let defaults = UserDefaults.standard
-                     defaults.set(self.LOGIN_EMAIL, forKey: self.LASTLOGIN_KEY )
-                 }
-                 return nil
-         }
+        // do something with Dynamo to force token exchange for credential (and id)
+        
+        tntSynchManager.shared.anyDynamoCall() {
+        
+            self.credentialsProvider?.getIdentityId().continueWith { task in
+                
+                     if let error = task.error as NSError? {
+                         print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
+                     } else {
+                         self.cognitoId  = self.credentialsProvider?.identityId
+                         print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
+                        
+                         //let defaults = UserDefaults.standard
+                         //defaults.set(self.LOGIN_EMAIL, forKey: self.LASTLOGIN_KEY )
+                         success()
+                     }
+                     return nil
+             }
+        }
     }
 }
 

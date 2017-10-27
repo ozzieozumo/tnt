@@ -33,7 +33,7 @@ class tntSynchManager {
                 
     }
 
-    func anyDynamoCall() {
+    func anyDynamoCall(success: @escaping () -> Void) {
         
         // make some random call to Dynamo DB
         // for use during User Pool token exchange for Cognito
@@ -46,6 +46,7 @@ class tntSynchManager {
                 print("The request failed. Error: \(error)")
             } else {
                 print("The request succeeded")
+                success()
             }
             return nil
         })

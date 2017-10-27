@@ -41,7 +41,6 @@ class tntLocalDataManager {
     
     func loadLocalData() {
         
-        fetchAllAthletes()  
         fetchMeets()
     }
     

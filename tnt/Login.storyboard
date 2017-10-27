@@ -18,40 +18,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKq-BD-XRz">
-                                <rect key="frame" x="127" y="268" width="108" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKq-BD-XRz">
+                                <rect key="frame" x="133.5" y="268" width="108" height="30"/>
                                 <state key="normal" title="Facebook Login"/>
                                 <connections>
                                     <action selector="fbLoginTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="LYv-7h-w78"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login using one of these methods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-C1-Mid">
-                                <rect key="frame" x="61" y="168" width="277" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login using one of these methods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-C1-Mid">
+                                <rect key="frame" x="58" y="168" width="259.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TNT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peF-iA-0Lm">
-                                <rect key="frame" x="152" y="66" width="52" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peF-iA-0Lm">
+                                <rect key="frame" x="161.5" y="66" width="52" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkH-Fy-xQy">
-                                <rect key="frame" x="109" y="318" width="144" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkH-Fy-xQy">
+                                <rect key="frame" x="115.5" y="318" width="144" height="30"/>
                                 <state key="normal" title="Email or Phone Login"/>
                                 <connections>
                                     <action selector="userPoolLoginTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="LKS-dz-X1T"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8e-w1-wQZ">
+                                <rect key="frame" x="296" y="317" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="userPoolLogoutTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="LJn-Rf-pts"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uww-GW-YT0">
+                                <rect key="frame" x="296" y="268" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="fbLogoutTapped:" destination="44M-Y9-2IL" eventType="touchUpInside" id="ugJ-wG-qdJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IkH-Fy-xQy" firstAttribute="centerX" secondItem="WcT-e5-FYb" secondAttribute="centerX" id="0oK-3o-7bw"/>
+                            <constraint firstItem="uww-GW-YT0" firstAttribute="bottom" secondItem="qKq-BD-XRz" secondAttribute="bottom" id="FxX-G8-RVr"/>
+                            <constraint firstItem="4zS-C1-Mid" firstAttribute="centerX" secondItem="WcT-e5-FYb" secondAttribute="centerX" id="GCJ-dY-PYy"/>
+                            <constraint firstItem="4zS-C1-Mid" firstAttribute="top" secondItem="peF-iA-0Lm" secondAttribute="bottom" constant="69" id="HAT-VJ-sui"/>
+                            <constraint firstItem="IkH-Fy-xQy" firstAttribute="top" secondItem="qKq-BD-XRz" secondAttribute="bottom" constant="20" id="SHs-dl-E2x"/>
+                            <constraint firstItem="O8e-w1-wQZ" firstAttribute="leading" secondItem="uww-GW-YT0" secondAttribute="leading" id="U89-vs-EeP"/>
+                            <constraint firstItem="O8e-w1-wQZ" firstAttribute="bottom" secondItem="IkH-Fy-xQy" secondAttribute="bottom" constant="-1" id="eRT-1O-v4P"/>
+                            <constraint firstItem="peF-iA-0Lm" firstAttribute="top" secondItem="LEp-C9-HjU" secondAttribute="top" constant="46" id="fPd-LG-bMF"/>
+                            <constraint firstItem="peF-iA-0Lm" firstAttribute="centerX" secondItem="WcT-e5-FYb" secondAttribute="centerX" id="hqS-Er-VQW"/>
+                            <constraint firstItem="qKq-BD-XRz" firstAttribute="centerX" secondItem="WcT-e5-FYb" secondAttribute="centerX" id="icQ-EC-PTk"/>
+                            <constraint firstItem="LEp-C9-HjU" firstAttribute="trailing" secondItem="uww-GW-YT0" secondAttribute="trailing" constant="31" id="nx9-Wx-c8F"/>
+                            <constraint firstItem="qKq-BD-XRz" firstAttribute="top" secondItem="4zS-C1-Mid" secondAttribute="bottom" constant="79" id="sUW-qT-gaR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LEp-C9-HjU"/>
                     </view>
+                    <connections>
+                        <outlet property="logoutFacebook" destination="uww-GW-YT0" id="Jrg-K8-J7g"/>
+                        <outlet property="logoutUserPool" destination="O8e-w1-wQZ" id="n8Y-bs-aXr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jt5-3b-zhI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

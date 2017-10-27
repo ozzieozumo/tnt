@@ -14,16 +14,22 @@ class tntLoginMethodsViewController: UIViewController {
     
     var fbLoginManager = FBSDKLoginManager()
 
+    @IBOutlet var logoutFacebook: UIButton!
+    @IBOutlet var logoutUserPool: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        setButtons()    
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     func FBLogin() {
         
@@ -80,30 +86,61 @@ class tntLoginMethodsViewController: UIViewController {
             if let error = task.error as NSError? {
                 print("TNT Login Methods VC, failed user.getDetails. Error: \(error)")
             } else {
-                // theoretically, we should should be logged in with a Cognito ID now
-                DispatchQueue.main.async {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.setInitialVC()
+                // At this point, the Cognito User Pools login is complete
+                // We should have a current user on the pool and a valid token in pool.logins
+                
+                // Now setup the credential provider and get a federated ID.
+                
+                tntLoginManager.shared.completeLoginWithUserPool {
+                    print("Login Methods VC: user pool login complete")
+                    print("Federated Cognito ID is:  \(tntLoginManager.shared.cognitoId ?? "nil")")
+                
+                    DispatchQueue.main.async {
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.setInitialVC()
+                    }
                 }
             }
             return nil
         }
         
-        
     }
     // MARK: - Button Actions
     
+    func setButtons() {
+        
+        logoutFacebook.isEnabled = tntLoginManager.shared.isLoggedInFB()
+        logoutUserPool.isEnabled = tntLoginManager.shared.isLoggedInUserPool()
+    }
+    
     @IBAction func fbLoginTapped(_ sender: Any) {
         
-        
         FBLogin()
+    }
+    
+    
+    @IBAction func fbLogoutTapped(_ sender: Any) {
         
+        if tntLoginManager.shared.isLoggedInFB() {
+            tntLoginManager.shared.fbLogout()
+            tntLocalDataManager.shared.clearTNTObjects()
+        }
     }
     
     
     @IBAction func userPoolLoginTapped(_ sender: Any) {
         
         userPoolLogin()
+    }
+    
+    
+    @IBAction func userPoolLogoutTapped(_ sender: Any) {
+        
+        if tntLoginManager.shared.isLoggedInUserPool() {
+            tntLoginManager.shared.userPoolLogout()
+            tntLocalDataManager.shared.clearTNTObjects()
+        }
+        
     }
     
     /*

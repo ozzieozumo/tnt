@@ -55,8 +55,9 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
     }
     
     public func didCompleteStepWithError(_ error: Error?) {
-        DispatchQueue.main.async {
-            if let error = error as NSError? {
+        
+        if let error = error as NSError? {
+            DispatchQueue.main.async {
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                         message: error.userInfo["message"] as? String,
                                                         preferredStyle: .alert)
@@ -64,15 +65,11 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
                 alertController.addAction(retryAction)
                 
                 self.present(alertController, animated: true, completion:  nil)
-            } else { // Authentication successful
-                
-                // obtain an AWS credential and reset AWS ready to use Dynamo and other services
-                
-                tntLoginManager.shared.completeLoginWithUserPool()
-                
-                self.loginEmail.text = nil
-                self.navigationController?.popViewController(animated: true)
             }
+        } else { // Authentication successful
+            print("TNT User Pool Login VC: successful login")
+            tntLoginManager.shared.printPoolInfo()
+            // IMPORTANT: don't try to call completeLogin() here, because currentUser etc is not set yet on the pool
         }
     }
 }
