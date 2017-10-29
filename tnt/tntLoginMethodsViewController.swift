@@ -25,6 +25,12 @@ class tntLoginMethodsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setButtons()
+        
+        // if nobody is logged in (by any method), enable interactive login for the user pool
+        
+        if !tntLoginManager.shared.loggedIn {
+            tntLoginManager.shared.enableInteractiveUserPoolLogin()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,10 +42,6 @@ class tntLoginMethodsViewController: UIViewController {
     
     func FBLogin() {
         
-        // TODO - should probably move this func to the login manager, allowing login from any VC
-        
-        // Note: don't try to make the fbLoginManager a local variable of this function, it should either be a property
-        // of the VC invoking the login or a property of the LoginManager singleton
         
         fbLoginManager.logIn(withReadPermissions: ["public_profile"], from: self) {
             (result, error) -> Void in
@@ -91,7 +93,7 @@ class tntLoginMethodsViewController: UIViewController {
             } else {
                 // User Pool Login is complete, setup credential provider and get federated ID
                 
-                tntLoginManager.shared.completeLoginWithUserPool {
+                tntLoginManager.shared.completeLoginWithUserPool { (success: Bool) in
                     print("Login Methods VC: user pool login complete")
                     print("Federated Cognito ID is:  \(tntLoginManager.shared.cognitoId ?? "nil")")
                 

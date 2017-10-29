@@ -42,6 +42,7 @@ class tntLocalDataManager {
     func loadLocalData() {
         
         fetchMeets()
+        fetchAllAthletes()
     }
     
     func clearTNTObjects () {
@@ -106,14 +107,30 @@ class tntLocalDataManager {
     
     func fetchAllAthletes() {
         
+        // fetches athletes from CoreData into the LocalDataManager cache
+        // the cognitoId (creator) of each athlete is matched to the current logged in user (in the future this might change to a team-based rule)
+        // athletes that don't match the current user are deleted from coredata
+        
+        guard tntLoginManager.shared.loggedIn else {
+            return
+        }
+        
+        let owningUserId = tntLoginManager.shared.cognitoId
+        
         let request: NSFetchRequest<Athlete> = Athlete.fetchRequest()
         
         do {
             let athleteArray = try moc!.fetch(request)
             
             for athlete in athleteArray {
-                athletes[athlete.id!] = athlete
-                print("TNT Local Data Manager fetched athlete \(athlete.id!) in fetch ALL")
+                
+                if athlete.cognitoId == owningUserId {
+                    athletes[athlete.id!] = athlete
+                    print("TNT Local Data Manager fetched athlete \(athlete.id!) in fetch ALL")
+                } else {
+                    // clean up by deleting any core data athletes that don't match the logged in Id
+                    deleteAthlete(athlete: athlete)
+                }
             }
             
         } catch {

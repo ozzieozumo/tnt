@@ -27,6 +27,8 @@ class tntLoginManager {
     
     static let shared = tntLoginManager()
     
+    let resumeTimeoutSeconds = 3
+    
     // Login Providers / Methods (could use actual provider strings instead? )
     let LASTLOGIN_KEY = "tntLastLoginMethod"
     let LOGIN_FB = "Facebook"
@@ -43,6 +45,7 @@ class tntLoginManager {
     
     // Cognito (User Pool)
     var userPool: AWSCognitoIdentityUserPool? = nil
+    var userPoolDefaultDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate? = nil;  // save this after pool creation but before assigning our delegate
     
     
     private init() {
@@ -61,25 +64,20 @@ class tntLoginManager {
         
         // Try to automatically login using the last known login method
         
+        print("TNT Login Manager - starting silent login")
         let defaults = UserDefaults.standard
         let lastLoginMethod = defaults.string(forKey: LASTLOGIN_KEY) ?? "UNRECOGNIZED"
+        
         switch lastLoginMethod {
-                case LOGIN_FB: resumeFBLogin()
-                case LOGIN_EMAIL: resumeUserPoolLogin ()
-                default: print("TNT Login Manager: unrecognized last login method (probably first time use)")
+            case LOGIN_FB: resumeFBLogin()
+            case LOGIN_EMAIL: resumeUserPoolLogin()
+            
+            default: print("TNT Login Manager: unrecognized last login method (treat as first time use)")
         }
         
-        
-        // after attempting silent login, enable interactive login for user pools
-        
-        enableInteractiveUserPoolLogin()
-        
-        // if not resuming a prior user pools session, clear out keychain for the user pool (just in case)
-        if lastLoginMethod != LOGIN_EMAIL {
-            userPool?.clearAll()
-        }
-        
+        print("TNT Login Manager - done with silent login")
     }
+    
     // MARK: Facebook
     
     func isLoggedInFB() -> Bool {
@@ -99,7 +97,16 @@ class tntLoginManager {
         if self.fbToken != nil {
             // TODO:  check expiration date of token?  (FB tokens are long lived, but still ... )
             print("tntLogin Manager - attempting silent login with FB token")
-            self.completeLoginWithFB(handler: nil)
+            
+            let waitGroup = DispatchGroup()
+            waitGroup.enter()
+            self.completeLoginWithFB {
+                waitGroup.leave()
+            }
+            let waitResult = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
+            if waitResult == .timedOut {
+                print("TNT Login Manager - timed out waiting to complete FB login")
+            }
             
         } else {
             // 2. No access token, so just leave fbToken as nil (wait for interactive login)
@@ -175,6 +182,8 @@ class tntLoginManager {
     }
     
     func userPoolLogout() {
+        
+        disableInteractiveUserPoolLogin()
         userPool?.clearAll()
         cognitoId = nil
     }
@@ -204,6 +213,11 @@ class tntLoginManager {
         
         self.userPool = pool
         
+        // save the default delegate but do not turn on interactive authentication yet
+        self.userPoolDefaultDelegate = pool.delegate
+        
+        printPoolInfo()
+        
     }
     
     func resumeUserPoolLogin() {
@@ -215,16 +229,26 @@ class tntLoginManager {
         setupUserPool()
         
         // check for logged in state in the user pool
+        // note that the completion handler is always called, whether for success or failure
+        // TODO: consider using the AWSTask structure for this function
         
         if let user = userPool?.currentUser() {
         
             if user.isSignedIn {
-                completeLoginWithUserPool() {
-                    // should do something here .. more chaining
+                let waitGroup = DispatchGroup ()
+                waitGroup.enter()
+                completeLoginWithUserPool() { (success: Bool) in
+                    // after resuming, enable the interactive delegate to handle session expiration etc
+                    self.enableInteractiveUserPoolLogin()
+                    waitGroup.leave()
                 }
+                let waitResults = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
+                if waitResults == .timedOut {
+                    print("TNT Login Manager - timed out waiting to complete user poo login")
+                }
+                
             } else {
                 print("tntLogin Manager - cannot resume user pool session. (probably expired token)")
-                return
             }
         } else {
                print("tntLogin Manager - cannot resume.  pool has no current user")
@@ -239,12 +263,21 @@ class tntLoginManager {
             setupUserPool()
         }
         
-        // if its not seat already, set the delegate to allow interactive UI authentication
+        // set the pool's interactive auth delegate to the AppDelegate
         
-        if userPool?.delegate == nil {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            userPool?.delegate = appDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        userPool?.delegate = appDelegate
+    }
+    
+    func disableInteractiveUserPoolLogin() {
+        
+        // set the interactive auth delegate back to the default value from pool setup
+        
+        guard let defaultDelegate = userPoolDefaultDelegate else {
+            print("TNT Login Manager:  disable interactive user pool login called but no default delegate saved")
+            return
         }
+        userPool?.delegate = defaultDelegate
     }
     
     func printPoolInfo() {
@@ -269,7 +302,7 @@ class tntLoginManager {
         }
     }
     
-    func completeLoginWithUserPool(success: @escaping ()->Void) {
+    func completeLoginWithUserPool(completion: @escaping (_ success: Bool)->Void) {
     // convert a logged in user pool into a credential for use with AWS services
     // this should be called on successful completion of getDetails()
         
@@ -290,13 +323,16 @@ class tntLoginManager {
             
                  if let error = task.error as NSError? {
                      print("TNT Login Manager, failed getting IdentityId for User Pool login. Error: \(error)")
+                    completion(false)
+                    
                  } else {
                      self.cognitoId  = self.credentialsProvider?.identityId
                      print("tntLoginManager: setting Cognito ID via user pool \(self.cognitoId ?? "Default")")
                     
                      let defaults = UserDefaults.standard
                      defaults.set(self.LOGIN_EMAIL, forKey: self.LASTLOGIN_KEY )
-                     success()
+                    
+                     completion(true)
                  }
                  return nil
          }
