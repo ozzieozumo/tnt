@@ -59,7 +59,7 @@ class tntLoginMethodsViewController: UIViewController {
                 } else {
                     
                     // Now that we have the FBToken (in this thread), proceed to setup the Cognito Service
-                    tntLoginManager.shared.completeLoginWithFB {
+                    tntLoginManager.shared.completeLoginWithFB(clearKeys: true) {
                     
                         // TODO: since we are logged in now, we should re-run anything that was skipped/failed in startup, e.g. loadCache
                         
@@ -83,24 +83,33 @@ class tntLoginMethodsViewController: UIViewController {
          If the user cancels, we should return to the login methods screen.
  
          */
-        
-        let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        tntLoginManager.shared.setupUserPool()                    // reset the user pool
+        tntLoginManager.shared.enableInteractiveUserPoolLogin()   // enable the interactive delegate
+        let pool = tntLoginManager.shared.userPool!
         let user = pool.currentUser()
         
-        user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+        user?.getDetails().continueWith { (task) -> AnyObject? in
             if let error = task.error as NSError? {
                 print("TNT Login Methods VC, failed user.getDetails. Error: \(error)")
             } else {
                 // User Pool Login is complete, setup credential provider and get federated ID
                 
-                tntLoginManager.shared.completeLoginWithUserPool { (success: Bool) in
+                tntLoginManager.shared.completeLoginWithUserPool(clearKeys: true) { (success: Bool) in
                     print("Login Methods VC: user pool login complete")
                     print("Federated Cognito ID is:  \(tntLoginManager.shared.cognitoId ?? "nil")")
-                
+               
+                // would prefer to do this, i.e. go  to initial view
+                /*
                     DispatchQueue.main.async {
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.setInitialVC()
                     }
+                */
+                    DispatchQueue.main.async {
+                        self.title = tntLoginManager.shared.cognitoId ?? "no Cognito user"
+                        self.setButtons()
+                    }
+                
                 }
             }
             return nil

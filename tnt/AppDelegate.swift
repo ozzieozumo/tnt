@@ -210,10 +210,12 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         signInViewController = (storyboard.instantiateViewController(withIdentifier: "tntUserPoolLogin") as! tntUserPoolLoginViewController)
         
-        DispatchQueue.main.async {
-            navController.pushViewController(self.signInViewController!, animated: true)
-        }
-        
+        let navStackCount = navController.viewControllers.count
+        print("TNT user pool interactive delegate navcontroller has \(navStackCount) view controllers" )
+        // should NOT need to pop to root 
+        // navController.popToRootViewController(animated: false)
+        navController.pushViewController(self.signInViewController!, animated: false)
+       
         return self.signInViewController!
     }
 }

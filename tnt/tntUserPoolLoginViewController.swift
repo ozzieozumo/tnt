@@ -71,6 +71,9 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
             // IMPORTANT: at this point, the user pool login is not complete
             //    e.g. the current user is not set and the logins are not set
             // The pool is not setup completely until the success handler for getDetails
+            DispatchQueue.main.async{
+                self.navigationController?.popViewController(animated: false)
+            }
         }
     }
 }

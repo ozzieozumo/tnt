@@ -100,7 +100,7 @@ class tntLoginManager {
             
             let waitGroup = DispatchGroup()
             waitGroup.enter()
-            self.completeLoginWithFB {
+            self.completeLoginWithFB(clearKeys: false) {
                 waitGroup.leave()
             }
             let waitResult = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
@@ -115,7 +115,7 @@ class tntLoginManager {
         }
     }
     
-    func completeLoginWithFB(handler: (()-> Void)? ) {
+    func completeLoginWithFB(clearKeys: Bool, handler: (()-> Void)? ) {
         
         // Make sure the FB token is set before proceeding
         
@@ -150,12 +150,19 @@ class tntLoginManager {
         // Instantiate the Cognito credentials provider using region, pool and the FB provider/token pair
         
         self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: idpm)
+        
+        if clearKeys {
+            
+            credentialsProvider?.clearKeychain()
+            assert(credentialsProvider?.identityId == nil)
+        }
         let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
         
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         print("tntLoginManager:  service manager initialized")
         print("tntLoginManager (AWS user agent info): \(configuration?.userAgent ?? "Default")")
+        print("tntLoginManager: credentials provider has \(self.credentialsProvider?.identityId ?? "nil") for federated id")
         
         // call getIdentityId here and print out in continuation block
         
@@ -183,9 +190,11 @@ class tntLoginManager {
     
     func userPoolLogout() {
         
-        disableInteractiveUserPoolLogin()
         userPool?.clearAll()
         cognitoId = nil
+        
+        enableInteractiveUserPoolLogin()  // need this to allow them to click login 
+
     }
     
     func setupUserPool() {
@@ -204,10 +213,10 @@ class tntLoginManager {
                                                                         clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
                                                                         poolId: Constants.CognitoIdentityUserPoolId)
         
-        // initialize user pool client
+        // register this pool configuration
         AWSCognitoIdentityUserPool.register(with: configuration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         
-        // fetch the user pool client we initialized in above step
+        // fetch a default user pool based on the configuration registered in the previous step
         // LDE: I beieve this step will reconstruct the pool from the keychain, incuding any unexpired logins (if the user had successfully signed into the pool before)
         let pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         
@@ -237,7 +246,7 @@ class tntLoginManager {
             if user.isSignedIn {
                 let waitGroup = DispatchGroup ()
                 waitGroup.enter()
-                completeLoginWithUserPool() { (success: Bool) in
+                completeLoginWithUserPool(clearKeys: false) { (success: Bool) in
                     // after resuming, enable the interactive delegate to handle session expiration etc
                     self.enableInteractiveUserPoolLogin()
                     waitGroup.leave()
@@ -302,7 +311,7 @@ class tntLoginManager {
         }
     }
     
-    func completeLoginWithUserPool(completion: @escaping (_ success: Bool)->Void) {
+    func completeLoginWithUserPool(clearKeys: Bool, completion: @escaping (_ success: Bool)->Void) {
     // convert a logged in user pool into a credential for use with AWS services
     // this should be called on successful completion of getDetails()
         
@@ -311,6 +320,12 @@ class tntLoginManager {
         printPoolInfo()
         
         self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: pool)
+        
+        if clearKeys {
+            
+            credentialsProvider?.clearKeychain()
+            assert(credentialsProvider?.identityId == nil)
+        }
                     
         let configuration = AWSServiceConfiguration(region: Constants.COGNITO_REGIONTYPE, credentialsProvider: self.credentialsProvider)
                     
