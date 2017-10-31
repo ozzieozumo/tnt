@@ -68,11 +68,16 @@ extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthenticati
             }
         } else { // Authentication successful
             print("TNT User Pool Login VC: successful login")
-            // IMPORTANT: at this point, the user pool login is not complete
-            //    e.g. the current user is not set and the logins are not set
-            // The pool is not setup completely until the success handler for getDetails
+            // IMPORTANT: at this point, the user pool login is not complete, e.g. the current user is not set and the logins are not set
+            // Therefore, this is NOT the place to call the federated login phase (completeLoginUserPool).  
+            
             DispatchQueue.main.async{
-                self.navigationController?.popViewController(animated: false)
+                // This login VC is always presented modally from the AppDelegate but check just in case
+                if self.presentingViewController != nil{
+                    self.dismiss(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

@@ -193,7 +193,7 @@ class tntLoginManager {
         userPool?.clearAll()
         cognitoId = nil
         
-        enableInteractiveUserPoolLogin()  // need this to allow them to click login 
+        // enableInteractiveUserPoolLogin()  // this is done on the login methods screen
 
     }
     
@@ -247,8 +247,7 @@ class tntLoginManager {
                 let waitGroup = DispatchGroup ()
                 waitGroup.enter()
                 completeLoginWithUserPool(clearKeys: false) { (success: Bool) in
-                    // after resuming, enable the interactive delegate to handle session expiration etc
-                    self.enableInteractiveUserPoolLogin()
+                    print("TNT Login Manager: resumed from user pool login and completed Cognito login")
                     waitGroup.leave()
                 }
                 let waitResults = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))

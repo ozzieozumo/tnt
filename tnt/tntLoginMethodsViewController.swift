@@ -97,24 +97,15 @@ class tntLoginMethodsViewController: UIViewController {
                 tntLoginManager.shared.completeLoginWithUserPool(clearKeys: true) { (success: Bool) in
                     print("Login Methods VC: user pool login complete")
                     print("Federated Cognito ID is:  \(tntLoginManager.shared.cognitoId ?? "nil")")
-               
-                // would prefer to do this, i.e. go  to initial view
-                /*
+           
                     DispatchQueue.main.async {
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.setInitialVC()
                     }
-                */
-                    DispatchQueue.main.async {
-                        self.title = tntLoginManager.shared.cognitoId ?? "no Cognito user"
-                        self.setButtons()
-                    }
-                
                 }
             }
             return nil
         }
-        
     }
     // MARK: - Button Actions
     
@@ -156,15 +147,5 @@ class tntLoginMethodsViewController: UIViewController {
         }
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
 }

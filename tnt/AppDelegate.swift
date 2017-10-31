@@ -203,6 +203,7 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
     func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
         
         guard let navController = self.window?.rootViewController as! UINavigationController? else {
+            // the TNT should always have a navigation controller as the rootVC
             print("TNT startPasswordAuthentication: no navigation controller, returning unloaded controller")
             return tntUserPoolLoginViewController() // forced to return something
         }
@@ -210,11 +211,12 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         signInViewController = (storyboard.instantiateViewController(withIdentifier: "tntUserPoolLogin") as! tntUserPoolLoginViewController)
         
-        let navStackCount = navController.viewControllers.count
-        print("TNT user pool interactive delegate navcontroller has \(navStackCount) view controllers" )
-        // should NOT need to pop to root 
-        // navController.popToRootViewController(animated: false)
-        navController.pushViewController(self.signInViewController!, animated: false)
+        if let visibleVC = navController.visibleViewController {
+            // present the login modally over the visible view 
+            visibleVC.present(self.signInViewController!, animated: false)
+        } else {
+            print("TNT App Delegate - could not find a visible VC to present sign in VC")
+        }
        
         return self.signInViewController!
     }

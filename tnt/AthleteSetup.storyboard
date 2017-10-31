@@ -5,19 +5,11 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
-        <scene sceneID="QTW-XB-0WG">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="N1C-Jp-9iO" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B8h-af-dFw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="944" y="-873"/>
-        </scene>
         <!--Athlete Setup-->
         <scene sceneID="FaF-jM-5dW">
             <objects>
@@ -42,13 +34,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Athlete Setup" id="IXJ-d4-f1p">
-                        <barButtonItem key="leftBarButtonItem" title="Done" id="WSD-Sb-qxM">
-                            <connections>
-                                <segue destination="N1C-Jp-9iO" kind="show" id="fHR-am-9CI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Athlete Setup" id="IXJ-d4-f1p"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="HYE-de-JUC" kind="show" identifier="tntEditAthleteSegue" id="WZg-Jd-QqS"/>
@@ -406,6 +392,6 @@
         <image name="default_profile" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vpi-DZ-Pvu"/>
+        <segue reference="y8E-uC-nsp"/>
     </inferredMetricsTieBreakers>
 </document>
