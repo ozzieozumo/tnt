@@ -41,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tntLocalDataManager.shared.loadLocalData()
         
+        // Start background tasks to synch any standard data available to all user (e.g. meets)
+        
+        tntSynchManager.shared.loadStandardData()
+        
         // Choose the starting VC based on login status, saved athletes etc
         
         setInitialVC()
@@ -214,6 +218,10 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         if let visibleVC = navController.visibleViewController {
             // present the login modally over the visible view 
             visibleVC.present(self.signInViewController!, animated: false)
+            // This will work unless the visible view is already presenting something modally - then you get a warning.
+            // Also if there are multiple nav controllers chained together, the visibleViewController method doesn't walk through the chain
+            // it would need to be called recursively to do that
+            // easier to just make sure that 
         } else {
             print("TNT App Delegate - could not find a visible VC to present sign in VC")
         }

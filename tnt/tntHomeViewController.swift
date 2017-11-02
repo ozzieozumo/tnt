@@ -197,8 +197,8 @@ class tntHomeViewController: UIViewController {
             nextMeetInfo.text = "\(meetTitle) \n \(meetSubtitle)"
             
         } else {
-            // no saved meet and no next meet
-            nextMeetInfo.text = "No Meets Available"
+            // no saved meet 
+            nextMeetInfo.text = "No Meet Selected"
         }
         
     }
@@ -211,6 +211,16 @@ class tntHomeViewController: UIViewController {
             
             // Set the meet and athlete on the scoring view controller
         
+            destvc.athleteId = selectedAthlete?.id ?? ""
+            destvc.meetId = selectedMeet?.id ?? ""
+            return
+            
+        }
+        
+        if let destvc = segue.destination as? tntScoresTableViewController {
+            
+            // Set the meet and athlete on the scores table view controller
+            
             destvc.athleteId = selectedAthlete?.id ?? ""
             destvc.meetId = selectedMeet?.id ?? ""
             return

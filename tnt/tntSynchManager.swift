@@ -22,15 +22,14 @@ class tntSynchManager {
         
     }
     
-    func loadCache() {
-        // Launch tasks to populate the local cache with information for the given Cognito user ID
+    func loadStandardData() {
         
-        // TODO:  probably should set some sort of context object on the singleton
-        
-        // self.loadAthletes()
-        self.loadMeets()
-        
-                
+        guard tntLoginManager.shared.loggedIn else {
+            print("TNT Synch Manager: loadStandardData called while not logged in. No action")
+            return
+        }
+        // Launch tasks to populate the local cache with information considered standard for all users
+        loadMeets()
     }
 
     func loadAthletes() {
@@ -54,6 +53,8 @@ class tntSynchManager {
     }
     
     func loadAthleteById(athleteId: String, success: @escaping (Athlete) -> Void ) {
+        // TODO; maybe this should load all related data for the athlete:  all scoress & video data for all meets
+        // or maybe there needs to be a "deep load" function which could be called from Athlete Setup / Reconnecct
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
@@ -254,6 +255,9 @@ class tntSynchManager {
     
     func loadMeets() {
         
+        // load all relevant meets from the cloud DB into CoreData, if they are not there already
+        // TODO: add filtering options, e.g. exclude meets from past seasons
+        
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
         let scanExpression = AWSDynamoDBScanExpression()
@@ -268,8 +272,12 @@ class tntSynchManager {
                     
                     print("TNT: retrieved meet \(meet.meetTitle ?? "no URL")")
                     
-                    let meetMO = Meet(dbMeet: meet)
-                    meetMO.saveLocal()  // needs exception handling?
+                    if tntLocalDataManager.shared.meets[meet.meetId!] == nil {
+                        // not in coredata cache, so ok to add a new MO
+                        
+                        let meetMO = Meet(dbMeet: meet)
+                        meetMO.saveLocal()  // needs exception handling?
+                    }
                 }
                 
                 // send a notification indicating new meet data
