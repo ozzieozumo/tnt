@@ -15,15 +15,15 @@ import Foundation
 
 class tntScoreItem{
     var event: String
-    var pass: UInt
-    var score: Float
+    var pass: Int
+    var score: Float?
 
     init(_ scoreDictionary: [String: Any]) {
         // inits a scoreItem from a dictionary retrieved from teh Scores managed object
         
         event = scoreDictionary["event"] as! String
-        pass  = scoreDictionary["pass"] as! UInt
-        score = scoreDictionary["score"] as! Float
+        pass  = scoreDictionary["pass"] as! Int
+        score = scoreDictionary["score"] as! Float?
         
     }
     

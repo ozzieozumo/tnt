@@ -109,6 +109,8 @@ class tntScoresTableViewController: UITableViewController {
 
         let scoredPass = passes(events()[indexPath.section])[indexPath.row]
         cell.scoreItem = scoredPass
+        
+        cell.setupCell()
 
         return cell
     }

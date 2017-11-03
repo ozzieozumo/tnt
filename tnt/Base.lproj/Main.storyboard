@@ -591,16 +591,25 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="25"/>
                                                     <subviews>
                                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-TV-vcJ">
-                                                            <rect key="frame" x="0.0" y="-95.5" width="359" height="216"/>
-                                                            <color key="backgroundColor" red="0.88444141652456276" green="0.44325328596047797" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <rect key="frame" x="239" y="-96" width="120" height="216"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="120" id="iug-8G-mKj"/>
+                                                            </constraints>
                                                         </pickerView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" misplaced="YES" text="Pass Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zna-pZ-klz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="218" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="0.8982648722009664" blue="0.27010536882809755" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="iuv-TV-vcJ" secondAttribute="trailing" id="TEm-s4-k11"/>
                                                         <constraint firstItem="iuv-TV-vcJ" firstAttribute="centerY" secondItem="kjx-5F-KNI" secondAttribute="centerY" id="UKL-Hk-Udc"/>
                                                         <constraint firstAttribute="height" constant="25" id="ZF0-c1-aaV"/>
-                                                        <constraint firstItem="iuv-TV-vcJ" firstAttribute="leading" secondItem="kjx-5F-KNI" secondAttribute="leading" id="oaN-ea-tb1"/>
+                                                        <constraint firstItem="iuv-TV-vcJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zna-pZ-klz" secondAttribute="trailing" constant="25" id="fbQ-KR-Yix"/>
+                                                        <constraint firstItem="zna-pZ-klz" firstAttribute="top" secondItem="kjx-5F-KNI" secondAttribute="top" id="muV-Sz-M3H"/>
+                                                        <constraint firstItem="zna-pZ-klz" firstAttribute="leading" secondItem="kjx-5F-KNI" secondAttribute="leading" id="x2N-G5-pPV"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -619,6 +628,7 @@
                                 <connections>
                                     <outlet property="basicPicker" destination="iuv-TV-vcJ" id="W8V-VR-jMF"/>
                                     <outlet property="basicScoringView" destination="kjx-5F-KNI" id="XHp-oT-h4k"/>
+                                    <outlet property="passLabel" destination="zna-pZ-klz" id="MtO-Ak-jMY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
