@@ -125,6 +125,27 @@ class tntScoresTableViewController: UITableViewController {
         default: return "Something Weird and Wonderful"
         }
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        // Need to calculate or set height of view here or in xib using constraints
+        let headerView = Bundle.main.loadNibNamed("tntScoresTableHeaderView", owner: self, options: nil)![0] as! tntScoresTableHeaderView
+        
+        headerView.eventLabel.text = "Trampoline"
+        headerView.totalScoreLabel.text = "59.50"
+        
+        headerView.sizeToFit()
+        
+        return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        return 2
+    }
 
     /*
     // Override to support conditional editing of the table view.

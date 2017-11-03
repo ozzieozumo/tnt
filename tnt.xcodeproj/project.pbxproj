@@ -69,6 +69,8 @@
 		A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */; };
 		A7BCE18E1EA0175C0053B550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BCE18D1EA0175C0053B550 /* Constants.swift */; };
 		A7E22CAA1F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */; };
+		A7F123F31FAC008A00B7207F /* tntScoresTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */; };
+		A7F123F51FAC00AE00B7207F /* tntScoresTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +172,8 @@
 		A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntLoginViewController.swift; sourceTree = "<group>"; };
 		A7BCE18D1EA0175C0053B550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntRelatedVideosTableCell.swift; sourceTree = "<group>"; };
+		A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntScoresTableHeaderView.swift; sourceTree = "<group>"; };
+		A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = tntScoresTableHeaderView.xib; sourceTree = "<group>"; };
 		CCADD3B3E4116C46273994CD /* Pods-tnt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tnt.release.xcconfig"; path = "Pods/Target Support Files/Pods-tnt/Pods-tnt.release.xcconfig"; sourceTree = "<group>"; };
 		E8CA800DC1F082033AA5E8FF /* Pods-tnt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tnt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tnt/Pods-tnt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +258,8 @@
 				A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */,
 				A79AA6351FA90169009B00A5 /* tntScoreItem.swift */,
 				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
+				A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */,
+				A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */,
 				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
 				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
 				A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */,
@@ -480,6 +486,7 @@
 				A74DE8871E8DD4EB006B2AF5 /* Assets.xcassets in Resources */,
 				A7349A191F7800D400E5EFEA /* AthleteSetup.storyboard in Resources */,
 				A7074AF21F9595AE004EBAB8 /* Login.storyboard in Resources */,
+				A7F123F51FAC00AE00B7207F /* tntScoresTableHeaderView.xib in Resources */,
 				A74DE8821E8DD4EB006B2AF5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +579,7 @@
 				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
 				A7504E5F1F7AC41B00928A79 /* Video+CoreDataClass.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
+				A7F123F31FAC008A00B7207F /* tntScoresTableHeaderView.swift in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
 				A7504E601F7AC41B00928A79 /* Video+CoreDataProperties.swift in Sources */,
 				A7504E501F7ABEDD00928A79 /* MeetMO.swift in Sources */,
