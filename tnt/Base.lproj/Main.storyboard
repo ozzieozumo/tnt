@@ -590,8 +590,8 @@
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kjx-5F-KNI">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="25"/>
                                                     <subviews>
-                                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-TV-vcJ">
-                                                            <rect key="frame" x="239" y="-96" width="120" height="216"/>
+                                                        <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-TV-vcJ">
+                                                            <rect key="frame" x="239" y="-36" width="120" height="93"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="iug-8G-mKj"/>
                                                             </constraints>

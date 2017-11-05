@@ -216,7 +216,8 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
         signInViewController = (storyboard.instantiateViewController(withIdentifier: "tntUserPoolLogin") as! tntUserPoolLoginViewController)
         
         if let visibleVC = navController.visibleViewController {
-            // present the login modally over the visible view 
+            // present the login modally over the visible view
+            
             visibleVC.present(self.signInViewController!, animated: false)
             // This will work unless the visible view is already presenting something modally - then you get a warning.
             // Also if there are multiple nav controllers chained together, the visibleViewController method doesn't walk through the chain
