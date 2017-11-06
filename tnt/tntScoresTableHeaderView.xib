@@ -18,30 +18,30 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-eB-YVH">
-                    <rect key="frame" x="0.0" y="0.0" width="380" height="40"/>
+                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-eB-YVH">
+                    <rect key="frame" x="0.0" y="0.0" width="373" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1d-Do-Q96">
-                            <rect key="frame" x="5" y="25" width="93" height="21"/>
+                            <rect key="frame" x="8" y="8" width="93" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="52.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULV-jD-Syu">
-                            <rect key="frame" x="111" y="25" width="45" height="21"/>
+                            <rect key="frame" x="114" y="8" width="45" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goldmedal" translatesAutoresizingMaskIntoConstraints="NO" id="HJP-Cq-Pue">
-                            <rect key="frame" x="171" y="25" width="30" height="30"/>
+                            <rect key="frame" x="174" y="8" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="0HF-VD-JPq"/>
                                 <constraint firstAttribute="width" secondItem="HJP-Cq-Pue" secondAttribute="height" multiplier="1:1" id="xfH-tG-bx9"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9x-vy-VCv">
-                            <rect key="frame" x="353" y="25" width="22" height="22"/>
+                            <rect key="frame" x="343" y="8" width="22" height="22"/>
                             <connections>
                                 <action selector="addPassesTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="BWs-BW-lhl"/>
                             </connections>
@@ -59,13 +59,12 @@
                         <constraint firstItem="HJP-Cq-Pue" firstAttribute="top" secondItem="q1d-Do-Q96" secondAttribute="top" id="fKh-6H-DMe"/>
                         <constraint firstAttribute="height" constant="40" id="shr-5J-tD0"/>
                     </constraints>
-                    <edgeInsets key="layoutMargins" top="5" left="5" bottom="5" right="5"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="3fS-eB-YVH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AVc-oQ-wxP"/>
-                <constraint firstAttribute="trailing" secondItem="3fS-eB-YVH" secondAttribute="trailingMargin" id="BgZ-y8-z0n"/>
+                <constraint firstAttribute="trailing" secondItem="3fS-eB-YVH" secondAttribute="trailingMargin" constant="10" id="BgZ-y8-z0n"/>
                 <constraint firstItem="3fS-eB-YVH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KdI-Ho-6xz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

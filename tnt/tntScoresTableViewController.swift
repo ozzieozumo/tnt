@@ -26,6 +26,11 @@ class tntScoresTableViewController: UITableViewController {
     
     var scores: [tntScoreItem] = []
     
+    // data sent to edit score VC
+    
+    var selectedPass: tntScoreItem? = nil
+    var selectedHeader: tntScoreItem? = nil  // the event header, or pass 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +39,13 @@ class tntScoresTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // reload all table data when returning from any editing views etc
+        
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,12 +130,8 @@ class tntScoresTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let codedEvent = events()[section]
         
-        switch codedEvent {
-        case "TR": return "Trampoline"
-        case "TU": return "Tumbling"
-        case "DMT": return "Double Mini"
-        default: return "Something Weird and Wonderful"
-        }
+        return tntScoreItem.eventNames[codedEvent] ?? "Something New"
+        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -131,22 +139,29 @@ class tntScoresTableViewController: UITableViewController {
         // Need to calculate or set height of view here or in xib using constraints
         let headerView = Bundle.main.loadNibNamed("tntScoresTableHeaderView", owner: self, options: nil)![0] as! tntScoresTableHeaderView
         
-        headerView.eventLabel.text = "Trampoline"
+        headerView.eventHeader = passes(events()[section])[0]
+        headerView.setupHeader()
         headerView.totalScoreLabel.text = "59.50"
-        
-        headerView.sizeToFit()
-        
+    
         return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        // TODO: figure out how to do automatic height calculation for table section headers (systemLaoutSizeFitting etc and layout passes)
         return 40.0
     }
-    
+
     override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         return 2
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPass = passes(events()[indexPath.section])[indexPath.row]
+        selectedHeader = passes(events()[indexPath.section])[0]
+        performSegue(withIdentifier: "tntEditScoreItem", sender: tableView)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -182,14 +197,20 @@ class tntScoresTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if let destVC = segue.destination as? tntEditScoreItemVC {
+            destVC.scoreItem = self.selectedPass
+            destVC.eventHeader = self.selectedHeader
+        }
     }
-    */
+
+    
 
 }

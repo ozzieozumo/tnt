@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -568,7 +567,7 @@
             </objects>
             <point key="canvasLocation" x="661.60000000000002" y="685.90704647676171"/>
         </scene>
-        <!--Tnt Scores Table View Controller-->
+        <!--Meet Scores-->
         <scene sceneID="jhM-qW-ful">
             <objects>
                 <tableViewController storyboardIdentifier="tntScoresTable" id="H2Q-CO-Q2P" customClass="tntScoresTableViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
@@ -584,50 +583,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="bottom" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Mb-2I-k0V">
-                                            <rect key="frame" x="8" y="8" width="359" height="25"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kjx-5F-KNI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="25"/>
-                                                    <subviews>
-                                                        <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-TV-vcJ">
-                                                            <rect key="frame" x="239" y="-36" width="120" height="93"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="120" id="iug-8G-mKj"/>
-                                                            </constraints>
-                                                        </pickerView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" misplaced="YES" text="Pass Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zna-pZ-klz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="218" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="iuv-TV-vcJ" secondAttribute="trailing" id="TEm-s4-k11"/>
-                                                        <constraint firstItem="iuv-TV-vcJ" firstAttribute="centerY" secondItem="kjx-5F-KNI" secondAttribute="centerY" id="UKL-Hk-Udc"/>
-                                                        <constraint firstAttribute="height" constant="25" id="ZF0-c1-aaV"/>
-                                                        <constraint firstItem="iuv-TV-vcJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zna-pZ-klz" secondAttribute="trailing" constant="25" id="fbQ-KR-Yix"/>
-                                                        <constraint firstItem="zna-pZ-klz" firstAttribute="top" secondItem="kjx-5F-KNI" secondAttribute="top" id="muV-Sz-M3H"/>
-                                                        <constraint firstItem="zna-pZ-klz" firstAttribute="leading" secondItem="kjx-5F-KNI" secondAttribute="leading" id="x2N-G5-pPV"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.88444141652456276" green="0.44325328596047797" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="kjx-5F-KNI" firstAttribute="top" secondItem="3Mb-2I-k0V" secondAttribute="top" id="3zo-gH-rcH"/>
-                                            </constraints>
-                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Pass Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zna-pZ-klz">
+                                            <rect key="frame" x="8" y="8" width="102" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uks-kr-IC8">
+                                            <rect key="frame" x="282.5" y="8" width="76.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3Mb-2I-k0V" secondAttribute="trailing" id="12r-s4-6NU"/>
-                                        <constraint firstItem="3Mb-2I-k0V" firstAttribute="top" secondItem="hSB-UK-7sx" secondAttribute="topMargin" id="Nku-pS-ENQ"/>
-                                        <constraint firstItem="3Mb-2I-k0V" firstAttribute="leading" secondItem="hSB-UK-7sx" secondAttribute="leadingMargin" id="g3m-HH-MkV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Uks-kr-IC8" secondAttribute="trailing" constant="8" id="2nk-RT-aLk"/>
+                                        <constraint firstItem="Uks-kr-IC8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zna-pZ-klz" secondAttribute="trailing" constant="40" id="4br-t6-C7M"/>
+                                        <constraint firstItem="zna-pZ-klz" firstAttribute="leading" secondItem="hSB-UK-7sx" secondAttribute="leadingMargin" id="7NO-J0-gTm"/>
+                                        <constraint firstItem="zna-pZ-klz" firstAttribute="top" secondItem="hSB-UK-7sx" secondAttribute="topMargin" id="TTO-90-jMp"/>
+                                        <constraint firstItem="Uks-kr-IC8" firstAttribute="top" secondItem="hSB-UK-7sx" secondAttribute="topMargin" id="XyQ-sj-A8u"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="basicPicker" destination="iuv-TV-vcJ" id="W8V-VR-jMF"/>
-                                    <outlet property="basicScoringView" destination="kjx-5F-KNI" id="XHp-oT-h4k"/>
+                                    <outlet property="netScoreLabel" destination="Uks-kr-IC8" id="WY3-c0-f1B"/>
                                     <outlet property="passLabel" destination="zna-pZ-klz" id="MtO-Ak-jMY"/>
                                 </connections>
                             </tableViewCell>
@@ -637,10 +616,131 @@
                             <outlet property="delegate" destination="H2Q-CO-Q2P" id="hiG-W6-DTo"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Meet Scores" id="GiV-4H-bsJ"/>
+                    <connections>
+                        <segue destination="cKV-B0-CWo" kind="show" identifier="tntEditScoreItem" id="gB2-DL-uM0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uv5-IJ-iE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1504.8" y="-344.07796101949026"/>
+            <point key="canvasLocation" x="1485.5999999999999" y="-341.37931034482762"/>
+        </scene>
+        <!--Enter Score-->
+        <scene sceneID="tBf-Ka-Tdf">
+            <objects>
+                <viewController id="cKV-B0-CWo" customClass="tntEditScoreItemVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l4L-3t-qhf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zci-L5-iKT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZF3-HX-Ihs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-TV-vcJ">
+                                <rect key="frame" x="223" y="137" width="120" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="iug-8G-mKj"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event and Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-Bw-umh">
+                                <rect key="frame" x="16" y="80" width="135" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Base Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydh-Br-cuP">
+                                <rect key="frame" x="16" y="121" width="87" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Degree of Difficulty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eha-hX-616">
+                                <rect key="frame" x="25" y="238" width="149" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOg-8M-5sQ">
+                                <rect key="frame" x="307" y="280" width="24" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="7qr-O6-PZi">
+                                <rect key="frame" x="25" y="280" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-1.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZ7-RO-L6H">
+                                <rect key="frame" x="302" y="390" width="29" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="MLo-7H-zGw">
+                                <rect key="frame" x="25" y="386" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deductions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-vI-gjM">
+                                <rect key="frame" x="25" y="340" width="88" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-1.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0a-tD-N4w">
+                                <rect key="frame" x="302" y="479" width="29" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="E2N-OZ-TpG">
+                                <rect key="frame" x="25" y="475" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Of Flight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wE5-ur-xU5">
+                                <rect key="frame" x="25" y="438" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Net Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DV1-2w-B0v">
+                                <rect key="frame" x="16" y="557" width="77" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="31.40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX1-Jd-I4p">
+                                <rect key="frame" x="302" y="557" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iuv-TV-vcJ" firstAttribute="centerY" secondItem="ZF3-HX-Ihs" secondAttribute="centerY" constant="-199" id="9QV-00-7pX"/>
+                            <constraint firstAttribute="trailing" secondItem="iuv-TV-vcJ" secondAttribute="trailing" constant="30" id="G75-Ga-zmo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Enter Score" id="Fnj-ca-2jY"/>
+                    <connections>
+                        <outlet property="baseScorePicker" destination="iuv-TV-vcJ" id="ddR-xP-64B"/>
+                        <outlet property="eventLabel" destination="4ng-Bw-umh" id="Tx9-Rx-C8w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P7u-h2-Gt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204" y="-341.37931034482762"/>
         </scene>
         <!--Tnt Meets Table View Controller-->
         <scene sceneID="Eph-5r-826">

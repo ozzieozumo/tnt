@@ -10,11 +10,22 @@ import UIKit
 
 class tntScoresTableHeaderView: UIView {
     
+    var eventHeader: tntScoreItem? = nil
     
     @IBOutlet var eventLabel: UILabel!
     
     @IBOutlet var totalScoreLabel: UILabel!
     
+    
+    func setupHeader() {
+        
+        guard let eventHeader = eventHeader else {
+            print("tntScoresTable Section Header has no event information")
+            return
+        }
+        
+        eventLabel.text = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
+    }
     
     /*
     // Only override draw() if you perform custom drawing.

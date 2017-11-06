@@ -14,8 +14,17 @@
 import Foundation
 
 class tntScoreItem{
+    
+    static let passNames: [String] = ["1st Pass", "2nd Pass"]
+    static let unitValues = 0...30
+    static let decimalValues = [".00", ".10", ".20", ".30", ".40", ".50", ".60", ".70", ".80", ".90"]
+    static let eventNames: [String: String] = ["DMT": "Double Mini",
+                                               "TR": "Trampoline",
+                                               "TU": "Tumbling"]
+    
     var event: String
     var pass: Int
+    var level: Int
     var score: Float?
 
     init(_ scoreDictionary: [String: Any]) {
@@ -24,6 +33,7 @@ class tntScoreItem{
         event = scoreDictionary["event"] as! String
         pass  = scoreDictionary["pass"] as! Int
         score = scoreDictionary["score"] as! Float?
+        level = (scoreDictionary["level"] ?? 0) as! Int
         
     }
     
@@ -34,6 +44,7 @@ class tntScoreItem{
         scoreDict["event"] = event
         scoreDict["pass"] = pass
         scoreDict["score"] = score
+        scoreDict["level"] = level
         
         return scoreDict
     }
