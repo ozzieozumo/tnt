@@ -25,7 +25,12 @@ class tntScoreItem{
     var event: String
     var pass: Int
     var level: Int
-    var score: Float?
+    var score: Float?            // The net score (N) = (E) + (D) - (P) + (F) + (H)
+    var execution: Float?         // Execution or base score (E)
+    var difficulty: Float?        // Degree of difficulty bonus (D)
+    var penalty: Float?           // Penalty or deductions (P)
+    var flight: Float?            // Time of flight (F) (only scored at elite levels)
+    var displacement: Float?      // horizontal displacement (H) (not sccored separately in US)
 
     init(_ scoreDictionary: [String: Any]) {
         // inits a scoreItem from a dictionary retrieved from teh Scores managed object
@@ -34,6 +39,11 @@ class tntScoreItem{
         pass  = scoreDictionary["pass"] as! Int
         score = scoreDictionary["score"] as! Float?
         level = (scoreDictionary["level"] ?? 0) as! Int
+        execution = scoreDictionary["execution"] as! Float?
+        difficulty = scoreDictionary["difficulty"] as! Float?
+        penalty = scoreDictionary["penalty"] as! Float?
+        flight = scoreDictionary["flight"] as! Float?
+        execution = scoreDictionary["execution"] as! Float?
         
     }
     
@@ -45,6 +55,11 @@ class tntScoreItem{
         scoreDict["pass"] = pass
         scoreDict["score"] = score
         scoreDict["level"] = level
+        scoreDict["execution"] = execution
+        scoreDict["difficulty"] = difficulty
+        scoreDict["penalty"] = penalty
+        scoreDict["flight"] = flight
+        scoreDict["displacement"] = displacement
         
         return scoreDict
     }

@@ -14,10 +14,18 @@ class tntEditScoreItemVC: UIViewController {
     var scoreItem: tntScoreItem?       // the pass being edited
     
     @IBOutlet var eventLabel: UILabel!
+    @IBOutlet var passLabel: UILabel!
     @IBOutlet var baseScorePicker: UIPickerView!
     
     
+    @IBOutlet var difficultyStepper: UIStepper!
+    @IBOutlet var difficultyLabel: UILabel!
+    @IBOutlet var penaltyStepper: UIStepper!
+    @IBOutlet var penaltyLabel: UILabel!
+    @IBOutlet var flightLabel: UILabel!
+    @IBOutlet var flightStepper: UIStepper!
     
+    @IBOutlet var netScoreLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,16 +34,19 @@ class tntEditScoreItemVC: UIViewController {
         baseScorePicker.dataSource = self
         baseScorePicker.delegate = self
         
-        setupEditor()
+        configureSteppers()
+        
+        setupBasicScoring()
+        
+        setupAdvancedScoring()
+        
+        recalculate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         // copy values back from controls to the scoreItem for the pass being edited
         
-        let unitScore = Float(baseScorePicker.selectedRow(inComponent: 0))
-        let tenthsScore = Float(baseScorePicker.selectedRow(inComponent: 1)) * 0.10
-        
-        scoreItem?.score = unitScore + tenthsScore
+        scoreItem?.score = baseScoreSelectedValue()
         
     }
 
@@ -44,17 +55,31 @@ class tntEditScoreItemVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func setupEditor() {
+    func configureSteppers() {
         
-        guard let scoreItem = scoreItem else {
-            print("tntEditScoreItemVC - cannot setup a cell with a nil score item")
+        let steppers = [difficultyStepper, penaltyStepper, flightStepper]
+        
+        for s in steppers  {
+            
+            s?.isContinuous = false
+            s?.autorepeat = true
+            s?.minimumValue = 0.0
+            s?.stepValue = 0.10
+            
+        }
+    }
+ 
+    func setupBasicScoring() {
+        
+        guard let scoreItem = scoreItem, let eventHeader = eventHeader else {
+            print("tntEditScoreItemVC - cannot setup editor without a score item")
             return
         }
         
-        let eventName = tntScoreItem.eventNames[eventHeader?.event ?? "None"] ?? "Other Event"
-        let levelName = " (\(eventHeader?.event))"
+        let eventName = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
+        let levelName = " (\(eventHeader.level))"
         eventLabel.text = eventName + levelName
+        passLabel.text = tntScoreItem.passNames[scoreItem.pass]
         let basicScore = scoreItem.score ?? 25.0   // use 25.0 as default value if no score yet
         
         var unitScore = Int(floor(basicScore))
@@ -63,6 +88,37 @@ class tntEditScoreItemVC: UIViewController {
         
         let tenthsScore = Int(floor(basicScore.truncatingRemainder(dividingBy: 1.0) * 10))
         baseScorePicker.selectRow(tenthsScore, inComponent: 1, animated: false)
+        
+        recalculate()
+        
+    }
+    
+    func setupAdvancedScoring() {
+    
+        guard let scoreItem = scoreItem else {
+            print("tntEditScoreItemVC - cannot setup editor without a score item")
+            return
+        }
+        difficultyStepper.value = Double(scoreItem.difficulty ?? 0.0)
+        penaltyStepper.value = Double(scoreItem.penalty ?? 0.0)
+        flightStepper.value = Double(scoreItem.flight ?? 0.0)
+    
+    }
+    
+    func recalculate() {
+        
+        let execution = Double(baseScoreSelectedValue())
+        let difficulty = difficultyStepper.value
+        let penalty = penaltyStepper.value
+        let flight = flightStepper.value
+        
+        let netScore = execution + difficulty - penalty + flight
+        
+        // update displayed values
+        difficultyLabel.text = String(difficulty)
+        penaltyLabel.text = "(-) \(penalty)"
+        flightLabel.text = String(flight)
+        netScoreLabel.text = String(format: "%.2f", netScore)
         
     }
 
@@ -75,7 +131,26 @@ class tntEditScoreItemVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
+    @IBAction func difficultyValueChanged(_ sender: UIStepper) {
+        
+        difficultyLabel.text = String(sender.value)
+        recalculate()
+    }
+    
+    @IBAction func penaltyValueChanged(_ sender: UIStepper) {
+        
+        penaltyLabel.text = String(sender.value)
+        recalculate()
+    }
+    
+    
+    @IBAction func flightValueChanged(_ sender: UIStepper) {
+        
+        flightLabel.text = String(sender.value)
+        recalculate()
+    }
 }
 
 extension tntEditScoreItemVC: UIPickerViewDataSource {
@@ -128,6 +203,14 @@ extension tntEditScoreItemVC: UIPickerViewDelegate {
             return NSAttributedString(string: tntScoreItem.decimalValues[row])
         default: return nil
         }
+    }
+    
+    func baseScoreSelectedValue() -> Float {
+    
+        let unitScore = Float(baseScorePicker.selectedRow(inComponent: 0))
+        let tenthsScore = Float(baseScorePicker.selectedRow(inComponent: 1)) * 0.10
+        
+        return unitScore + tenthsScore
     }
     
     
