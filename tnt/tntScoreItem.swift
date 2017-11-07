@@ -12,6 +12,7 @@
 //
 
 import Foundation
+import UIKit
 
 class tntScoreItem{
     
@@ -22,6 +23,12 @@ class tntScoreItem{
                                                "TR": "Trampoline",
                                                "TU": "Tumbling"]
     
+    static let medalNames: [String: (name: String, image: UIImage?)] = ["gold": ("Gold", #imageLiteral(resourceName: "goldmedal")),
+                                                                       "silver": ("Silver", #imageLiteral(resourceName: "silvermedal")),
+                                                                       "bronze": ("Bronze", #imageLiteral(resourceName: "bronzemedal")),
+                                                                       "podium": ("Podium", nil)]
+    
+    
     var event: String
     var pass: Int
     var level: Int
@@ -31,6 +38,11 @@ class tntScoreItem{
     var penalty: Float?           // Penalty or deductions (P)
     var flight: Float?            // Time of flight (F) (only scored at elite levels)
     var displacement: Float?      // horizontal displacement (H) (not sccored separately in US)
+    
+    // mebers applicable for event headers only
+    var medal: String?
+    var qualified: Bool
+    var mobilized: Bool
 
     init(_ scoreDictionary: [String: Any]) {
         // inits a scoreItem from a dictionary retrieved from teh Scores managed object
@@ -44,7 +56,9 @@ class tntScoreItem{
         penalty = scoreDictionary["penalty"] as! Float?
         flight = scoreDictionary["flight"] as! Float?
         execution = scoreDictionary["execution"] as! Float?
-        
+        medal = scoreDictionary["medal"] as! String?
+        qualified = (scoreDictionary["qualifying"] as! Bool?) ?? false
+        mobilized = (scoreDictionary["mobilizing"] as! Bool?) ?? false
     }
     
     func toDictionary() -> [String: Any] {
@@ -60,6 +74,9 @@ class tntScoreItem{
         scoreDict["penalty"] = penalty
         scoreDict["flight"] = flight
         scoreDict["displacement"] = displacement
+        scoreDict["medal"] = medal
+        scoreDict["qualifying"] = qualified
+        scoreDict["mobilizing"] = mobilized
         
         return scoreDict
     }

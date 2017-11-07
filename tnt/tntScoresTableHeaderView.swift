@@ -13,9 +13,13 @@ class tntScoresTableHeaderView: UIView {
     var eventHeader: tntScoreItem? = nil
     
     @IBOutlet var eventLabel: UILabel!
-    
     @IBOutlet var totalScoreLabel: UILabel!
     
+    @IBOutlet var medalImage: UIImageView!
+    @IBOutlet var qualifiedImage: UIImageView!
+    @IBOutlet var mobilizedImage: UIImageView!
+
+    @IBOutlet var editMoreButton: UIButton!
     
     func setupHeader() {
         
@@ -23,8 +27,13 @@ class tntScoresTableHeaderView: UIView {
             print("tntScoresTable Section Header has no event information")
             return
         }
+        let eventName = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
+        let eventLevel = eventHeader.level
+        eventLabel.text = eventName + " (\(eventLevel))"
         
-        eventLabel.text = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
+        medalImage.isHidden = (eventHeader.medal == nil)
+        qualifiedImage.isHidden = !eventHeader.qualified
+        mobilizedImage.isHidden = !eventHeader.mobilized
     }
     
     /*
@@ -35,6 +44,12 @@ class tntScoresTableHeaderView: UIView {
     }
     */
 
-    @IBAction func addPassesTapped(_ sender: Any) {
+    @IBAction func editHeaderTapped(_ sender: Any) {
+        
+        print("Edit Header Tapped")
+        
+        // segue to Edit Header VC
+        
     }
+    
 }
