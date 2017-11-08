@@ -63,6 +63,7 @@
                                         <constraint firstAttribute="height" constant="30" id="MH4-Ya-NV2"/>
                                         <constraint firstAttribute="width" constant="30" id="NoM-QN-3h3"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="..."/>
                                     <connections>
                                         <action selector="editHeaderTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="9H1-Ee-sAJ"/>

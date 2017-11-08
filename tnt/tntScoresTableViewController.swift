@@ -31,6 +31,10 @@ class tntScoresTableViewController: UITableViewController {
     var selectedPass: tntScoreItem? = nil
     var selectedHeader: tntScoreItem? = nil  // the event header, or pass 0
     
+    // data sent to edit header VC
+    
+    var editHeader: tntScoreItem? = nil
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,6 +144,7 @@ class tntScoresTableViewController: UITableViewController {
         let headerView = Bundle.main.loadNibNamed("tntScoresTableHeaderView", owner: self, options: nil)![0] as! tntScoresTableHeaderView
         
         headerView.eventHeader = passes(events()[section])[0]
+        headerView.controller = self
         headerView.setupHeader()
         headerView.totalScoreLabel.text = "59.50"
     
@@ -208,6 +213,11 @@ class tntScoresTableViewController: UITableViewController {
         if let destVC = segue.destination as? tntEditScoreItemVC {
             destVC.scoreItem = self.selectedPass
             destVC.eventHeader = self.selectedHeader
+        }
+        
+        if let destVC = segue.destination as? tntEditEventHeaderVC {
+            destVC.eventHeader = self.editHeader
+            // TODO: pass in athlete info too, for current level checking
         }
     }
 

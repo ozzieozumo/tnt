@@ -23,10 +23,13 @@ class tntScoreItem{
                                                "TR": "Trampoline",
                                                "TU": "Tumbling"]
     
-    static let medalNames: [String: (name: String, image: UIImage?)] = ["gold": ("Gold", #imageLiteral(resourceName: "goldmedal")),
+    static let medalInfo: [String: (name: String, image: UIImage?)] = ["gold": ("Gold", #imageLiteral(resourceName: "goldmedal")),
                                                                        "silver": ("Silver", #imageLiteral(resourceName: "silvermedal")),
                                                                        "bronze": ("Bronze", #imageLiteral(resourceName: "bronzemedal")),
-                                                                       "podium": ("Podium", nil)]
+                                                                       "podium": ("Podium", nil),
+                                                                       "other": ("Other", nil)]
+    
+    static let medalKeys: [String] = ["gold", "silver", "bronze", "podium", "other"]
     
     
     var event: String

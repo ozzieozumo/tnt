@@ -619,13 +619,136 @@
                     <navigationItem key="navigationItem" title="Meet Scores" id="GiV-4H-bsJ"/>
                     <connections>
                         <segue destination="cKV-B0-CWo" kind="show" identifier="tntEditScoreItem" id="gB2-DL-uM0"/>
+                        <segue destination="WER-FM-G1q" kind="show" identifier="tntEditEventHeader" id="HiQ-B2-0eM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uv5-IJ-iE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1485.5999999999999" y="-341.37931034482762"/>
+            <point key="canvasLocation" x="1428" y="-341"/>
         </scene>
-        <!--Enter Score-->
+        <!--Event Result-->
+        <scene sceneID="hBA-2W-kWS">
+            <objects>
+                <viewController id="WER-FM-G1q" customClass="tntEditEventHeaderVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nbw-P2-iEy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ogi-xS-0gt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DCf-om-w4G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzS-Mc-hHE">
+                                <rect key="frame" x="16" y="79" width="202" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcC-P7-fF6">
+                                <rect key="frame" x="16" y="128" width="40" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" maximumValue="12" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-VP-CHJ">
+                                <rect key="frame" x="196" y="157" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="levelStepperChanged:" destination="WER-FM-G1q" eventType="valueChanged" id="YLJ-V9-g6Z"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="8" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqe-Nf-aAj">
+                                <rect key="frame" x="298" y="165" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your current level for this event is " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yL-su-2I0">
+                                <rect key="frame" x="16" y="157" width="152" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Podium Position" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ql2-Xb-BA7">
+                                <rect key="frame" x="16" y="244" width="123" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" maximumValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wpt-dX-tEL">
+                                <rect key="frame" x="196" y="270" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="podiumStepperChanged:" destination="WER-FM-G1q" eventType="valueChanged" id="dze-ff-not"/>
+                                </connections>
+                            </stepper>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XnV-o0-JzY">
+                                <rect key="frame" x="298" y="259" width="61" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sC-fi-R6U">
+                                <rect key="frame" x="298" y="359" width="61" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qualifying Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-gh-jFz">
+                                <rect key="frame" x="16" y="344" width="126" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6OF-f2-Dd3">
+                                <rect key="frame" x="219" y="374" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="qualifyingSwitchChanged:" destination="WER-FM-G1q" eventType="valueChanged" id="ACN-FS-mbQ"/>
+                                </connections>
+                            </switch>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PxA-up-gZR">
+                                <rect key="frame" x="298" y="454" width="61" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobilizing Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWj-Vl-OZP">
+                                <rect key="frame" x="17" y="439" width="127" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NaC-x7-L6g">
+                                <rect key="frame" x="219" y="469" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="mobilizingSwitchChanged:" destination="WER-FM-G1q" eventType="valueChanged" id="k7H-lD-H94"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Event Result" id="I0V-b9-GBr"/>
+                    <connections>
+                        <outlet property="currentLevelInfoLabel" destination="3yL-su-2I0" id="zMH-Y0-I23"/>
+                        <outlet property="eventLevelLabel" destination="fqe-Nf-aAj" id="12T-FI-Kn2"/>
+                        <outlet property="eventNameLabel" destination="IzS-Mc-hHE" id="21A-ro-BxZ"/>
+                        <outlet property="levelStepper" destination="qm7-VP-CHJ" id="xBN-SW-dNG"/>
+                        <outlet property="medalImage" destination="XnV-o0-JzY" id="SY4-LM-fxa"/>
+                        <outlet property="mobilizingImage" destination="PxA-up-gZR" id="uhC-bF-Jck"/>
+                        <outlet property="mobilizingSwitch" destination="NaC-x7-L6g" id="h09-oa-YLN"/>
+                        <outlet property="podiumStepper" destination="Wpt-dX-tEL" id="bRU-rO-xkc"/>
+                        <outlet property="qualifyingImage" destination="1sC-fi-R6U" id="GRy-c0-OMA"/>
+                        <outlet property="qualifyingSwitch" destination="6OF-f2-Dd3" id="wY1-vD-Omv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AfL-kw-IF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204" y="-1035.832083958021"/>
+        </scene>
+        <!--Pass Score-->
         <scene sceneID="tBf-Ka-Tdf">
             <objects>
                 <viewController id="cKV-B0-CWo" customClass="tntEditScoreItemVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
@@ -766,7 +889,7 @@
                             <constraint firstItem="E2N-OZ-TpG" firstAttribute="top" secondItem="wE5-ur-xU5" secondAttribute="bottom" constant="8" id="yYw-BS-8LW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Enter Score" id="Fnj-ca-2jY"/>
+                    <navigationItem key="navigationItem" title="Pass Score" id="Fnj-ca-2jY"/>
                     <connections>
                         <outlet property="baseScorePicker" destination="iuv-TV-vcJ" id="ddR-xP-64B"/>
                         <outlet property="difficultyLabel" destination="cOg-8M-5sQ" id="wJ1-u9-nOJ"/>

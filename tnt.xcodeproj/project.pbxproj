@@ -11,6 +11,7 @@
 		A7074AF21F9595AE004EBAB8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7074AF11F9595AE004EBAB8 /* Login.storyboard */; };
 		A7074AF41F959D1D004EBAB8 /* tntLoginMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */; };
 		A71726AB1FB1579F00759B52 /* AIFlatSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */; };
+		A71726AD1FB23B3400759B52 /* tntEditEventHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */; };
 		A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */; };
 		A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */; };
 		A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */; };
@@ -115,6 +116,7 @@
 		A7074AF11F9595AE004EBAB8 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntLoginMethodsViewController.swift; sourceTree = "<group>"; };
 		A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFlatSwitch.swift; sourceTree = "<group>"; };
+		A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntEditEventHeaderVC.swift; sourceTree = "<group>"; };
 		A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntIdentityProvider.swift; sourceTree = "<group>"; };
 		A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntS3UploadViewController.swift; sourceTree = "<group>"; };
 		A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideoUploadViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				A79AA6351FA90169009B00A5 /* tntScoreItem.swift */,
 				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
 				A7F123F61FAF71EA00B7207F /* tntEditScoreItemVC.swift */,
+				A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */,
 				A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */,
 				A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */,
 				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
@@ -616,6 +619,7 @@
 				A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */,
 				A79AA6341FA8FD7B009B00A5 /* tntScoresTableViewCell.swift in Sources */,
 				A7504E521F7ABF5800928A79 /* VideoMO.swift in Sources */,
+				A71726AD1FB23B3400759B52 /* tntEditEventHeaderVC.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
 				A79DB3541EC537470007A543 /* tntLoginManager.swift in Sources */,
 				A79AA6321FA8FD41009B00A5 /* tntScoresTableViewController.swift in Sources */,

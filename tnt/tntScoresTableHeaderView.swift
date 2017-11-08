@@ -11,6 +11,7 @@ import UIKit
 class tntScoresTableHeaderView: UIView {
     
     var eventHeader: tntScoreItem? = nil
+    var controller: tntScoresTableViewController? = nil
     
     @IBOutlet var eventLabel: UILabel!
     @IBOutlet var totalScoreLabel: UILabel!
@@ -46,9 +47,8 @@ class tntScoresTableHeaderView: UIView {
 
     @IBAction func editHeaderTapped(_ sender: Any) {
         
-        print("Edit Header Tapped")
-        
-        // segue to Edit Header VC
+        controller?.editHeader = eventHeader
+        controller?.performSegue(withIdentifier: "tntEditEventHeader", sender: self)
         
     }
     
