@@ -35,11 +35,17 @@ class tntScoresTableViewController: UITableViewController {
     
     var editHeader: tntScoreItem? = nil
     
-
+    // outlets
+    
+    @IBOutlet var emptyTableFooter: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(tntScoresTableViewController.observerScoresLoaded(notification:)), name: Notification.Name("tntScoresLoaded"), object: nil)
 
         setupDataSource()
+        recalculateData()
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
@@ -49,6 +55,7 @@ class tntScoresTableViewController: UITableViewController {
         
         // reload all table data when returning from any editing views etc
         
+        recalculateData()
         tableView.reloadData()
     }
 
@@ -94,9 +101,78 @@ class tntScoresTableViewController: UITableViewController {
             // no scores yet in core data for this athlete meet, create a new scores MO
             // TODO
             
+        }
+        
+        emptyTableFooter.isHidden = !scores.isEmpty
+        
+    }
+    
+    func recalculateData() {
+        
+        // Recompute total score for the event header (displayed in section header)
+        
+        for event in events() {
+            
+            var headerItem = header(for: event)
+            if headerItem == nil {
+                // if existing data had no header row, create one now
+                headerItem = tntScoreItem(event, 0)
+                scores.append(headerItem!)
+            }
+            var totalScore: Float = 0.0
+            
+            for pass in passes(event) {
+                
+                totalScore += pass.score ?? 0.0
+            }
+            
+            headerItem?.score = totalScore
             
         }
+    }
     
+    func createEmptyScoreSheet() {
+        
+        // Creates two blank passes for each standard event: double-mini, trampoline, tumbling
+        
+        for event in tntScoreItem.eventNames.keys.sorted() {
+            
+            // create event header (pass 0) and two passes (1 & 2) for each event
+            
+            for pass in 0...2 {
+            
+                let newScoreItem = tntScoreItem(event, pass)
+                
+                // set the level to the athlete's current level for the event
+                
+                let athleteLevels = athleteMO?.eventLevels as! [String: Int]
+                newScoreItem.level = athleteLevels[event] ?? 0
+                
+                scores.append(newScoreItem)
+            }
+        }
+        emptyTableFooter.isHidden = true
+        tableView.reloadData()
+    }
+    
+    func refreshScores() {
+        
+        // TODO: a) this should be unnecessary if initial athlete synch and background synch operations are working
+        //  b) should involve some sort of time check, but for now refresh means overwrite with anything found in the cloud DB
+        
+        guard athleteId != "" && meetId != "" else {
+            print("TNT Scores Table:  athlete ID and meet ID required for refresh")
+            return
+        }
+        
+        //delete scores object from Core Data and Cache
+        tntLocalDataManager.shared.deleteScores(scoreId)
+        
+        //background query the cloud DB to load a scores object
+        tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
+        
+        // ideally need a completion handler here to cancel activity indicator and then reload the table
+        // for now, just wait for notifcation of scoreLoaded
     }
     
     func events() -> [String] {
@@ -107,6 +183,11 @@ class tntScoresTableViewController: UITableViewController {
     func passes(_ event: String) -> [tntScoreItem] {
         
         return scores.filter {$0.event == event && $0.pass > 0}
+    }
+    
+    func header(for event: String) -> tntScoreItem? {
+        let matchingHeaders = scores.filter {$0.event == event && $0.pass == 0}
+        return matchingHeaders.count > 0 ? matchingHeaders[0] : nil
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -143,10 +224,9 @@ class tntScoresTableViewController: UITableViewController {
         // Need to calculate or set height of view here or in xib using constraints
         let headerView = Bundle.main.loadNibNamed("tntScoresTableHeaderView", owner: self, options: nil)![0] as! tntScoresTableHeaderView
         
-        headerView.eventHeader = passes(events()[section])[0]
+        headerView.eventHeader = header(for: events()[section])
         headerView.controller = self
         headerView.setupHeader()
-        headerView.totalScoreLabel.text = "59.50"
     
         return headerView
     }
@@ -222,5 +302,30 @@ class tntScoresTableViewController: UITableViewController {
     }
 
     
-
+    @IBAction func newScoreSheetTapped(_ sender: Any) {
+        
+        createEmptyScoreSheet()
+        
+    }
+    
+    
+    @IBAction func refreshScoresTapped(_ sender: Any) {
+        
+        // Check the cloud DB for a more upto date version of the scores object
+        
+        refreshScores()
+    }
+    
+    // MARK: Notification Center Observers
+    
+    func observerScoresLoaded(notification: Notification) {
+        
+        DispatchQueue.main.async{
+            self.setupDataSource()
+            self.recalculateData()
+            self.tableView.reloadData()
+        }
+        
+    }
+    
 }

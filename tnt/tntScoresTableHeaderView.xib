@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -27,14 +27,14 @@
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="52.60" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULV-jD-Syu">
-                            <rect key="frame" x="323" y="8" width="45" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULV-jD-Syu">
+                            <rect key="frame" x="333" y="8" width="24" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="X8A-r7-kLF">
-                            <rect key="frame" x="154" y="8" width="144" height="30"/>
+                            <rect key="frame" x="164" y="8" width="144" height="30"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goldmedal" translatesAutoresizingMaskIntoConstraints="NO" id="HJP-Cq-Pue">
                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -80,7 +80,7 @@
                         <constraint firstItem="q1d-Do-Q96" firstAttribute="leading" secondItem="3fS-eB-YVH" secondAttribute="leadingMargin" id="4hQ-8d-jSH"/>
                         <constraint firstItem="X8A-r7-kLF" firstAttribute="top" secondItem="q1d-Do-Q96" secondAttribute="top" id="G2F-Ao-r4A"/>
                         <constraint firstItem="X8A-r7-kLF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="q1d-Do-Q96" secondAttribute="trailing" priority="250" constant="40" id="Huf-TI-bIu"/>
-                        <constraint firstAttribute="trailing" secondItem="ULV-jD-Syu" secondAttribute="trailing" constant="5" id="Kpy-K7-g6m"/>
+                        <constraint firstAttribute="trailing" secondItem="ULV-jD-Syu" secondAttribute="trailing" constant="16" id="Kpy-K7-g6m"/>
                         <constraint firstItem="q1d-Do-Q96" firstAttribute="top" secondItem="3fS-eB-YVH" secondAttribute="topMargin" id="KxB-1r-KHe"/>
                         <constraint firstItem="ULV-jD-Syu" firstAttribute="top" secondItem="q1d-Do-Q96" secondAttribute="top" id="OS7-s6-GaK"/>
                         <constraint firstItem="ULV-jD-Syu" firstAttribute="leading" secondItem="X8A-r7-kLF" secondAttribute="trailing" constant="25" id="Ylm-Bs-q5k"/>

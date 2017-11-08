@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6eG-1c-d0X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6eG-1c-d0X">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -575,6 +575,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="ZcB-VF-uwo">
+                            <rect key="frame" x="0.0" y="141.5" width="375" height="116"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Scores For This Meet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzj-M5-9di">
+                                    <rect key="frame" x="93" y="8" width="189" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWB-SY-3Q7">
+                                    <rect key="frame" x="129" y="43" width="117" height="30"/>
+                                    <state key="normal" title="New  Scoresheet"/>
+                                    <connections>
+                                        <action selector="newScoreSheetTapped:" destination="H2Q-CO-Q2P" eventType="touchUpInside" id="BC8-1B-prQ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsj-oW-daa">
+                                    <rect key="frame" x="161" y="72" width="53" height="30"/>
+                                    <state key="normal" title="Refresh"/>
+                                    <connections>
+                                        <action selector="refreshScoresTapped:" destination="H2Q-CO-Q2P" eventType="touchUpInside" id="u2y-cL-0Uc"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="jWB-SY-3Q7" firstAttribute="top" secondItem="Fzj-M5-9di" secondAttribute="bottom" constant="14" id="4JM-8l-Hf1"/>
+                                <constraint firstItem="nsj-oW-daa" firstAttribute="top" secondItem="jWB-SY-3Q7" secondAttribute="bottom" constant="-1" id="EQt-PE-zpA"/>
+                                <constraint firstItem="nsj-oW-daa" firstAttribute="centerX" secondItem="ZcB-VF-uwo" secondAttribute="centerX" id="Jks-ys-zI4"/>
+                                <constraint firstItem="jWB-SY-3Q7" firstAttribute="centerX" secondItem="ZcB-VF-uwo" secondAttribute="centerX" id="UL3-K9-cME"/>
+                                <constraint firstItem="Fzj-M5-9di" firstAttribute="centerX" secondItem="ZcB-VF-uwo" secondAttribute="centerX" id="Xne-vn-Z4K"/>
+                                <constraint firstItem="Fzj-M5-9di" firstAttribute="top" secondItem="ZcB-VF-uwo" secondAttribute="top" constant="8" id="YQg-dK-NIe"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntScoreItem" rowHeight="68" id="FBa-B7-RsT" customClass="tntScoresTableViewCell" customModule="tnt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="68"/>
@@ -584,20 +619,20 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Pass Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zna-pZ-klz">
-                                            <rect key="frame" x="8" y="8" width="102" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="102" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uks-kr-IC8">
-                                            <rect key="frame" x="282.5" y="8" width="76.5" height="21"/>
+                                            <rect key="frame" x="282.5" y="11" width="76.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Uks-kr-IC8" secondAttribute="trailing" constant="8" id="2nk-RT-aLk"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Uks-kr-IC8" secondAttribute="trailing" id="2nk-RT-aLk"/>
                                         <constraint firstItem="Uks-kr-IC8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zna-pZ-klz" secondAttribute="trailing" constant="40" id="4br-t6-C7M"/>
                                         <constraint firstItem="zna-pZ-klz" firstAttribute="leading" secondItem="hSB-UK-7sx" secondAttribute="leadingMargin" id="7NO-J0-gTm"/>
                                         <constraint firstItem="zna-pZ-klz" firstAttribute="top" secondItem="hSB-UK-7sx" secondAttribute="topMargin" id="TTO-90-jMp"/>
@@ -618,13 +653,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Meet Scores" id="GiV-4H-bsJ"/>
                     <connections>
+                        <outlet property="emptyTableFooter" destination="ZcB-VF-uwo" id="WPD-XB-FmA"/>
                         <segue destination="cKV-B0-CWo" kind="show" identifier="tntEditScoreItem" id="gB2-DL-uM0"/>
                         <segue destination="WER-FM-G1q" kind="show" identifier="tntEditEventHeader" id="HiQ-B2-0eM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uv5-IJ-iE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428" y="-341"/>
+            <point key="canvasLocation" x="1428" y="-341.37931034482762"/>
         </scene>
         <!--Event Result-->
         <scene sceneID="hBA-2W-kWS">

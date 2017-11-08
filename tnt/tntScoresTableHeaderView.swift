@@ -35,6 +35,8 @@ class tntScoresTableHeaderView: UIView {
         medalImage.isHidden = (eventHeader.medal == nil)
         qualifiedImage.isHidden = !eventHeader.qualified
         mobilizedImage.isHidden = !eventHeader.mobilized
+        
+        totalScoreLabel.text = String(format: "%.2f", eventHeader.score ?? 0.0)
     }
     
     /*

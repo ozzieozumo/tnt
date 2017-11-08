@@ -246,6 +246,19 @@ class tntLocalDataManager {
         }
     }
     
+    func deleteScores(_ scoreId: String) {
+        
+        if let objectToDelete = scores[scoreId] {
+            scores[scoreId] = nil
+            moc!.delete(objectToDelete)
+            do {
+                try moc!.save()
+            } catch {
+                fatalError("TNT Local Data Manager error saving context after scores delete")
+            }
+        }
+    }
+    
     func getPendingScoreUpdates() -> [Scores] {
         
         // return an array of MOs for each Score in a pending upload state

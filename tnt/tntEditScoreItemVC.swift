@@ -26,6 +26,8 @@ class tntEditScoreItemVC: UIViewController {
     @IBOutlet var flightStepper: UIStepper!
     
     @IBOutlet var netScoreLabel: UILabel!
+    var netScore: Float = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +48,11 @@ class tntEditScoreItemVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // copy values back from controls to the scoreItem for the pass being edited
         
-        scoreItem?.score = baseScoreSelectedValue()
+        scoreItem?.execution = baseScoreSelectedValue()
+        scoreItem?.difficulty = Float(difficultyStepper.value)
+        scoreItem?.penalty = Float(penaltyStepper.value)
+        scoreItem?.flight = Float(flightStepper.value)
+        scoreItem?.score = netScore
         
     }
 
@@ -112,7 +118,7 @@ class tntEditScoreItemVC: UIViewController {
         let penalty = penaltyStepper.value
         let flight = flightStepper.value
         
-        let netScore = execution + difficulty - penalty + flight
+        netScore = Float(execution + difficulty - penalty + flight)
         
         // update displayed values
         difficultyLabel.text = String(difficulty)
@@ -203,6 +209,10 @@ extension tntEditScoreItemVC: UIPickerViewDelegate {
             return NSAttributedString(string: tntScoreItem.decimalValues[row])
         default: return nil
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        recalculate()
     }
     
     func baseScoreSelectedValue() -> Float {

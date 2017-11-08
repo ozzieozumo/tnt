@@ -142,20 +142,20 @@ class tntHomeViewController: UIViewController {
             let firstName = athlete.firstName ?? ""
             let lastName =  athlete.lastName ?? ""
             tntName.text = firstName + " " + lastName
-        }
+        
     
-        // current level display
-        
-        //let eventLevels = athlete.value(forKey: "eventLevels") as! [String: Int]
-        
-        let levelTRint = 6 // eventLevels["TR"]
-        let levelTUint = 7 // eventLevels["TU"]
-        let levelDMTint = 7 // eventLevels["DMT"]
-        
-        currentLevelTR.text =  levelTRint != nil ? "\(levelTRint)" : ""
-        currentLevelTU.text = levelTUint != nil ? "\(levelTUint)" : ""
-        currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint)" : ""
-        
+            // current level display
+            
+            let eventLevels = athlete.eventLevels as! [String: Int]
+            
+            let levelTRint  = eventLevels["TR"]
+            let levelTUint  = eventLevels["TU"]
+            let levelDMTint = eventLevels["DMT"]
+            
+            currentLevelTR.text =  levelTRint != nil ? "\(levelTRint!)" : ""
+            currentLevelTU.text = levelTUint != nil ? "\(levelTUint!)" : ""
+            currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint!)" : ""
+        }
     }
     
     func displayProfileImage() {

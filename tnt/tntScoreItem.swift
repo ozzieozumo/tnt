@@ -16,7 +16,7 @@ import UIKit
 
 class tntScoreItem{
     
-    static let passNames: [String] = ["1st Pass", "2nd Pass"]
+    static let passNames: [String] = ["Event Header", "1st Pass", "2nd Pass"]
     static let unitValues = 0...30
     static let decimalValues = [".00", ".10", ".20", ".30", ".40", ".50", ".60", ".70", ".80", ".90"]
     static let eventNames: [String: String] = ["DMT": "Double Mini",
@@ -34,18 +34,23 @@ class tntScoreItem{
     
     var event: String
     var pass: Int
-    var level: Int
-    var score: Float?            // The net score (N) = (E) + (D) - (P) + (F) + (H)
-    var execution: Float?         // Execution or base score (E)
-    var difficulty: Float?        // Degree of difficulty bonus (D)
-    var penalty: Float?           // Penalty or deductions (P)
-    var flight: Float?            // Time of flight (F) (only scored at elite levels)
-    var displacement: Float?      // horizontal displacement (H) (not sccored separately in US)
+    var level: Int = 0
+    var score: Float?  = nil           // The net score (N) = (E) + (D) - (P) + (F) + (H)
+    var execution: Float? = nil        // Execution or base score (E)
+    var difficulty: Float? = nil        // Degree of difficulty bonus (D)
+    var penalty: Float? = nil           // Penalty or deductions (P)
+    var flight: Float? = nil           // Time of flight (F) (only scored at elite levels)
+    var displacement: Float? = nil     // horizontal displacement (H) (not sccored separately in US)
     
-    // mebers applicable for event headers only
-    var medal: String?
-    var qualified: Bool
-    var mobilized: Bool
+    // applicable for event headers only
+    var medal: String? = nil
+    var qualified: Bool = false
+    var mobilized: Bool = false
+    
+    init(_ event: String, _ pass: Int) {
+        self.event = event
+        self.pass = pass
+    }
 
     init(_ scoreDictionary: [String: Any]) {
         // inits a scoreItem from a dictionary retrieved from teh Scores managed object
