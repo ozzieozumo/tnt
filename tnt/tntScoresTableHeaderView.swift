@@ -30,7 +30,7 @@ class tntScoresTableHeaderView: UIView {
         }
         let eventName = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
         let eventLevel = eventHeader.level
-        eventLabel.text = eventName + " (\(eventLevel))"
+        eventLabel.text = eventName + " (L\(eventLevel))"
         
         medalImage.isHidden = (eventHeader.medal == nil)
         qualifiedImage.isHidden = !eventHeader.qualified

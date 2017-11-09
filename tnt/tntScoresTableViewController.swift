@@ -58,6 +58,18 @@ class tntScoresTableViewController: UITableViewController {
         recalculateData()
         tableView.reloadData()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // automatically save the table as a scores object in CoreData
+        
+        // only if the view is being popped (I think this could also be done in willMoveToParentViewController with a test for nil parent)
+        if self.isMovingFromParentViewController {
+            
+            saveScores()
+            
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,7 +97,7 @@ class tntScoresTableViewController: UITableViewController {
         
         if let cachedMO = tntLocalDataManager.shared.scores[scoreId] {
             
-            scoresMO = cachedMO
+            self.scoresMO = cachedMO
             // get the scores dictionary
             
             let scoresDictArray = cachedMO.scores as? [[String:Any]] ?? []
@@ -117,6 +129,10 @@ class tntScoresTableViewController: UITableViewController {
             if headerItem == nil {
                 // if existing data had no header row, create one now
                 headerItem = tntScoreItem(event, 0)
+                
+                let athleteLevels = athleteMO?.eventLevels as! [String: Int]
+                headerItem?.level = athleteLevels[event] ?? 0
+                
                 scores.append(headerItem!)
             }
             var totalScore: Float = 0.0
@@ -173,6 +189,38 @@ class tntScoresTableViewController: UITableViewController {
         
         // ideally need a completion handler here to cancel activity indicator and then reload the table
         // for now, just wait for notifcation of scoreLoaded
+    }
+    
+    func saveScores() {
+        
+        var scoresToSave: Scores? = nil
+        
+        if scoresMO != nil {
+            scoresToSave = scoresMO
+        } else {
+            // need to create an MO first and set key attributes
+            
+            scoresToSave = Scores(context: tntLocalDataManager.shared.moc!)
+            self.scoresMO = scoresToSave
+            
+            scoresToSave?.athleteId = athleteId
+            scoresToSave?.meetId = meetId
+            scoresToSave?.scoreId = scoreId
+        }
+        
+        // now convert the table's datasource backinto an array of dictionaries
+        
+        var scoresDictArray: [[String:Any]] = []
+        
+        for item in scores {
+            scoresDictArray.append(item.toDictionary())
+        }
+        
+        scoresToSave?.scores = scoresDictArray as NSObject
+        
+        scoresToSave?.saveLocal()
+        
+        
     }
     
     func events() -> [String] {

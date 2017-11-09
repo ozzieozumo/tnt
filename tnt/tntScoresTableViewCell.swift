@@ -39,7 +39,7 @@ class tntScoresTableViewCell: UITableViewCell {
         }
         
         passLabel.text = tntScoreItem.passNames[scoreItem.pass]
-        netScoreLabel.text = String(scoreItem.score ?? 0.0)
+        netScoreLabel.text = String(format: "%.2f", scoreItem.score ?? 0.0)
         
     }
 

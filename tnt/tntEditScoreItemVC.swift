@@ -83,7 +83,7 @@ class tntEditScoreItemVC: UIViewController {
         }
         
         let eventName = tntScoreItem.eventNames[eventHeader.event] ?? "Other Event"
-        let levelName = " (\(eventHeader.level))"
+        let levelName = " (L\(eventHeader.level))"
         eventLabel.text = eventName + levelName
         passLabel.text = tntScoreItem.passNames[scoreItem.pass]
         let basicScore = scoreItem.score ?? 25.0   // use 25.0 as default value if no score yet
@@ -121,9 +121,9 @@ class tntEditScoreItemVC: UIViewController {
         netScore = Float(execution + difficulty - penalty + flight)
         
         // update displayed values
-        difficultyLabel.text = String(difficulty)
-        penaltyLabel.text = "(-) \(penalty)"
-        flightLabel.text = String(flight)
+        difficultyLabel.text = String(format: "%.2f", difficulty)
+        penaltyLabel.text = String(format: "(-) %.2f", penalty)
+        flightLabel.text = String(format: "%.2f",flight)
         netScoreLabel.text = String(format: "%.2f", netScore)
         
     }
@@ -141,20 +141,17 @@ class tntEditScoreItemVC: UIViewController {
     
     @IBAction func difficultyValueChanged(_ sender: UIStepper) {
         
-        difficultyLabel.text = String(sender.value)
         recalculate()
     }
     
     @IBAction func penaltyValueChanged(_ sender: UIStepper) {
         
-        penaltyLabel.text = String(sender.value)
         recalculate()
     }
     
     
     @IBAction func flightValueChanged(_ sender: UIStepper) {
         
-        flightLabel.text = String(sender.value)
         recalculate()
     }
 }
