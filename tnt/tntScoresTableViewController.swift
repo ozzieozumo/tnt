@@ -302,18 +302,51 @@ class tntScoresTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func itemIndex(_ indexPath: IndexPath) -> Int? {
+     
+        // returns the index within the scores array (datasource) corresponding to a given indexPath (section and row)
+        // NOTE: this would be a whole lot easier if the datasource was an array of arrays
+        
+        guard events().indices.contains(indexPath.section) else {
+            print("TNT Scores Table VC: invalid section in itemAt")
+            return nil
+        }
+        let event = events()[indexPath.section]
+        
+        let pass  = indexPath.row + 1  // row 0 = pass 1 etc (because pass 0 is not a row0
+        
+        let itemIndex = scores.index { $0.event == event && $0.pass == pass }
+        
+        return itemIndex
+        
     }
-    */
+ 
+     // Override to support editing the table view.
+    
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+         if editingStyle == .delete {
+            
+            // delete  the corresponding item from the datasource (scores array)
+            if let indexToDelete = itemIndex(indexPath) {
+                scores.remove(at: indexToDelete)
+            }
+            
+            // delete the table cell
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            recalculateData()
+            
+            // force update of all section headers to recalculate
+            // might be possible to just call headerview for section to find any views to update
+            
+            tableView.reloadData()
+         
+         
+         } else if editingStyle == .insert {
+         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+         }
+     }
 
     /*
     // Override to support rearranging the table view.
