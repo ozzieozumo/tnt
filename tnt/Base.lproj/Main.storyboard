@@ -651,7 +651,13 @@
                             <outlet property="delegate" destination="H2Q-CO-Q2P" id="hiG-W6-DTo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Meet Scores" id="GiV-4H-bsJ"/>
+                    <navigationItem key="navigationItem" title="Meet Scores" id="GiV-4H-bsJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="h70-vG-ul0">
+                            <connections>
+                                <action selector="addRowsTapped:" destination="H2Q-CO-Q2P" id="bnM-OB-P2q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyTableFooter" destination="ZcB-VF-uwo" id="WPD-XB-FmA"/>
                         <segue destination="cKV-B0-CWo" kind="show" identifier="tntEditScoreItem" id="gB2-DL-uM0"/>

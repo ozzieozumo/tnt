@@ -16,7 +16,8 @@ import UIKit
 
 class tntScoreItem{
     
-    static let passNames: [String] = ["Event Header", "1st Pass", "2nd Pass"]
+    static let passNames: [String] = ["Event Header", "1st Pass", "2nd Pass", "3rd Pass",
+                                      "4th Pass", "5th Pass", "6th Pass", "7th Pass" ]
     static let unitValues = 0...30
     static let decimalValues = [".00", ".10", ".20", ".30", ".40", ".50", ".60", ".70", ".80", ".90"]
     static let eventNames: [String: String] = ["DMT": "Double Mini",

@@ -171,6 +171,34 @@ class tntScoresTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func addMissingScoreItems() {
+        // for each event add blank score items where there are gaps in the pass sequence
+        for event in events() {
+            
+            let passIndexes = (passes(event).map {$0.pass})
+            let maxPass = passIndexes.max() ?? 0
+            if maxPass > 1 {
+                for pass in 1 ... maxPass {
+                    if !passIndexes.contains(pass) {
+                        let newPass = tntScoreItem(event, pass)
+                        scores.append(newPass)
+                    }
+                }
+            }
+        }
+    }
+ 
+    func addExtraScoreItems() {
+        // for each event add an additional pass after the last pass for that event
+        
+        for event in events() {
+            let maxPass = (passes(event).map {$0.pass}).max() ?? 0
+            let newPass = tntScoreItem(event, maxPass + 1)
+            scores.append(newPass)
+        }
+    }
+    
+    
     func refreshScores() {
         
         // TODO: a) this should be unnecessary if initial athlete synch and background synch operations are working
@@ -230,7 +258,7 @@ class tntScoresTableViewController: UITableViewController {
     
     func passes(_ event: String) -> [tntScoreItem] {
         
-        return scores.filter {$0.event == event && $0.pass > 0}
+        return (scores.filter {$0.event == event && $0.pass > 0}).sorted {$0.pass < $1.pass}
     }
     
     func header(for event: String) -> tntScoreItem? {
@@ -396,6 +424,35 @@ class tntScoresTableViewController: UITableViewController {
         
         refreshScores()
     }
+    
+    @IBAction func addRowsTapped(_ sender: Any) {
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let addMorePasses = UIAlertAction(title: "Add More Passes", style: .default) { action in
+            self.addExtraScoreItems()
+            self.recalculateData()
+            self.tableView.reloadData()
+        }
+        let addMissingPasses = UIAlertAction(title: "Add Missing Passes", style: .default) { action in
+            self.addMissingScoreItems()
+            self.recalculateData()
+            self.tableView.reloadData()
+        }
+        let blankScoreSheet = UIAlertAction(title: "Blank Score Sheet", style: .destructive) { action in
+            self.scores = []
+            self.createEmptyScoreSheet()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            print("TNT Scores Table View - action canceled")
+        }
+        for action in [addMorePasses, addMissingPasses, blankScoreSheet, cancelAction] {
+            actionSheet.addAction(action)
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
     
     // MARK: Notification Center Observers
     
