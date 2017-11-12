@@ -342,7 +342,7 @@ class tntScoresTableViewController: UITableViewController {
         }
         let event = events()[indexPath.section]
         
-        let pass  = indexPath.row + 1  // row 0 = pass 1 etc (because pass 0 is not a row0
+        let pass  = passes(event)[indexPath.row].pass 
         
         let itemIndex = scores.index { $0.event == event && $0.pass == pass }
         
