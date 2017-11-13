@@ -245,6 +245,7 @@ extension tntEditAthleteViewController: UIImagePickerControllerDelegate, UINavig
         preferredImage = (editedImage != nil) ? editedImage : originalImage
         
         if preferredImage != nil {
+            preferredImage = normalizeImage(selfie: preferredImage!)
             profileImage.image = preferredImage
             profileImage.isUserInteractionEnabled = true
             
@@ -252,6 +253,46 @@ extension tntEditAthleteViewController: UIImagePickerControllerDelegate, UINavig
             print("TNT: profile image picker coujld not determine chosen image")
         }
         
+    }
+    
+    func enumdesc(_ orientation: UIImageOrientation) -> String  {
+        
+        switch orientation {
+        case .up: return "The image is right side up"
+        case .down: return "The image is rotated 180 degrees"
+        case .left: return "The image is rotated 90 degrees counterclockwise"
+        case .right: return "The image is rotated 90 degrees clockwise."
+        case .upMirrored: return "A mirror version of an image drawn with the up orientation."
+        case .downMirrored: return "A mirror version of an image drawn with the down orientation."
+        case .leftMirrored: return "A mirror version of an image drawn with the left orientation."
+        case .rightMirrored: return "A mirror version of an image drawn with the right orientation."
+        default: return "Something weird"
+            
+        }
+        
+    }
+    
+    func normalizeImage(selfie: UIImage) -> UIImage? {
+    // Corrects the orientation of an image from the phones camera.
+    // Selfies may be captured in different orientations depending on how the camera is held.
+    // UIImageView respects the orientation and rotates the image for display.
+    // However, the orientation information is lost when saving to PNG and uploading to
+    // the cloud DB. Subsequently downloaded images would appear rotated, which is
+    // why we normalize the image here.
+    
+        print("tntEditAthlete: normalizeImage(): starting orientation is \(enumdesc(selfie.imageOrientation))")
+        if selfie.imageOrientation == .up {
+            return selfie
+        }
+        UIGraphicsBeginImageContextWithOptions(selfie.size, false, selfie.scale)
+        var rect = CGRect.zero
+        rect.size = selfie.size
+        selfie.draw(in: rect)
+        let retVal = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        print("Final orientation for selfie is \(enumdesc(retVal!.imageOrientation))")
+        return retVal
     }
     
     
