@@ -193,7 +193,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hG-3d-3eQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hG-3d-3eQ">
                                 <rect key="frame" x="6" y="100" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="pGl-xr-B79"/>
@@ -1028,7 +1028,7 @@
         <image name="smile-emoticon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UYT-Om-cUA"/>
+        <segue reference="3VO-jR-EeR"/>
         <segue reference="DbF-hn-L9T"/>
     </inferredMetricsTieBreakers>
 </document>

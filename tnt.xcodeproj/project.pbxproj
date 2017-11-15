@@ -227,6 +227,96 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A73D1F921FBCC16F00A93A9C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
+				A7074AF11F9595AE004EBAB8 /* Login.storyboard */,
+				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
+				A7349A181F7800D400E5EFEA /* AthleteSetup.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A73D1F931FBCC64100A93A9C /* VCs Main */ = {
+			isa = PBXGroup;
+			children = (
+				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
+				A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */,
+				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
+				A7F123F61FAF71EA00B7207F /* tntEditScoreItemVC.swift */,
+				A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */,
+				A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */,
+				A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */,
+				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
+				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
+				A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */,
+			);
+			name = "VCs Main";
+			sourceTree = "<group>";
+		};
+		A73D1F941FBCC69A00A93A9C /* VCs Athlete Setup */ = {
+			isa = PBXGroup;
+			children = (
+				A7349A1A1F78054100E5EFEA /* tntAthleteSetupChoices.swift */,
+				A7349A1C1F781F0200E5EFEA /* tntEditAthleteViewController.swift */,
+				A7349A1E1F78959D00E5EFEA /* tntAthleteSelectViewController.swift */,
+				A7349A201F7895C200E5EFEA /* tntAthleteSearchViewController.swift */,
+			);
+			name = "VCs Athlete Setup";
+			sourceTree = "<group>";
+		};
+		A73D1F951FBCC6DF00A93A9C /* VCs Login */ = {
+			isa = PBXGroup;
+			children = (
+				A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */,
+				A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */,
+				A78E8E681F9D1344007820C4 /* tntUserPoolLoginViewController.swift */,
+				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
+			);
+			name = "VCs Login";
+			sourceTree = "<group>";
+		};
+		A73D1F971FBCC76800A93A9C /* Other Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A79AA6351FA90169009B00A5 /* tntScoreItem.swift */,
+			);
+			name = "Other Model Classes";
+			sourceTree = "<group>";
+		};
+		A73D1F981FBCC80100A93A9C /* Prototypes and Defunct */ = {
+			isa = PBXGroup;
+			children = (
+				A734D4DC1F216E1F006F89D3 /* tntScoringViewController.swift */,
+				A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */,
+				A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */,
+			);
+			name = "Prototypes and Defunct";
+			sourceTree = "<group>";
+		};
+		A73D1F991FBCC84400A93A9C /* Globals and Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				A74DE88B1E8DD4EB006B2AF5 /* Info.plist */,
+				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
+				A7BCE18D1EA0175C0053B550 /* Constants.swift */,
+				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
+				A79DB3531EC537470007A543 /* tntLoginManager.swift */,
+				A79DB3511EC4C5430007A543 /* tntSynchManager.swift */,
+				A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */,
+			);
+			name = "Globals and Singletons";
+			sourceTree = "<group>";
+		};
+		A73D1F9A1FBCCA4700A93A9C /* Custom Controls */ = {
+			isa = PBXGroup;
+			children = (
+				A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */,
+			);
+			name = "Custom Controls";
+			sourceTree = "<group>";
+		};
 		A74DE8701E8DD4EB006B2AF5 = {
 			isa = PBXGroup;
 			children = (
@@ -252,44 +342,17 @@
 		A74DE87B1E8DD4EB006B2AF5 /* tnt */ = {
 			isa = PBXGroup;
 			children = (
+				A73D1F991FBCC84400A93A9C /* Globals and Singletons */,
+				A73D1F981FBCC80100A93A9C /* Prototypes and Defunct */,
 				A7643F1D1F7AC979008C9579 /* CoreData Generated */,
-				A7E20B871F86EAEB009A0506 /* CoreData Custom */,
 				A7E20B881F86EB28009A0506 /* DynamoDB Mapping */,
-				A74DE87C1E8DD4EB006B2AF5 /* AppDelegate.swift */,
-				A7BCE18B1EA015A70053B550 /* tntLoginViewController.swift */,
-				A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */,
-				A78E8E681F9D1344007820C4 /* tntUserPoolLoginViewController.swift */,
-				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
-				A734D4DC1F216E1F006F89D3 /* tntScoringViewController.swift */,
-				A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */,
-				A79AA6351FA90169009B00A5 /* tntScoreItem.swift */,
-				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
-				A7F123F61FAF71EA00B7207F /* tntEditScoreItemVC.swift */,
-				A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */,
-				A7F123F21FAC008A00B7207F /* tntScoresTableHeaderView.swift */,
-				A7F123F41FAC00AE00B7207F /* tntScoresTableHeaderView.xib */,
-				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
-				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
-				A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */,
-				A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */,
-				A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */,
-				A74DE8881E8DD4EB006B2AF5 /* LaunchScreen.storyboard */,
-				A7074AF11F9595AE004EBAB8 /* Login.storyboard */,
-				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
-				A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */,
-				A7349A181F7800D400E5EFEA /* AthleteSetup.storyboard */,
-				A7349A1A1F78054100E5EFEA /* tntAthleteSetupChoices.swift */,
-				A7349A1C1F781F0200E5EFEA /* tntEditAthleteViewController.swift */,
-				A7349A1E1F78959D00E5EFEA /* tntAthleteSelectViewController.swift */,
-				A7349A201F7895C200E5EFEA /* tntAthleteSearchViewController.swift */,
-				A7BCE18D1EA0175C0053B550 /* Constants.swift */,
-				A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */,
-				A74DE8861E8DD4EB006B2AF5 /* Assets.xcassets */,
-				A74DE88B1E8DD4EB006B2AF5 /* Info.plist */,
-				A79DB3531EC537470007A543 /* tntLoginManager.swift */,
-				A79DB34F1EC4C0560007A543 /* tntLocalDataManager.swift */,
-				A79DB3511EC4C5430007A543 /* tntSynchManager.swift */,
-				A74DE8831E8DD4EB006B2AF5 /* tnt.xcdatamodeld */,
+				A7E20B871F86EAEB009A0506 /* CoreData Custom */,
+				A73D1F971FBCC76800A93A9C /* Other Model Classes */,
+				A73D1F921FBCC16F00A93A9C /* Storyboards */,
+				A73D1F931FBCC64100A93A9C /* VCs Main */,
+				A73D1F941FBCC69A00A93A9C /* VCs Athlete Setup */,
+				A73D1F951FBCC6DF00A93A9C /* VCs Login */,
+				A73D1F9A1FBCCA4700A93A9C /* Custom Controls */,
 				A7579B351E9FD6C800143A85 /* Frameworks */,
 			);
 			path = tnt;
@@ -348,6 +411,7 @@
 		A7E20B871F86EAEB009A0506 /* CoreData Custom */ = {
 			isa = PBXGroup;
 			children = (
+				A74DE8831E8DD4EB006B2AF5 /* tnt.xcdatamodeld */,
 				A7504E531F7ABFC000928A79 /* AthleteMO.swift */,
 				A7504E511F7ABF5800928A79 /* VideoMO.swift */,
 				A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */,

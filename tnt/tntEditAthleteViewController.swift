@@ -266,14 +266,12 @@ extension tntEditAthleteViewController: UIImagePickerControllerDelegate, UINavig
         case .downMirrored: return "A mirror version of an image drawn with the down orientation."
         case .leftMirrored: return "A mirror version of an image drawn with the left orientation."
         case .rightMirrored: return "A mirror version of an image drawn with the right orientation."
-        default: return "Something weird"
-            
         }
         
     }
     
     func normalizeImage(selfie: UIImage) -> UIImage? {
-    // Corrects the orientation of an image from the phones camera.
+    // Corrects the orientation of an image from the phone's camera.
     // Selfies may be captured in different orientations depending on how the camera is held.
     // UIImageView respects the orientation and rotates the image for display.
     // However, the orientation information is lost when saving to PNG and uploading to

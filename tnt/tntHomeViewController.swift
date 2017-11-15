@@ -146,15 +146,15 @@ class tntHomeViewController: UIViewController {
     
             // current level display
             
-            let eventLevels = athlete.eventLevels as! [String: Int]
+            let eventLevels = athlete.eventLevels as! [String: Int]?
             
-            let levelTRint  = eventLevels["TR"]
-            let levelTUint  = eventLevels["TU"]
-            let levelDMTint = eventLevels["DMT"]
+            let levelTRint  = eventLevels?["TR"]
+            let levelTUint  = eventLevels?["TU"]
+            let levelDMTint = eventLevels?["DMT"]
             
-            currentLevelTR.text =  levelTRint != nil ? "\(levelTRint!)" : ""
-            currentLevelTU.text = levelTUint != nil ? "\(levelTUint!)" : ""
-            currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint!)" : ""
+            currentLevelTR.text =  levelTRint != nil ? "\(levelTRint!)" : "?"
+            currentLevelTU.text = levelTUint != nil ? "\(levelTUint!)" : "?"
+            currentLevelDMT.text = levelDMTint != nil ? "\(levelDMTint!)" : "?"
         }
     }
     
