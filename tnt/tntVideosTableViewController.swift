@@ -328,7 +328,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         if let scores = tntLocalDataManager.shared.scores[scoreId] {
             
             self.scoresMO = scores
-            let videoInfo = scores.videos! as! [[String:Any]]
+            let videoInfo = (scores.videos as! [[String:Any]]?) ?? []
             
             self.videos = videoInfo.flatMap { return (expanded: false, info: $0)}
             return
@@ -336,8 +336,14 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         } else {
             
             // request loading from cloud DB (and await notification)
+            // TODO: probably want to replace this with a refresh button; should be handled in athlete synch
             
-            tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
+            // tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
+            
+            // create a new scoresMO so that new videos can be inserted
+            
+            self.scoresMO = Scores(athleteId: athleteId, meetId: meetId)
+            self.scoresMO?.saveLocal()
 
             return
             
@@ -364,6 +370,11 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             return
         }
         
+        guard let scoresMO = self.scoresMO else {
+            print("TNT Videos Table View Controller: cannot save video to a nil scores object")
+            return
+        }
+        
         // pop the VC of the video picker
         
         self.navigationController?.popViewController(animated: true)
@@ -374,7 +385,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         // upload the file to S3 and create the video object
         
-        tntSynchManager.shared.s3VideoUpload(url: url, asset: photosAsset, scores: scoresMO!)
+        tntSynchManager.shared.s3VideoUpload(url: url, asset: photosAsset, scores: scoresMO)
     
     }
     

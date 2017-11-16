@@ -28,6 +28,15 @@ extension Scores {
         
     }
     
+    convenience init(athleteId: String, meetId: String) {
+        
+        self.init(context: tntLocalDataManager.shared.moc!)
+        self.athleteId = athleteId
+        self.meetId = meetId
+        self.scoreId = athleteId + ":" + meetId
+      
+    }
+    
     func saveLocal() {
         
         cloudSavePending = true

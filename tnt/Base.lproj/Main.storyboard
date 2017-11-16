@@ -361,10 +361,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VS-Q9-aCS">
-                                    <rect key="frame" x="238" y="14" width="127" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Upload New Video"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VS-Q9-aCS">
+                                    <rect key="frame" x="320" y="5" width="50" height="30"/>
+                                    <state key="normal" title="Upload"/>
                                     <connections>
                                         <segue destination="AIN-si-y35" kind="show" id="UYT-Om-cUA"/>
                                     </connections>
@@ -385,6 +384,10 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="2VS-Q9-aCS" secondAttribute="trailing" constant="5" id="3qe-jI-mvc"/>
+                                <constraint firstItem="2VS-Q9-aCS" firstAttribute="top" secondItem="Up3-KX-vwa" secondAttribute="top" constant="5" id="vEr-V0-V1C"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntvideo" rowHeight="194" id="G3e-V2-6vz" customClass="tntRelatedVideosTableCell" customModule="tnt" customModuleProvider="target">
@@ -1028,7 +1031,7 @@
         <image name="smile-emoticon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3VO-jR-EeR"/>
+        <segue reference="UYT-Om-cUA"/>
         <segue reference="DbF-hn-L9T"/>
     </inferredMetricsTieBreakers>
 </document>
