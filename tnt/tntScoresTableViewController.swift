@@ -161,8 +161,8 @@ class tntScoresTableViewController: UITableViewController {
                 
                 // set the level to the athlete's current level for the event
                 
-                let athleteLevels = athleteMO?.eventLevels as! [String: Int]
-                newScoreItem.level = athleteLevels[event] ?? 0
+                let athleteLevels = athleteMO?.eventLevels as! [String: Int]?
+                newScoreItem.level = athleteLevels?[event] ?? 0
                 
                 scores.append(newScoreItem)
             }

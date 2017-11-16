@@ -18,12 +18,17 @@ class tntEditScoreItemVC: UIViewController {
     @IBOutlet var baseScorePicker: UIPickerView!
     
     
-    @IBOutlet var difficultyStepper: UIStepper!
+    
+    @IBOutlet var difficultySlider: UISlider!
     @IBOutlet var difficultyLabel: UILabel!
-    @IBOutlet var penaltyStepper: UIStepper!
+   
     @IBOutlet var penaltyLabel: UILabel!
+    
+    @IBOutlet var penaltySlider: UISlider!
     @IBOutlet var flightLabel: UILabel!
-    @IBOutlet var flightStepper: UIStepper!
+    
+    @IBOutlet var flightSlider: UISlider!
+    
     
     @IBOutlet var netScoreLabel: UILabel!
     var netScore: Float = 0.0
@@ -36,8 +41,6 @@ class tntEditScoreItemVC: UIViewController {
         baseScorePicker.dataSource = self
         baseScorePicker.delegate = self
         
-        configureSteppers()
-        
         setupBasicScoring()
         
         setupAdvancedScoring()
@@ -49,9 +52,9 @@ class tntEditScoreItemVC: UIViewController {
         // copy values back from controls to the scoreItem for the pass being edited
         
         scoreItem?.execution = baseScoreSelectedValue()
-        scoreItem?.difficulty = Float(difficultyStepper.value)
-        scoreItem?.penalty = Float(penaltyStepper.value)
-        scoreItem?.flight = Float(flightStepper.value)
+        scoreItem?.difficulty = Float(difficultySlider.value)
+        scoreItem?.penalty = Float(penaltySlider.value)
+        scoreItem?.flight = Float(flightSlider.value)
         scoreItem?.score = netScore
         
     }
@@ -61,19 +64,7 @@ class tntEditScoreItemVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func configureSteppers() {
-        
-        let steppers = [difficultyStepper, penaltyStepper, flightStepper]
-        
-        for s in steppers  {
-            
-            s?.isContinuous = false
-            s?.autorepeat = true
-            s?.minimumValue = 0.0
-            s?.stepValue = 0.10
-            
-        }
-    }
+   
  
     func setupBasicScoring() {
         
@@ -105,18 +96,18 @@ class tntEditScoreItemVC: UIViewController {
             print("tntEditScoreItemVC - cannot setup editor without a score item")
             return
         }
-        difficultyStepper.value = Double(scoreItem.difficulty ?? 0.0)
-        penaltyStepper.value = Double(scoreItem.penalty ?? 0.0)
-        flightStepper.value = Double(scoreItem.flight ?? 0.0)
+        difficultySlider.value = Float(scoreItem.difficulty ?? 0.0)
+        penaltySlider.value = Float(scoreItem.penalty ?? 0.0)
+        flightSlider.value = Float(scoreItem.flight ?? 0.0)
     
     }
     
     func recalculate() {
         
         let execution = Double(baseScoreSelectedValue())
-        let difficulty = difficultyStepper.value
-        let penalty = penaltyStepper.value
-        let flight = flightStepper.value
+        let difficulty = Double((difficultySlider.value * 10).rounded() / 10)
+        let penalty = Double((penaltySlider.value * 10).rounded() / 10)
+        let flight = Double((flightSlider.value * 10).rounded() / 10)
         
         netScore = Float(execution + difficulty - penalty + flight)
         
@@ -139,18 +130,18 @@ class tntEditScoreItemVC: UIViewController {
     */
     
     
-    @IBAction func difficultyValueChanged(_ sender: UIStepper) {
+    @IBAction func difficultyValueChanged(_ sender: UISlider) {
         
         recalculate()
     }
     
-    @IBAction func penaltyValueChanged(_ sender: UIStepper) {
+    @IBAction func penaltyValueChanged(_ sender: UISlider) {
         
         recalculate()
     }
     
     
-    @IBAction func flightValueChanged(_ sender: UIStepper) {
+    @IBAction func flightValueChanged(_ sender: UISlider) {
         
         recalculate()
     }
