@@ -67,6 +67,8 @@ extension Video {
         
         var s3imgURL : URL?
         
+        // TODO: why not use AWS Transfer Manager here instead of pre-signed URL and URL session?
+        
         DispatchQueue.global().sync {
             
             s3imgURL = URL(string: tntSynchManager.shared.tntPreSignedURL(unsignedURL: url))

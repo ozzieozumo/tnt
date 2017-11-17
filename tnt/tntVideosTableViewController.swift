@@ -42,7 +42,6 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntVideosTableViewController.observerThumbnailLoaded(notification:)), name: Notification.Name("tntVideoThumbnailLoaded"), object: nil)
         
-        // if there are no videos in coredata, try to load from the cloud database
         
         getScores()
         
@@ -335,11 +334,6 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             
         } else {
             
-            // request loading from cloud DB (and await notification)
-            // TODO: probably want to replace this with a refresh button; should be handled in athlete synch
-            
-            // tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
-            
             // create a new scoresMO so that new videos can be inserted
             
             self.scoresMO = Scores(athleteId: athleteId, meetId: meetId)
@@ -349,6 +343,8 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             
         }
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

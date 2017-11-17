@@ -39,6 +39,7 @@ class tntRelatedVideosTableCell: UITableViewCell {
     func setVideo(videoId: String) {
         
         video = tntLocalDataManager.shared.getVideoById(videoId: videoId)
+        backgroundLoadMissingThumbnail(video)
         
     }
     
@@ -72,13 +73,29 @@ class tntRelatedVideosTableCell: UITableViewCell {
         displayExpansionIndicator()
     }
     
+    func backgroundLoadMissingThumbnail(_ video: Video?) {
+        // It is possible that the binary image data for the thumbnail image is not in coredata
+        // (e.g. when "reconnecting" on a new phone, or after clearing coredata.
+        // Reload the thumbnail image in such cases.
+        
+        if video?.thumbImage == nil && video?.thumbKey != nil {
+            
+            let thumbQueue = DispatchQueue(label: "thumbimages")
+            thumbQueue.async {
+                video?.loadThumbImage(imageURL: video?.thumbKey)
+            }
+        }
+        
+        
+    }
+    
     func displayExpansionIndicator() {
         
         if expandedView.isHidden {
-            let expandImage = UIImage(imageLiteralResourceName: "down-arrow")
+            let expandImage = UIImage(imageLiteralResourceName: "connect-right")
             viewToggleButton.setImage(expandImage, for: .normal)
         } else {
-            let contractImage = UIImage(imageLiteralResourceName: "up-arrow")
+            let contractImage = UIImage(imageLiteralResourceName: "connect-left")
             viewToggleButton.setImage(contractImage, for: .normal)
         }
     }

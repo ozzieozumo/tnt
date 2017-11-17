@@ -44,6 +44,7 @@
 		A7504E621F7AC41B00928A79 /* Scores+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5A1F7AC41B00928A79 /* Scores+CoreDataProperties.swift */; };
 		A7504E631F7AC41B00928A79 /* Athlete+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */; };
 		A7504E641F7AC41B00928A79 /* Athlete+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */; };
+		A760E93F1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A760E93E1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift */; };
 		A76E9CD31E9FDCF400FC14FC /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; };
 		A76E9CD41E9FDCF400FC14FC /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A76E9CD71E9FDD1900FC14FC /* AWSCognito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */; };
@@ -155,6 +156,7 @@
 		A7504E5A1F7AC41B00928A79 /* Scores+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scores+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A7504E5B1F7AC41B00928A79 /* Athlete+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A7504E5C1F7AC41B00928A79 /* Athlete+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A760E93E1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntEditVideoInfoVC.swift; sourceTree = "<group>"; };
 		A76E9CD21E9FDCF400FC14FC /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
 		A76E9CD61E9FDD1900FC14FC /* AWSCognito.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognito.framework; sourceTree = "<group>"; };
 		A76E9CD91E9FDD4100FC14FC /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		A73D1F931FBCC64100A93A9C /* VCs Main */ = {
 			isa = PBXGroup;
 			children = (
+				A760E93E1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift */,
 				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
 				A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */,
 				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
@@ -647,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A734D4DD1F216E1F006F89D3 /* tntScoringViewController.swift in Sources */,
+				A760E93F1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift in Sources */,
 				A79DB3501EC4C0560007A543 /* tntLocalDataManager.swift in Sources */,
 				A7504E5E1F7AC41B00928A79 /* Meet+CoreDataProperties.swift in Sources */,
 				A79DB3521EC4C5430007A543 /* tntSynchManager.swift in Sources */,
