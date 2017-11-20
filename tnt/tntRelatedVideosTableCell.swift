@@ -92,7 +92,7 @@ class tntRelatedVideosTableCell: UITableViewCell {
     func displayExpansionIndicator() {
         
         if expandedView.isHidden {
-            let expandImage = UIImage(imageLiteralResourceName: "connect-right")
+            let expandImage = UIImage(imageLiteralResourceName: "moredots")
             viewToggleButton.setImage(expandImage, for: .normal)
         } else {
             let contractImage = UIImage(imageLiteralResourceName: "connect-left")
@@ -114,5 +114,16 @@ class tntRelatedVideosTableCell: UITableViewCell {
         // let the delegate (table view controller) perform the actions
         
         tableUpdatesDelegate?.didToggleExpansion(for: self)
+    }
+    
+    
+    @IBAction func tapEdit(_ sender: Any) {
+        
+        print("TNT Videos Cell - edit tapped")
+        if let video = self.video {
+            print("TNT Videos Cell - edit tapped, setting video for delegate")
+            tableUpdatesDelegate?.didSetVideoToEdit(video: video)
+        }
+        
     }
 }

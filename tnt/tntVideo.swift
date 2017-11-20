@@ -21,6 +21,8 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var publishDate: String?            // yyyy-MM-dd
     var captureDate: String?            // yyyy-MM-dd
     var duration: Double?               // duration in seconds
+    var title: String?
+    var notes: String?
     
     class func dynamoDBTableName() -> String {
         return "tntVideo"
@@ -52,6 +54,9 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         }
         
         duration = videoMO.duration
+        
+        title = videoMO.title
+        notes = (videoMO.notes as! NSAttributedString?)?.string ?? ""
     }
     
     

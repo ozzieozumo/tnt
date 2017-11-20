@@ -472,7 +472,7 @@
                                                             <rect key="frame" x="340" y="133.5" width="30" height="30"/>
                                                             <state key="normal" title="Edit"/>
                                                             <connections>
-                                                                <segue destination="KKX-Ia-ZsT" kind="show" id="06v-Sb-f8M"/>
+                                                                <action selector="tapEdit:" destination="G3e-V2-6vz" eventType="touchUpInside" id="fKT-EF-S90"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -525,11 +525,12 @@
                     <connections>
                         <outlet property="athleteName" destination="rIj-T4-8pv" id="MOS-a9-Qjw"/>
                         <outlet property="meetInfo" destination="Qo8-IW-8bk" id="YJl-2a-LJE"/>
+                        <segue destination="KKX-Ia-ZsT" kind="show" identifier="tntEditVideoInfo" id="NRm-aM-hMU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1tl-Oo-j5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48.799999999999997" y="929.68515742128943"/>
+            <point key="canvasLocation" x="-167" y="936"/>
         </scene>
         <!--Tnt Edit Video InfoVC-->
         <scene sceneID="jtU-aS-0q2">
@@ -542,12 +543,79 @@
                     <view key="view" contentMode="scaleToFill" id="PHY-Vr-Zfm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HER-wG-zq0">
+                                <rect key="frame" x="0.0" y="64" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Los-Pg-yWD"/>
+                                    <constraint firstAttribute="height" constant="120" id="lMg-Hl-b9q"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capture Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bar-UC-vUJ">
+                                <rect key="frame" x="160" y="72" width="117" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2r2-zV-Y3G">
+                                <rect key="frame" x="0.0" y="204" width="375" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="65y-wh-53N">
+                                <rect key="frame" x="0.0" y="283" width="375" height="344"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAp-qz-KFP">
+                                <rect key="frame" x="0.0" y="254" width="45.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run TIme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpY-Fc-w00">
+                                <rect key="frame" x="160" y="113" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FAp-qz-KFP" firstAttribute="top" secondItem="2r2-zV-Y3G" secondAttribute="bottom" constant="20" id="1Ma-wc-kMF"/>
+                            <constraint firstItem="FAp-qz-KFP" firstAttribute="leading" secondItem="2r2-zV-Y3G" secondAttribute="leading" id="3Tg-71-4NP"/>
+                            <constraint firstItem="65y-wh-53N" firstAttribute="top" secondItem="FAp-qz-KFP" secondAttribute="bottom" constant="8" id="7UL-hd-dKT"/>
+                            <constraint firstAttribute="trailing" secondItem="2r2-zV-Y3G" secondAttribute="trailing" id="A25-tE-iJ1"/>
+                            <constraint firstItem="65y-wh-53N" firstAttribute="leading" secondItem="2r2-zV-Y3G" secondAttribute="leading" id="C0y-LG-Zdf"/>
+                            <constraint firstItem="vpY-Fc-w00" firstAttribute="leading" secondItem="Bar-UC-vUJ" secondAttribute="leading" id="Ffv-yi-CcE"/>
+                            <constraint firstItem="HER-wG-zq0" firstAttribute="top" secondItem="gPP-ho-Z5k" secondAttribute="bottom" id="JhF-WQ-9nM"/>
+                            <constraint firstItem="HER-wG-zq0" firstAttribute="leading" secondItem="PHY-Vr-Zfm" secondAttribute="leading" id="P2N-HF-dnX"/>
+                            <constraint firstItem="ri8-lF-YlW" firstAttribute="top" secondItem="65y-wh-53N" secondAttribute="bottom" priority="250" constant="40" id="SxW-qF-RS7"/>
+                            <constraint firstItem="2r2-zV-Y3G" firstAttribute="leading" secondItem="PHY-Vr-Zfm" secondAttribute="leading" id="Ulu-iD-8j9"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vpY-Fc-w00" secondAttribute="trailing" constant="125" id="VDo-rw-Dgg"/>
+                            <constraint firstItem="2r2-zV-Y3G" firstAttribute="top" secondItem="HER-wG-zq0" secondAttribute="bottom" constant="20" id="Zoi-CO-ibo"/>
+                            <constraint firstAttribute="trailing" secondItem="65y-wh-53N" secondAttribute="trailing" id="cq6-ML-PDG"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FAp-qz-KFP" secondAttribute="trailing" constant="20" symbolic="YES" id="eeh-YQ-x1Q"/>
+                            <constraint firstItem="vpY-Fc-w00" firstAttribute="top" secondItem="Bar-UC-vUJ" secondAttribute="bottom" constant="20" id="iHF-mM-l3z"/>
+                            <constraint firstItem="Bar-UC-vUJ" firstAttribute="leading" secondItem="HER-wG-zq0" secondAttribute="trailing" constant="40" id="pug-Hy-5zM"/>
+                            <constraint firstItem="65y-wh-53N" firstAttribute="leading" secondItem="PHY-Vr-Zfm" secondAttribute="leading" id="ruF-aZ-zJi"/>
+                            <constraint firstItem="Bar-UC-vUJ" firstAttribute="top" secondItem="gPP-ho-Z5k" secondAttribute="bottom" constant="8" id="x1N-4f-RfH"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bar-UC-vUJ" secondAttribute="trailing" constant="98" id="zsX-IA-gFS"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="captureDate" destination="Bar-UC-vUJ" id="272-nW-L1G"/>
+                        <outlet property="runTime" destination="vpY-Fc-w00" id="Mi0-fD-KXn"/>
+                        <outlet property="thumbnail" destination="HER-wG-zq0" id="F7c-pO-URu"/>
+                        <outlet property="videoTitle" destination="2r2-zV-Y3G" id="1gJ-wD-LYP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFQ-yK-OK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="545" y="1689"/>
+            <point key="canvasLocation" x="544.79999999999995" y="1688.9055472263869"/>
         </scene>
         <!--Tnt Video Upload View Controller-->
         <scene sceneID="hfx-UB-SE0">

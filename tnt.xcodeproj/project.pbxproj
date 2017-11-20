@@ -243,7 +243,6 @@
 		A73D1F931FBCC64100A93A9C /* VCs Main */ = {
 			isa = PBXGroup;
 			children = (
-				A760E93E1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift */,
 				A74DE8BC1E96EEDF006B2AF5 /* tntHomeViewController.swift */,
 				A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */,
 				A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */,
@@ -254,6 +253,7 @@
 				A734D4DE1F216E8A006F89D3 /* tntMeetsTableViewController.swift */,
 				A77E58F01EE0F79700E05757 /* tntVideosTableViewController.swift */,
 				A7E22CA91F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift */,
+				A760E93E1FBE3C9400D0D7F3 /* tntEditVideoInfoVC.swift */,
 			);
 			name = "VCs Main";
 			sourceTree = "<group>";

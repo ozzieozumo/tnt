@@ -21,6 +21,9 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
     var scoresMO : Scores?
     var videos : [(expanded: Bool, info: [String:Any])] = []
     
+    // provided to Edit Video Info VC
+    var videoToEdit: Video? = nil
+    
 
     @IBOutlet weak var athleteName: UILabel!
     @IBOutlet weak var meetInfo: UILabel!
@@ -353,6 +356,11 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             destVC.uploadDelegate = self
         }
         
+        if let destVC = segue.destination as? tntEditVideoInfoVC {
+            print("TNT Videos Table View Controller - segue to edit video info")
+            destVC.video = self.videoToEdit
+        }
+        
     }
     
     
@@ -396,6 +404,11 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             
         }
     }
+    
+    func didSetVideoToEdit(video: Video) {
+        self.videoToEdit = video
+        performSegue(withIdentifier: "tntEditVideoInfo", sender: self)
+     }
 
 }
 
@@ -407,6 +420,7 @@ protocol tntVideoUploadPickerDelegate : class {
 
 protocol tntRelatedCellDelegate : class {
     func didToggleExpansion(for: tntRelatedVideosTableCell)
+    func didSetVideoToEdit(video: Video)
 }
 
 

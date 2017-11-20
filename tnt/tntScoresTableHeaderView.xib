@@ -104,7 +104,7 @@
                 <outlet property="qualifiedImage" destination="aWO-82-SLc" id="r7G-u2-ruc"/>
                 <outlet property="totalScoreLabel" destination="ULV-jD-Syu" id="hd0-2Y-GlP"/>
             </connections>
-            <point key="canvasLocation" x="-359.5" y="12.5"/>
+            <point key="canvasLocation" x="-570" y="-305"/>
         </view>
     </objects>
     <resources>

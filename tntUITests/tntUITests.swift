@@ -30,7 +30,18 @@ class tntUITests: XCTestCase {
     
     func testExample() {
         // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        let element = app.otherElements.containing(.navigationBar, identifier:"tnt.tntHomeView").children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        let textField = element.children(matching: .textField).element(boundBy: 0)
+        textField.tap()
+        textField.typeText("9")
+        element.children(matching: .textField).element(boundBy: 1).tap()
+        app.buttons["Scores"].tap()
+        app.tables["No Scores For This Meet"].buttons["New  Scoresheet"].tap()
+        
     }
+    
+    
     
 }
