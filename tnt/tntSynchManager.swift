@@ -253,6 +253,36 @@ class tntSynchManager {
         })
     }
     
+    func queryVideo(videoId: String) {
+        
+        // queries Dynamo for a matching video but doesn't update CoreData cache
+        // if found, sends a notification containing the DB object
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.load(tntVideo.self, hashKey: videoId, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("The request failed. Error: \(error)")
+                return nil
+                
+            } else if let videoDB = task.result as? tntVideo {
+                
+                print("TNT: synch manager queried video for \(videoId)")
+                
+                // send a notification including the returned DB object
+                
+                let nc = NotificationCenter.default
+                nc.post(name: Notification.Name("tntVideoQueried"), object: nil, userInfo: ["videoObject": videoDB])
+                
+            }
+            return nil
+        })
+        
+        
+        
+        
+    }
+    
     func loadMeets() {
         
         // load all relevant meets from the cloud DB into CoreData, if they are not there already
@@ -324,6 +354,8 @@ class tntSynchManager {
         })
 
     }
+    
+    
     
     func saveScores(_ scoreId: String) {
         

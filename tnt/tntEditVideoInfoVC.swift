@@ -19,16 +19,20 @@ class tntEditVideoInfoVC: UIViewController {
     @IBOutlet var runTime: UILabel!
     
     @IBOutlet var videoTitle: UITextField!
+    @IBOutlet var videoNotes: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupVideo()
+        videoTitle.delegate = self
+        videoNotes.delegate = self
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         // save values back to the video object
-        
+        video?.saveLocal()
     }
     
     func setupVideo() {
@@ -50,8 +54,16 @@ class tntEditVideoInfoVC: UIViewController {
         if let title = video?.title {
             videoTitle.text = title
         } else {
-            videoTitle.text = "Untitled"
-            // set font to light grey
+            videoTitle.text = "(Untitled)"
+            // set font to light color
+        }
+        if let notes = video?.notes {
+            videoNotes.text = notes
+            videoNotes.clearsOnInsertion = false
+        } else {
+            videoNotes.text = "Type or dictate some notes for this video"
+            videoNotes.clearsOnInsertion = true
+            // set font color
         }
         
         if let imgData = video?.thumbImage as Data? {
@@ -83,4 +95,19 @@ class tntEditVideoInfoVC: UIViewController {
     }
     */
 
+}
+
+extension tntEditVideoInfoVC: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        video?.title = textField.text
+    }
+}
+
+extension tntEditVideoInfoVC: UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        video?.notes = textView.text
+    }
+    
 }

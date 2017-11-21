@@ -58,7 +58,20 @@ class tntRelatedVideosTableCell: UITableViewCell {
             dateText = "(date unknown)"
         }
         videoCaptureDate.text = dateText
-        videoTitle.text = "(Untitled)"
+        
+        if let title = video?.title {
+            videoTitle.text = title
+        } else {
+            videoTitle.text = "(Untitled)"
+            // set font to light color
+        }
+        
+        if let notes = video?.notes {
+            videoDescription.text = notes
+        } else {
+            videoDescription.text = "(Edit to enter notes)"
+            // set font to light color
+        }
         
         if let imgData = video?.thumbImage as Data? {
             
@@ -78,14 +91,20 @@ class tntRelatedVideosTableCell: UITableViewCell {
         // (e.g. when "reconnecting" on a new phone, or after clearing coredata.
         // Reload the thumbnail image in such cases.
         
+    
         if video?.thumbImage == nil && video?.thumbKey != nil {
             
-            let thumbQueue = DispatchQueue(label: "thumbimages")
-            thumbQueue.async {
-                video?.loadThumbImage(imageURL: video?.thumbKey)
+            if video?.thumbKey != nil {
+                // only the video data is missing from CoreData, load it in the background
+                let thumbQueue = DispatchQueue(label: "thumbimages")
+                thumbQueue.async {
+                    video?.loadThumbImage(imageURL: video?.thumbKey)
+                }
+            } else {
+                // no thumbKey for video, try to reset it from cloud DB
+                
             }
         }
-        
         
     }
     

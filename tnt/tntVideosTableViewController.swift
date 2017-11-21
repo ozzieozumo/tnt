@@ -59,7 +59,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         super.viewWillAppear(animated)
         
         showContextInfo()
-        
+        tableView.reloadData()
         
     }
 
@@ -210,6 +210,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         // This includes updated related video information
         
         DispatchQueue.main.async{
+            self.getScores()
             self.tableView.reloadData()
         }
         
@@ -347,6 +348,22 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         }
     }
     
+    func refreshScores() {
+        
+        guard let athleteId = athleteMO?.id, let meetId = meetMO?.id else {
+            print("TNT : athlete and meet must be set for refresh in videos view controller")
+            return
+        }
+        
+        let scoreId = athleteId + ":" + meetId
+        
+        //delete scores object from Core Data and Cache
+        tntLocalDataManager.shared.deleteScores(scoreId)
+        
+        //background query the cloud DB to load a scores object
+        tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
+    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -409,6 +426,26 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         self.videoToEdit = video
         performSegue(withIdentifier: "tntEditVideoInfo", sender: self)
      }
+    
+    @IBAction func refreshTapped(_ sender: UIBarButtonItem) {
+    
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let refreshVideos = UIAlertAction(title: "Refresh Videos", style: .default) { action in
+            
+            self.refreshScores()
+
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            print("TNT Related Videos Table View - action canceled")
+        }
+        for action in [refreshVideos, cancelAction] {
+            actionSheet.addAction(action)
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
 
 }
 

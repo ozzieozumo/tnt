@@ -55,8 +55,8 @@ class tntVideo : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         
         duration = videoMO.duration
         
-        title = videoMO.title
-        notes = (videoMO.notes as! NSAttributedString?)?.string ?? ""
+        title = videoMO.title ?? ""
+        notes = videoMO.notes ?? ""
     }
     
     

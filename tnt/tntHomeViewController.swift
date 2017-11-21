@@ -38,6 +38,12 @@ class tntHomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerProfileImageLoaded(notification:)), name: Notification.Name("tntProfileImageLoaded"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(tntHomeViewController.observerMeetLoaded(notification:)), name: Notification.Name("tntMeetLoaded"), object: nil)
+        
+        // if the meet list is empty, try to load standard data from cloud
+        
+        if tntLocalDataManager.shared.meets.count == 0 {
+            tntSynchManager.shared.loadStandardData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
