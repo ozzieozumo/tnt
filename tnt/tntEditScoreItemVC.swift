@@ -21,12 +21,12 @@ class tntEditScoreItemVC: UIViewController {
     
     @IBOutlet var difficultySlider: UISlider!
     @IBOutlet var difficultyLabel: UILabel!
-   
+
     @IBOutlet var penaltyLabel: UILabel!
-    
+
     @IBOutlet var penaltySlider: UISlider!
     @IBOutlet var flightLabel: UILabel!
-    
+
     @IBOutlet var flightSlider: UISlider!
     
     
@@ -135,14 +135,45 @@ class tntEditScoreItemVC: UIViewController {
         recalculate()
     }
     
+    
+    @IBAction func difficultyDecrement(_ sender: Any) {
+        
+        difficultySlider.value -= 0.1
+        recalculate()
+    }
+    
+    @IBAction func difficultyIncrement(_ sender: Any) {
+        difficultySlider.value += 0.1
+        recalculate()
+    }
+    
     @IBAction func penaltyValueChanged(_ sender: UISlider) {
         
         recalculate()
     }
     
+    @IBAction func penaltyDecrement(_ sender: Any) {
+        penaltySlider.value -= 0.1
+        recalculate()
+    }
+    
+    @IBAction func penaltyIncrement(_ sender: Any) {
+        penaltySlider.value += 0.1
+        recalculate()
+    }
     
     @IBAction func flightValueChanged(_ sender: UISlider) {
         
+        recalculate()
+    }
+    
+    @IBAction func flightDecrement(_ sender: Any) {
+        flightSlider.value -= 0.1
+        recalculate()
+    }
+    
+    @IBAction func flightIncrement(_ sender: Any) {
+        flightSlider.value += 0.1
         recalculate()
     }
 }
