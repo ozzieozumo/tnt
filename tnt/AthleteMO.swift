@@ -23,8 +23,6 @@ extension Athlete {
         self.lastName = dbAthlete.lastName
         self.eventLevels = dbAthlete.eventLevels as NSObject?
         
-        
-        
     }
     
     func saveLocal() {

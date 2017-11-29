@@ -357,6 +357,8 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         
         let scoreId = athleteId + ":" + meetId
         
+        //TODO:  should delete related video objects from CoreData, since those should be refreshed also
+        
         //delete scores object from Core Data and Cache
         tntLocalDataManager.shared.deleteScores(scoreId)
         

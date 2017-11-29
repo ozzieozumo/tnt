@@ -242,11 +242,16 @@ class tntSynchManager {
                 
                 print("TNT: synch manager retrieved video for \(videoId)")
                 
-                // create a managed object and store it
+                let exists = tntLocalDataManager.shared.videos[videoId] != nil
                 
-                let videoMO = Video(dbVideo: videoDB)
-                videoMO.saveLocal()
-                return nil
+                if !exists {
+                    // Create a coredata video object
+                    let videoMO = Video(dbVideo: videoDB)
+                    videoMO.saveLocal()
+                    
+                } else {
+                    print("TNT SynchManager: videoId already exists in CoreData, attempt to load duplicate ignored")
+                }
                 
             }
             return nil
