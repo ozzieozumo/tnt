@@ -27,6 +27,14 @@
             </objects>
             <point key="canvasLocation" x="-905" y="136"/>
         </scene>
+        <!--tntTeamSetup-->
+        <scene sceneID="LLd-Lh-Ze9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TeamSetup" referencedIdentifier="tntTeamSetup" id="tA8-OE-2Kr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NRH-xF-suc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-822" y="594"/>
+        </scene>
         <!--Tnt Login View Controller-->
         <scene sceneID="iZI-Lx-gzd">
             <objects>
@@ -101,6 +109,14 @@
                                 <state key="normal" title="Upload Image to S3"/>
                                 <connections>
                                     <segue destination="EVD-fr-yxD" kind="show" identifier="showUploadImage" id="Iwx-BW-HaV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8K-ia-Nba">
+                                <rect key="frame" x="115" y="575" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Team Setup"/>
+                                <connections>
+                                    <segue destination="tA8-OE-2Kr" kind="show" id="jYi-ax-tJP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1237,7 +1253,7 @@
         <image name="smile-emoticon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UYT-Om-cUA"/>
-        <segue reference="DbF-hn-L9T"/>
+        <segue reference="3VO-jR-EeR"/>
+        <segue reference="tQo-9X-QtI"/>
     </inferredMetricsTieBreakers>
 </document>

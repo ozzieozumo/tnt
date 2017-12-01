@@ -50,6 +50,13 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="Team" representedClassName=".Team" syncable="YES">
+        <attribute name="athleteIds" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secret" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teamId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userIds" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <entity name="Video" representedClassName=".Video" syncable="YES">
         <attribute name="captureDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="cloudURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -72,5 +79,6 @@
         <element name="Meet" positionX="133" positionY="-36" width="128" height="210"/>
         <element name="Scores" positionX="-110" positionY="17" width="128" height="180"/>
         <element name="Video" positionX="367" positionY="45" width="128" height="195"/>
+        <element name="Team" positionX="81" positionY="-36" width="128" height="120"/>
     </elements>
 </model>

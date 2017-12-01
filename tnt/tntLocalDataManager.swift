@@ -21,12 +21,14 @@ class tntLocalDataManager {
     var scores : [String: Scores]
     var meets : [String: Meet]
     var videos: [String: Video]
+    var teams: [String: Team]
     
     private init() {
         athletes = [:]
         scores = [:]
         meets = [:]
         videos = [:]
+        teams = [:]
         moc = nil
             
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -51,6 +53,7 @@ class tntLocalDataManager {
         batchDeleteEntity(name: "Meet"); meets = [:]
         batchDeleteEntity(name: "Video"); videos = [:]
         batchDeleteEntity(name: "Scores"); scores = [:]
+        batchDeleteEntity(name: "Team"); teams = [:]
         
     }
     

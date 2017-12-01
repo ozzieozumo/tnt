@@ -12,6 +12,13 @@
 		A7074AF41F959D1D004EBAB8 /* tntLoginMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */; };
 		A71726AB1FB1579F00759B52 /* AIFlatSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */; };
 		A71726AD1FB23B3400759B52 /* tntEditEventHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */; };
+		A724598C1FCF658F00558162 /* TeamSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A724598B1FCF658F00558162 /* TeamSetup.storyboard */; };
+		A72459931FCF696C00558162 /* Team+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72459911FCF696C00558162 /* Team+CoreDataClass.swift */; };
+		A72459941FCF696C00558162 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72459921FCF696C00558162 /* Team+CoreDataProperties.swift */; };
+		A72459961FD057EB00558162 /* tntTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72459951FD057EB00558162 /* tntTeam.swift */; };
+		A72459981FD059C800558162 /* TeamMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72459971FD059C800558162 /* TeamMO.swift */; };
+		A724599B1FD07CB300558162 /* tntEditTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A724599A1FD07CB300558162 /* tntEditTeamVC.swift */; };
+		A724599D1FD07DE900558162 /* tntSelectTeamTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A724599C1FD07DE900558162 /* tntSelectTeamTVC.swift */; };
 		A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */; };
 		A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */; };
 		A73120181EF9ADC00008F9F9 /* tntVideoUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */; };
@@ -118,6 +125,13 @@
 		A7074AF31F959D1D004EBAB8 /* tntLoginMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntLoginMethodsViewController.swift; sourceTree = "<group>"; };
 		A71726AA1FB1579F00759B52 /* AIFlatSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFlatSwitch.swift; sourceTree = "<group>"; };
 		A71726AC1FB23B3400759B52 /* tntEditEventHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntEditEventHeaderVC.swift; sourceTree = "<group>"; };
+		A724598B1FCF658F00558162 /* TeamSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TeamSetup.storyboard; sourceTree = "<group>"; };
+		A72459911FCF696C00558162 /* Team+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A72459921FCF696C00558162 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A72459951FD057EB00558162 /* tntTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntTeam.swift; sourceTree = "<group>"; };
+		A72459971FD059C800558162 /* TeamMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMO.swift; sourceTree = "<group>"; };
+		A724599A1FD07CB300558162 /* tntEditTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntEditTeamVC.swift; sourceTree = "<group>"; };
+		A724599C1FD07DE900558162 /* tntSelectTeamTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntSelectTeamTVC.swift; sourceTree = "<group>"; };
 		A728254F1EA7CFBE00EA3DA0 /* tntIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntIdentityProvider.swift; sourceTree = "<group>"; };
 		A72825511EA97FAB00EA3DA0 /* tntS3UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntS3UploadViewController.swift; sourceTree = "<group>"; };
 		A73120171EF9ADC00008F9F9 /* tntVideoUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tntVideoUploadViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +243,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A72459991FD07C1200558162 /* VCs Team Setup */ = {
+			isa = PBXGroup;
+			children = (
+				A724599A1FD07CB300558162 /* tntEditTeamVC.swift */,
+				A724599C1FD07DE900558162 /* tntSelectTeamTVC.swift */,
+			);
+			name = "VCs Team Setup";
+			sourceTree = "<group>";
+		};
 		A73D1F921FBCC16F00A93A9C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +259,7 @@
 				A7074AF11F9595AE004EBAB8 /* Login.storyboard */,
 				A74DE8801E8DD4EB006B2AF5 /* Main.storyboard */,
 				A7349A181F7800D400E5EFEA /* AthleteSetup.storyboard */,
+				A724598B1FCF658F00558162 /* TeamSetup.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -353,6 +377,7 @@
 				A73D1F971FBCC76800A93A9C /* Other Model Classes */,
 				A73D1F921FBCC16F00A93A9C /* Storyboards */,
 				A73D1F931FBCC64100A93A9C /* VCs Main */,
+				A72459991FD07C1200558162 /* VCs Team Setup */,
 				A73D1F941FBCC69A00A93A9C /* VCs Athlete Setup */,
 				A73D1F951FBCC6DF00A93A9C /* VCs Login */,
 				A73D1F9A1FBCCA4700A93A9C /* Custom Controls */,
@@ -399,6 +424,8 @@
 		A7643F1D1F7AC979008C9579 /* CoreData Generated */ = {
 			isa = PBXGroup;
 			children = (
+				A72459911FCF696C00558162 /* Team+CoreDataClass.swift */,
+				A72459921FCF696C00558162 /* Team+CoreDataProperties.swift */,
 				A7504E551F7AC41B00928A79 /* Meet+CoreDataClass.swift */,
 				A7504E561F7AC41B00928A79 /* Meet+CoreDataProperties.swift */,
 				A7504E571F7AC41B00928A79 /* Video+CoreDataClass.swift */,
@@ -419,6 +446,7 @@
 				A7504E511F7ABF5800928A79 /* VideoMO.swift */,
 				A7504E4F1F7ABEDD00928A79 /* MeetMO.swift */,
 				A7504E4D1F7ABE7B00928A79 /* ScoresMO.swift */,
+				A72459971FD059C800558162 /* TeamMO.swift */,
 			);
 			name = "CoreData Custom";
 			sourceTree = "<group>";
@@ -427,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				A74DE8BA1E96E1F6006B2AF5 /* tntAthlete.swift */,
+				A72459951FD057EB00558162 /* tntTeam.swift */,
 				A77D4CEB1F335AD5004D7215 /* tntScores.swift */,
 				A734D4DA1F17E30D006F89D3 /* tntMeet.swift */,
 				A77E58F21EE9C66700E05757 /* tntVideo.swift */,
@@ -559,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74DE88A1E8DD4EB006B2AF5 /* LaunchScreen.storyboard in Resources */,
+				A724598C1FCF658F00558162 /* TeamSetup.storyboard in Resources */,
 				A74DE8871E8DD4EB006B2AF5 /* Assets.xcassets in Resources */,
 				A7349A191F7800D400E5EFEA /* AthleteSetup.storyboard in Resources */,
 				A7074AF21F9595AE004EBAB8 /* Login.storyboard in Resources */,
@@ -658,6 +688,7 @@
 				A7F123F71FAF71EA00B7207F /* tntEditScoreItemVC.swift in Sources */,
 				A74DE8851E8DD4EB006B2AF5 /* tnt.xcdatamodeld in Sources */,
 				A7F123F31FAC008A00B7207F /* tntScoresTableHeaderView.swift in Sources */,
+				A72459941FCF696C00558162 /* Team+CoreDataProperties.swift in Sources */,
 				A7BCE18C1EA015A70053B550 /* tntLoginViewController.swift in Sources */,
 				A7504E601F7AC41B00928A79 /* Video+CoreDataProperties.swift in Sources */,
 				A7504E501F7ABEDD00928A79 /* MeetMO.swift in Sources */,
@@ -665,6 +696,7 @@
 				A77E58F31EE9C66700E05757 /* tntVideo.swift in Sources */,
 				A7E22CAA1F7D96A0006FAAFC /* tntRelatedVideosTableCell.swift in Sources */,
 				A7504E621F7AC41B00928A79 /* Scores+CoreDataProperties.swift in Sources */,
+				A72459931FCF696C00558162 /* Team+CoreDataClass.swift in Sources */,
 				A74DE87D1E8DD4EB006B2AF5 /* AppDelegate.swift in Sources */,
 				A77E58F11EE0F79700E05757 /* tntVideosTableViewController.swift in Sources */,
 				A734D4DF1F216E8A006F89D3 /* tntMeetsTableViewController.swift in Sources */,
@@ -676,6 +708,7 @@
 				A74DE8BB1E96E1F6006B2AF5 /* tntAthlete.swift in Sources */,
 				A74DE8BD1E96EEDF006B2AF5 /* tntHomeViewController.swift in Sources */,
 				A7504E5D1F7AC41B00928A79 /* Meet+CoreDataClass.swift in Sources */,
+				A724599D1FD07DE900558162 /* tntSelectTeamTVC.swift in Sources */,
 				A7504E631F7AC41B00928A79 /* Athlete+CoreDataClass.swift in Sources */,
 				A7349A1B1F78054100E5EFEA /* tntAthleteSetupChoices.swift in Sources */,
 				A7349A1D1F781F0200E5EFEA /* tntEditAthleteViewController.swift in Sources */,
@@ -684,8 +717,10 @@
 				A71726AB1FB1579F00759B52 /* AIFlatSwitch.swift in Sources */,
 				A7074AF41F959D1D004EBAB8 /* tntLoginMethodsViewController.swift in Sources */,
 				A7504E4E1F7ABE7B00928A79 /* ScoresMO.swift in Sources */,
+				A72459961FD057EB00558162 /* tntTeam.swift in Sources */,
 				A77D4CEC1F335AD5004D7215 /* tntScores.swift in Sources */,
 				A79AA6341FA8FD7B009B00A5 /* tntScoresTableViewCell.swift in Sources */,
+				A724599B1FD07CB300558162 /* tntEditTeamVC.swift in Sources */,
 				A7504E521F7ABF5800928A79 /* VideoMO.swift in Sources */,
 				A71726AD1FB23B3400759B52 /* tntEditEventHeaderVC.swift in Sources */,
 				A72825521EA97FAB00EA3DA0 /* tntS3UploadViewController.swift in Sources */,
@@ -693,6 +728,7 @@
 				A79AA6321FA8FD41009B00A5 /* tntScoresTableViewController.swift in Sources */,
 				A72825501EA7CFBE00EA3DA0 /* tntIdentityProvider.swift in Sources */,
 				A79AA6361FA90169009B00A5 /* tntScoreItem.swift in Sources */,
+				A72459981FD059C800558162 /* TeamMO.swift in Sources */,
 				A7504E541F7ABFC000928A79 /* AthleteMO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

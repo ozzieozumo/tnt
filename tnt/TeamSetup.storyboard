@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Select Athletes-->
+        <scene sceneID="q1y-yp-WE5">
+            <objects>
+                <tableViewController id="56R-p6-hVC" customClass="tntSelectTeamTVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Vr1-TA-FpF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3Pi-ep-bRa">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Pi-ep-bRa" id="nmL-Ye-juy">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="56R-p6-hVC" id="pQe-o8-Hrn"/>
+                            <outlet property="delegate" destination="56R-p6-hVC" id="zAy-oT-K1p"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Athletes" id="rpz-IK-zR9"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V6f-mt-p0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="345" y="-76"/>
+        </scene>
+        <!--Team Setup-->
+        <scene sceneID="NCA-kR-tV2">
+            <objects>
+                <viewController storyboardIdentifier="tntTeamSetup" id="k4z-0m-bfL" customClass="tntEditTeamVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rw9-bP-KAu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dja-EF-fCB">
+                                <rect key="frame" x="20" y="40" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secret" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8Z-aS-TCk">
+                                <rect key="frame" x="20" y="106" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oH-e7-3Oe">
+                                <rect key="frame" x="325" y="345.5" width="30" height="30"/>
+                                <state key="normal" title="Join"/>
+                                <connections>
+                                    <action selector="joinTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="nrL-Do-w8b"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2m-bA-GVs">
+                                <rect key="frame" x="305" y="445.5" width="50" height="30"/>
+                                <state key="normal" title="Create "/>
+                                <connections>
+                                    <action selector="createTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="lf5-RR-s28"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jVc-FS-s4N">
+                                <rect key="frame" x="105" y="37" width="250" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t5F-z8-T7t">
+                                <rect key="frame" x="105" y="103" width="250" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="To add athletes to an existing team, you must know the team secret" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fC0-sx-Q8u">
+                                <rect key="frame" x="20" y="328" width="240" height="65"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="8tT-i7-56u"/>
+                                    <constraint firstAttribute="width" constant="240" id="rqx-UN-TW9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Or you can create a new team with a new or random secret" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K4w-ie-6IE">
+                                <rect key="frame" x="20" y="428" width="240" height="65"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="t6l-G4-hez"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-ug-oq9">
+                                <rect key="frame" x="249" y="146" width="106" height="30"/>
+                                <state key="normal" title="Random Secret"/>
+                                <connections>
+                                    <action selector="randomTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="n4n-iS-RSg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="top" secondItem="p8Z-aS-TCk" secondAttribute="bottom" constant="201" id="3ny-nu-rJw"/>
+                            <constraint firstItem="jVc-FS-s4N" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="5Ao-qz-OJV"/>
+                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="centerY" secondItem="fC0-sx-Q8u" secondAttribute="centerY" id="9hj-3J-P4h"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="top" secondItem="fC0-sx-Q8u" secondAttribute="bottom" constant="35" id="9l6-Co-B6M"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="width" secondItem="fC0-sx-Q8u" secondAttribute="width" id="BKE-Wp-o6y"/>
+                            <constraint firstItem="jVc-FS-s4N" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="trailing" constant="40" id="IhN-BD-5Mo"/>
+                            <constraint firstItem="t5F-z8-T7t" firstAttribute="baseline" secondItem="p8Z-aS-TCk" secondAttribute="baseline" id="Qiz-wj-pDO"/>
+                            <constraint firstItem="t5F-z8-T7t" firstAttribute="trailing" secondItem="jVc-FS-s4N" secondAttribute="trailing" id="QzW-2j-hZR"/>
+                            <constraint firstItem="dja-EF-fCB" firstAttribute="top" secondItem="Sho-fW-1vj" secondAttribute="top" constant="20" id="RoW-9G-F8x"/>
+                            <constraint firstItem="p8Z-aS-TCk" firstAttribute="top" secondItem="dja-EF-fCB" secondAttribute="bottom" constant="45" id="UPV-mW-9A7"/>
+                            <constraint firstItem="dja-EF-fCB" firstAttribute="leading" secondItem="Sho-fW-1vj" secondAttribute="leading" constant="20" id="Xe1-iw-1vN"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="cid-gD-01v"/>
+                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="dpR-Bs-n5r"/>
+                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="eS4-tl-ndJ"/>
+                            <constraint firstItem="p8Z-aS-TCk" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="fvf-21-ReH"/>
+                            <constraint firstItem="g9M-ug-oq9" firstAttribute="top" secondItem="t5F-z8-T7t" secondAttribute="bottom" constant="13" id="giR-KU-lKJ"/>
+                            <constraint firstItem="t5F-z8-T7t" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="tl6-jS-haT"/>
+                            <constraint firstItem="t5F-z8-T7t" firstAttribute="width" secondItem="jVc-FS-s4N" secondAttribute="width" id="uJM-PI-uSi"/>
+                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="centerY" secondItem="K4w-ie-6IE" secondAttribute="centerY" id="uMw-iW-XXy"/>
+                            <constraint firstItem="jVc-FS-s4N" firstAttribute="baseline" secondItem="dja-EF-fCB" secondAttribute="baseline" id="x4U-ie-OTa"/>
+                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="x5S-tT-hw8"/>
+                            <constraint firstItem="Sho-fW-1vj" firstAttribute="trailing" secondItem="jVc-FS-s4N" secondAttribute="trailing" constant="20" id="yov-JS-jlG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sho-fW-1vj"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Team Setup" id="Xny-ct-ttW" userLabel="Edit Team"/>
+                    <connections>
+                        <outlet property="createButton" destination="Z2m-bA-GVs" id="0Tm-QN-BRj"/>
+                        <outlet property="joinButton" destination="8oH-e7-3Oe" id="ndM-Cq-BeV"/>
+                        <outlet property="randomButton" destination="g9M-ug-oq9" id="wR1-Mn-qvQ"/>
+                        <outlet property="teamName" destination="jVc-FS-s4N" id="7kz-Xc-Za0"/>
+                        <outlet property="teamSecret" destination="t5F-z8-T7t" id="orL-sP-ozx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ab-ny-KpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-770.39999999999998" y="-271.21439280359823"/>
+        </scene>
+    </scenes>
+</document>
