@@ -60,8 +60,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oH-e7-3Oe">
-                                <rect key="frame" x="325" y="345.5" width="30" height="30"/>
-                                <state key="normal" title="Join"/>
+                                <rect key="frame" x="302" y="345.5" width="53" height="30"/>
+                                <state key="normal" title="Choose"/>
                                 <connections>
                                     <action selector="joinTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="nrL-Do-w8b"/>
                                 </connections>
@@ -111,6 +111,22 @@
                                     <action selector="randomTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="n4n-iS-RSg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-G4-IL5">
+                                <rect key="frame" x="312" y="533" width="36" height="30"/>
+                                <state key="normal" title="Add  "/>
+                                <connections>
+                                    <action selector="createTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="dft-c7-ycC"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Share some or all of your athletes with the team" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-BR-Mlk">
+                                <rect key="frame" x="20" y="516" width="240" height="65"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="6na-jc-4ag"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -130,6 +146,7 @@
                             <constraint firstItem="8oH-e7-3Oe" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="eS4-tl-ndJ"/>
                             <constraint firstItem="p8Z-aS-TCk" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="fvf-21-ReH"/>
                             <constraint firstItem="g9M-ug-oq9" firstAttribute="top" secondItem="t5F-z8-T7t" secondAttribute="bottom" constant="13" id="giR-KU-lKJ"/>
+                            <constraint firstItem="fgj-G4-IL5" firstAttribute="centerY" secondItem="LcM-BR-Mlk" secondAttribute="centerY" id="iEh-Ev-3Er"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="tl6-jS-haT"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="width" secondItem="jVc-FS-s4N" secondAttribute="width" id="uJM-PI-uSi"/>
                             <constraint firstItem="Z2m-bA-GVs" firstAttribute="centerY" secondItem="K4w-ie-6IE" secondAttribute="centerY" id="uMw-iW-XXy"/>

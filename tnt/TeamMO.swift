@@ -21,6 +21,19 @@ extension Team {
         
     }
     
+    convenience init(name: String, secret: String) {
+        
+        // inits a new TeamMO with a new UUID
+        self.init(context: tntLocalDataManager.shared.moc!)
+        
+        self.teamId = UUID().uuidString
+        self.name = name
+        self.secret = secret
+        self.athleteIds = nil
+        self.userIds = nil
+        
+    }
+    
     func saveLocal() {
         
         do {

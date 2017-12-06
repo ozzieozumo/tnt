@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class tntEditTeamVC: UIViewController {
 
@@ -18,6 +19,8 @@ class tntEditTeamVC: UIViewController {
     @IBOutlet var randomButton: UIButton!
     @IBOutlet var joinButton: UIButton!
     @IBOutlet var createButton: UIButton!
+    
+    var mailForm: MFMailComposeViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +54,60 @@ class tntEditTeamVC: UIViewController {
         tntTeam.checkNameAvailable(name) { (available: Bool) in
             if available {
                 // proceed with object creation
+                print("TNT Team Setup VC : requested team name is available")
+                
+                let teamMO = Team(name: name, secret: secret)
+                teamMO.saveLocal()
+                
+                self.team = teamMO
+                
+                DispatchQueue.main.async {
+                    self.setButtons()
+                    // self.showAddAthletes()
+                }
+                
+                
+                let teamDB = tntTeam(teamMO: teamMO)
+                teamDB.saveToCloud()  // async, assumed to succeed (TODO)
+                
+                completion(nil, teamMO)
                 
             } else {
                 // TODO : use enum for error codes in constants/globals
+                // Maybe send a notification instead??
                 let error = NSError(domain: "TNT", code: 1, userInfo: ["message": "team name unavailable"])
                 completion(error, nil)
             }
         }
     }
     
+    func randomSecret(len: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        let randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for _ in 1...len{
+            let length = UInt32 (letters.length)
+            let rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.character(at: Int(rand)))
+        }
+        
+        return randomString as String
+    }
+    
+    func showPostCreateMailForm(team: Team) {
+        mailForm = MFMailComposeViewController()
+        
+        if let mailForm = mailForm {
+            mailForm.mailComposeDelegate = nil
+            mailForm.setSubject("details for our new team in the TNT tracker app")
+            mailForm.setMessageBody("the team name and team secret go here", isHTML: true)
+        
+            present(mailForm, animated: true, completion: nil)
+        }
+        
+    }
     // MARK: - Button Actions
     func setButtons() {
         
@@ -89,6 +137,9 @@ class tntEditTeamVC: UIViewController {
     }
     
     @IBAction func randomTapped(_ sender: UIButton) {
+        
+        teamSecret.text = randomSecret(len: 8)
+        setButtons()
     }
     
     
@@ -101,7 +152,16 @@ class tntEditTeamVC: UIViewController {
         disableButtons()
         
         createTeam(name: teamName.text!, secret: teamSecret.text!) { (error, result) in
-            
+        
+            if error == nil {
+                // show a mail compose form to mail the team name and secret
+                
+                if let createdTeam = result {
+                    DispatchQueue.main.async {
+                        self.showPostCreateMailForm(team: createdTeam)
+                    }
+                }
+            }
         }
         
         // show button to segue to add athletes

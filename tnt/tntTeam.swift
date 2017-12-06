@@ -67,5 +67,20 @@ class tntTeam : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         
     }
     
+    func saveToCloud() {
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.save(self).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("TNT Team DB, failed saving tntTeam object to Dynamo. Error: \(error)")
+            } else {
+                print("TNT Team DB, saved team \(self.teamId!)")
+            }
+            return nil
+        })
+    }
+        
+    
     
 }
