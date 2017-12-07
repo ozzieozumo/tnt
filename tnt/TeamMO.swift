@@ -49,6 +49,31 @@ extension Team {
         nc.post(name: Notification.Name("tntTeamDataLoaded"), object: nil, userInfo: ["teamId":self.teamId!])
         
     }
+   
+    func addCurrentUser() {
+        // add the cognito ID of the currently logged in user
+        
+        guard tntLoginManager.shared.loggedIn else {
+            print("TNT TeamMO: addCurrentUser, not logged in")
+            return
+        }
+        
+        if let currentUserId = tntLoginManager.shared.cognitoId {
+            addUser(userId: currentUserId)
+        }
+        
+    }
+    func addUser(userId: String) {
+   
+        var userArray = userIds as! [String]? ?? []
+    
+        
+        if !userArray.contains(userId) {
+            userArray.append(userId)
+        }
+        
+        userIds = userArray as NSObject
+    }
     
    
 }

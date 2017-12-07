@@ -10,14 +10,14 @@ import UIKit
 
 class tntSelectTeamTVC: UITableViewController {
 
+    // team should be set on segue
+    var team: Team? = nil
+    var athletes: [Athlete] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        getAvailableAthletes()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +29,32 @@ class tntSelectTeamTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return athletes.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    func getAvailableAthletes() {
+        
+        // retrieve athletes from core data for the current logged in user
+        let cognitoId = tntLoginManager.shared.cognitoId
+        let ownedAthletes = tntLocalDataManager.shared.athletes.values.filter {$0.cognitoId == cognitoId}
+        
+        // sort them and store in the table datasource
+        self.athletes = ownedAthletes.sorted { $0.lastName ?? "" < $1.lastName ?? ""}
+    }
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "joinathlete", for: indexPath)
+
+        cell.textLabel?.text = athletes[indexPath.row].id
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

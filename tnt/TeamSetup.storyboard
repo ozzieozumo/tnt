@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3Pi-ep-bRa">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="joinathlete" id="3Pi-ep-bRa">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Pi-ep-bRa" id="nmL-Ye-juy">
@@ -37,7 +37,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6f-mt-p0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="-76"/>
+            <point key="canvasLocation" x="81" y="-271"/>
         </scene>
         <!--Team Setup-->
         <scene sceneID="NCA-kR-tV2">
@@ -60,14 +60,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oH-e7-3Oe">
-                                <rect key="frame" x="302" y="345.5" width="53" height="30"/>
-                                <state key="normal" title="Choose"/>
+                                <rect key="frame" x="325" y="345.5" width="30" height="30"/>
+                                <state key="normal" title="Join"/>
                                 <connections>
                                     <action selector="joinTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="nrL-Do-w8b"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2m-bA-GVs">
-                                <rect key="frame" x="305" y="445.5" width="50" height="30"/>
+                                <rect key="frame" x="305" y="440.5" width="50" height="30"/>
                                 <state key="normal" title="Create "/>
                                 <connections>
                                     <action selector="createTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="lf5-RR-s28"/>
@@ -85,6 +85,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-ug-oq9">
+                                <rect key="frame" x="249" y="146" width="106" height="30"/>
+                                <state key="normal" title="Random Secret"/>
+                                <connections>
+                                    <action selector="randomTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="n4n-iS-RSg"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="To add athletes to an existing team, you must know the team secret" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fC0-sx-Q8u">
                                 <rect key="frame" x="20" y="328" width="240" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,7 +103,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Or you can create a new team with a new or random secret" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K4w-ie-6IE">
-                                <rect key="frame" x="20" y="428" width="240" height="65"/>
+                                <rect key="frame" x="20" y="423" width="240" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="t6l-G4-hez"/>
@@ -104,22 +111,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-ug-oq9">
-                                <rect key="frame" x="249" y="146" width="106" height="30"/>
-                                <state key="normal" title="Random Secret"/>
-                                <connections>
-                                    <action selector="randomTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="n4n-iS-RSg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-G4-IL5">
-                                <rect key="frame" x="312" y="533" width="36" height="30"/>
-                                <state key="normal" title="Add  "/>
-                                <connections>
-                                    <action selector="createTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="dft-c7-ycC"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="Share some or all of your athletes with the team" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-BR-Mlk">
-                                <rect key="frame" x="20" y="516" width="240" height="65"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Share some or all of your athletes with the team" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-BR-Mlk">
+                                <rect key="frame" x="20" y="511" width="240" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="6na-jc-4ag"/>
@@ -127,37 +120,51 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-G4-IL5">
+                                <rect key="frame" x="319" y="528" width="36" height="30"/>
+                                <state key="normal" title="Add  "/>
+                                <connections>
+                                    <action selector="createTapped:" destination="k4z-0m-bfL" eventType="touchUpInside" id="dft-c7-ycC"/>
+                                    <segue destination="56R-p6-hVC" kind="show" id="LVr-a9-J9h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="top" secondItem="p8Z-aS-TCk" secondAttribute="bottom" constant="201" id="3ny-nu-rJw"/>
                             <constraint firstItem="jVc-FS-s4N" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="5Ao-qz-OJV"/>
-                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="centerY" secondItem="fC0-sx-Q8u" secondAttribute="centerY" id="9hj-3J-P4h"/>
-                            <constraint firstItem="K4w-ie-6IE" firstAttribute="top" secondItem="fC0-sx-Q8u" secondAttribute="bottom" constant="35" id="9l6-Co-B6M"/>
-                            <constraint firstItem="K4w-ie-6IE" firstAttribute="width" secondItem="fC0-sx-Q8u" secondAttribute="width" id="BKE-Wp-o6y"/>
+                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="top" secondItem="g9M-ug-oq9" secondAttribute="bottom" constant="169.5" id="6TG-i9-EMh"/>
+                            <constraint firstItem="LcM-BR-Mlk" firstAttribute="width" secondItem="fC0-sx-Q8u" secondAttribute="width" id="7Sn-ey-B5X"/>
+                            <constraint firstItem="fgj-G4-IL5" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="86R-CU-Jw8"/>
+                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="8ht-yQ-QUE"/>
                             <constraint firstItem="jVc-FS-s4N" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="trailing" constant="40" id="IhN-BD-5Mo"/>
+                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="centerY" secondItem="K4w-ie-6IE" secondAttribute="centerY" id="N36-3P-jKf"/>
+                            <constraint firstItem="fgj-G4-IL5" firstAttribute="trailing" secondItem="Z2m-bA-GVs" secondAttribute="trailing" id="O0K-8m-33S"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="baseline" secondItem="p8Z-aS-TCk" secondAttribute="baseline" id="Qiz-wj-pDO"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="trailing" secondItem="jVc-FS-s4N" secondAttribute="trailing" id="QzW-2j-hZR"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="top" secondItem="fC0-sx-Q8u" secondAttribute="bottom" constant="30" id="Rbh-xk-kBy"/>
                             <constraint firstItem="dja-EF-fCB" firstAttribute="top" secondItem="Sho-fW-1vj" secondAttribute="top" constant="20" id="RoW-9G-F8x"/>
+                            <constraint firstItem="LcM-BR-Mlk" firstAttribute="leading" secondItem="p8Z-aS-TCk" secondAttribute="leading" id="TdA-EA-fP1"/>
                             <constraint firstItem="p8Z-aS-TCk" firstAttribute="top" secondItem="dja-EF-fCB" secondAttribute="bottom" constant="45" id="UPV-mW-9A7"/>
+                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="leading" secondItem="p8Z-aS-TCk" secondAttribute="leading" id="W8F-mQ-kF8"/>
                             <constraint firstItem="dja-EF-fCB" firstAttribute="leading" secondItem="Sho-fW-1vj" secondAttribute="leading" constant="20" id="Xe1-iw-1vN"/>
-                            <constraint firstItem="K4w-ie-6IE" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="cid-gD-01v"/>
-                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="dpR-Bs-n5r"/>
-                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="eS4-tl-ndJ"/>
+                            <constraint firstItem="LcM-BR-Mlk" firstAttribute="top" secondItem="K4w-ie-6IE" secondAttribute="bottom" constant="23" id="acX-iR-mlG"/>
+                            <constraint firstItem="fC0-sx-Q8u" firstAttribute="top" secondItem="p8Z-aS-TCk" secondAttribute="bottom" constant="201" id="ef5-Wa-LPz"/>
                             <constraint firstItem="p8Z-aS-TCk" firstAttribute="leading" secondItem="dja-EF-fCB" secondAttribute="leading" id="fvf-21-ReH"/>
                             <constraint firstItem="g9M-ug-oq9" firstAttribute="top" secondItem="t5F-z8-T7t" secondAttribute="bottom" constant="13" id="giR-KU-lKJ"/>
-                            <constraint firstItem="fgj-G4-IL5" firstAttribute="centerY" secondItem="LcM-BR-Mlk" secondAttribute="centerY" id="iEh-Ev-3Er"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="width" secondItem="fC0-sx-Q8u" secondAttribute="width" id="hTR-E9-eVx"/>
+                            <constraint firstItem="8oH-e7-3Oe" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="jhq-Hq-wjU"/>
+                            <constraint firstItem="K4w-ie-6IE" firstAttribute="leading" secondItem="p8Z-aS-TCk" secondAttribute="leading" id="sOx-DW-apQ"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="tl6-jS-haT"/>
                             <constraint firstItem="t5F-z8-T7t" firstAttribute="width" secondItem="jVc-FS-s4N" secondAttribute="width" id="uJM-PI-uSi"/>
-                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="centerY" secondItem="K4w-ie-6IE" secondAttribute="centerY" id="uMw-iW-XXy"/>
                             <constraint firstItem="jVc-FS-s4N" firstAttribute="baseline" secondItem="dja-EF-fCB" secondAttribute="baseline" id="x4U-ie-OTa"/>
-                            <constraint firstItem="Z2m-bA-GVs" firstAttribute="trailing" secondItem="g9M-ug-oq9" secondAttribute="trailing" id="x5S-tT-hw8"/>
                             <constraint firstItem="Sho-fW-1vj" firstAttribute="trailing" secondItem="jVc-FS-s4N" secondAttribute="trailing" constant="20" id="yov-JS-jlG"/>
+                            <constraint firstItem="fgj-G4-IL5" firstAttribute="centerY" secondItem="LcM-BR-Mlk" secondAttribute="centerY" id="zkj-uL-aBP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Sho-fW-1vj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Team Setup" id="Xny-ct-ttW" userLabel="Edit Team"/>
                     <connections>
+                        <outlet property="addAthletesButton" destination="fgj-G4-IL5" id="h26-08-xvE"/>
                         <outlet property="createButton" destination="Z2m-bA-GVs" id="0Tm-QN-BRj"/>
                         <outlet property="joinButton" destination="8oH-e7-3Oe" id="ndM-Cq-BeV"/>
                         <outlet property="randomButton" destination="g9M-ug-oq9" id="wR1-Mn-qvQ"/>

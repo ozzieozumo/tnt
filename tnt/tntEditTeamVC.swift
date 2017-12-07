@@ -19,7 +19,8 @@ class tntEditTeamVC: UIViewController {
     @IBOutlet var randomButton: UIButton!
     @IBOutlet var joinButton: UIButton!
     @IBOutlet var createButton: UIButton!
-    
+    @IBOutlet var addAthletesButton: UIButton!
+        
     var mailForm: MFMailComposeViewController? = nil
     
     override func viewDidLoad() {
@@ -38,16 +39,15 @@ class tntEditTeamVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destVC = segue.destination as? tntSelectTeamTVC {
+            destVC.team = self.team
+        }
     }
-    */
+
     
     func createTeam(name: String, secret: String, completion: @escaping (Error?, Team?) -> Void) {
         
@@ -57,6 +57,8 @@ class tntEditTeamVC: UIViewController {
                 print("TNT Team Setup VC : requested team name is available")
                 
                 let teamMO = Team(name: name, secret: secret)
+                // when creating a team, the current cognito user is automatically added to the team users list
+                teamMO.addCurrentUser()
                 teamMO.saveLocal()
                 
                 self.team = teamMO
@@ -108,6 +110,10 @@ class tntEditTeamVC: UIViewController {
         }
         
     }
+    
+    func showAddAthletes() {
+        
+    }
     // MARK: - Button Actions
     func setButtons() {
         
@@ -119,6 +125,7 @@ class tntEditTeamVC: UIViewController {
         // once a team has been joined or created, all buttons are disabled
         if team != nil {
             allButtons.forEach() { $0?.isEnabled = false }
+            addAthletesButton.isEnabled = true
             return
         }
         
@@ -128,6 +135,7 @@ class tntEditTeamVC: UIViewController {
         let secretEmpty = teamSecret.text?.isEmpty ?? true
         
         actionButtons.forEach() { $0?.isEnabled = !nameEmpty && !secretEmpty }
+        addAthletesButton.isEnabled = false
         
     }
     
@@ -158,13 +166,14 @@ class tntEditTeamVC: UIViewController {
                 
                 if let createdTeam = result {
                     DispatchQueue.main.async {
-                        self.showPostCreateMailForm(team: createdTeam)
+                        //TODO: consider opening email form here
+                        self.setButtons()
                     }
                 }
             }
         }
         
-        // show button to segue to add athletes
+       
         
     }
     
