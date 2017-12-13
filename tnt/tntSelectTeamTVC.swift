@@ -14,10 +14,20 @@ class tntSelectTeamTVC: UITableViewController {
     var team: Team? = nil
     var athletes: [Athlete] = []
     
+    @IBOutlet var addAthletesButton: UIBarButtonItem!
+    
+    @IBOutlet var teamNameLabel: UILabel!
+    @IBOutlet var allTeamsSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        teamNameLabel.text = team?.name ?? "No team selected"
         getAvailableAthletes()
+        
+        tableView.allowsMultipleSelection = true
+        
+        addAthletesButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,13 +59,45 @@ class tntSelectTeamTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "joinathlete", for: indexPath)
-
-        cell.textLabel?.text = athletes[indexPath.row].id
+        
+        let athlete = athletes[indexPath.row]
+        cell.textLabel?.text = (athlete.lastName ?? "") + ", " + (athlete.firstName ?? "")
 
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addAthletesButton.isEnabled = (tableView.indexPathsForSelectedRows ?? []).count > 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        addAthletesButton.isEnabled = (tableView.indexPathsForSelectedRows ?? []).count > 0
+    }
 
+    func addSelectedAthletes() {
+        
+        if let rows = tableView.indexPathsForSelectedRows {
+            
+            guard rows.count <= athletes.count else {
+                print("TNT team setup - invalid number of rows adding athletes to team")
+                return
+            }
+            
+            let athletesToAdd  = rows.map {athletes[$0.row]}
+            
+            //TODO - implement adding to all teams based on switch in header
+            
+            athletesToAdd.forEach { team?.addAthlete(athleteId: $0.id!) }
+            team?.saveLocal()
+            
+            tntTeam.loadTeamById(teamId: (team?.teamId)!) { (dbTeam) in
+                dbTeam.mergeDeviceData(team: self.team!)
+                dbTeam.saveToCloud()
+            }
+        } else {
+            print("TNT team setup, no athlete rows selected")
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -100,5 +142,23 @@ class tntSelectTeamTVC: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func addAthletesTapped(_ sender: Any) {
+    
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let addAction = UIAlertAction(title: "Add", style: .default) { action in
+            
+            self.addSelectedAthletes()
+            self.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            print("TNT Team Setup - add athletes canceled")
+        }
+        for action in [addAction, cancelAction] {
+            actionSheet.addAction(action)
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
 }

@@ -63,6 +63,7 @@ extension Team {
         }
         
     }
+    
     func addUser(userId: String) {
    
         var userArray = userIds as! [String]? ?? []
@@ -75,5 +76,16 @@ extension Team {
         userIds = userArray as NSObject
     }
     
+    func addAthlete(athleteId: String) {
+        
+        var athleteArray = athleteIds as! [String]? ?? []
+        
+        
+        if !athleteArray.contains(athleteId) {
+            athleteArray.append(athleteId)
+        }
+        
+        athleteIds = athleteArray as NSObject
+    }
    
 }

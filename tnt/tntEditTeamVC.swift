@@ -83,6 +83,32 @@ class tntEditTeamVC: UIViewController {
         }
     }
     
+    func joinTeam(name: String, secret: String, completion: @escaping (Error?, Team?) -> Void) {
+        
+        tntTeam.validateTeamSecret(teamName: name, teamSecret: secret) { (dbTeam: tntTeam?) in
+            if let validTeam = dbTeam {
+                if let cachedTeamMO = tntLocalDataManager.shared.teams[validTeam.teamId!] {
+                    self.team = cachedTeamMO
+                } else {
+                    self.team = Team(dbTeam: validTeam)
+                }
+                // when creating a team, the current cognito user is automatically added to the team users list
+                self.team?.addCurrentUser()
+                self.team?.saveLocal()
+                
+                validTeam.mergeDeviceData(team: self.team!)
+                validTeam.saveToCloud()  // async, assumed to succeed (TODO)
+                
+                completion(nil, self.team!)
+                
+            } else {
+                
+                let error = NSError(domain: "TNT", code: 1, userInfo: ["message": "could not join team"])
+                completion(error, nil)
+            }
+        }
+    }
+    
     func randomSecret(len: Int) -> String {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -152,6 +178,24 @@ class tntEditTeamVC: UIViewController {
     
     
     @IBAction func joinTapped(_ sender: UIButton) {
+        
+        disableButtons()
+        
+        joinTeam(name: teamName.text!, secret: teamSecret.text!) { (error, result) in
+            
+            if error == nil {
+                
+                if result != nil {
+                    DispatchQueue.main.async {
+                        self.setButtons()
+                    }
+                }
+            } else {
+                // show alert, indicating failur to join
+                print("TNT Team Setup - failed to join team")
+            }
+        }
+        
     }
     
     

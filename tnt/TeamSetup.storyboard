@@ -18,9 +18,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="CKP-90-5hR">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKn-cD-mHP">
+                                    <rect key="frame" x="8" y="15" width="91" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="s6V-lf-aLW">
+                                    <rect key="frame" x="8" y="49" width="49" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </switch>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Apply actions to all teams, not just this team" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rfH-cR-TwW">
+                                    <rect key="frame" x="63" y="49" width="229" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="joinathlete" id="3Pi-ep-bRa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="156" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Pi-ep-bRa" id="nmL-Ye-juy">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -33,11 +58,24 @@
                             <outlet property="delegate" destination="56R-p6-hVC" id="zAy-oT-K1p"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select Athletes" id="rpz-IK-zR9"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Select Athletes" id="0o9-HM-MU4">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="6lo-Iv-BtH">
+                            <connections>
+                                <action selector="addAthletesTapped:" destination="56R-p6-hVC" id="7jx-GV-U4I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addAthletesButton" destination="6lo-Iv-BtH" id="rdP-9M-1GD"/>
+                        <outlet property="allTeamsSwitch" destination="s6V-lf-aLW" id="scL-ou-wOE"/>
+                        <outlet property="teamNameLabel" destination="pKn-cD-mHP" id="igz-Fc-by7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6f-mt-p0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81" y="-271"/>
+            <point key="canvasLocation" x="80.799999999999997" y="-271.21439280359823"/>
         </scene>
         <!--Team Setup-->
         <scene sceneID="NCA-kR-tV2">
