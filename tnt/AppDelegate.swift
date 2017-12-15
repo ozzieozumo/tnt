@@ -166,34 +166,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "tntLoginMethods")
             startingVCs.append(loginVC)
-            
-            navController.setViewControllers(debugVCs + startingVCs, animated: false)
-            return
-        }
-        
-        // if running in debug mode, add the utilities page to the VCs
-        
-       
-        let defaults = UserDefaults.standard
-        let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") ?? ""
-        
-        if tntLocalDataManager.shared.athletes[savedAthleteId] != nil {
-            
-            // athlete saved in user defaults and exists in core data -> display home VC
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
-            startingVCs.append(homeVC)
-            
         } else {
+            // if running in debug mode, add the utilities page to the VCs
             
-            // otherwise, display athlete setup VC
-            let storyboard = UIStoryboard(name: "AthleteSetup", bundle: nil)
-            let setupVC = storyboard.instantiateViewController(withIdentifier: "tntAthleteSetup")
-            startingVCs.append(setupVC)
+            let defaults = UserDefaults.standard
+            let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") ?? ""
             
+            if tntLocalDataManager.shared.athletes[savedAthleteId] != nil {
+                
+                // athlete saved in user defaults and exists in core data -> display home VC
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let homeVC = storyboard.instantiateViewController(withIdentifier: "tntHomeVC")
+                startingVCs.append(homeVC)
+                
+            } else {
+                
+                // otherwise, display athlete setup VC
+                let storyboard = UIStoryboard(name: "AthleteSetup", bundle: nil)
+                let setupVC = storyboard.instantiateViewController(withIdentifier: "tntAthleteSetup")
+                startingVCs.append(setupVC)
+                
+            }
         }
-
+       
+        // dismiss any modally presented controllers, e.g. arising from user pool login process
+        navController.dismiss(animated: false)
         
         navController.setViewControllers(debugVCs + startingVCs, animated: false)
     }
