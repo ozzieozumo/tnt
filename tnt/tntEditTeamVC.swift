@@ -62,6 +62,7 @@ class tntEditTeamVC: UIViewController {
                 teamMO.saveLocal()
                 
                 self.team = teamMO
+                tntLoginManager.shared.currentTeam = self.team
                 
                 DispatchQueue.main.async {
                     self.setButtons()
@@ -98,6 +99,8 @@ class tntEditTeamVC: UIViewController {
                 
                 validTeam.mergeDeviceData(team: self.team!)
                 validTeam.saveToCloud()  // async, assumed to succeed (TODO)
+                
+                tntLoginManager.shared.currentTeam = self.team
                 
                 completion(nil, self.team!)
                 

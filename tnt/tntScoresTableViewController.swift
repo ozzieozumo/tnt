@@ -62,11 +62,9 @@ class tntScoresTableViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // automatically save the table as a scores object in CoreData
         
-        // only if the view is being popped (I think this could also be done in willMoveToParentViewController with a test for nil parent)
+        // only if the view is being popped
         if self.isMovingFromParentViewController {
-            
             saveScores()
-            
         }
         
     }

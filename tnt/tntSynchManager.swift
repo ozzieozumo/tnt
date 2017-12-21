@@ -360,6 +360,46 @@ class tntSynchManager {
 
     }
     
+    func loadTeamScores(teamScoreIds: [String]) -> AWSTask<tntTeamScores> {
+    
+        // For a given list of score Ids (all relevant athletes and meets), query Dyanamo
+        // Return a task which completes when all queries are done, returning the scores in an array (tntTeamScores)
+        
+        let taskCompletion = AWSTaskCompletionSource<tntTeamScores>()
+        var subTasks: [AWSTask<AnyObject>] = []
+        var dbObjects: [tntScores] = []
+        let updateQueue = DispatchQueue(label: "tasks.exclusive")  // serial queue to ensure exclusive access during array updates
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        for scoreId in teamScoreIds {
+            
+            let loadTask = dynamoDBObjectMapper.load(tntScores.self, hashKey: scoreId, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+                    if let error = task.error as NSError? {
+                        print("TNT Team Scores: Error loading \(scoreId). Error: \(error)")
+                    } else if let dbScores = task.result as? tntScores {
+                        print("TNT Team Scores: retrieved scores for " + scoreId)
+                        updateQueue.sync { dbObjects.append(dbScores) }  // append in a thread-safe way
+                    }
+                    print("TNT Team Scores: retrieved no score DB object with id \(scoreId)")
+                    return nil
+                })
+            subTasks.append(loadTask)
+        }
+        
+        let whenAllTask = AWSTask(forCompletionOfAllTasks: subTasks).continueWith(block: { (task:AWSTask<AnyObject>) -> AWSTask<AnyObject>? in
+            if let error = task.error as NSError? {
+                taskCompletion.set(error: error)
+            } else {
+                let result = tntTeamScores()
+                result.teamScores = dbObjects
+                taskCompletion.set(result: result)
+            }
+            return nil
+        })
+        
+        return taskCompletion.task
+    }
+    
     
     
     func saveScores(_ scoreId: String) {
@@ -521,13 +561,11 @@ class tntSynchManager {
                                 
                                 pendingScore.clearCloudSavePending()
                             }
-                            group.leave()
                             return nil
                         })
 
                     }
-                    
-                    
+                    group.leave()  // leave the group after polling and starting the save tasks (which will complete in background)
                 }
                 
                 

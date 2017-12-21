@@ -47,6 +47,8 @@ class tntLoginManager {
     var userPool: AWSCognitoIdentityUserPool? = nil
     var userPoolDefaultDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate? = nil;  // save this after pool creation but before assigning our delegate
     
+    // Current Team
+    var currentTeam: Team?
     
     private init() {
         

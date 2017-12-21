@@ -192,7 +192,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         // dismiss any modally presented controllers, e.g. arising from user pool login process
         navController.dismiss(animated: false)
-        
         navController.setViewControllers(debugVCs + startingVCs, animated: false)
     }
 
