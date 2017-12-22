@@ -20,7 +20,12 @@ class tntEditTeamVC: UIViewController {
     @IBOutlet var joinButton: UIButton!
     @IBOutlet var createButton: UIButton!
     @IBOutlet var addAthletesButton: UIButton!
-        
+    
+    
+    @IBOutlet var currentTeamLabel: UILabel!
+    @IBOutlet var membershipStatusBtn: UIButton!
+    @IBOutlet var membershipInfoLabel: UILabel!
+    
     var mailForm: MFMailComposeViewController? = nil
     
     override func viewDidLoad() {
@@ -28,6 +33,8 @@ class tntEditTeamVC: UIViewController {
         
         teamName.delegate = self
         teamSecret.delegate = self
+        
+        checkCurrentTeam()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +69,9 @@ class tntEditTeamVC: UIViewController {
                 teamMO.saveLocal()
                 
                 self.team = teamMO
-                tntLoginManager.shared.currentTeam = self.team
+                tntLoginManager.shared.currentTeam = teamMO
+                let defaults = UserDefaults.standard
+                defaults.set(teamMO.teamId!, forKey: Constants.dk_CurrentTeamId)
                 
                 DispatchQueue.main.async {
                     self.setButtons()
@@ -101,6 +110,8 @@ class tntEditTeamVC: UIViewController {
                 validTeam.saveToCloud()  // async, assumed to succeed (TODO)
                 
                 tntLoginManager.shared.currentTeam = self.team
+                let defaults = UserDefaults.standard
+                defaults.set(validTeam.teamId!, forKey: Constants.dk_CurrentTeamId)
                 
                 completion(nil, self.team!)
                 
@@ -136,6 +147,71 @@ class tntEditTeamVC: UIViewController {
             mailForm.setMessageBody("the team name and team secret go here", isHTML: true)
         
             present(mailForm, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func checkCurrentTeam() {
+        
+        // look for current team in user defaults
+        
+        let defaults = UserDefaults.standard
+        if let teamId = defaults.string(forKey: Constants.dk_CurrentTeamId) {
+            
+            verifyTeamMembership(currentTeamId: teamId)
+            
+        } else {
+        
+            displayCurrentTeamSection(show: false)
+        }
+    }
+    
+    func verifyTeamMembership(currentTeamId: String) {
+        
+        guard let currentUser = tntLoginManager.shared.cognitoId else {
+            // no logged in user, so cannot be a member of any team
+            displayCurrentTeamSection(show: false)
+            return
+        }
+        
+        displayCurrentTeamSection(show: true)
+        currentTeamLabel.text = ""
+        membershipStatusBtn.setImage(#imageLiteral(resourceName: "circle-timer"), for: .normal)
+        membershipInfoLabel.text = ""
+        
+        // retrieve current
+        
+        tntTeam.cacheTeamById(teamId: currentTeamId, updateCache: true) { (error, result: tntTeam?) in
+            if error != nil  {
+                print("TNT edit team VC:  error retrieving team db object")
+                DispatchQueue.main.async { self.displayCurrentTeamSection(show: false)}
+            } else {
+    
+               let isMember = result?.userIds?.contains(currentUser) ?? false
+                DispatchQueue.main.async { self.displayTeamMessage(valid: isMember)}
+               // the corresponding Team MO should be in the cache now
+                tntLoginManager.shared.currentTeam = tntLocalDataManager.shared.teams[result!.teamId!]
+            }
+        }
+        
+        
+    }
+    
+    func displayCurrentTeamSection(show: Bool) {
+        
+        
+    }
+    
+    func displayTeamMessage(valid: Bool) {
+    
+        if valid {
+            self.currentTeamLabel.text = tntLoginManager.shared.currentTeam?.name
+            self.membershipInfoLabel.text = "You are on the team!"
+            self.membershipStatusBtn.setImage(#imageLiteral(resourceName: "circle-tick"), for: .normal)
+        } else {
+            self.membershipInfoLabel.text = "Your previous membership seems to be invalid. Try rejoining or creating a new team"
+            self.membershipStatusBtn.setImage(#imageLiteral(resourceName: "circle-cross"), for: .normal)
+            
         }
         
     }

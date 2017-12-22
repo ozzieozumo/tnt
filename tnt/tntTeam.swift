@@ -68,6 +68,47 @@ class tntTeam : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         })
     }
     
+    // better version of the above (option to add to cache, completion handler with error and result
+    
+    class func cacheTeamById(teamId: String?, updateCache: Bool, completion: @escaping (NSError?, tntTeam?) -> Void ) {
+        
+        guard teamId != nil else {
+            return
+        }
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.load(tntTeam.self, hashKey: teamId!, rangeKey:nil).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("AWS Dynamo error loading team item. Error: \(error)")
+                completion(error, nil)
+                
+            } else if let team = task.result as? tntTeam {
+                if updateCache {
+                    
+                    if let teamMO = tntLocalDataManager.shared.teams[teamId!] {
+                        
+                        teamMO.updateFromCloud(dbTeam: team)
+                        teamMO.saveLocal()
+                        
+                    } else {
+                        let newMO = Team(dbTeam: team)
+                        newMO.saveLocal()
+                        
+                    }
+                    
+                }
+                
+                completion(nil, team)
+            } else {
+                // No team found in cloud DB, so remove from cache
+                
+            }
+            return nil
+        })
+    }
+    
+    
     class func validateTeamSecret(teamName: String, teamSecret: String, completion: @escaping (tntTeam?) -> Void ) {
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         

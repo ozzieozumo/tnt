@@ -36,5 +36,9 @@ struct Constants {
     
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
     
+    
+    // User Default Key Constants (dk)
+    
+    static let dk_CurrentTeamId = "tntCurrentTeamId"
        
 }

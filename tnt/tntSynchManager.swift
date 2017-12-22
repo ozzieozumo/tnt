@@ -400,8 +400,6 @@ class tntSynchManager {
         return taskCompletion.task
     }
     
-    
-    
     func saveScores(_ scoreId: String) {
         
         if let scoresMO = tntLocalDataManager.shared.scores[scoreId] {

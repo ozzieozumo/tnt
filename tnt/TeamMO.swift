@@ -34,6 +34,28 @@ extension Team {
         
     }
     
+    // not sure about this function
+    class func fetchAndCache(_ teamId: String) {
+        
+        let fetchRequest: NSFetchRequest<Team> = Team.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "teamId == %@", teamId)
+        
+        do {
+            let moc = tntLocalDataManager.shared.moc!
+            let teams = try moc.fetch(fetchRequest)
+            if teams.count > 0 {
+                
+                tntLocalDataManager.shared.teams[teamId] = teams[0]
+                
+            }
+            print("TNT: fetch and cache team \(teamId)")
+            
+        } catch let error as NSError {
+            print("Could not fetch team from core data. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
     func saveLocal() {
         
         do {
@@ -49,6 +71,7 @@ extension Team {
         nc.post(name: Notification.Name("tntTeamDataLoaded"), object: nil, userInfo: ["teamId":self.teamId!])
         
     }
+    
    
     func addCurrentUser() {
         // add the cognito ID of the currently logged in user
@@ -87,5 +110,15 @@ extension Team {
         
         athleteIds = athleteArray as NSObject
     }
+    
+    func updateFromCloud(dbTeam: tntTeam) {
+        // like init from db but doesn't create a new managed object in the context
+        self.teamId = dbTeam.teamId
+        self.name = dbTeam.teamName
+        self.secret = dbTeam.teamSecret
+        self.athleteIds = dbTeam.athleteIds as NSObject?
+        self.userIds = dbTeam.userIds as NSObject?
+    }
+
    
 }
