@@ -91,6 +91,7 @@ class tntLoginManager {
         let fbLoginManager = FBSDKLoginManager()
         fbLoginManager.logOut()
         cognitoId = nil
+        currentTeam = nil
     }
     
     func resumeFBLogin() {
@@ -195,6 +196,7 @@ class tntLoginManager {
         
         userPool?.clearAll()
         cognitoId = nil
+        currentTeam = nil
         
         // enableInteractiveUserPoolLogin()  // this is done on the login methods screen
 
