@@ -154,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntDebugUtilities")
+            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntOptionsMenu")
             debugVCs.append(debugUtilVC)
             
         #endif

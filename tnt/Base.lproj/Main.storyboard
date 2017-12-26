@@ -20,20 +20,49 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="bCL-Sf-QFQ" kind="relationship" relationship="rootViewController" id="nYP-sS-BdS"/>
+                        <segue destination="QfV-xA-la4" kind="relationship" relationship="rootViewController" id="GVZ-nz-FP6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUM-zG-MaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-905" y="136"/>
+            <point key="canvasLocation" x="-2846" y="-63"/>
         </scene>
-        <!--tntTeamSetup-->
-        <scene sceneID="LLd-Lh-Ze9">
+        <!--Options-->
+        <scene sceneID="3DZ-nw-f6I">
             <objects>
-                <viewControllerPlaceholder storyboardName="TeamSetup" referencedIdentifier="tntTeamSetup" id="tA8-OE-2Kr" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NRH-xF-suc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="tntOptionsMenu" id="QfV-xA-la4" customClass="tntOptionsTVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KVa-km-irP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Rfm-3D-ISz">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rfm-3D-ISz" id="S22-10-KMt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QfV-xA-la4" id="bUn-Ov-XV3"/>
+                            <outlet property="delegate" destination="QfV-xA-la4" id="zto-os-Xdk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Options" id="cf2-AS-pfz"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="tntOptionHome" id="QR3-yL-I2V"/>
+                        <segue destination="bCL-Sf-QFQ" kind="show" identifier="tntOptionDebug" id="iOC-uS-VlW"/>
+                        <segue destination="MyI-1X-r6f" kind="show" identifier="tntOptionAthleteSetup" id="4yw-gP-rd7"/>
+                        <segue destination="jdb-ts-gAg" kind="show" identifier="tntOptionTeamSetup" id="Fcm-y8-K7Z"/>
+                        <segue destination="D7n-EK-90q" kind="show" identifier="tntOptionMeetSetup" id="loO-Xi-ME2"/>
+                        <segue destination="TXT-mJ-yMR" kind="show" identifier="tntOptionAccount" id="WAJ-OR-sXN"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IQs-um-6nk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-822" y="594"/>
+            <point key="canvasLocation" x="-1822" y="-63"/>
         </scene>
         <!--tntTeamActivity-->
         <scene sceneID="fBe-WT-de5">
@@ -41,9 +70,9 @@
                 <viewControllerPlaceholder storyboardName="TeamSetup" referencedIdentifier="tntTeamActivity" id="348-Dd-Q1T" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UeO-Ra-ja7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-722" y="683"/>
+            <point key="canvasLocation" x="-1054" y="576"/>
         </scene>
-        <!--Tnt Login View Controller-->
+        <!--Debug-->
         <scene sceneID="iZI-Lx-gzd">
             <objects>
                 <viewController storyboardIdentifier="tntDebugUtilities" id="bCL-Sf-QFQ" customClass="tntLoginViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
@@ -55,52 +84,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESl-QF-I5q">
-                                <rect key="frame" x="98" y="353" width="133" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Video to S3"/>
-                                <connections>
-                                    <segue destination="AIN-si-y35" kind="show" id="3VO-jR-EeR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wTs-LY-taL">
-                                <rect key="frame" x="88" y="399" width="148" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play Video From S3"/>
-                                <connections>
-                                    <action selector="playVideoClicked:" destination="bCL-Sf-QFQ" eventType="touchUpInside" id="p1u-3u-eB0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDQ-nj-N9v">
-                                <rect key="frame" x="104" y="455" width="109" height="30"/>
+                                <rect key="frame" x="105" y="295" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear Core Data"/>
                                 <connections>
                                     <action selector="clearCoreDataClicked:" destination="bCL-Sf-QFQ" eventType="touchUpInside" id="Uxe-Lv-fb6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-gl-4Az">
-                                <rect key="frame" x="113" y="159" width="86" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Home View"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="showAthlete" id="C6Q-eX-F0C"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HI3-IL-UKo">
-                                <rect key="frame" x="91" y="512" width="146" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Related Videos"/>
-                                <connections>
-                                    <segue destination="wR7-Nb-Ce5" kind="show" id="tQo-9X-QtI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCa-cU-p0D">
-                                <rect key="frame" x="104" y="203" width="104" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Athlete Setup"/>
-                                <connections>
-                                    <segue destination="MyI-1X-r6f" kind="show" id="gSg-Fb-2IK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6K2-Aa-3br">
@@ -111,24 +100,8 @@
                                     <segue destination="NP0-w5-HtP" kind="show" id="Pk5-yx-4qH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-Cw-Pp4">
-                                <rect key="frame" x="79" y="305" width="170" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Image to S3"/>
-                                <connections>
-                                    <segue destination="EVD-fr-yxD" kind="show" identifier="showUploadImage" id="Iwx-BW-HaV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8K-ia-Nba">
-                                <rect key="frame" x="115" y="575" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Team Setup"/>
-                                <connections>
-                                    <segue destination="tA8-OE-2Kr" kind="show" id="jYi-ax-tJP"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vO-Mp-BHY">
-                                <rect key="frame" x="110" y="617" width="92" height="30"/>
+                                <rect key="frame" x="113" y="348" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Team Activity"/>
                                 <connections>
@@ -138,11 +111,35 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="D0w-x4-cKx"/>
+                    <navigationItem key="navigationItem" title="Debug" id="D0w-x4-cKx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXi-VU-jgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207.19999999999999" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-1823" y="813"/>
+        </scene>
+        <!--tntAccountVC-->
+        <scene sceneID="1ea-3U-epl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="tntAccountVC" id="TXT-mJ-yMR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8AS-PS-0Js" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1105" y="-900"/>
+        </scene>
+        <!--MeetSetup-->
+        <scene sceneID="6Bw-dg-FUh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MeetSetup" id="D7n-EK-90q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k68-2C-a0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1090" y="-784"/>
+        </scene>
+        <!--TeamSetup-->
+        <scene sceneID="ppc-5F-qVK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TeamSetup" id="jdb-ts-gAg" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HMv-h6-9vS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1087" y="-690"/>
         </scene>
         <!--tntLoginMethods-->
         <scene sceneID="Kdh-UM-PpJ">
@@ -150,7 +147,7 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="tntLoginMethods" id="NP0-w5-HtP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rZy-9B-Zhj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="-553"/>
+            <point key="canvasLocation" x="-1059" y="461"/>
         </scene>
         <!--AthleteSetup-->
         <scene sceneID="Fj0-6Q-cVx">
@@ -158,7 +155,7 @@
                 <viewControllerPlaceholder storyboardName="AthleteSetup" id="MyI-1X-r6f" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="llC-Nx-F4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="-461"/>
+            <point key="canvasLocation" x="-1040" y="-601"/>
         </scene>
         <!--tntSelectAthlete-->
         <scene sceneID="T34-k4-wH3">
@@ -166,7 +163,7 @@
                 <viewControllerPlaceholder storyboardName="AthleteSetup" referencedIdentifier="tntSelectAthlete" id="EvS-z8-yRI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEB-f8-ihk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="610" y="-394"/>
+            <point key="canvasLocation" x="304" y="-948"/>
         </scene>
         <!--Tnt Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -379,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653.60000000000002" y="38.23088455772114"/>
+            <point key="canvasLocation" x="-346" y="-63"/>
         </scene>
         <!--Meet Videos-->
         <scene sceneID="si5-Zn-npn">
@@ -667,7 +664,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFQ-yK-OK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="544.79999999999995" y="1688.9055472263869"/>
+            <point key="canvasLocation" x="-167" y="1748"/>
         </scene>
         <!--Tnt Video Upload View Controller-->
         <scene sceneID="hfx-UB-SE0">
@@ -685,52 +682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rhg-Eg-dBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1402" y="1268"/>
-        </scene>
-        <!--TntS3 Upload View Controller-->
-        <scene sceneID="WeX-Vj-Vv7">
-            <objects>
-                <viewController id="EVD-fr-yxD" customClass="tntS3UploadViewController" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ubf-Nj-FRR"/>
-                        <viewControllerLayoutGuide type="bottom" id="0bH-Ve-fBr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Xlc-kB-S9E">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3c6-TR-qiV">
-                                <rect key="frame" x="67" y="150" width="244" height="230"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utE-qZ-GES">
-                                <rect key="frame" x="77" y="406" width="240" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WQd-CC-DMA">
-                                <rect key="frame" x="69" y="443" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbu-MX-K09">
-                                        <rect key="frame" x="97" y="49" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="selectedImageView" destination="3c6-TR-qiV" id="Tbh-cI-pNe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lfp-wh-dAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="661.60000000000002" y="685.90704647676171"/>
+            <point key="canvasLocation" x="830" y="936"/>
         </scene>
         <!--Meet Scores-->
         <scene sceneID="jhM-qW-ful">
@@ -831,7 +783,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uv5-IJ-iE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428" y="-341.37931034482762"/>
+            <point key="canvasLocation" x="786" y="-449"/>
         </scene>
         <!--Event Result-->
         <scene sceneID="hBA-2W-kWS">
@@ -953,7 +905,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfL-kw-IF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2204" y="-1035.832083958021"/>
+            <point key="canvasLocation" x="1818" y="-1072"/>
         </scene>
         <!--Pass Score-->
         <scene sceneID="tBf-Ka-Tdf">
@@ -1196,7 +1148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7u-h2-Gt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2204" y="-341.37931034482762"/>
+            <point key="canvasLocation" x="1818" y="-347"/>
         </scene>
         <!--Tnt Meets Table View Controller-->
         <scene sceneID="Eph-5r-826">
@@ -1255,7 +1207,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFy-gR-vae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1632.8" y="412.44377811094455"/>
+            <point key="canvasLocation" x="1738" y="510"/>
         </scene>
     </scenes>
     <resources>
@@ -1268,8 +1220,4 @@
         <image name="plus" width="30" height="30"/>
         <image name="smile-emoticon" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="3VO-jR-EeR"/>
-        <segue reference="tQo-9X-QtI"/>
-    </inferredMetricsTieBreakers>
 </document>
