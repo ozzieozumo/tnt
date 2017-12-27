@@ -37,6 +37,7 @@ class tntLoginManager {
     // Facebook
     
     var fbToken: FBSDKAccessToken?
+    var fbProfile: FBSDKProfile?
     
     // Cognito (Federated Identity Pool)
     
@@ -54,6 +55,7 @@ class tntLoginManager {
     private init() {
         
         fbToken = nil
+        fbProfile = nil
         cognitoId = nil
         credentialsProvider = nil
         
@@ -63,6 +65,58 @@ class tntLoginManager {
         return isLoggedInFB() || isLoggedInUserPool()
     }
     
+    var loggedInUser: String? {
+        guard self.loggedIn else {return nil}
+        
+        if isLoggedInUserPool() {
+            return userPool?.currentUser()?.username
+        }
+        
+        if isLoggedInFB() {
+            let lastName = fbProfile?.lastName ?? ""
+            let firstName = fbProfile?.firstName ?? ""
+            if firstName + lastName == "" {
+                return "Profile Name Unavailable"
+            } else {
+                return "\(firstName) \(lastName)"
+            }
+        }
+        return "Unknown Login Method"
+    }
+    
+    var loggedInEmail: String? {
+        guard self.loggedIn else {return nil}
+        
+        if isLoggedInUserPool() {
+            // will need to save getDetails result after each successful login, similar to saving FB profile
+            return "User Pool Email"
+        }
+        
+        if isLoggedInFB() {
+            // if let fbEmail = fbProfile?.
+            return "FB Profile Email"
+        }
+        return "Unknown Login Method"
+        
+    }
+    
+    func logout() {
+        guard loggedIn else {return}
+        
+        if isLoggedInFB() {
+            fbLogout()
+        }
+        if isLoggedInUserPool() {
+            userPoolLogout()
+        }
+        
+        //TODO : decide whether core data should be cleared on logout
+        //       app should be usable when not connected to internet
+        //       provided meets & athletes have been setup in advance.
+        //       need to clarify this in UI.
+        
+        tntLocalDataManager.shared.clearTNTObjects()
+    }
     func attemptSilentLogin() {
         
         // Try to automatically login using the last known login method
@@ -140,6 +194,8 @@ class tntLoginManager {
                 print("tntLoginManager: error loading current Facebook profile")
             }
             else {
+                // TODO - save the fbProfile returned here
+                //      - also, do a graph request to get the email address and save it
                 let fbProfile = FBSDKProfile.current()
                 print("tnt: FBSDK User Profile \(fbProfile!.name)")
             }
