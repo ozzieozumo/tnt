@@ -2,8 +2,9 @@
 //  Meet+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 9/26/17.
+//  Created by Luke Everett on 12/26/17.
 //  Copyright © 2017 ozzieozumo. All rights reserved.
+//
 //
 
 import Foundation
@@ -26,6 +27,8 @@ extension Meet {
     @NSManaged public var subTitle: String?
     @NSManaged public var title: String?
     @NSManaged public var venue: String?
+    @NSManaged public var sharedStatus: Bool
+    @NSManaged public var sharedTeam: String?
     @NSManaged public var registered: Athlete?
 
 }

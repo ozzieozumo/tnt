@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ey3-tN-D8r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jzd-ge-FkV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Meet Setup-->
+        <!--Edit Meet-->
         <scene sceneID="0px-Wv-GmF">
             <objects>
-                <viewController id="ey3-tN-D8r" sceneMemberID="viewController">
+                <viewController id="ey3-tN-D8r" customClass="tntEditMeetVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZFI-aK-Gzd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,11 +30,75 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="iYL-ch-Fjf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Meet Setup" id="A4f-jn-6V9"/>
+                    <navigationItem key="navigationItem" title="Edit Meet" id="A4f-jn-6V9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZg-nq-IQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="188.45577211394306"/>
+            <point key="canvasLocation" x="676" y="91"/>
+        </scene>
+        <!--Meets-->
+        <scene sceneID="4ZO-HB-1m4">
+            <objects>
+                <tableViewController id="jzd-ge-FkV" customClass="tntMeetSetupListTVC" customModule="tnt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3u9-3p-2cJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="XeT-sV-MsK">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="meetCell" rowHeight="67" id="75H-ho-zKd" customClass="tntMeetSetupListCell" customModule="tnt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="110" width="375" height="67"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="75H-ho-zKd" id="Mb1-8j-x3w">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FR5-Nv-Z4l">
+                                            <rect key="frame" x="24" y="19" width="60" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="RyS-JF-Azi"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpU-of-cqo">
+                                            <rect key="frame" x="137" y="19" width="202" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FR5-Nv-Z4l" firstAttribute="leading" secondItem="Mb1-8j-x3w" secondAttribute="leadingMargin" constant="8" id="2VX-LJ-Umw"/>
+                                        <constraint firstItem="LpU-of-cqo" firstAttribute="leading" secondItem="FR5-Nv-Z4l" secondAttribute="trailing" constant="53" id="8IZ-Xj-D0m"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LpU-of-cqo" secondAttribute="trailing" constant="20" id="OSn-zS-lpT"/>
+                                        <constraint firstItem="LpU-of-cqo" firstAttribute="top" secondItem="FR5-Nv-Z4l" secondAttribute="top" id="y7a-tG-p8c"/>
+                                        <constraint firstItem="FR5-Nv-Z4l" firstAttribute="top" secondItem="Mb1-8j-x3w" secondAttribute="topMargin" constant="8" id="yFm-lu-Y7G"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="meetDate" destination="FR5-Nv-Z4l" id="Ipd-xs-sN8"/>
+                                    <outlet property="meetName" destination="LpU-of-cqo" id="HGw-JQ-QOr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jzd-ge-FkV" id="O1E-FD-YPA"/>
+                            <outlet property="delegate" destination="jzd-ge-FkV" id="ZUn-CI-Dn6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Meets" id="kN2-L8-JHJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q8G-gY-wip"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSe-wH-gEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-95.200000000000003" y="89.505247376311857"/>
         </scene>
     </scenes>
 </document>

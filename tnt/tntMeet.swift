@@ -22,6 +22,8 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var meetEvents: [String]?
     var meetTitle: String?
     var meetSubTitle: String?
+    var sharedStatus: Bool?
+    var sharedTeam: String?
 
     
     class func dynamoDBTableName() -> String {
@@ -57,6 +59,9 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         meetEvents = meetMO.events as! [String]?
         meetTitle = meetMO.title
         meetSubTitle = meetMO.subTitle
+        
+        sharedStatus = meetMO.sharedStatus
+        sharedTeam = meetMO.sharedTeam
     
     }
 

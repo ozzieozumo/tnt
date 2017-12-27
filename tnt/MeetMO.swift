@@ -29,6 +29,8 @@ extension Meet {
         self.events = dbMeet.meetEvents as NSObject?
         self.title = dbMeet.meetTitle
         self.subTitle = dbMeet.meetSubTitle
+        self.sharedStatus = dbMeet.sharedStatus ?? false
+        self.sharedTeam = dbMeet.sharedTeam
         
     }
     
@@ -96,6 +98,22 @@ extension Meet {
         return nil
     }
     
+    class func fetchAllPrivateMeets(completion: @escaping () -> Void) {
+        
+        DispatchQueue.global().async {
     
-   
+            let request: NSFetchRequest<Meet> = Meet.fetchRequest()
+            // request.predicate = NSPredicate(format: "sharedStatus == false")
+            do {
+                let fetchedMeetsArray = try tntLocalDataManager.shared.moc!.fetch(request)
+                for meet in fetchedMeetsArray {
+                    tntLocalDataManager.shared.meets[meet.id!] = meet
+                    print("TNT Local Data Manager fetched meet with id : \(meet.id!)")
+                }
+                completion()
+            } catch {
+                fatalError("TNT Local Data Manager exception retrieving meets: \(error)")
+            }
+        }
+    }
 }
