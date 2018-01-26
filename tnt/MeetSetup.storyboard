@@ -19,22 +19,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Setup new meets and share with team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ag3-S1-8sf">
-                                <rect key="frame" x="32" y="39" width="292" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bN7-25-JZa">
+                                <rect key="frame" x="5" y="25" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="OHu-gO-q70">
+                                <rect key="frame" x="5" y="122" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="538419308.26044905">
+                                    <!--2018-01-23 16:55:08 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGj-pF-diC">
+                                <rect key="frame" x="5" y="96" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PU9-ja-wIP">
+                                <rect key="frame" x="5" y="353" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="upd-6w-xUY">
+                                <rect key="frame" x="5" y="379" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="doT-mX-YW1"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="14" translatesAutoresizingMaskIntoConstraints="NO" id="T83-Pk-qO2">
+                                <rect key="frame" x="75" y="379" width="94" height="29"/>
+                                <connections>
+                                    <action selector="meetDurationChanged:" destination="ey3-tN-D8r" eventType="valueChanged" id="fSa-Zc-h3C"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsV-rM-Isa">
+                                <rect key="frame" x="295" y="468" width="40" height="30"/>
+                                <state key="normal" title="More "/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jnX-b5-fB5">
+                                <rect key="frame" x="5" y="51" width="330" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OHu-gO-q70" firstAttribute="top" secondItem="pGj-pF-diC" secondAttribute="bottom" constant="5" id="3fj-3h-eJi"/>
+                            <constraint firstItem="upd-6w-xUY" firstAttribute="leading" secondItem="bN7-25-JZa" secondAttribute="leading" id="4wI-dj-iwh"/>
+                            <constraint firstItem="jnX-b5-fB5" firstAttribute="leading" secondItem="bN7-25-JZa" secondAttribute="leading" id="DW6-we-7Oy"/>
+                            <constraint firstItem="pGj-pF-diC" firstAttribute="top" secondItem="jnX-b5-fB5" secondAttribute="bottom" constant="15" id="FcI-G0-7iU"/>
+                            <constraint firstItem="bN7-25-JZa" firstAttribute="leading" secondItem="iYL-ch-Fjf" secondAttribute="leading" constant="5" id="HYk-1f-c4W"/>
+                            <constraint firstItem="T83-Pk-qO2" firstAttribute="top" secondItem="upd-6w-xUY" secondAttribute="top" id="Myv-An-vLe"/>
+                            <constraint firstItem="bN7-25-JZa" firstAttribute="top" secondItem="iYL-ch-Fjf" secondAttribute="top" constant="5" id="N3b-fL-Bmg"/>
+                            <constraint firstItem="jnX-b5-fB5" firstAttribute="top" secondItem="bN7-25-JZa" secondAttribute="bottom" constant="5" id="SOT-s7-QVg"/>
+                            <constraint firstItem="upd-6w-xUY" firstAttribute="top" secondItem="PU9-ja-wIP" secondAttribute="bottom" constant="5" id="T8I-iN-QMi"/>
+                            <constraint firstItem="PU9-ja-wIP" firstAttribute="leading" secondItem="bN7-25-JZa" secondAttribute="leading" id="TIu-7D-7OH"/>
+                            <constraint firstItem="iYL-ch-Fjf" firstAttribute="trailing" secondItem="jnX-b5-fB5" secondAttribute="trailing" constant="40" id="c5O-S8-AQj"/>
+                            <constraint firstItem="BsV-rM-Isa" firstAttribute="top" secondItem="T83-Pk-qO2" secondAttribute="bottom" constant="60" id="ceA-eO-u5a"/>
+                            <constraint firstItem="pGj-pF-diC" firstAttribute="leading" secondItem="bN7-25-JZa" secondAttribute="leading" id="d0I-3t-Dz4"/>
+                            <constraint firstItem="BsV-rM-Isa" firstAttribute="trailing" secondItem="jnX-b5-fB5" secondAttribute="trailing" id="ftA-05-0VL"/>
+                            <constraint firstItem="PU9-ja-wIP" firstAttribute="top" secondItem="OHu-gO-q70" secondAttribute="bottom" constant="15" id="gN4-lw-N1C"/>
+                            <constraint firstItem="T83-Pk-qO2" firstAttribute="leading" secondItem="upd-6w-xUY" secondAttribute="trailing" constant="10" id="oL5-ez-csG"/>
+                            <constraint firstItem="OHu-gO-q70" firstAttribute="leading" secondItem="bN7-25-JZa" secondAttribute="leading" id="yd2-4Y-GY6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iYL-ch-Fjf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit Meet" id="A4f-jn-6V9"/>
+                    <navigationItem key="navigationItem" title="Edit Meet" id="A4f-jn-6V9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NDB-d3-0dq">
+                            <connections>
+                                <action selector="saveTapped:" destination="ey3-tN-D8r" id="G0z-Zh-fkZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="meetDuration" destination="upd-6w-xUY" id="DPZ-RF-K6C"/>
+                        <outlet property="meetDurationStepper" destination="T83-Pk-qO2" id="fss-82-P4A"/>
+                        <outlet property="meetStartDate" destination="OHu-gO-q70" id="67K-ja-w3b"/>
+                        <outlet property="meetTitle" destination="jnX-b5-fB5" id="R2w-Pe-Uo3"/>
+                        <outlet property="saveBtn" destination="NDB-d3-0dq" id="Po0-Yy-BWa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZg-nq-IQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="676" y="91"/>
+            <point key="canvasLocation" x="676" y="90.404797601199405"/>
         </scene>
         <!--Meets-->
         <scene sceneID="4ZO-HB-1m4">
@@ -93,8 +167,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Meets" id="kN2-L8-JHJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q8G-gY-wip"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q8G-gY-wip">
+                            <connections>
+                                <action selector="addMeetTapped:" destination="jzd-ge-FkV" id="v3i-Bz-1TP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="ey3-tN-D8r" kind="show" identifier="tntEditMeet" id="YWo-cV-RbA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSe-wH-gEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

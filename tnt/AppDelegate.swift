@@ -80,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // start (or restart) the cloudRetry task
         
+        
         DispatchQueue.global().async {
             
             tntSynchManager.shared.startRetryTask()

@@ -34,6 +34,16 @@ extension Meet {
         
     }
     
+    convenience init(name: String) {
+        
+        // inits a new MeetMO with a new UUID
+        self.init(context: tntLocalDataManager.shared.moc!)
+        
+        self.id = UUID().uuidString
+        self.title = name
+        
+    }
+    
     func saveLocal() {
         
         do {
