@@ -22,7 +22,7 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var meetEvents: [String]?
     var meetTitle: String?
     var meetSubTitle: String?
-    var sharedStatus: Bool?
+    var sharedStatus: Int?
     var sharedTeam: String?
 
     
@@ -60,9 +60,24 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         meetTitle = meetMO.title
         meetSubTitle = meetMO.subTitle
         
-        sharedStatus = meetMO.sharedStatus
+        sharedStatus = meetMO.sharedStatus ? 1 : 0 
         sharedTeam = meetMO.sharedTeam
     
+    }
+    
+    func saveToCloud() {
+        //TODO - update cloud save status and provide completion handler for errors/success
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        dynamoDBObjectMapper.save(self).continueWith(block: { (task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("TNT Meet DB, failed saving tntMeet object to Dynamo. Error: \(error)")
+            } else {
+                print("TNT Meet DB, saved meet \(self.meetId!)")
+            }
+            return nil
+        })
     }
 
 }

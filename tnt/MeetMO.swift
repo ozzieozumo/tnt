@@ -29,7 +29,7 @@ extension Meet {
         self.events = dbMeet.meetEvents as NSObject?
         self.title = dbMeet.meetTitle
         self.subTitle = dbMeet.meetSubTitle
-        self.sharedStatus = dbMeet.sharedStatus ?? false
+        self.sharedStatus = (dbMeet.sharedStatus ?? 0) == 1
         self.sharedTeam = dbMeet.sharedTeam
         
     }
