@@ -16,6 +16,7 @@ class tntEditScoreItemVC: UIViewController {
     @IBOutlet var eventLabel: UILabel!
     @IBOutlet var passLabel: UILabel!
     @IBOutlet var baseScorePicker: UIPickerView!
+    var showDecimalsInPicker: Bool = true
     
     
     
@@ -197,7 +198,7 @@ extension tntEditScoreItemVC: UIPickerViewDataSource {
                 
             // make these dynamic based off some arrays
             case 0: return tntScoreItem.unitValues.count
-            case 1: return tntScoreItem.decimalValues.count
+            case 1: return showDecimalsInPicker ? tntScoreItem.decimalValues.count : 1
             default: return 0
             }
         }
@@ -231,6 +232,21 @@ extension tntEditScoreItemVC: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if component == 0 {
+            if row == baseScorePicker.numberOfRows(inComponent: 0) - 1 {
+                // showing the highest score, so reset the decimals
+                if showDecimalsInPicker {
+                    showDecimalsInPicker = false
+                    baseScorePicker.reloadComponent(1)
+                }
+            } else {
+                if !showDecimalsInPicker {
+                    showDecimalsInPicker = true
+                    baseScorePicker.reloadComponent(1)
+                }
+            }
+        }
         recalculate()
     }
     
