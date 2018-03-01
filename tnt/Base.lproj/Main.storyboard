@@ -1176,7 +1176,6 @@
                                     </connections>
                                 </switch>
                             </subviews>
-                            <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="Es1-iX-ZDo" firstAttribute="leading" secondItem="5VW-8y-jJZ" secondAttribute="leading" constant="113" id="q7X-Dz-Nvs"/>
                             </constraints>
@@ -1184,7 +1183,6 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZXw-RU-uZC">
                             <rect key="frame" x="0.0" y="126" width="375" height="174"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntmeet" rowHeight="42" id="h9k-8I-KAI">

@@ -69,8 +69,6 @@ class tntMeetsTableViewController: UITableViewController {
             //Populate the cell from the object
             
             cell.textLabel?.text = meet.title
-            cell.contentView.backgroundColor = UIColor.cyan
-            
             return cell
 
         } else {
