@@ -37,6 +37,14 @@ class tntMeetSetupListTVC: UITableViewController {
 
     // MARK: - Table view data source
 
+    func meetForIndexPath(_ indexPath: IndexPath)  -> Meet? {
+        
+        if indexPath.section == 0 {
+            return  teamMeets[indexPath.row]
+        } else {
+           return privateMeets[indexPath.row]
+        }
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
@@ -50,11 +58,7 @@ class tntMeetSetupListTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "meetCell", for: indexPath) as! tntMeetSetupListCell
 
-        if indexPath.section == 0 {
-            cell.meet = teamMeets[indexPath.row]
-        } else {
-            cell.meet = privateMeets[indexPath.row]
-        }
+        cell.meet = meetForIndexPath(indexPath)
         return cell
     }
 

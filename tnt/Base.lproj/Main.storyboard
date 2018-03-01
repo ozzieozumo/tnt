@@ -1158,35 +1158,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="5VW-8y-jJZ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next Meet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilS-e4-utJ">
-                                    <rect key="frame" x="16" y="22" width="79" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Es1-iX-ZDo">
-                                    <rect key="frame" x="113" y="16" width="51" height="31"/>
-                                    <connections>
-                                        <action selector="nextMeetSwitchChanged:" destination="rpJ-sG-GNH" eventType="valueChanged" id="4dp-tb-QZZ"/>
-                                    </connections>
-                                </switch>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="Es1-iX-ZDo" firstAttribute="leading" secondItem="5VW-8y-jJZ" secondAttribute="leading" constant="113" id="q7X-Dz-Nvs"/>
-                            </constraints>
-                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ZXw-RU-uZC">
-                            <rect key="frame" x="0.0" y="126" width="375" height="174"/>
+                            <rect key="frame" x="0.0" y="70" width="375" height="174"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tntmeet" rowHeight="42" id="h9k-8I-KAI">
-                                <rect key="frame" x="0.0" y="84" width="375" height="42"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="42"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9k-8I-KAI" id="hkd-7I-cSh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="41.5"/>
@@ -1199,9 +1177,6 @@
                             <outlet property="delegate" destination="rpJ-sG-GNH" id="03C-Hk-qHh"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="nextMeetSwitch" destination="Es1-iX-ZDo" id="XRk-FE-aHe"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFy-gR-vae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

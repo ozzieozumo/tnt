@@ -8,38 +8,15 @@
 
 import UIKit
 
-class tntMeetsTableViewController: UITableViewController {
+class tntMeetsTableViewController: tntMeetSetupListTVC {
 
    
-    var selectedMeetId : String? = nil
-    var meets: [Meet] = []
+    var selectedMeetId : String? = nil  // set on segue
     
     @IBOutlet weak var nextMeetSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        meets = tntLocalDataManager.shared.availableMeets()
-        
-        let defaults = UserDefaults.standard
-        
-        let dateSelect = defaults.bool(forKey: "nextMeetSelectByDate")
-        
-        if dateSelect {
-            nextMeetSwitch.setOn(true, animated: false)
-            self.selectedMeetId = Meet.nextMeet(startDate: Date())?.id
-            
-        } else {
-            nextMeetSwitch.setOn(false, animated: false)
-            self.selectedMeetId = Meet.lastSelected()?.id
-            
-        }
         
     }
 
@@ -48,66 +25,44 @@ class tntMeetsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meets.count
-    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "tntmeet", for: indexPath)
    
-        if indexPath.row <= meets.count {
-            let meet = meets[indexPath.row]
-            //Populate the cell from the object
-            
+        if let meet = meetForIndexPath(indexPath) {
             cell.textLabel?.text = meet.title
-            return cell
-
-        } else {
-            fatalError("Attempt to configure cell without a managed object")
         }
+        return cell
         
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // show selected row as selected
         
-        let meet = meets[indexPath.row]
+        if let meet = meetForIndexPath(indexPath) {
         
-        if meet.id == self.selectedMeetId {
-                cell.setSelected(true, animated: true)
-            } else {
-                cell.setSelected(false, animated: true)
-            }
+            if meet.id == self.selectedMeetId {
+                    cell.setSelected(true, animated: true)
+                } else {
+                    cell.setSelected(false, animated: true)
+                }
+        }
     }
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let meet = meets[indexPath.row]
-            
-        Meet.setLastSelected(meetId: meet.id)
-        navigationController?.popViewController(animated: true)
+        if let meet = meetForIndexPath(indexPath) {
+            Meet.setLastSelected(meetId: meet.id)
+            navigationController?.popViewController(animated: true)
+        }
         
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        
-        if nextMeetSwitch.isOn {
-            return nil
-        } else {
-            return indexPath
-        }
-    }
-
+   
     
 
     /*
@@ -155,23 +110,6 @@ class tntMeetsTableViewController: UITableViewController {
     }
     */
     
-    
-    @IBAction func nextMeetSwitchChanged(_ sender: Any) {
-        
-        // save the selection to user defaults
-        
-        let defaults = UserDefaults.standard
-        defaults.set(nextMeetSwitch.isOn, forKey: "nextMeetSelectByDate")
-        defaults.synchronize()
-        
-        if nextMeetSwitch.isOn {
-            
-            self.selectedMeetId = Meet.nextMeet(startDate: Date())?.id
-            
-            tableView.reloadData()
-        }
-        
-        
-    }
+
 
 }
