@@ -30,6 +30,11 @@ class tntHomeViewController: UIViewController {
     @IBOutlet weak var currentLevelTU: UITextField!
     @IBOutlet weak var nextMeetInfo: UITextView!
     
+    // Current meet display
+    @IBOutlet var meetMonth: UILabel!
+    @IBOutlet var meetDay: UILabel!
+    @IBOutlet var meetYear: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -180,23 +185,16 @@ class tntHomeViewController: UIViewController {
     
     func displayMeetInfo() {
         
-        // set the current meet if it is not set already 
-        
-        let defaults = UserDefaults.standard
-        let dateSelect = defaults.bool(forKey: "nextMeetSelectByDate")
-        
-        if dateSelect {
-            selectedMeet = Meet.nextMeet(startDate: Date())
-             
-        } else {
-            selectedMeet = Meet.lastSelected()
-            
-        }
-        
+        selectedMeet = Meet.lastSelected()
                
         if let meet = selectedMeet {
             // format and display info about the next meet
-            
+            if let startDate = meet.startDate as Date? {
+                let cal = Calendar.current
+                meetMonth.text = cal.shortMonthSymbols[cal.component(.month, from: startDate) - 1]
+                meetDay.text = "\(cal.component(.day, from: startDate))"
+                meetYear.text = "\(cal.component(.year, from: startDate))"
+            }
             let meetTitle = meet.title ?? ""
             let meetSubtitle = meet.subTitle ?? ""
             
