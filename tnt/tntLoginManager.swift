@@ -309,11 +309,12 @@ class tntLoginManager {
                 waitGroup.enter()
                 completeLoginWithUserPool(clearKeys: false) { (success: Bool) in
                     print("TNT Login Manager: resumed from user pool login and completed Cognito login")
+                    self.enableInteractiveUserPoolLogin()  // delegate must be set to allow token refreshes
                     waitGroup.leave()
                 }
                 let waitResults = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
                 if waitResults == .timedOut {
-                    print("TNT Login Manager - timed out waiting to complete user poo login")
+                    print("TNT Login Manager - timed out waiting to complete user pool login")
                 }
                 
             } else {
