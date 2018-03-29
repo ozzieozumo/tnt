@@ -152,14 +152,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        #if DEBUG
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntOptionsMenu")
-            debugVCs.append(debugUtilVC)
-            
-        #endif
-        
+        // the options menu is part of the main app (it is no longer included only for DEBUG)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntOptionsMenu")
+        debugVCs.append(debugUtilVC)
         
         if !tntLoginManager.shared.loggedIn {
             
