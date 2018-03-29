@@ -26,6 +26,10 @@ class tntEditAthleteViewController: UIViewController {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var dobPicker: UIDatePicker!
     
+    @IBOutlet var LevelTR: UITextField!
+    @IBOutlet var LevelDMT: UITextField!
+    @IBOutlet var LevelTU: UITextField!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -67,6 +71,17 @@ class tntEditAthleteViewController: UIViewController {
             firstName.text = existingAthlete.firstName ?? ""
             lastName.text = existingAthlete.lastName   ?? ""
             dobPicker.date = (existingAthlete.dob as Date?) ?? defaultDate
+            
+            let eventLevels = existingAthlete.eventLevels as! [String: Int]?
+            
+            let levelTRint  = eventLevels?["TR"] ?? 0
+            let levelTUint  = eventLevels?["TU"] ?? 0
+            let levelDMTint = eventLevels?["DMT"] ?? 0
+            
+            LevelTR.text  =  "\(levelTRint)"
+            LevelDMT.text  =  "\(levelDMTint)"
+            LevelTU.text  =  "\(levelTUint)"
+            
         } else {
             displayDefaultData()
         }
@@ -119,7 +134,10 @@ class tntEditAthleteViewController: UIViewController {
         athleteToSave.firstName = firstName.text
         athleteToSave.lastName = lastName.text
         athleteToSave.dob = dobPicker.date as NSDate
-        
+        let levels = ["TR" : Int(LevelTR.text ?? "0"),
+                      "DMT" : Int(LevelDMT.text ?? "0"),
+                      "TU" : Int(LevelTU.text ?? "0")]
+        athleteToSave.eventLevels = levels as NSObject
         // check for duplicate names
         if athlete == nil {
             if isNameLocalDuplicate(athlete: athleteToSave) {

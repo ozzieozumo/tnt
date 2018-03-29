@@ -185,6 +185,11 @@ class tntHomeViewController: UIViewController {
     
     func displayMeetInfo() {
         
+        if #available(iOS 11.0, *) {
+            meetMonth.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         selectedMeet = Meet.lastSelected()
                
         if let meet = selectedMeet {
