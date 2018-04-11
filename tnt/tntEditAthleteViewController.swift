@@ -34,6 +34,12 @@ class tntEditAthleteViewController: UIViewController {
         
         super.viewDidLoad()
         
+        firstName.delegate = self
+        lastName.delegate = self
+        LevelTR.delegate = self
+        LevelTU.delegate = self
+        LevelDMT.delegate = self
+        
         displayAthleteData()
         
     }
@@ -317,5 +323,12 @@ extension tntEditAthleteViewController: UIImagePickerControllerDelegate, UINavig
         // don't change the displayed profile image, just dismiss the picker
         
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension tntEditAthleteViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
 }
