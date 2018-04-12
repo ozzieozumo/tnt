@@ -366,12 +366,36 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
         tntSynchManager.shared.loadScores(athleteId: athleteId, meetId: meetId)
     }
     
-    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        // confirm acess to photo libary / videos before doing any segue (to upload or edit)
+        // waits for the result of interactive acess
+        
+        var hasPHAccess: Bool = false
+        
+        let accessCheckGroup = DispatchGroup()
+        accessCheckGroup.enter()
+        PHPhotoLibrary.testOrRequestPhotoAccess { (success) in
+            if success {
+                hasPHAccess = true
+                accessCheckGroup.leave()
+                
+            } else {
+                // show alert controller for photo acess failure
+                let alert = UIAlertController(title: "Photo Library Access Failure", message: "TNT was unable to access your video library", preferredStyle: .alert)
+                self.present(alert, animated: true)
+                hasPHAccess = false
+                accessCheckGroup.leave()
+            }
+        }
+        
+        accessCheckGroup.wait()
+        return hasPHAccess
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         if let destVC = segue.destination as? tntVideoUploadViewController {
-            
             destVC.uploadDelegate = self
         }
         

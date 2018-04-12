@@ -249,7 +249,16 @@ class tntEditAthleteViewController: UIViewController {
         
         profileImage.isUserInteractionEnabled = false
         
-        showProfilePicker()
+        PHPhotoLibrary.testOrRequestPhotoAccess { (success) in
+            if success {
+                self.showProfilePicker()
+            } else {
+                // show alert controller for photo acess failure
+                let alert = UIAlertController(title: "Photo Library Access Failure", message: "TNT was unable to access your photo library", preferredStyle: .alert)
+                self.present(alert, animated: true)
+            }
+        }
+        
         
     }
     
