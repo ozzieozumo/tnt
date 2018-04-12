@@ -24,6 +24,7 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var meetSubTitle: String?
     var sharedStatus: Int?
     var sharedTeam: String?
+    var sharedUser: String?  // if set, means private to this user
 
     
     class func dynamoDBTableName() -> String {
@@ -62,6 +63,7 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         
         sharedStatus = meetMO.sharedStatus ? 1 : 0 
         sharedTeam = meetMO.sharedTeam
+        sharedUser = meetMO.shareduser
     
     }
     
@@ -78,6 +80,34 @@ class tntMeet : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             }
             return nil
         })
+    }
+    
+    class func scanTeamMeets(completion: @escaping ([tntMeet]?) -> Void ) {
+        
+        guard let teamName = tntLoginManager.shared.currentTeam?.name else { return }
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.filterExpression = "sharedTeam = :teamName"
+        scanExpression.expressionAttributeValues = [":sharedTeam": teamName]
+        
+        dynamoDBObjectMapper.scan(tntMeet.self, expression: scanExpression).continueWith(block: { (task:AWSTask<AWSDynamoDBPaginatedOutput>!) -> Any? in
+            if let error = task.error as NSError? {
+                print("TNT Meet: Dynamo DB error scanning for shared meets \(error)")
+                completion(nil)
+            } else {
+                let meets = task.result?.items as! [tntMeet]? ?? []
+                if meets.count > 0 {
+                    completion(meets)
+                } else {
+                    completion(nil)
+                }
+            }
+            return nil
+        })
+        
+        
     }
 
 }

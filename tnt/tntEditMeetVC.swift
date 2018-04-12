@@ -95,7 +95,11 @@ class tntEditMeetVC: UIViewController {
                                              to: meetStartDate.date)
         meet.endDate = (endDate ?? meetStartDate.date) as NSDate
         meet.sharedStatus = sharedSwitch.isOn
-        meet.sharedTeam = tntLoginManager.shared.currentTeam?.teamId
+        if meet.sharedStatus {
+            meet.sharedTeam = tntLoginManager.shared.currentTeam?.teamId
+        } else {
+            meet.shareduser = tntLoginManager.shared.cognitoId
+        }
         
         meet.saveLocal()
         

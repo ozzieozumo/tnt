@@ -75,23 +75,24 @@ class tntMeetSetupListTVC: UITableViewController {
     
     func getTeamMeets() {
         
-        // retrieves any shared/team meets from core data
-        // also scans cloud DB for any newly shared meets
-        
-        self.teamMeets = tntLocalDataManager.shared.meets.values.filter {$0.sharedStatus == true }
-        self.teamMeets.sort { ($0.startDate! as Date)  < ($1.startDate! as Date) }
-        DispatchQueue.main.async { self.tableView.reloadData() }
+        // scan dynamo for any shared team meets
+        Meet.fetchAllTeamMeets {
+            self.teamMeets = tntLocalDataManager.shared.meets.values.filter {$0.sharedStatus == true && $0.sharedTeam == tntLoginManager.shared.currentTeam?.teamId }
+            self.teamMeets.sort { ($0.startDate! as Date)  < ($1.startDate! as Date) }
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }
         
     }
     
     func getPrivateMeets() {
-       // private meets are only available on the current device
-       // retrieve the private meets from coredata
+       // private meets are only available on the current device, this queries only core data locally
        
-        Meet.fetchAllPrivateMeets {
-            self.privateMeets = tntLocalDataManager.shared.meets.values.filter {$0.sharedStatus == false }
-            self.privateMeets.sort { ($0.startDate! as Date)  < ($1.startDate! as Date) }
-            DispatchQueue.main.async { self.tableView.reloadData() }
+        Meet.fetchAllPrivateMeets { [weak self] in
+            if let strongSelf = self {
+                strongSelf.privateMeets = tntLocalDataManager.shared.meets.values.filter {$0.sharedStatus == false && $0.shareduser == tntLoginManager.shared.cognitoId}
+                strongSelf.privateMeets.sort { ($0.startDate! as Date)  < ($1.startDate! as Date) }
+            DispatchQueue.main.async { strongSelf.tableView.reloadData() }
+            }
         }
     }
     

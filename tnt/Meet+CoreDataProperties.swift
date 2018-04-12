@@ -2,8 +2,8 @@
 //  Meet+CoreDataProperties.swift
 //  tnt
 //
-//  Created by Luke Everett on 12/26/17.
-//  Copyright © 2017 ozzieozumo. All rights reserved.
+//  Created by Luke Everett on 4/12/18.
+//  Copyright © 2018 ozzieozumo. All rights reserved.
 //
 //
 
@@ -23,12 +23,13 @@ extension Meet {
     @NSManaged public var id: String?
     @NSManaged public var maxLevel: Int16
     @NSManaged public var minLevel: Int16
+    @NSManaged public var sharedStatus: Bool
+    @NSManaged public var sharedTeam: String?
     @NSManaged public var startDate: NSDate?
     @NSManaged public var subTitle: String?
     @NSManaged public var title: String?
     @NSManaged public var venue: String?
-    @NSManaged public var sharedStatus: Bool
-    @NSManaged public var sharedTeam: String?
+    @NSManaged public var shareduser: String?
     @NSManaged public var registered: Athlete?
 
 }

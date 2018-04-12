@@ -31,6 +31,7 @@ extension Meet {
         self.subTitle = dbMeet.meetSubTitle
         self.sharedStatus = (dbMeet.sharedStatus ?? 0) == 1
         self.sharedTeam = dbMeet.sharedTeam
+        self.shareduser = dbMeet.sharedUser
         
     }
     
@@ -110,10 +111,14 @@ extension Meet {
     
     class func fetchAllPrivateMeets(completion: @escaping () -> Void) {
         
+        guard let user = tntLoginManager.shared.cognitoId else { return }
+    // Loads core data with all private meets for the current user only
         DispatchQueue.global().async {
     
             let request: NSFetchRequest<Meet> = Meet.fetchRequest()
-            // request.predicate = NSPredicate(format: "sharedStatus == false")
+            // don't need to user sharedStatus since sharedUser test is sufficient
+            // request.predicate = NSPredicate(format: "sharedStatus == 0")
+            request.predicate = NSPredicate(format: "shareduser == %@", user)
             do {
                 let fetchedMeetsArray = try tntLocalDataManager.shared.moc!.fetch(request)
                 for meet in fetchedMeetsArray {
@@ -122,8 +127,24 @@ extension Meet {
                 }
                 completion()
             } catch {
-                fatalError("TNT Local Data Manager exception retrieving meets: \(error)")
+                fatalError("TNT Local Data Manager exception retrieving private meets: \(error)")
             }
+        }
+    }
+    
+    class func fetchAllTeamMeets(completion: @escaping () -> Void) {
+        
+        guard let team = tntLoginManager.shared.currentTeam?.teamId else { return }
+        
+        // Scans dynamo DB for all meets associated with the current team, saves them to core data and caches them
+        // TODO: review need for duplicate detection and error handling in save local
+        tntMeet.scanTeamMeets { (meets) in
+            let dbMeets = (meets ?? []) as [tntMeet]
+            for meet in dbMeets {
+                let meetMO = Meet(dbMeet: meet)
+                meetMO.saveLocal() // do I need a duplicate check in here somehere?
+            }
+            completion()
         }
     }
 }
