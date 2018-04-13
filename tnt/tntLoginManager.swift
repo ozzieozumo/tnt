@@ -253,8 +253,7 @@ class tntLoginManager {
         userPool?.clearAll()
         cognitoId = nil
         currentTeam = nil
-        
-        // enableInteractiveUserPoolLogin()  // this is done on the login methods screen
+        disableInteractiveUserPoolLogin()  
 
     }
     

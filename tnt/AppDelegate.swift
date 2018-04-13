@@ -152,11 +152,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        // the options menu is part of the main app (it is no longer included only for DEBUG)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntOptionsMenu")
-        debugVCs.append(debugUtilVC)
-        
         if !tntLoginManager.shared.loggedIn {
             
             // not logged in, so open the login page
@@ -164,7 +159,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let loginVC = storyboard.instantiateViewController(withIdentifier: "tntLoginMethods")
             startingVCs.append(loginVC)
         } else {
-            // if running in debug mode, add the utilities page to the VCs
+            // logged in, so include the options menu
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let debugUtilVC = storyboard.instantiateViewController(withIdentifier: "tntOptionsMenu")
+            debugVCs.append(debugUtilVC)
             
             let defaults = UserDefaults.standard
             let savedAthleteId = defaults.string(forKey: "tntSelectedAthleteId") ?? ""

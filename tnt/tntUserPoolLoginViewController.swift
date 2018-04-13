@@ -44,7 +44,11 @@ class tntUserPoolLoginViewController: UIViewController {
         }
     }
     
-
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.dismiss(animated: false)
+    }
+    
+    
 }
 
 extension tntUserPoolLoginViewController: AWSCognitoIdentityPasswordAuthentication {

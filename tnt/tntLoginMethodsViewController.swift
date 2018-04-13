@@ -16,8 +16,6 @@ class tntLoginMethodsViewController: UIViewController {
 
     @IBOutlet var loginFacebook: UIButton!
     @IBOutlet var loginUserPool: UIButton!
-    @IBOutlet var logoutFacebook: UIButton!
-    @IBOutlet var logoutUserPool: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,8 +110,7 @@ class tntLoginMethodsViewController: UIViewController {
     func setButtons() {
         loginFacebook.isEnabled = !tntLoginManager.shared.loggedIn
         loginUserPool.isEnabled = !tntLoginManager.shared.loggedIn
-        logoutFacebook.isEnabled = tntLoginManager.shared.isLoggedInFB()
-        logoutUserPool.isEnabled = tntLoginManager.shared.isLoggedInUserPool()
+        
     }
     
     @IBAction func fbLoginTapped(_ sender: Any) {
@@ -122,14 +119,6 @@ class tntLoginMethodsViewController: UIViewController {
     }
     
     
-    @IBAction func fbLogoutTapped(_ sender: Any) {
-        
-        if tntLoginManager.shared.isLoggedInFB() {
-            tntLoginManager.shared.fbLogout()
-            tntLocalDataManager.shared.clearTNTObjects()
-            setButtons()
-        }
-    }
     
     
     @IBAction func userPoolLoginTapped(_ sender: Any) {
@@ -137,15 +126,4 @@ class tntLoginMethodsViewController: UIViewController {
         userPoolLogin()
     }
     
-    
-    @IBAction func userPoolLogoutTapped(_ sender: Any) {
-        
-        if tntLoginManager.shared.isLoggedInUserPool() {
-            tntLoginManager.shared.userPoolLogout()
-            tntLocalDataManager.shared.clearTNTObjects()
-            setButtons()
-        }
-        
-    }
-   
 }
