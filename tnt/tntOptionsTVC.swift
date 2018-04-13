@@ -21,32 +21,32 @@ class tntOptionsTVC: UITableViewController {
         Option(
             title: "Home",
             description: "Track scores and videos",
-            icon: nil,
+            icon: #imageLiteral(resourceName: "optionhome"),
             segueId: "tntOptionHome"
             
         ),
         Option(
             title: "Athlete Setup",
             description: "Create or import an athlete",
-            icon: nil,
+            icon: #imageLiteral(resourceName: "optionathlete"),
             segueId: "tntOptionAthleteSetup"
         ),
         Option(
             title: "Team Setup",
             description: "Create or join a team",
-            icon: nil,
+            icon: #imageLiteral(resourceName: "optionteam"),
             segueId: "tntOptionTeamSetup"
         ),
         Option(
             title: "Meet Setup",
             description: "Create and share meets",
-            icon: nil,
+            icon: #imageLiteral(resourceName: "optionmeet"),
             segueId: "tntOptionMeetSetup"
         ),
         Option(
             title: "Account",
             description: "Login/Logout and Preferences",
-            icon: nil,
+            icon: #imageLiteral(resourceName: "optionaccount"),
             segueId: "tntOptionAccount"
         )
         ]
@@ -86,11 +86,12 @@ class tntOptionsTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tntoption", for: indexPath) as! tntOptionsTableCell
         
         let choice = menu[indexPath.row]
-        cell.textLabel?.text = choice.title
-        cell.detailTextLabel?.text = choice.description
+        cell.optionName.text = choice.title
+        cell.optionSubtitle.text = choice.description
+        cell.optionIcon.image = choice.icon
         
         return cell
     }
