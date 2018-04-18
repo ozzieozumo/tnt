@@ -90,8 +90,14 @@ class tntLoginMethodsViewController: UIViewController {
             if let error = task.error as NSError? {
                 print("TNT Login Methods VC, failed user.getDetails. Error: \(error)")
             } else {
-                // User Pool Login is complete, setup credential provider and get federated ID
+                if let userAttributes = task.result?.userAttributes {
+                    // convert the AWS array of name value pairs into dictionary
+                    let dict: [String: String] = userAttributes.reduce(into: [:]) { (dict, attr) in
+                        dict[attr.name!] = attr.value}
+                    tntLoginManager.shared.userDetailAttributes = dict
+                }
                 
+                // User Pool Login is complete, setup credential provider and get federated ID
                 tntLoginManager.shared.completeLoginWithUserPool(clearKeys: true) { (success: Bool) in
                     print("Login Methods VC: user pool login complete")
                     print("Federated Cognito ID is:  \(tntLoginManager.shared.cognitoId ?? "nil")")

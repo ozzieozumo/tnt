@@ -47,6 +47,7 @@ class tntLoginManager {
     // Cognito (User Pool)
     var userPool: AWSCognitoIdentityUserPool? = nil
     var userPoolDefaultDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate? = nil;  // save this after pool creation but before assigning our delegate
+    var userDetailAttributes: [String: String] = [:]  // user detail attributes such as email
     
     //  Teams
     

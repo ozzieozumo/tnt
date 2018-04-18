@@ -88,6 +88,7 @@ class tntMeetSetupListTVC: UITableViewController {
        // private meets are only available on the current device, this queries only core data locally
        
         Meet.fetchAllPrivateMeets { [weak self] in
+            
             if let strongSelf = self {
                 strongSelf.privateMeets = tntLocalDataManager.shared.meets.values.filter {$0.sharedStatus == false && $0.shareduser == tntLoginManager.shared.cognitoId}
                 strongSelf.privateMeets.sort { ($0.startDate! as Date)  < ($1.startDate! as Date) }
