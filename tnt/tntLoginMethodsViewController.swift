@@ -41,7 +41,7 @@ class tntLoginMethodsViewController: UIViewController {
     func FBLogin() {
         
         
-        fbLoginManager.logIn(withReadPermissions: ["public_profile"], from: self) {
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) {
             (result, error) -> Void in
                 
                 if (error != nil) {

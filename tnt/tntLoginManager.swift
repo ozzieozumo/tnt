@@ -38,6 +38,7 @@ class tntLoginManager {
     
     var fbToken: FBSDKAccessToken?
     var fbProfile: FBSDKProfile?
+    var fbEmail: String?
     
     // Cognito (Federated Identity Pool)
     
@@ -57,6 +58,7 @@ class tntLoginManager {
         
         fbToken = nil
         fbProfile = nil
+        fbEmail = nil
         cognitoId = nil
         credentialsProvider = nil
         
@@ -95,7 +97,7 @@ class tntLoginManager {
         
         if isLoggedInFB() {
             // if let fbEmail = fbProfile?.
-            return "FB Profile Email"
+            return self.fbEmail ?? "FB Email Unavailable"
         }
         return "Unknown Login Method"
         
@@ -195,10 +197,24 @@ class tntLoginManager {
                 print("tntLoginManager: error loading current Facebook profile")
             }
             else {
-                // TODO - save the fbProfile returned here
-                //      - also, do a graph request to get the email address and save it
-                let fbProfile = FBSDKProfile.current()
-                print("tnt: FBSDK User Profile \(fbProfile!.name)")
+                // save the profile object
+                
+                self.fbProfile = FBSDKProfile.current()
+                
+                // do a graph request to get the email
+                
+                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email"])
+                graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+                    
+                    if error != nil {
+                        print("Error retrieving Facebook email: \(String(describing: error))")
+                        return
+                    }
+                    if let result = result as! [String: Any]?  {
+                        self.fbEmail = (result["email"] as! String?)
+                    }
+                })
+                
             }
         }
         
