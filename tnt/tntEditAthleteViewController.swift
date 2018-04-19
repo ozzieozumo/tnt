@@ -243,14 +243,11 @@ class tntEditAthleteViewController: UIViewController {
     
     @IBAction func profileImageTapped(_ sender: Any) {
         
-        print("Profile Image was tapped")
-        
-        //immediately turn of user interaction so that we don't get multiple taps
-        
-        profileImage.isUserInteractionEnabled = false
+        // check for access, request if necessary
         
         PHPhotoLibrary.testOrRequestPhotoAccess { (success) in
             if success {
+                // if we have access, show the image picker
                 self.showProfilePicker()
             } else {
                 // show alert controller for photo acess failure
