@@ -40,6 +40,16 @@ class tntEditAthleteViewController: UIViewController {
         LevelTU.delegate = self
         LevelDMT.delegate = self
         
+        // set some resonable range limits for athlete DOB
+        // should be >= 4 years old and <= 64 years old
+        // Note: the picker will still display years outside this range but they will be grayed out 
+        
+        let minDate = dobPicker.calendar.date(byAdding: .year, value: -64, to: Date())
+        let maxDate = dobPicker.calendar.date(byAdding: .year, value: -4, to: Date())
+        
+        dobPicker.minimumDate = minDate
+        dobPicker.maximumDate = maxDate
+        
         displayAthleteData()
         
     }
