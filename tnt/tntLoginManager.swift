@@ -92,7 +92,7 @@ class tntLoginManager {
         
         if isLoggedInUserPool() {
             // will need to save getDetails result after each successful login, similar to saving FB profile
-            return "User Pool Email"
+            return self.userDetailAttributes["email"] ?? "User Pool Email"
         }
         
         if isLoggedInFB() {
@@ -396,6 +396,8 @@ class tntLoginManager {
         
         printPoolInfo()
         
+        saveUserPoolDetails()  //always retrieve the user details and save them to the login manager
+        
         self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: Constants.COGNITO_REGIONTYPE, identityPoolId: Constants.COGNITO_IDENTITY_POOL_ID, identityProviderManager: pool)
         
         if clearKeys {
@@ -428,6 +430,23 @@ class tntLoginManager {
                  }
                  return nil
          }
+    }
+    
+    func saveUserPoolDetails() {
+        let user = userPool?.currentUser()
+        user?.getDetails().continueWith { (task) -> AnyObject? in
+            if let error = task.error as NSError? {
+                print("TNT Login Manager, failed user.getDetails. Error: \(error)")
+            } else {
+                if let userAttributes = task.result?.userAttributes {
+                    // convert the AWS array of name value pairs into dictionary
+                    let dict: [String: String] = userAttributes.reduce(into: [:]) { (dict, attr) in
+                        dict[attr.name!] = attr.value}
+                    tntLoginManager.shared.userDetailAttributes = dict
+                }
+            }
+            return nil
+        }
     }
     
 }
