@@ -68,6 +68,7 @@
 		A78E8E691F9D1344007820C4 /* tntUserPoolLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78E8E681F9D1344007820C4 /* tntUserPoolLoginViewController.swift */; };
 		A797063B207FB2FF001F8920 /* tntPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A797063A207FB2FF001F8920 /* tntPhotos.swift */; };
 		A797063D2080265C001F8920 /* tntOptionsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A797063C2080265C001F8920 /* tntOptionsTableCell.swift */; };
+		A797063F2097696C001F8920 /* meetSetupBkgView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A797063E2097696C001F8920 /* meetSetupBkgView.xib */; };
 		A79AA6321FA8FD41009B00A5 /* tntScoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */; };
 		A79AA6341FA8FD7B009B00A5 /* tntScoresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */; };
 		A79AA6361FA90169009B00A5 /* tntScoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79AA6351FA90169009B00A5 /* tntScoreItem.swift */; };
@@ -194,6 +195,7 @@
 		A78E8E681F9D1344007820C4 /* tntUserPoolLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntUserPoolLoginViewController.swift; sourceTree = "<group>"; };
 		A797063A207FB2FF001F8920 /* tntPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntPhotos.swift; sourceTree = "<group>"; };
 		A797063C2080265C001F8920 /* tntOptionsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntOptionsTableCell.swift; sourceTree = "<group>"; };
+		A797063E2097696C001F8920 /* meetSetupBkgView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = meetSetupBkgView.xib; sourceTree = "<group>"; };
 		A79AA6311FA8FD41009B00A5 /* tntScoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntScoresTableViewController.swift; sourceTree = "<group>"; };
 		A79AA6331FA8FD7B009B00A5 /* tntScoresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntScoresTableViewCell.swift; sourceTree = "<group>"; };
 		A79AA6351FA90169009B00A5 /* tntScoreItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tntScoreItem.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 		A7C7343E1FF335B700A502A6 /* VCs Meet Setup */ = {
 			isa = PBXGroup;
 			children = (
+				A797063E2097696C001F8920 /* meetSetupBkgView.xib */,
 				A7C7343F1FF3368B00A502A6 /* tntMeetSetupListTVC.swift */,
 				A7C734411FF3370000A502A6 /* tntMeetSetupListCell.swift */,
 				A7C734431FF35C0D00A502A6 /* tntEditMeetVC.swift */,
@@ -635,6 +638,7 @@
 				A724598C1FCF658F00558162 /* TeamSetup.storyboard in Resources */,
 				A74DE8871E8DD4EB006B2AF5 /* Assets.xcassets in Resources */,
 				A7349A191F7800D400E5EFEA /* AthleteSetup.storyboard in Resources */,
+				A797063F2097696C001F8920 /* meetSetupBkgView.xib in Resources */,
 				A7074AF21F9595AE004EBAB8 /* Login.storyboard in Resources */,
 				A7F123F51FAC00AE00B7207F /* tntScoresTableHeaderView.xib in Resources */,
 				A74DE8821E8DD4EB006B2AF5 /* Main.storyboard in Resources */,

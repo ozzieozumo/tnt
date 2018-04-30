@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="meetSetupBkgView" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXT-B7-YKb">
+                    <rect key="frame" x="148.5" y="140" width="78" height="22"/>
+                    <attributedString key="attributedText">
+                        <fragment content="No Meets">
+                            <attributes>
+                                <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-H0-3tc">
+                    <rect key="frame" x="15" y="186" width="345" height="203"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">There are no meets available.   You may either add new meets  yourself or join a team to share meets with others.   Sharing meets with your team is the best way to use this app.   Youl will always have the option to share a private meet with your team. </string>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dvZ-H0-3tc" firstAttribute="top" secondItem="oXT-B7-YKb" secondAttribute="bottom" constant="24" id="CXY-FK-rXY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dvZ-H0-3tc" secondAttribute="bottom" constant="278" id="KWt-fx-vYD"/>
+                <constraint firstItem="oXT-B7-YKb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UWI-a9-eEW"/>
+                <constraint firstItem="dvZ-H0-3tc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="ZFo-57-MOs"/>
+                <constraint firstItem="oXT-B7-YKb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="120" id="loH-WW-c7P"/>
+                <constraint firstItem="dvZ-H0-3tc" firstAttribute="centerX" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sAi-7L-8of"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dvZ-H0-3tc" secondAttribute="trailing" constant="15" id="sCu-63-Mf9"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="60.5"/>
+        </view>
+    </objects>
+</document>

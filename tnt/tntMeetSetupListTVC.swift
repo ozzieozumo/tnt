@@ -18,6 +18,9 @@ class tntMeetSetupListTVC: UITableViewController {
         
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        let bkgView = Bundle.main.loadNibNamed("meetSetupBkgView", owner: nil, options: nil)?[0] as? UIView
+        tableView.backgroundView = bkgView
 
         getTeamMeets()
         getPrivateMeets()
