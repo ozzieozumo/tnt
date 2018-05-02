@@ -118,5 +118,10 @@ class SignUpViewController: UIViewController {
     }
 
 
+    @IBAction func cancelTapped(_ sender: Any) {
+        
+        self.dismiss(animated: false, completion: nil)
+        
+    }
     
 }
