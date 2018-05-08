@@ -69,14 +69,22 @@ extension Meet {
     class func lastSelected() -> Meet? {
         
         // return the last selected meet or nil
+        var lastMeet: Meet?
         
         let defaults = UserDefaults.standard
         if let lastSelectedMeetId = defaults.string(forKey: "tntLastSelectedMeetId") {
-            return tntLocalDataManager.shared.meets[lastSelectedMeetId]
+            
+            lastMeet = tntLocalDataManager.shared.meets[lastSelectedMeetId]
         }
         
-        return nil
+        guard let savedMeet = lastMeet else {return nil} // nothing was saved
         
+        if savedMeet.isPrivate() || savedMeet.isTeam() {
+            return savedMeet
+        } else {
+            print("TNT Meet: apparently the last saved meet is not visible to this user/team")
+            return nil
+        }
     }
     
     class func setLastSelected(meetId: String?) {
@@ -147,4 +155,16 @@ extension Meet {
             completion()
         }
     }
+    
+    func isPrivate() -> Bool {
+        
+        // true if the meet is a private meet for the current user
+        return shareduser == tntLoginManager.shared.cognitoId
+    }
+    
+    func isTeam() -> Bool {
+        // true if the meet is a team meet for the current user's current team
+        return sharedTeam == tntLoginManager.shared.currentTeam?.teamId
+    }
+
 }
