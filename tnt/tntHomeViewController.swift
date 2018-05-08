@@ -139,12 +139,22 @@ class tntHomeViewController: UIViewController {
             
             selectedAthlete = tntLocalDataManager.shared.getAthleteById(athleteId: athleteId)
             
-        } else {
-            // selected Athlete is not set in User Defaults, do nothing and wait
-            return
+            if selectedAthlete?.cognitoId != tntLoginManager.shared.cognitoId {
+                // if not owned by the current user (weird) treat the same as no last athlete
+                print("TNT Home Screen: saved athlete appears to not be owned by current user, therefore ignored")
+                selectedAthlete = nil
+            }
+            
         }
+        
+        setButtonStatus()
+            
     }
     
+    func setButtonStatus() {
+        
+        editAthleteButton.isUserInteractionEnabled = (selectedAthlete != nil)
+    }
     
     func displayAthleteData() {
         // Display the data for the current athlete 

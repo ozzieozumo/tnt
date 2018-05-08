@@ -292,6 +292,7 @@ class tntSynchManager {
         
         // load all relevant meets from the cloud DB into CoreData, if they are not there already
         // TODO: add filtering options, e.g. exclude meets from past seasons
+        // also this is pulling all meets for all users/teams which seems unecessary (ignore for now)
         
         let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
         
