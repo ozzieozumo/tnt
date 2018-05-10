@@ -383,6 +383,7 @@ class tntVideosTableViewController: UITableViewController, tntVideoUploadPickerD
             } else {
                 // show alert controller for photo acess failure
                 let alert = UIAlertController(title: "Photo Library Access Failure", message: "TNT was unable to access your video library", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
                 self.present(alert, animated: true)
                 hasPHAccess = false
                 accessCheckGroup.leave()

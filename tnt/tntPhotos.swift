@@ -25,11 +25,28 @@ extension PHPhotoLibrary {
         }
             
         else if (status == PHAuthorizationStatus.denied) {
-            // Access has been denied.
-            print("TNT Photo Library:  access was (previously) denied")
-            completion(false)
+            // Access has been denied. Ask for access
+            print("TNT Photo Library:  access was previously denied, requesting interactively")
+            // Note that this may be unnecessary. If the user has previously denied access or
+            // has used the settings app to restrict access, then the interactive dialog will not be
+            // displayed by this call to request.
+            var newStatus = status
+            let requestAccessGroup = DispatchGroup()
+            requestAccessGroup.enter()
+            requestAuthorization() { (status) in
+                newStatus = status
+                requestAccessGroup.leave()
+            }
+            requestAccessGroup .wait()
+            if newStatus == .authorized {
+                print("TNT Photo Library:  access authorized after interactive request")
+                completion(true)
+            } else {
+                print("TNT Photo Library:  access was not authorized during interactive request")
+                completion(false)
+            }
         }
-            
+        
         else if (status == PHAuthorizationStatus.notDetermined) {
             
             // Access has not been determined.
