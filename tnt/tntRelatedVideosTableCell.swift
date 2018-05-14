@@ -111,10 +111,10 @@ class tntRelatedVideosTableCell: UITableViewCell {
     func displayExpansionIndicator() {
         
         if expandedView.isHidden {
-            let expandImage = UIImage(imageLiteralResourceName: "moredots")
+            let expandImage = UIImage(imageLiteralResourceName: "expandview")
             viewToggleButton.setImage(expandImage, for: .normal)
         } else {
-            let contractImage = UIImage(imageLiteralResourceName: "connect-left")
+            let contractImage = UIImage(imageLiteralResourceName: "contractview")
             viewToggleButton.setImage(contractImage, for: .normal)
         }
     }
@@ -145,4 +145,10 @@ class tntRelatedVideosTableCell: UITableViewCell {
         }
         
     }
+    
+    @IBAction func tapDone(_ sender: Any) {
+        
+        self.endEditing(true)
+    }
+    
 }
