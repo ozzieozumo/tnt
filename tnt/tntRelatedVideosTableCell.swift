@@ -81,7 +81,7 @@ class tntRelatedVideosTableCell: UITableViewCell {
             self.videoThumb.image = UIImage(imageLiteralResourceName: "smile-emoticon")
         }
 
-        videoRunTime.text = String(format: "%.2f", video?.duration ?? 0.0)
+        videoRunTime.text = String(format: "%.2f s", video?.duration ?? 0.0)
         
         displayExpansionIndicator()
     }
