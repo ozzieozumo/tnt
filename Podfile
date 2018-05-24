@@ -5,4 +5,7 @@ use_frameworks!
 
 target 'tnt' do
     pod 'UICKeyChainStore', '~> 2.0.6'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare' 
 end
