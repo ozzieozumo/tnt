@@ -57,13 +57,16 @@ class tntEditVideoInfoVC: UIViewController {
             videoTitle.text = "(Untitled)"
             // set font to light color
         }
-        if let notes = video?.notes {
+        
+        let notes = video?.notes ?? ""
+        
+        if notes != "" {
             videoNotes.text = notes
             videoNotes.clearsOnInsertion = false
         } else {
-            videoNotes.text = "Type or dictate some notes for this video"
+            videoNotes.text = "Type some notes for this video"
             videoNotes.clearsOnInsertion = true
-            // set font color
+            videoNotes.resignFirstResponder()
         }
         
         if let imgData = video?.thumbImage as Data? {
@@ -108,6 +111,12 @@ extension tntEditVideoInfoVC: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         video?.notes = textView.text
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if videoNotes.text == "Type some notes for this video" {
+            videoNotes.text = ""
+        }
     }
     
 }
