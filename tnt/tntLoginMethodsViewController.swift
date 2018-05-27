@@ -48,6 +48,7 @@ class tntLoginMethodsViewController: UIViewController {
                     DispatchQueue.main.async {
                         
                         let alert = UIAlertController(title: "Error logging in with FB", message: error!.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 } else if result!.isCancelled {
