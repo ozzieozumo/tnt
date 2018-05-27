@@ -23,6 +23,9 @@ class tntEditMeetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        meetTitle.delegate = self
+        meetDuration.delegate = self
+        
         displayValues()
         setButtons()
     }
@@ -46,9 +49,11 @@ class tntEditMeetVC: UIViewController {
         if let team = tntLoginManager.shared.currentTeam {
             sharedSwitch.isEnabled = true
             shareWithLabel.text = "Share with \(team.name ?? "Unnamed Team")"
+            shareWithLabel.textColor = UIColor.black
         } else {
             sharedSwitch.isEnabled = false
-            shareWithLabel.text = "(No Team)"
+            shareWithLabel.text = "(Join a team to use this option)"
+            shareWithLabel.textColor = UIColor.lightGray
         }
         
     }
@@ -137,4 +142,11 @@ class tntEditMeetVC: UIViewController {
         // shared --> private : disallow if saved data exists for other users
     }
     
+}
+
+extension tntEditMeetVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 }
