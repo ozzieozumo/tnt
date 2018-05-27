@@ -161,7 +161,7 @@ class tntLoginManager {
             
             let waitGroup = DispatchGroup()
             waitGroup.enter()
-            self.completeLoginWithFB(clearKeys: false) {
+            self.completeLoginWithFB(clearKeys: true) {
                 waitGroup.leave()
             }
             let waitResult = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
@@ -315,17 +315,19 @@ class tntLoginManager {
         setupUserPool()
         
         // check for logged in state in the user pool
-        // note that the completion handler is always called, whether for success or failure
-        // TODO: consider using the AWSTask structure for this function
         
         if let user = userPool?.currentUser() {
         
             if user.isSignedIn {
                 let waitGroup = DispatchGroup ()
                 waitGroup.enter()
-                completeLoginWithUserPool(clearKeys: false) { (success: Bool) in
-                    print("TNT Login Manager: resumed from user pool login and completed Cognito login")
-                    self.enableInteractiveUserPoolLogin()  // delegate must be set to allow token refreshes
+                completeLoginWithUserPool(clearKeys: true) { (success: Bool) in
+                    if success {
+                        print("TNT Login Manager: resumed from user pool login and completed Cognito login")
+                        self.enableInteractiveUserPoolLogin()  // delegate must be set to allow token refreshes
+                    } else {
+                        print("TNT Login Manager: could not resume user pool login")
+                    }
                     waitGroup.leave()
                 }
                 let waitResults = waitGroup.wait(timeout: DispatchTime.now() + .seconds(resumeTimeoutSeconds))
@@ -351,8 +353,10 @@ class tntLoginManager {
         
         // set the pool's interactive auth delegate to the AppDelegate
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        userPool?.delegate = appDelegate
+        DispatchQueue.main.async {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            self.userPool?.delegate = appDelegate
+        }
     }
     
     func disableInteractiveUserPoolLogin() {
