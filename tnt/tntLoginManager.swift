@@ -352,11 +352,11 @@ class tntLoginManager {
         }
         
         // set the pool's interactive auth delegate to the AppDelegate
-        
-        DispatchQueue.main.async {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.userPool?.delegate = appDelegate
-        }
+        // (There's no need to do this asynchronously, which led to some weird timing bugs)
+       
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.userPool?.delegate = appDelegate
+
     }
     
     func disableInteractiveUserPoolLogin() {
